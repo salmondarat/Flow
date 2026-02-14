@@ -2,10 +2,15 @@
 
 import Hero from "@/components/landing/hero";
 import Partners from "@/components/landing/partners";
+import Impact from "@/components/landing/impact";
+import Services from "@/components/landing/services";
+import Process from "@/components/landing/process";
+import Work from "@/components/landing/work";
 import Testimonials from "@/components/landing/testimonials";
-import Stats from "@/components/landing/stats";
 import Pricing from "@/components/landing/pricing";
 import Faq from "@/components/landing/faq";
+import Blog from "@/components/landing/blog";
+import Cta from "@/components/landing/cta";
 import Footer from "@/components/landing/footer";
 import { Header } from "@/components/layout/header";
 import { useEffect, useState } from "react";
@@ -35,10 +40,15 @@ export default function HomePage() {
       <Header />
       <Hero />
       <Partners />
+      <Impact />
+      <Services />
+      <Process />
+      <Work />
       <Testimonials />
-      <Stats />
       <Pricing />
       <Faq />
+      <Blog />
+      <Cta />
       <Footer />
     </main>
   );

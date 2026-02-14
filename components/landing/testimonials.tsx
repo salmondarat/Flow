@@ -1,5 +1,7 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 export default function Testimonials() {
   const testimonials = [
@@ -32,7 +34,7 @@ export default function Testimonials() {
       role: "Commission Artist",
       avatar: "https://i.pravatar.cc/150?img=15",
       content:
-        "I've tried multiple project management tools, but Flow is the first one that actually understands the custom model kit workflow. The form templates and service configurability are exactly what I needed.",
+        "I've tried multiple project management tools, but Flow is first one that actually understands the custom model kit workflow. The form templates and service configurability are exactly what I needed.",
       rating: 5,
     },
     {
@@ -51,106 +53,200 @@ export default function Testimonials() {
         "Flow's multi-kit support is perfect for my Gundam diorama projects. I can manage multiple orders in one dashboard, track each separately, and keep all my client communications organized.",
       rating: 5,
     },
-    {
-      name: "Sophie Anderson",
-      role: "Collector & Builder",
-      avatar: "https://i.pravatar.cc/150?img=21",
-      content:
-        "The public tracking feature is brilliant. I can share my order link with anyone, and they can check progress without needing to create an account. Perfect for custom build communities.",
-      rating: 5,
-    },
-    {
-      name: "James Wilson",
-      role: "Studio Co-Owner",
-      avatar: "https://i.pravatar.cc/150?img=23",
-      content:
-        "Migrating to Flow was seamless. The team was productive from day one. The complexity-based pricing system perfectly matches how we've always estimated builds, but now it's automated.",
-      rating: 5,
-    },
-    {
-      name: "Elena Petrov",
-      role: "Full-Time Builder",
-      avatar: "https://i.pravatar.cc/150?img=25",
-      content:
-        "I've been using Flow for 8 months and it's become indispensable. From solo builder to scaling with a partner, Flow has grown with my business. The feature set just keeps getting better.",
-      rating: 5,
-    },
-    {
-      name: "Michael Chang",
-      role: "Studio Lead, HG Custom",
-      avatar: "https://i.pravatar.cc/150?img=27",
-      content:
-        "The admin dashboard gives us complete visibility into our studio operations. Workload distribution, revenue tracking, and performance metrics all in one place. It's like having a business analyst built in.",
-      rating: 5,
-    },
   ];
 
-  const StarIcon = () => (
-    <svg className="h-4 w-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-    </svg>
-  );
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  // Auto-slide every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      paginate(1);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [currentIndex]);
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 300 : -300,
+      opacity: 0,
+    }),
+  };
+
+  const paginate = (newDirection: number) => {
+    setDirection(newDirection);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex + newDirection + testimonials.length) % testimonials.length
+    );
+  };
+
+  const StarIcon = () => <Star className="h-5 w-5 fill-yellow-500 text-yellow-500" />;
+
+  const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section id="testimonials" className="px-4 py-24">
-      <div className="mx-auto max-w-6xl">
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="mb-20 flex flex-col gap-3 text-center"
-        >
-          <h2 className="from-foreground to-muted-foreground bg-linear-to-b bg-clip-text text-xl font-semibold text-transparent sm:text-2xl">
-            Loved by Model Kit Builders Worldwide
-          </h2>
-          <p className="text-muted-foreground mx-auto max-w-xl text-center">
-            Join hundreds of solo builders and studios using Flow to manage custom builds.
-          </p>
-        </motion.div>
+    <section
+      id="testimonials"
+      className="mx-auto w-full max-w-(--breakpoint-xl) px-4 py-24 md:px-8"
+    >
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="mb-16 text-center"
+      >
+        <h2 className="from-foreground to-muted-foreground bg-linear-to-b bg-clip-text text-xl font-semibold text-transparent sm:text-2xl">
+          Testimonials
+        </h2>
+        <p className="text-muted-foreground mx-auto mt-2 max-w-xl text-center">
+          Results that speaks volume. Read success stories.
+        </p>
+      </motion.div>
 
-        <div className="columns-1 gap-8 space-y-8 md:columns-2 lg:columns-3">
-          {testimonials.map((testimonial, index) => (
+      {/* Single unified carousel */}
+      <div className="mx-auto max-w-3xl">
+        <div className="relative min-h-[400px]">
+          <AnimatePresence initial={false} mode="wait" custom={direction}>
             <motion.div
-              key={index}
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
+              key={currentIndex}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
               transition={{
-                duration: 0.6,
-                delay: index * 0.05,
-                ease: "easeOut",
+                x: { type: "spring", stiffness: 300, damping: 30 },
+                opacity: { duration: 0.3 },
               }}
-              className="mb-8 break-inside-avoid"
+              className="absolute inset-0 flex items-center justify-center"
             >
-              <div className="bg-card border-border rounded-xl border p-6 transition-colors duration-300">
-                <div className="mb-4 flex">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <StarIcon key={i} />
+              <div className="border-border bg-card/50 w-full rounded-2xl border p-8 shadow-lg md:p-12">
+                {/* Large avatar */}
+                <div className="mb-6 flex justify-center">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
+                  >
+                    <img
+                      src={currentTestimonial.avatar}
+                      alt={currentTestimonial.name}
+                      className="border-primary/20 h-20 w-20 rounded-full border-4 shadow-xl"
+                    />
+                  </motion.div>
+                </div>
+
+                {/* Star rating */}
+                <div className="mb-4 flex justify-center gap-1">
+                  {Array.from({ length: currentTestimonial.rating }).map((_, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.2 + i * 0.1 }}
+                    >
+                      <StarIcon />
+                    </motion.div>
                   ))}
                 </div>
 
-                <p className="text-muted-foreground mb-6 text-sm leading-relaxed">
-                  &ldquo;{testimonial.content}&rdquo;
-                </p>
+                {/* Quote */}
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-muted-foreground mb-6 text-center text-lg leading-relaxed md:text-xl"
+                >
+                  &ldquo;{currentTestimonial.content}&rdquo;
+                </motion.p>
 
-                <div className="flex items-center gap-3">
-                  <div className="from-primary/20 to-primary/10 border-primary/20 flex h-10 w-10 items-center justify-center rounded-full border bg-linear-to-br text-sm font-medium">
-                    {testimonial.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-semibold">{testimonial.name}</h4>
-                    <p className="text-muted-foreground text-xs">{testimonial.role}</p>
-                  </div>
-                </div>
+                {/* Author info */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-center"
+                >
+                  <p className="text-lg font-semibold">{currentTestimonial.name}</p>
+                  <p className="text-muted-foreground text-sm">{currentTestimonial.role}</p>
+                </motion.div>
               </div>
             </motion.div>
-          ))}
+          </AnimatePresence>
+        </div>
+
+        {/* Navigation */}
+        <div className="mt-8 flex items-center justify-center gap-4">
+          <motion.button
+            onClick={() => paginate(-1)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="border-border bg-card text-foreground hover:bg-accent flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-200"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </motion.button>
+
+          {/* Dot indicators */}
+          <div className="flex gap-2">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  setDirection(i > currentIndex ? 1 : -1);
+                  setCurrentIndex(i);
+                }}
+                className={`h-2 w-2 rounded-full transition-all duration-200 ${
+                  i === currentIndex ? "bg-primary w-6" : "bg-muted hover:bg-muted-foreground/30"
+                }`}
+              />
+            ))}
+          </div>
+
+          <motion.button
+            onClick={() => paginate(1)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="border-border bg-card text-foreground hover:bg-accent flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-200"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </motion.button>
         </div>
       </div>
+
+      {/* Stats */}
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        className="mt-16 text-center"
+      >
+        <p className="text-muted-foreground text-sm">1500 satisfied clients love our services</p>
+        <div className="mt-2 flex items-center justify-center gap-2">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star key={i} className="h-5 w-5 fill-yellow-500 text-yellow-500" />
+          ))}
+        </div>
+        <p className="text-muted-foreground mt-1 text-sm">4.9 Based on 1.5k reviews</p>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          className="text-muted-foreground hover:text-foreground mt-4 text-sm font-medium underline underline-offset-4 transition-colors"
+        >
+          View all reviews
+        </motion.button>
+      </motion.div>
     </section>
   );
 }
