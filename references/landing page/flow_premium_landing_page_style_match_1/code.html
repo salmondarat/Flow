@@ -1,0 +1,762 @@
+<!doctype html>
+<html class="scroll-smooth" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Flow - The OS for Custom Model Studios</title>
+    <meta
+      content="Streamline your custom model kit building business with Flow."
+      name="description"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+            },
+            colors: {
+              primary: "#1d4ed8", // RX-78-2 Blue (Blue-700)
+              "primary-hover": "#1e40af",
+              secondary: "#dc2626", // RX-78-2 Red (Red-600)
+              accent: "#facc15", // RX-78-2 Yellow (Yellow-400)
+              "background-light": "#ffffff",
+              "background-gray": "#f8fafc", // Slate-50
+              "surface-light": "#ffffff",
+              "border-tech": "#cbd5e1", // Slate-300
+              "mech-gray": "#475569", // Slate-600
+            },
+            boxShadow: {
+              none: "none",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .bg-grid-flat {
+        background-size: 40px 40px;
+        background-image:
+          linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+      }
+      * {
+        border-radius: 0px !important;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light selection:bg-accent font-sans text-slate-600 antialiased selection:text-black"
+  >
+    <nav class="fixed top-0 z-50 w-full border-b border-slate-200 bg-white">
+      <div class="flex h-1 w-full">
+        <div class="bg-primary w-1/3"></div>
+        <div class="bg-accent w-1/3"></div>
+        <div class="bg-secondary w-1/3"></div>
+      </div>
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+        <div class="flex items-center gap-3">
+          <div
+            class="bg-primary flex h-8 w-8 items-center justify-center text-lg font-bold text-white"
+          >
+            f.
+          </div>
+          <span class="text-xl font-bold tracking-tight text-slate-900 uppercase">flow</span>
+        </div>
+        <div class="hidden items-center gap-8 text-sm font-bold tracking-wide uppercase md:flex">
+          <a class="hover:text-primary text-slate-600 transition-colors" href="#features"
+            >Features</a
+          >
+          <a class="hover:text-primary text-slate-600 transition-colors" href="#how-it-works"
+            >How it Works</a
+          >
+          <a class="hover:text-primary text-slate-600 transition-colors" href="#pricing">Pricing</a>
+        </div>
+        <div class="flex items-center gap-4">
+          <a
+            class="hover:text-primary hidden text-sm font-medium tracking-wide text-slate-600 uppercase transition-colors sm:block"
+            href="#"
+            >Log In</a
+          >
+          <a
+            class="bg-secondary border border-transparent px-6 py-2 text-sm font-bold tracking-wider text-white uppercase transition-colors hover:bg-red-700"
+            href="#"
+          >
+            Get Started
+          </a>
+        </div>
+      </div>
+    </nav>
+    <section class="bg-background-light relative overflow-hidden pt-32 pb-20">
+      <div class="bg-grid-flat pointer-events-none absolute inset-0"></div>
+      <div class="relative z-10 container mx-auto px-4 text-center">
+        <div
+          class="border-accent mb-8 inline-flex items-center gap-2 border-l-4 bg-slate-100 px-4 py-1 text-xs font-bold tracking-widest text-slate-800 uppercase"
+        >
+          <span class="bg-secondary h-2 w-2"></span>
+          System Online: AI Workflow
+        </div>
+        <h1
+          class="mb-6 text-5xl leading-tight font-bold tracking-tight text-slate-900 uppercase md:text-7xl"
+        >
+          Streamline Your <br />
+          <span class="text-primary">Custom Build Ops</span>
+        </h1>
+        <p
+          class="mx-auto mb-10 max-w-2xl text-lg leading-relaxed font-medium text-slate-500 md:text-xl"
+        >
+          Transform your model kit commissions with technical precision. Real-time tracking, smart
+          estimation, and client portals for the modern builder.
+        </p>
+        <div class="mb-20 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a
+            class="bg-primary hover:bg-primary-hover flex items-center gap-2 border border-transparent px-8 py-4 text-lg font-bold tracking-wide text-white uppercase transition-colors"
+            href="#"
+          >
+            Start Free Trial
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+          </a>
+          <a
+            class="border border-slate-300 bg-white px-8 py-4 font-bold tracking-wide text-slate-600 uppercase transition-colors hover:bg-slate-50"
+            href="#"
+          >
+            View Demo
+          </a>
+        </div>
+        <div class="relative mx-auto max-w-5xl px-4">
+          <div
+            class="border-secondary absolute -top-4 -left-4 hidden h-8 w-8 border-t-2 border-l-2 md:block"
+          ></div>
+          <div
+            class="border-primary absolute -right-4 -bottom-4 hidden h-8 w-8 border-r-2 border-b-2 md:block"
+          ></div>
+          <div class="relative z-10 border-2 border-slate-200 bg-white p-1 shadow-none">
+            <div class="overflow-hidden border border-slate-200 bg-slate-50">
+              <div
+                class="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3"
+              >
+                <div class="flex gap-2">
+                  <div class="h-3 w-3 bg-slate-300"></div>
+                  <div class="h-3 w-3 bg-slate-300"></div>
+                  <div class="h-3 w-3 bg-slate-300"></div>
+                </div>
+                <div class="h-2 w-48 bg-slate-100"></div>
+                <div class="w-4"></div>
+              </div>
+              <div class="grid grid-cols-12 gap-6 p-6 text-left md:p-8">
+                <div class="col-span-2 hidden space-y-4 md:block">
+                  <div class="bg-primary/10 border-primary h-8 w-full border-l-2"></div>
+                  <div class="space-y-2">
+                    <div class="h-6 w-3/4 bg-slate-200"></div>
+                    <div class="h-6 w-5/6 bg-slate-200"></div>
+                    <div class="h-6 w-2/3 bg-slate-200"></div>
+                  </div>
+                </div>
+                <div class="col-span-12 grid grid-cols-1 gap-6 md:col-span-10 md:grid-cols-3">
+                  <div
+                    class="relative col-span-3 border border-slate-200 bg-white p-6 lg:col-span-2"
+                  >
+                    <div class="bg-primary absolute top-0 left-0 h-1 w-full"></div>
+                    <div class="mb-8 flex items-start justify-between">
+                      <div>
+                        <div class="text-xs font-bold tracking-widest text-slate-400 uppercase">
+                          Monthly Revenue
+                        </div>
+                        <div class="mt-1 text-3xl font-bold text-slate-900">$12,450</div>
+                      </div>
+                      <div
+                        class="text-primary border border-blue-100 bg-blue-50 px-2 py-1 text-xs font-bold uppercase"
+                      >
+                        +18.2% YOY
+                      </div>
+                    </div>
+                    <div class="flex h-32 items-end justify-between gap-3">
+                      <div class="h-[40%] w-full bg-slate-100"></div>
+                      <div class="h-[60%] w-full bg-slate-100"></div>
+                      <div class="h-[45%] w-full bg-slate-100"></div>
+                      <div class="h-[80%] w-full bg-slate-100"></div>
+                      <div class="bg-primary relative h-[95%] w-full">
+                        <div class="bg-accent absolute top-0 h-1 w-full"></div>
+                      </div>
+                      <div class="h-[70%] w-full bg-slate-100"></div>
+                    </div>
+                  </div>
+                  <div class="col-span-3 space-y-6 lg:col-span-1">
+                    <div class="relative border border-slate-200 bg-white p-5">
+                      <div class="bg-accent absolute top-0 bottom-0 left-0 w-1"></div>
+                      <div class="mb-2 text-xs font-bold tracking-widest text-slate-400 uppercase">
+                        Active Builds
+                      </div>
+                      <div class="text-2xl font-bold text-slate-900">8 Projects</div>
+                      <div class="mt-4 h-2 w-full overflow-hidden bg-slate-100">
+                        <div class="bg-secondary h-full w-2/3"></div>
+                      </div>
+                    </div>
+                    <div class="relative border border-slate-200 bg-white p-5">
+                      <div class="bg-secondary absolute top-0 bottom-0 left-0 w-1"></div>
+                      <div class="mb-2 text-xs font-bold tracking-widest text-slate-400 uppercase">
+                        Pending Quotes
+                      </div>
+                      <div class="text-2xl font-bold text-slate-900">3 Requests</div>
+                      <div class="mt-4 flex -space-x-2">
+                        <div class="h-8 w-8 border-2 border-white bg-slate-200"></div>
+                        <div class="h-8 w-8 border-2 border-white bg-slate-300"></div>
+                        <div class="h-8 w-8 border-2 border-white bg-slate-400"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="absolute top-24 -left-4 z-20 hidden max-w-[220px] border border-slate-200 bg-white p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.05)] lg:block"
+          >
+            <div class="mb-3 flex items-center gap-3">
+              <div
+                class="bg-primary/10 text-primary border-primary/20 flex h-8 w-8 items-center justify-center border text-xs font-bold"
+              >
+                MG
+              </div>
+              <div>
+                <div class="text-xs font-bold text-slate-900">RX-78-2 Ver.Ka</div>
+                <div class="text-[10px] text-slate-500 uppercase">Paint Phase</div>
+              </div>
+            </div>
+            <div class="h-1.5 w-full overflow-hidden bg-slate-100">
+              <div class="bg-primary h-full w-[85%]"></div>
+            </div>
+          </div>
+          <div
+            class="absolute -right-8 bottom-32 z-20 hidden border border-slate-200 bg-white p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.05)] lg:block"
+          >
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-accent">check_circle</span>
+              <div>
+                <div class="text-sm font-bold text-slate-900">Invoice Paid</div>
+                <div class="text-xs text-slate-500">$850.00 received</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="border-y border-slate-200 bg-white py-12">
+      <div
+        class="mx-auto grid max-w-6xl grid-cols-1 gap-8 divide-y divide-slate-100 px-4 text-center md:grid-cols-3 md:divide-x md:divide-y-0"
+      >
+        <div>
+          <div class="mb-2 text-4xl font-bold text-slate-900">500+</div>
+          <div class="text-xs font-bold tracking-widest text-slate-500 uppercase">
+            Studios Powered
+          </div>
+        </div>
+        <div>
+          <div class="mb-2 text-4xl font-bold text-slate-900">98%</div>
+          <div class="text-xs font-bold tracking-widest text-slate-500 uppercase">
+            Client Satisfaction
+          </div>
+        </div>
+        <div>
+          <div class="mb-2 text-4xl font-bold text-slate-900">10k+</div>
+          <div class="text-xs font-bold tracking-widest text-slate-500 uppercase">
+            Kits Completed
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="bg-background-gray py-24" id="features">
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="mb-16 text-center">
+          <h2 class="mb-6 text-3xl font-bold tracking-tight text-slate-900 uppercase md:text-5xl">
+            Technical Workflow Tools
+          </h2>
+          <p class="mx-auto max-w-2xl text-lg text-slate-500">
+            Focus on the craft, not the spreadsheets. Precision tools designed for efficiency.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div
+            class="hover:border-primary hover:border-t-primary group border border-t-4 border-slate-200 border-t-transparent bg-white p-8 transition-all"
+          >
+            <div
+              class="group-hover:bg-primary mb-6 flex h-12 w-12 items-center justify-center bg-slate-100 text-slate-700 transition-colors group-hover:text-white"
+            >
+              <span class="material-symbols-outlined">assignment_ind</span>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-slate-900 uppercase">Order Intake</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              Customizable intake forms that capture every detail—scale, grade, paint
+              preferences—filtering out spam.
+            </p>
+          </div>
+          <div
+            class="hover:border-accent hover:border-t-accent group border border-t-4 border-slate-200 border-t-transparent bg-white p-8 transition-all"
+          >
+            <div
+              class="group-hover:bg-accent mb-6 flex h-12 w-12 items-center justify-center bg-slate-100 text-slate-700 transition-colors group-hover:text-black"
+            >
+              <span class="material-symbols-outlined">calculate</span>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-slate-900 uppercase">Smart Estimation</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              Stop guessing prices. Our AI suggests quotes based on kit complexity and historical
+              data.
+            </p>
+          </div>
+          <div
+            class="hover:border-secondary hover:border-t-secondary group border border-t-4 border-slate-200 border-t-transparent bg-white p-8 transition-all"
+          >
+            <div
+              class="group-hover:bg-secondary mb-6 flex h-12 w-12 items-center justify-center bg-slate-100 text-slate-700 transition-colors group-hover:text-white"
+            >
+              <span class="material-symbols-outlined">timeline</span>
+            </div>
+            <h3 class="mb-3 text-xl font-bold text-slate-900 uppercase">Progress Tracking</h3>
+            <p class="text-sm leading-relaxed text-slate-600">
+              Keep clients updated with a dedicated portal. Upload WIP photos and mark milestones
+              effortlessly.
+            </p>
+          </div>
+          <div
+            class="mt-4 flex flex-col items-center gap-12 border border-l-4 border-slate-200 border-l-slate-800 bg-white p-8 md:col-span-3 md:flex-row md:p-12"
+          >
+            <div class="md:w-1/2">
+              <div
+                class="bg-accent mb-4 inline-block px-3 py-1 text-xs font-bold tracking-wider text-slate-900 uppercase"
+              >
+                New Module
+              </div>
+              <h3 class="mb-4 text-2xl font-bold text-slate-900 uppercase md:text-3xl">
+                Inventory &amp; Paint Management
+              </h3>
+              <p class="mb-8 leading-relaxed text-slate-500">
+                Never run out of primer mid-build again. Track your paint stock, kit backlog, and
+                tool conditions in one unified dashboard.
+              </p>
+              <a
+                class="text-primary hover:text-primary-hover group flex items-center gap-2 text-sm font-bold tracking-wide uppercase"
+                href="#"
+              >
+                Learn about Inventory
+                <span
+                  class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+            <div
+              class="relative grid h-64 w-full grid-cols-4 gap-3 border border-slate-200 bg-slate-50 p-4 md:w-1/2"
+            >
+              <div class="border-secondary relative h-full border-2 bg-white">
+                <span
+                  class="text-secondary absolute bottom-2 left-2 text-[10px] font-bold uppercase"
+                  >RED-01</span
+                >
+              </div>
+              <div class="border-primary relative h-full border-2 bg-white">
+                <span class="text-primary absolute bottom-2 left-2 text-[10px] font-bold uppercase"
+                  >BLU-02</span
+                >
+              </div>
+              <div class="border-accent relative h-full border-2 bg-white">
+                <div
+                  class="bg-accent absolute top-2 right-2 flex h-6 w-6 items-center justify-center text-xs font-bold text-black"
+                >
+                  !
+                </div>
+                <span
+                  class="absolute bottom-2 left-2 text-[10px] font-bold text-yellow-600 uppercase"
+                  >YEL-03</span
+                >
+              </div>
+              <div class="relative h-full border border-slate-300 bg-slate-200 opacity-50">
+                <span
+                  class="absolute bottom-2 left-2 text-[10px] font-bold text-slate-500 uppercase"
+                  >GRY-04</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="border-y border-slate-200 bg-white py-24" id="how-it-works">
+      <div class="mx-auto max-w-6xl px-4">
+        <div class="mb-16 text-center">
+          <h2 class="mb-4 text-3xl font-bold text-slate-900 uppercase md:text-4xl">
+            Three Simple Steps
+          </h2>
+          <p class="text-slate-500">Data-driven success in minutes.</p>
+        </div>
+        <div class="grid grid-cols-1 gap-12 md:grid-cols-3">
+          <div class="relative border-l border-slate-200 pl-8">
+            <div class="absolute -top-4 -left-6 bg-white px-2 text-6xl font-bold text-slate-100">
+              01
+            </div>
+            <div class="relative z-10 pt-4">
+              <h3 class="mb-3 text-xl font-bold text-slate-900 uppercase">Connect &amp; Import</h3>
+              <p class="text-sm leading-relaxed text-slate-500">
+                Import your existing client list and backlog from Spreadsheets or Instagram DMs in
+                seconds.
+              </p>
+            </div>
+          </div>
+          <div class="relative border-l border-slate-200 pl-8">
+            <div class="absolute -top-4 -left-6 bg-white px-2 text-6xl font-bold text-slate-100">
+              02
+            </div>
+            <div class="relative z-10 pt-4">
+              <h3 class="mb-3 text-xl font-bold text-slate-900 uppercase">Build &amp; Track</h3>
+              <p class="text-sm leading-relaxed text-slate-500">
+                Log hours, materials, and progress. Our AI analyzes your efficiency to improve
+                future quotes.
+              </p>
+            </div>
+          </div>
+          <div class="relative border-l border-slate-200 pl-8">
+            <div class="absolute -top-4 -left-6 bg-white px-2 text-6xl font-bold text-slate-100">
+              03
+            </div>
+            <div class="relative z-10 pt-4">
+              <h3 class="mb-3 text-xl font-bold text-slate-900 uppercase">Deliver &amp; Scale</h3>
+              <p class="text-sm leading-relaxed text-slate-500">
+                Generate professional invoices automatically. Use insights to grow your revenue.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="bg-background-gray relative py-24" id="pricing">
+      <div class="relative z-10 container mx-auto px-4">
+        <div class="mb-12 text-center">
+          <h2 class="mb-6 text-3xl font-bold text-slate-900 uppercase md:text-5xl">Flat Pricing</h2>
+          <div class="inline-flex border border-slate-300 bg-white p-1">
+            <button
+              class="bg-slate-900 px-6 py-2 text-xs font-bold tracking-wider text-white uppercase"
+            >
+              Monthly
+            </button>
+            <button
+              class="px-6 py-2 text-xs font-bold tracking-wider text-slate-600 uppercase transition-colors hover:bg-slate-50"
+            >
+              Yearly <span class="text-secondary ml-1">-20%</span>
+            </button>
+          </div>
+        </div>
+        <div class="mx-auto grid max-w-6xl grid-cols-1 items-start gap-6 md:grid-cols-3">
+          <div
+            class="border border-slate-200 bg-white p-8 transition-colors hover:border-slate-400"
+          >
+            <div class="mb-6 h-1 w-full bg-slate-300"></div>
+            <h3 class="mb-2 text-lg font-bold text-slate-900 uppercase">Starter</h3>
+            <p class="mb-6 text-sm text-slate-500">Perfect for hobbyists.</p>
+            <div class="mb-6 flex items-baseline">
+              <span class="text-4xl font-bold text-slate-900">$29</span>
+              <span class="ml-1 text-slate-500">/mo</span>
+            </div>
+            <button
+              class="mb-8 w-full border border-slate-300 py-3 text-xs font-bold tracking-widest text-slate-900 uppercase transition-colors hover:bg-slate-50"
+            >
+              Choose Plan
+            </button>
+            <ul class="space-y-3 text-sm text-slate-600">
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-base">check</span> 5 Active
+                Projects
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-base">check</span> Basic
+                Invoicing
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-base">check</span> Client
+                Portal
+              </li>
+            </ul>
+          </div>
+          <div class="border-primary relative border-2 bg-white p-8 shadow-xl shadow-blue-900/5">
+            <div
+              class="bg-accent absolute -top-3 left-1/2 -translate-x-1/2 border border-slate-900 px-4 py-1 text-xs font-bold tracking-widest text-slate-900 uppercase"
+            >
+              Most Popular
+            </div>
+            <div class="bg-primary mb-6 h-1 w-full"></div>
+            <h3 class="text-primary mb-2 text-lg font-bold uppercase">Studio Pro</h3>
+            <p class="mb-6 text-sm text-slate-500">For growing teams.</p>
+            <div class="mb-6 flex items-baseline">
+              <span class="text-5xl font-bold text-slate-900">$79</span>
+              <span class="ml-1 text-slate-500">/mo</span>
+            </div>
+            <button
+              class="bg-primary hover:bg-primary-hover mb-8 w-full py-3 text-xs font-bold tracking-widest text-white uppercase transition-colors"
+            >
+              Choose Plan
+            </button>
+            <ul class="space-y-3 text-sm text-slate-700">
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-base">check_box</span>
+                Unlimited Projects
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-base">check_box</span>
+                Advanced AI Estimates
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-base">check_box</span>
+                Inventory Tracking
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-base">check_box</span>
+                White-label Reports
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-base">check_box</span>
+                Priority Support
+              </li>
+            </ul>
+          </div>
+          <div
+            class="border border-slate-200 bg-white p-8 transition-colors hover:border-slate-400"
+          >
+            <div class="mb-6 h-1 w-full bg-slate-900"></div>
+            <h3 class="mb-2 text-lg font-bold text-slate-900 uppercase">Enterprise</h3>
+            <p class="mb-6 text-sm text-slate-500">For large production.</p>
+            <div class="mb-6 flex items-baseline">
+              <span class="text-4xl font-bold text-slate-900">$199</span>
+              <span class="ml-1 text-slate-500">/mo</span>
+            </div>
+            <button
+              class="mb-8 w-full border border-slate-300 py-3 text-xs font-bold tracking-widest text-slate-900 uppercase transition-colors hover:bg-slate-50"
+            >
+              Contact Sales
+            </button>
+            <ul class="space-y-3 text-sm text-slate-600">
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-base">check</span>
+                Unlimited Team Members
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-base">check</span> API
+                Access
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-base">check</span> Account
+                Manager
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-base">check</span> Custom
+                Integrations
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="border-t border-slate-200 bg-white py-24">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-4 lg:grid-cols-2">
+        <div>
+          <h2 class="mb-6 text-3xl font-bold text-slate-900 uppercase md:text-5xl">
+            Why Builders Love Flow
+          </h2>
+          <p class="mb-8 text-lg text-slate-500">
+            Join thousands of creators who have transformed their workflow into a predictable
+            revenue engine.
+          </p>
+          <div
+            class="relative flex aspect-video flex-col justify-end overflow-hidden border border-slate-200 bg-slate-50 p-6"
+          >
+            <div class="absolute top-0 right-0 p-4">
+              <div class="flex gap-1">
+                <div class="bg-secondary h-2 w-2"></div>
+                <div class="bg-accent h-2 w-2"></div>
+                <div class="bg-primary h-2 w-2"></div>
+              </div>
+            </div>
+            <div class="mt-auto flex h-40 items-end gap-3">
+              <div class="h-[40%] flex-1 bg-slate-200"></div>
+              <div class="h-[60%] flex-1 bg-slate-300"></div>
+              <div class="bg-primary group relative h-[80%] flex-1">
+                <div
+                  class="absolute -top-10 left-1/2 -translate-x-1/2 bg-black px-3 py-1 text-xs font-bold tracking-widest whitespace-nowrap text-white uppercase opacity-0 transition-opacity group-hover:opacity-100"
+                >
+                  Peak Output
+                </div>
+              </div>
+              <div class="h-[50%] flex-1 bg-slate-200"></div>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <details class="group border-b border-slate-200 bg-transparent">
+            <summary class="flex cursor-pointer list-none items-center justify-between py-4">
+              <span class="text-lg font-bold text-slate-900 uppercase">01 Increase Engagement</span>
+              <span
+                class="material-symbols-outlined text-primary transition-transform group-open:rotate-180"
+                >expand_more</span
+              >
+            </summary>
+            <div class="pb-4 text-slate-600">
+              Discover the best times to post, optimal content formats, and hashtag strategies that
+              maximize your visibility within the model kit community.
+            </div>
+          </details>
+          <details class="group border-b border-slate-200 bg-transparent">
+            <summary class="flex cursor-pointer list-none items-center justify-between py-4">
+              <span class="text-lg font-bold text-slate-900 uppercase"
+                >02 Optimize Performance</span
+              >
+              <span
+                class="material-symbols-outlined text-primary transition-transform group-open:rotate-180"
+                >expand_more</span
+              >
+            </summary>
+            <div class="pb-4 text-slate-600">
+              Automatically analyze which photos of your builds get the most traction and replicate
+              that success.
+            </div>
+          </details>
+          <details class="group border-b border-slate-200 bg-transparent">
+            <summary class="flex cursor-pointer list-none items-center justify-between py-4">
+              <span class="text-lg font-bold text-slate-900 uppercase">03 Understand Audience</span>
+              <span
+                class="material-symbols-outlined text-primary transition-transform group-open:rotate-180"
+                >expand_more</span
+              >
+            </summary>
+            <div class="pb-4 text-slate-600">
+              Know exactly what your clients want before they ask. Our AI analyzes feedback to
+              suggest your next popular service.
+            </div>
+          </details>
+          <details class="group border-b border-slate-200 bg-transparent">
+            <summary class="flex cursor-pointer list-none items-center justify-between py-4">
+              <span class="text-lg font-bold text-slate-900 uppercase"
+                >04 Data-Driven Decisions</span
+              >
+              <span
+                class="material-symbols-outlined text-primary transition-transform group-open:rotate-180"
+                >expand_more</span
+              >
+            </summary>
+            <div class="pb-4 text-slate-600">
+              Stop guessing on pricing. Use real market data to price your commissions competitively
+              while maximizing profit.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+    <section class="bg-background-gray px-4 py-24">
+      <div class="bg-primary border-primary mx-auto max-w-5xl border-4 text-center">
+        <div class="m-1 border border-slate-100 bg-white p-12">
+          <h2 class="mb-6 text-3xl font-bold tracking-tight text-slate-900 uppercase md:text-5xl">
+            Ready to Deploy?
+          </h2>
+          <p class="mx-auto mb-8 max-w-2xl text-slate-500">
+            Join 10,000+ marketers and studio owners using AI-powered analytics.
+          </p>
+          <button
+            class="bg-secondary inline-flex items-center gap-2 border border-transparent px-8 py-4 text-lg font-bold tracking-wide text-white uppercase transition-colors hover:bg-red-700"
+          >
+            Initialize System
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+          </button>
+          <p class="mt-6 font-mono text-xs text-slate-400">
+            No credit card required • 14-day free trial
+          </p>
+        </div>
+      </div>
+    </section>
+    <footer class="border-t-secondary border-t-4 bg-white pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="mb-12 grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-5">
+          <div class="col-span-2 lg:col-span-2">
+            <div class="mb-4 flex items-center gap-2">
+              <div
+                class="bg-primary flex h-8 w-8 items-center justify-center text-lg font-bold text-white"
+              >
+                f.
+              </div>
+              <span class="text-xl font-bold text-slate-900 uppercase">flow.</span>
+            </div>
+            <p class="mb-6 max-w-xs text-sm text-slate-500">
+              Advanced analytics and management for smarter marketing decisions and custom build
+              studios.
+            </p>
+            <div class="flex gap-4">
+              <a
+                class="hover:bg-primary flex h-10 w-10 items-center justify-center bg-slate-100 text-slate-600 transition-colors hover:text-white"
+                href="#"
+              >
+                <span class="text-lg font-bold">X</span>
+              </a>
+              <a
+                class="hover:bg-secondary flex h-10 w-10 items-center justify-center bg-slate-100 text-slate-600 transition-colors hover:text-white"
+                href="#"
+              >
+                <span class="material-symbols-outlined">play_arrow</span>
+              </a>
+              <a
+                class="hover:bg-accent flex h-10 w-10 items-center justify-center bg-slate-100 text-slate-600 transition-colors hover:text-black"
+                href="#"
+              >
+                <span class="material-symbols-outlined">social_leaderboard</span>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 class="mb-4 text-xs font-bold tracking-wider text-slate-900 uppercase">Product</h4>
+            <ul class="space-y-2 text-sm text-slate-600">
+              <li><a class="hover:text-primary transition-colors" href="#">Features</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Pricing</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Integrations</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Changelog</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="mb-4 text-xs font-bold tracking-wider text-slate-900 uppercase">Company</h4>
+            <ul class="space-y-2 text-sm text-slate-600">
+              <li><a class="hover:text-primary transition-colors" href="#">About</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Blog</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+              <li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="mb-4 text-xs font-bold tracking-wider text-slate-900 uppercase">Legal</h4>
+            <ul class="space-y-2 text-sm text-slate-600">
+              <li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+              <li>
+                <a class="hover:text-primary transition-colors" href="#">Terms &amp; Conditions</a>
+              </li>
+              <li><a class="hover:text-primary transition-colors" href="#">Accessibility</a></li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="flex flex-col items-center justify-between border-t border-slate-200 pt-8 font-mono text-xs text-slate-500 md:flex-row"
+        >
+          <p>© 2023 Flow Analytics Inc. All rights reserved.</p>
+          <div class="mt-4 flex gap-4 md:mt-0">
+            <a class="hover:text-slate-800" href="#">Sitemap</a>
+            <a class="hover:text-slate-800" href="#">Cookies</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

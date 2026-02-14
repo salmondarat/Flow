@@ -1,0 +1,13 @@
+# Robots.txt for Flow
+# Allow all crawlers
+
+User-agent: *
+Allow: /
+
+# Disallow admin and client portal areas
+Disallow: /admin/
+Disallow: /client/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://flow.sys/sitemap.xml

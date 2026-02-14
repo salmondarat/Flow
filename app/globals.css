@@ -1,0 +1,380 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ============================================================================
+   TAILWIND V4 THEME CONFIGURATION
+   ============================================================================ */
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* Minimal SaaS color palette - sophisticated indigo primary */
+  --color-brand: #6366f1;
+  --color-brand-hover: #4f46e5;
+  --color-brand-light: #eef2ff;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-light: var(--light);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --light: #5ba8ff;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --light: #016fee;
+}
+
+/* ============================================================================
+   LIGHT THEME (default)
+   ============================================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* Semantic colors - minimal clean palette */
+  --color-base-100: #ffffff; /* Pure white background */
+  --color-base-200: #fafafa; /* Card background - subtle off-white */
+  --color-base-300: #f4f4f5; /* Panel backgrounds - light gray */
+  --color-base-content: #18181b; /* Near black text for high contrast */
+
+  /* Primary - Indigo */
+  --color-primary: #6366f1;
+  --color-primary-content: #ffffff;
+
+  /* Secondary - Slate */
+  --color-secondary: #64748b;
+  --color-secondary-content: #ffffff;
+
+  /* Accent - Teal (for success states) */
+  --color-accent: #14b8a6;
+  --color-accent-content: #ffffff;
+
+  /* Semantic colors */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+
+  /* Neutral - Muted tones */
+  --color-neutral: #f4f4f5;
+  --color-neutral-content: #52525b;
+
+  /* Border & Input */
+  --color-border: #e4e4e7;
+  --color-input: #e4e4e7;
+
+  /* Focus ring */
+  --color-ring: #6366f1;
+
+  /* High contrast text colors - WCAG AA compliant */
+  --color-text-high: #09090b; /* Near-black for primary text (contrast > 15:1) */
+  --color-text-medium: #27272a; /* Dark gray for secondary text (contrast > 10:1) */
+  --color-text-muted: #52525b; /* Medium gray for tertiary text (contrast > 7:1) */
+}
+
+/* ============================================================================
+   DARK THEME
+   ============================================================================ */
+
+.dark {
+  color-scheme: dark;
+
+  /* Semantic colors - Dark mode minimal palette */
+  --color-base-100: #09090b; /* Deep black background */
+  --color-base-200: #18181b; /* Card background - dark gray */
+  --color-base-300: #27272a; /* Panel backgrounds - medium gray */
+  --color-base-content: #fafafa; /* Light text for high contrast */
+
+  /* High contrast text colors - WCAG AA compliant */
+  --color-text-high: #fafafa; /* Near-white for primary text (contrast > 15:1) */
+  --color-text-medium: #d4d4d8; /* Light gray for secondary text (contrast > 10:1) */
+  --color-text-muted: #a1a1aa; /* Medium gray for tertiary text (improved to 7:1+ on dark cards) */
+
+  /* Primary - Brighter indigo for dark mode */
+  --color-primary: #818cf8;
+  --color-primary-content: #09090b;
+
+  /* Secondary */
+  --color-secondary: #a1a1aa;
+  --color-secondary-content: #09090b;
+
+  /* Accent - Brighter teal */
+  --color-accent: #2dd4bf;
+  --color-accent-content: #09090b;
+
+  /* Neutral */
+  --color-neutral: #27272a;
+  --color-neutral-content: #d4d4d8;
+
+  /* Border & Input */
+  --color-border: #27272a;
+  --color-input: #27272a;
+
+  /* Focus ring */
+  --color-ring: #818cf8;
+}
+
+/* ============================================================================
+   TAILWIND LAYERS
+   ============================================================================ */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  /* Set default border color */
+  * {
+    border-color: var(--color-border);
+  }
+
+  /* Smooth theme transition for all color properties */
+  *,
+  *::before,
+  *::after {
+    transition-property:
+      color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow,
+      opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0ms;
+  }
+
+  /* Background and text colors */
+  html {
+    background-color: var(--color-base-100);
+    color: var(--color-base-content);
+  }
+
+  body {
+    background-color: var(--color-base-100);
+    color: var(--color-base-content);
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Minimal card utilities */
+  .flat-card {
+    background-color: var(--color-base-200);
+    border: 1px solid var(--color-border);
+  }
+
+  .card-soft {
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+
+  /* Minimal hover effect */
+  .hover-lift {
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07);
+  }
+
+  /* Semantic theme utilities */
+  .bg-background {
+    background-color: var(--color-base-100);
+  }
+
+  .bg-card {
+    background-color: var(--color-base-200);
+  }
+
+  .text-foreground {
+    color: var(--color-base-content);
+  }
+
+  .text-card-foreground {
+    color: var(--color-base-content);
+  }
+
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+
+  .text-primary {
+    color: var(--color-primary);
+  }
+
+  .bg-muted {
+    background-color: var(--color-neutral);
+  }
+
+  .text-muted-foreground {
+    color: var(--color-neutral-content);
+  }
+
+  .text-accent-content {
+    color: var(--color-accent-content);
+  }
+
+  .text-primary-content {
+    color: var(--color-primary-content);
+  }
+
+  .text-secondary-content {
+    color: var(--color-secondary-content);
+  }
+
+  .border-border {
+    border-color: var(--color-border);
+  }
+
+  /* High contrast text utilities */
+  .text-text-high {
+    color: var(--color-text-high);
+  }
+
+  .text-text-medium {
+    color: var(--color-text-medium);
+  }
+
+  .text-text-muted {
+    color: var(--color-text-muted);
+  }
+
+  /* Better contrast for text on neutral backgrounds */
+  .bg-neutral-50 {
+    background-color: #fafafa;
+  }
+  .dark .bg-neutral-50 {
+    background-color: #27272a;
+  }
+
+  .bg-neutral-100 {
+    background-color: #f4f4f5;
+  }
+  .dark .bg-neutral-100 {
+    background-color: #27272a;
+  }
+
+  .bg-neutral-900 {
+    background-color: #18181b;
+  }
+
+  /* Better contrast for text on brand/colored backgrounds in light mode */
+  .text-brand-on-light {
+    color: #4f46e5; /* Darker indigo for light backgrounds */
+  }
+
+  .dark .text-brand-on-light {
+    color: #a5b4fc; /* Lighter indigo for dark backgrounds */
+  }
+
+  /* Better contrast for muted backgrounds with text */
+  .bg-brand-100 {
+    background-color: #e0e7ff;
+  }
+  .dark .bg-brand-100 {
+    background-color: rgba(99, 102, 241, 0.15);
+  }
+
+  .text-brand-600 {
+    color: #4f46e5; /* Darker indigo for better contrast on light */
+  }
+  .dark .text-brand-600 {
+    color: #818cf8; /* Lighter indigo for dark backgrounds */
+  }
+
+  .text-brand-500 {
+    color: #6366f1;
+  }
+  .dark .text-brand-500 {
+    color: #a5b4fc;
+  }
+}
+
+/* ============================================================================
+   FONT IMPORTS
+   ============================================================================ */
+
+/* Geist - Primary font (from Vercel) */
+@font-face {
+  font-family: "Geist";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("https://assets.vercel.com/font/inter-cf93dacec27e4e6f40ed62695cd7c5c0/fonts/Geist/Geist-Variable.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("https://assets.vercel.com/font/inter-cf93dacec27e4e6f40ed62695cd7c5c0/fonts/GeistMono/GeistMono-Variable.woff2")
+    format("woff2");
+}
+
+/* Space Grotesk - Display/headings */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+/* Inter - Body text */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+/* JetBrains Mono - Technical data */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap");

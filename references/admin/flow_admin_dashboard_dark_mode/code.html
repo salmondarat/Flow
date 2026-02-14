@@ -1,0 +1,657 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Flow Admin Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#2b2bee",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101022",
+              "surface-dark": "#18182f", // Slightly lighter for cards
+              "border-dark": "#2a2a45",
+            },
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+              none: "0px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Custom scrollbar for webkit */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #101022;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2b2bee;
+        border-radius: 0px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #4040ff;
+      }
+
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        font-size: 20px;
+      }
+      .icon-fill {
+        font-variation-settings: "FILL" 1;
+      }
+      .icon-lg {
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display flex h-screen overflow-hidden text-slate-900 dark:text-white"
+  >
+    <!-- Sidebar -->
+    <aside
+      class="bg-surface-dark border-border-dark z-20 flex h-full w-64 flex-shrink-0 flex-col border-r"
+    >
+      <div class="border-border-dark flex h-16 items-center border-b bg-[#111122] px-6">
+        <span class="material-symbols-outlined text-primary icon-lg icon-fill mr-3"
+          >deployed_code</span
+        >
+        <h1 class="text-xl font-bold tracking-widest text-white uppercase">FLOW</h1>
+      </div>
+      <div class="flex flex-1 flex-col gap-6 overflow-y-auto px-3 py-6">
+        <!-- Main Nav -->
+        <div class="flex flex-col gap-1">
+          <p class="mb-2 px-3 text-xs font-bold tracking-wider text-[#9292c9] uppercase">
+            Main Menu
+          </p>
+          <a
+            class="bg-primary/10 border-primary group hover:bg-primary/20 flex items-center gap-3 rounded border-l-2 px-3 py-2.5 transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined icon-fill text-white">dashboard</span>
+            <span class="text-sm font-medium text-white">Dashboard</span>
+          </a>
+          <a
+            class="group flex items-center gap-3 rounded border-l-2 border-transparent px-3 py-2.5 transition-colors hover:bg-white/5"
+            href="#"
+          >
+            <span
+              class="material-symbols-outlined text-[#9292c9] transition-colors group-hover:text-white"
+              >handyman</span
+            >
+            <span
+              class="text-sm font-medium text-[#9292c9] transition-colors group-hover:text-white"
+              >Active Builds</span
+            >
+          </a>
+          <a
+            class="group flex items-center gap-3 rounded border-l-2 border-transparent px-3 py-2.5 transition-colors hover:bg-white/5"
+            href="#"
+          >
+            <span
+              class="material-symbols-outlined text-[#9292c9] transition-colors group-hover:text-white"
+              >request_quote</span
+            >
+            <span
+              class="text-sm font-medium text-[#9292c9] transition-colors group-hover:text-white"
+              >Estimations</span
+            >
+          </a>
+          <a
+            class="group flex items-center gap-3 rounded border-l-2 border-transparent px-3 py-2.5 transition-colors hover:bg-white/5"
+            href="#"
+          >
+            <span
+              class="material-symbols-outlined text-[#9292c9] transition-colors group-hover:text-white"
+              >inventory_2</span
+            >
+            <span
+              class="text-sm font-medium text-[#9292c9] transition-colors group-hover:text-white"
+              >Inventory</span
+            >
+          </a>
+        </div>
+        <!-- Team -->
+        <div class="flex flex-col gap-1">
+          <p class="mb-2 px-3 text-xs font-bold tracking-wider text-[#9292c9] uppercase">Team</p>
+          <a
+            class="group flex items-center gap-3 rounded border-l-2 border-transparent px-3 py-2.5 transition-colors hover:bg-white/5"
+            href="#"
+          >
+            <span
+              class="material-symbols-outlined text-[#9292c9] transition-colors group-hover:text-white"
+              >engineering</span
+            >
+            <span
+              class="text-sm font-medium text-[#9292c9] transition-colors group-hover:text-white"
+              >Builders</span
+            >
+          </a>
+          <a
+            class="group flex items-center gap-3 rounded border-l-2 border-transparent px-3 py-2.5 transition-colors hover:bg-white/5"
+            href="#"
+          >
+            <span
+              class="material-symbols-outlined text-[#9292c9] transition-colors group-hover:text-white"
+              >schedule</span
+            >
+            <span
+              class="text-sm font-medium text-[#9292c9] transition-colors group-hover:text-white"
+              >Schedules</span
+            >
+          </a>
+        </div>
+      </div>
+      <div class="border-border-dark border-t p-4">
+        <a
+          class="group flex items-center gap-3 rounded px-3 py-2 transition-colors hover:bg-white/5"
+          href="#"
+        >
+          <span
+            class="material-symbols-outlined text-[#9292c9] transition-colors group-hover:text-white"
+            >settings</span
+          >
+          <span class="text-sm font-medium text-[#9292c9] transition-colors group-hover:text-white"
+            >Settings</span
+          >
+        </a>
+        <div
+          class="border-border-dark mt-4 flex items-center gap-3 rounded border bg-[#111122] px-3 py-2"
+        >
+          <div
+            class="size-8 rounded-full bg-cover bg-center"
+            data-alt="User avatar of a man with glasses"
+            style="
+              background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAuL-srWr-y0rJcW7gqWHWIlvAY1NARkfJn10pMMq9UWJ0k9i5R5H-NXmBuVZL6NYv0PLjfLDeZKeP_q2J8Fy0OiC7OvIdnLZm3hgTcRg-uBcOb14AeBA8oruoQlqw_dA482CSmuGCqL0vAs45LRzOOF1KdG-D2LfmCMtWDojxc0RVDfsNUlbbLoBpVyMJ8gw4rOBlI_kLyXotcvKWGbo4bnfNaJw36-Ov2nlVkskEzW3BaUn9W9YAXCl1BBCpKUY65EnkiWHsYZA9Y&quot;);
+            "
+          ></div>
+          <div class="flex flex-col">
+            <span class="text-xs font-bold text-white">Admin User</span>
+            <span class="text-[10px] text-[#9292c9]">System Op</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="bg-background-dark relative flex h-full min-w-0 flex-1 flex-col">
+      <!-- Top Header -->
+      <header
+        class="border-border-dark bg-background-dark/95 sticky top-0 z-10 flex h-16 items-center justify-between border-b px-8 backdrop-blur"
+      >
+        <!-- Search -->
+        <div class="flex w-96 max-w-lg items-center">
+          <div class="relative w-full">
+            <span
+              class="material-symbols-outlined absolute top-1/2 left-3 -translate-y-1/2 text-[#9292c9]"
+              >search</span
+            >
+            <input
+              class="bg-surface-dark border-border-dark focus:border-primary focus:ring-primary w-full rounded border py-2 pr-4 pl-10 text-sm text-white placeholder-[#565676] focus:ring-1 focus:outline-none"
+              placeholder="Search projects, parts, or builders..."
+              type="text"
+            />
+          </div>
+        </div>
+        <!-- Right Actions -->
+        <div class="flex items-center gap-4">
+          <button
+            class="relative rounded p-2 text-[#9292c9] transition-colors hover:bg-white/5 hover:text-white"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+            <span
+              class="bg-primary border-background-dark absolute top-2 right-2 size-2 rounded-full border-2"
+            ></span>
+          </button>
+          <button
+            class="flex items-center justify-center rounded p-2 text-[#9292c9] transition-colors hover:bg-white/5 hover:text-white"
+          >
+            <span class="material-symbols-outlined">help</span>
+          </button>
+        </div>
+      </header>
+      <!-- Scrollable Content -->
+      <div class="flex-1 overflow-y-auto p-8">
+        <div class="mx-auto flex max-w-[1400px] flex-col gap-8">
+          <!-- Page Heading -->
+          <div class="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+            <div>
+              <h2 class="text-3xl font-bold tracking-tight text-white uppercase md:text-4xl">
+                Command Center <span class="text-primary">//</span> Flow Systems
+              </h2>
+              <p class="mt-1 text-sm tracking-wide text-[#9292c9]">
+                Overview of active mecha operations and pipeline metrics.
+              </p>
+            </div>
+            <div class="flex gap-3">
+              <span
+                class="flex items-center gap-2 rounded border border-green-500/20 bg-green-500/10 px-3 py-1 text-xs font-bold tracking-wider text-green-500 uppercase"
+              >
+                <span class="size-2 animate-pulse rounded-full bg-green-500"></span>
+                System Online
+              </span>
+              <span
+                class="bg-surface-dark border-border-dark rounded border px-3 py-1 text-xs font-bold tracking-wider text-[#9292c9] uppercase"
+              >
+                v.2.4.0
+              </span>
+            </div>
+          </div>
+          <!-- Stats Grid -->
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <!-- Stat Card 1 -->
+            <div
+              class="bg-surface-dark border-border-dark group relative flex flex-col overflow-hidden rounded border p-6"
+            >
+              <div
+                class="absolute top-0 right-0 p-4 opacity-10 transition-opacity group-hover:opacity-20"
+              >
+                <span class="material-symbols-outlined text-6xl text-white"
+                  >precision_manufacturing</span
+                >
+              </div>
+              <p class="text-sm font-medium tracking-wider text-[#9292c9] uppercase">
+                Active Operations
+              </p>
+              <div class="mt-2 flex items-baseline gap-2">
+                <h3 class="text-3xl font-bold text-white">12</h3>
+                <span class="flex items-center text-xs font-bold text-green-400">
+                  <span class="material-symbols-outlined text-sm">arrow_upward</span> 20%
+                </span>
+              </div>
+              <div class="mt-4 h-1 w-full overflow-hidden rounded-full bg-[#111122]">
+                <div class="bg-primary h-full w-[65%]"></div>
+              </div>
+            </div>
+            <!-- Stat Card 2 -->
+            <div
+              class="bg-surface-dark border-border-dark group relative flex flex-col overflow-hidden rounded border p-6"
+            >
+              <div
+                class="absolute top-0 right-0 p-4 opacity-10 transition-opacity group-hover:opacity-20"
+              >
+                <span class="material-symbols-outlined text-6xl text-white">pending_actions</span>
+              </div>
+              <p class="text-sm font-medium tracking-wider text-[#9292c9] uppercase">
+                Pending Estimations
+              </p>
+              <div class="mt-2 flex items-baseline gap-2">
+                <h3 class="text-3xl font-bold text-white">4</h3>
+                <span class="flex items-center text-xs font-bold text-yellow-400">
+                  <span class="material-symbols-outlined text-sm">priority_high</span> Urgent
+                </span>
+              </div>
+              <div class="mt-4 h-1 w-full overflow-hidden rounded-full bg-[#111122]">
+                <div class="h-full w-[25%] bg-yellow-400"></div>
+              </div>
+            </div>
+            <!-- Stat Card 3 -->
+            <div
+              class="bg-surface-dark border-border-dark group relative flex flex-col overflow-hidden rounded border p-6"
+            >
+              <div
+                class="absolute top-0 right-0 p-4 opacity-10 transition-opacity group-hover:opacity-20"
+              >
+                <span class="material-symbols-outlined text-6xl text-white">monitoring</span>
+              </div>
+              <p class="text-sm font-medium tracking-wider text-[#9292c9] uppercase">
+                Revenue (YTD)
+              </p>
+              <div class="mt-2 flex items-baseline gap-2">
+                <h3 class="text-3xl font-bold text-white">$45,200</h3>
+                <span class="flex items-center text-xs font-bold text-green-400">
+                  <span class="material-symbols-outlined text-sm">arrow_upward</span> 15%
+                </span>
+              </div>
+              <div class="mt-4 h-1 w-full overflow-hidden rounded-full bg-[#111122]">
+                <div class="h-full w-[85%] bg-cyan-400"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Main Grid: Pipeline + Actions -->
+          <div class="grid grid-cols-1 items-start gap-6 lg:grid-cols-4">
+            <!-- Left Column: Pipeline Table -->
+            <div class="flex flex-col gap-4 lg:col-span-3">
+              <div class="border-border-dark flex items-center justify-between border-b pb-2">
+                <h3 class="text-xl font-bold tracking-tight text-white uppercase">
+                  Order Pipeline
+                </h3>
+                <div class="flex gap-2">
+                  <button
+                    class="bg-surface-dark border-border-dark hover:border-primary flex items-center gap-2 rounded border px-3 py-1.5 text-xs font-bold tracking-wider text-white uppercase transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-sm">filter_list</span> Filter
+                  </button>
+                  <button
+                    class="bg-surface-dark border-border-dark hover:border-primary flex items-center gap-2 rounded border px-3 py-1.5 text-xs font-bold tracking-wider text-white uppercase transition-colors"
+                  >
+                    <span class="material-symbols-outlined text-sm">download</span> Export
+                  </button>
+                </div>
+              </div>
+              <div class="bg-surface-dark border-border-dark overflow-hidden rounded border">
+                <table class="w-full border-collapse text-left">
+                  <thead>
+                    <tr
+                      class="border-border-dark border-b bg-[#111122] text-xs tracking-wider text-[#9292c9] uppercase"
+                    >
+                      <th class="p-4 font-semibold">Project Name</th>
+                      <th class="p-4 font-semibold">Status</th>
+                      <th class="p-4 font-semibold">Builder</th>
+                      <th class="p-4 font-semibold">Deadline</th>
+                      <th class="p-4 text-right font-semibold">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-border-dark divide-y text-sm">
+                    <tr class="group transition-colors hover:bg-white/5">
+                      <td class="p-4">
+                        <div class="flex items-center gap-3">
+                          <div
+                            class="border-border-dark flex size-10 items-center justify-center overflow-hidden rounded border bg-[#111122]"
+                          >
+                            <div
+                              class="size-full bg-cover bg-center opacity-80"
+                              data-alt="Close up of mechanical robot parts"
+                              style="
+                                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCMAo27SI8onCirYZ5eJgNtf9ICEGRvhQwDzTDR6xo3DhI7G31shlNqNr-OBH8bc3sHyesW_1lrfTvVjKEdYapGT-0AoVVbjh7yAEoJA898uVmx_9a9ku7uLijc_1HuuSeLxT7DI_qs9qUfXuOyf6yRj1gXTZdBeBrcOHKT6N4BsOe_Gemlx7ooCRXOu7tjggpHJnW47azQgUOyo0BhnDdWKeEKIzikixAGWP12I3NznL9IKA3x6G0WbBsx5vEvB5WsVR8SuNINCKWP&quot;);
+                              "
+                            ></div>
+                          </div>
+                          <div>
+                            <div class="font-bold text-white">PG Unleashed RX-78-2</div>
+                            <div class="text-xs text-[#9292c9]">ID: #FLW-8821</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="p-4">
+                        <span
+                          class="inline-flex items-center gap-1.5 rounded border border-blue-500/20 bg-blue-500/10 px-2.5 py-1 text-xs font-bold text-blue-400 uppercase"
+                        >
+                          <span class="size-1.5 rounded-full bg-blue-400"></span>
+                          Assembly
+                        </span>
+                      </td>
+                      <td class="p-4">
+                        <div class="flex items-center gap-2">
+                          <div
+                            class="size-6 rounded-full bg-cover bg-center"
+                            data-alt="Avatar of K. Yamato"
+                            style="
+                              background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBZwgqq5clQ3yIZ9esbC22pC6AYN33hStdwrSObop9WaXVo9IdDyBK7XZCiqKULG2e13XsOvwrokhfNNrU1-EHDTYHD1mIgtEItoGsFuShZa-Oj0TAfGXnmCJVlYUNhiwZIpDux8jA0J7RkLIVX14Jmg7MdSjg-yUQkIV_WOaNziS-gVl1KfI119z_-o8i-OxEeLAzD3hHPgV7wDNuelwfRmg2aTUgGS6-5IX1BVPUfHaVPfqsP9X2bxPKJ-m9TiJ0Ge7bZLetXUPSH&quot;);
+                            "
+                          ></div>
+                          <span class="text-xs font-medium text-white">K. Yamato</span>
+                        </div>
+                      </td>
+                      <td class="p-4 font-medium text-white">Oct 24, 2023</td>
+                      <td class="p-4 text-right">
+                        <button class="text-[#9292c9] transition-colors hover:text-white">
+                          <span class="material-symbols-outlined">more_horiz</span>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr class="group transition-colors hover:bg-white/5">
+                      <td class="p-4">
+                        <div class="flex items-center gap-3">
+                          <div
+                            class="border-border-dark flex size-10 items-center justify-center overflow-hidden rounded border bg-[#111122]"
+                          >
+                            <div
+                              class="size-full bg-cover bg-center opacity-80"
+                              data-alt="Industrial robot arm painting"
+                              style="
+                                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAu3KJVMRWCdeCYLmI4XjrdzpPRzcOchuOEQQcxlM3Eeg58lWvPtQjGm_IPr-scHvLqEUxHaKg3b9G-OXTfV4jkwnGkc5gBr-9xM_EgcvlGuz5y9n0F0ks8rKl_2z8TDMxZds85lbZnVdgNWJGxAOgMZ6KgLTFJ1u6LiOe4fixyEh_y1vDeu8VE7rrGsIFFVM45Zwn53a9qj6rs6yAJ9BdTD8wvWD-uWqPrJIfC2rHn0pAtxk1IOt77vk7SkOuoM86ALld-K9no1cTh&quot;);
+                              "
+                            ></div>
+                          </div>
+                          <div>
+                            <div class="font-bold text-white">RG Nu Gundam HWS</div>
+                            <div class="text-xs text-[#9292c9]">ID: #FLW-8822</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="p-4">
+                        <span
+                          class="inline-flex items-center gap-1.5 rounded border border-cyan-500/20 bg-cyan-500/10 px-2.5 py-1 text-xs font-bold text-cyan-400 uppercase"
+                        >
+                          <span class="size-1.5 rounded-full bg-cyan-400"></span>
+                          Painting
+                        </span>
+                      </td>
+                      <td class="p-4">
+                        <div class="flex items-center gap-2">
+                          <div
+                            class="size-6 rounded-full bg-cover bg-center"
+                            data-alt="Avatar of A. Ray"
+                            style="
+                              background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCK5vBLFHPsMYuooacP76Wn7gDdc3-vTNSsduqhqM6FsOMRVh55M31bpWrwv9p98sk2exPYiixYRbr0x5GTY08ai1V0D_u4b82k5-QDbT6kBwfj6vCGpeuvignQQpmXLYj2-63PdnkZbm5WHTges7ASJXU5xvimaqNngsSyYI4lav_ZmkTtOKWBVEAtWzM9zomgoG4jf2oH4agzRNSyTeHKyUw3T2gybR79PSMbCwMWD3vAdPDJxHtHnD9m_CXG3hkvArpUcDaq3sCV&quot;);
+                            "
+                          ></div>
+                          <span class="text-xs font-medium text-white">A. Ray</span>
+                        </div>
+                      </td>
+                      <td class="p-4 font-medium text-white">Nov 02, 2023</td>
+                      <td class="p-4 text-right">
+                        <button class="text-[#9292c9] transition-colors hover:text-white">
+                          <span class="material-symbols-outlined">more_horiz</span>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr class="group transition-colors hover:bg-white/5">
+                      <td class="p-4">
+                        <div class="flex items-center gap-3">
+                          <div
+                            class="border-border-dark flex size-10 items-center justify-center overflow-hidden rounded border bg-[#111122]"
+                          >
+                            <div
+                              class="size-full bg-cover bg-center opacity-80"
+                              data-alt="Schematics on a computer screen"
+                              style="
+                                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAJudrSUZVainYDtWTfi0kiumrNVEJkrwu3nqwNwXDpZ_swTCYVd4DWcpBjodY9lvRE4NyvA0r3Vy5glX77yxvNXaYDkNoeIQeLb1WrPY4UV3uCFqxDVee8xV87i1p0tDAdMFtxIftVMYXLYn1Pd0yJSZ1HG7pZiYns9jVUA64nKfoMkfecQpU-3uYU6UB6qYmDH4iJNrKzNZGi9SGCu50P4QQ9-4liFpWlZ26l5U_id_yWJCoCmzk282-BB4FAOJjd3n_E6hdZ6EeR&quot;);
+                              "
+                            ></div>
+                          </div>
+                          <div>
+                            <div class="font-bold text-white">MG Eclipse Custom</div>
+                            <div class="text-xs text-[#9292c9]">ID: #FLW-8823</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="p-4">
+                        <span
+                          class="inline-flex items-center gap-1.5 rounded border border-purple-500/20 bg-purple-500/10 px-2.5 py-1 text-xs font-bold text-purple-400 uppercase"
+                        >
+                          <span class="size-1.5 rounded-full bg-purple-400"></span>
+                          Intake
+                        </span>
+                      </td>
+                      <td class="p-4">
+                        <div class="flex items-center gap-2">
+                          <span
+                            class="bg-border-dark flex size-6 items-center justify-center rounded-full border border-dashed border-[#565676] text-[10px] text-[#9292c9]"
+                            >?</span
+                          >
+                          <span class="text-xs font-medium text-[#9292c9] italic">Unassigned</span>
+                        </div>
+                      </td>
+                      <td class="p-4 font-medium text-white">TBD</td>
+                      <td class="p-4 text-right">
+                        <button class="text-[#9292c9] transition-colors hover:text-white">
+                          <span class="material-symbols-outlined">more_horiz</span>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr class="group transition-colors hover:bg-white/5">
+                      <td class="p-4">
+                        <div class="flex items-center gap-3">
+                          <div
+                            class="border-border-dark flex size-10 items-center justify-center overflow-hidden rounded border bg-[#111122]"
+                          >
+                            <div
+                              class="size-full bg-cover bg-center opacity-80"
+                              data-alt="Cardboard box with shipping label"
+                              style="
+                                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDFhEgbqRdkdsYJsI7Xk2kBfz133T7LFygVTIjFTbHA7ilbFfAIRll-p4J6Td8Y9mpMFwRT5zjnpGYS6VksNsTJm-mfaVurm8HiDHOvAdNcl8Myuuk-3aVjOSFd95MZfvTUZog_NusUGhYv0ISlcnyJ44NFXfNceH8myI1gxWPkWoR5H4smKkOWqPDsnUDhcJF-w88OhEC8caJK8H0ucSeSeoAuiojO1VJqdqkBl3BjtZQLUiJ2XS6w8ksyseDYeKRJauT03DVv8Q6m&quot;);
+                              "
+                            ></div>
+                          </div>
+                          <div>
+                            <div class="font-bold text-white">HG Aerial Rebuild</div>
+                            <div class="text-xs text-[#9292c9]">ID: #FLW-8824</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="p-4">
+                        <span
+                          class="inline-flex items-center gap-1.5 rounded border border-yellow-500/20 bg-yellow-500/10 px-2.5 py-1 text-xs font-bold text-yellow-400 uppercase"
+                        >
+                          <span class="size-1.5 rounded-full bg-yellow-400"></span>
+                          Pending Parts
+                        </span>
+                      </td>
+                      <td class="p-4">
+                        <div class="flex items-center gap-2">
+                          <div
+                            class="size-6 rounded-full bg-cover bg-center"
+                            data-alt="Avatar of S. Mercury"
+                            style="
+                              background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuB6ZvDi1MUyiPVU06mSUDRGJYz7A7BH6rlXZN9Jh8i2XTxvQNlRCHPr9PSnFUpJgL3og8lJuMluP_fnO6_vN-JnhKEV1IqAnVUGN_KP3cCXRjckLKobYpAqL-xZyuRMU8bbrN5WWoeZfZcATZPLrq422tVg0mnCuAwW4dDIDYweNXeeHfZHbpWaNCfb1_-2ZaXWpxpdrIy4gBQSCEmkLYEM8K4kZkA3kTzvpSzKFCQ-R0uo2J9by-O3RC53BtSMRfSK6Iow-DBHKXJ3&quot;);
+                            "
+                          ></div>
+                          <span class="text-xs font-medium text-white">S. Mercury</span>
+                        </div>
+                      </td>
+                      <td class="p-4 font-medium text-white">Nov 15, 2023</td>
+                      <td class="p-4 text-right">
+                        <button class="text-[#9292c9] transition-colors hover:text-white">
+                          <span class="material-symbols-outlined">more_horiz</span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- Right Column: Quick Actions & Log -->
+            <div class="flex flex-col gap-6 lg:col-span-1">
+              <!-- Actions Panel -->
+              <div
+                class="bg-surface-dark border-border-dark flex flex-col gap-4 rounded border p-5"
+              >
+                <h3
+                  class="flex items-center gap-2 text-sm font-bold tracking-wider text-white uppercase"
+                >
+                  <span class="material-symbols-outlined text-primary text-lg">bolt</span> Quick
+                  Actions
+                </h3>
+                <div class="flex flex-col gap-3">
+                  <button
+                    class="bg-primary flex w-full items-center justify-center gap-2 rounded px-4 py-3 text-sm font-bold tracking-wide text-white uppercase shadow-[0_0_15px_rgba(43,43,238,0.25)] transition-all hover:bg-blue-600"
+                  >
+                    <span class="material-symbols-outlined text-lg">add_circle</span> New Estimate
+                  </button>
+                  <button
+                    class="border-border-dark flex w-full items-center justify-center gap-2 rounded border bg-[#111122] px-4 py-3 text-sm font-bold tracking-wide text-[#9292c9] uppercase transition-all hover:border-white/20 hover:bg-white/5 hover:text-white"
+                  >
+                    <span class="material-symbols-outlined text-lg">inventory</span> Log Part Usage
+                  </button>
+                  <button
+                    class="border-border-dark flex w-full items-center justify-center gap-2 rounded border bg-[#111122] px-4 py-3 text-sm font-bold tracking-wide text-[#9292c9] uppercase transition-all hover:border-white/20 hover:bg-white/5 hover:text-white"
+                  >
+                    <span class="material-symbols-outlined text-lg">local_shipping</span> Create
+                    Label
+                  </button>
+                </div>
+              </div>
+              <!-- Mini Log / Activity -->
+              <div class="bg-surface-dark border-border-dark flex flex-col rounded border">
+                <div class="border-border-dark border-b p-4">
+                  <h3 class="text-sm font-bold tracking-wider text-white uppercase">
+                    Recent Activity
+                  </h3>
+                </div>
+                <div class="flex flex-col gap-4 p-4">
+                  <div class="flex gap-3">
+                    <div class="flex-none pt-1">
+                      <div class="size-2 rounded-full bg-cyan-400"></div>
+                    </div>
+                    <div>
+                      <p class="text-xs leading-relaxed text-white">
+                        <span class="font-bold text-cyan-400">System</span> updated status for
+                        <span class="font-bold">#FLW-8822</span> to Painting.
+                      </p>
+                      <p class="mt-1 text-[10px] text-[#565676]">2 mins ago</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-3">
+                    <div class="flex-none pt-1">
+                      <div class="bg-primary size-2 rounded-full"></div>
+                    </div>
+                    <div>
+                      <p class="text-xs leading-relaxed text-white">
+                        <span class="text-primary font-bold">K. Yamato</span> added comment to
+                        <span class="font-bold">#FLW-8821</span>.
+                      </p>
+                      <p class="mt-1 text-[10px] text-[#565676]">15 mins ago</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-3">
+                    <div class="flex-none pt-1">
+                      <div class="size-2 rounded-full bg-yellow-400"></div>
+                    </div>
+                    <div>
+                      <p class="text-xs leading-relaxed text-white">
+                        <span class="font-bold text-yellow-400">Alert</span> Stock low on RG frame
+                        runners.
+                      </p>
+                      <p class="mt-1 text-[10px] text-[#565676]">1 hour ago</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="border-border-dark border-t p-3 text-center">
+                  <button
+                    class="flex items-center justify-center gap-1 text-xs font-bold tracking-wider text-[#9292c9] uppercase transition-colors hover:text-white"
+                  >
+                    View Full Log
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

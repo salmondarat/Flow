@@ -1,0 +1,27 @@
+project password:salmonflow99!!
+
+After the Migration Runs Successfully:
+
+  Step 1: Create Your Admin User
+
+  Go to your app at /admin/login and sign up with any email/password.
+
+  Step 2: Get Your User ID
+
+  1. Go to Supabase Dashboard → Authentication → Users
+  2. Find your user and copy the UID (looks like: 12345678-1234-1234-1234-123456789abc)
+
+  Step 3: Promote to Admin
+
+  In SQL Editor, run:
+  SELECT public.promote_to_admin('paste-your-uid-here');
+
+  Step 4: Verify
+
+  SELECT * FROM public.profiles WHERE role = 'admin';
+
+  You should see your user with role = 'admin'.
+
+  Step 5: Log In
+
+  Go to /admin/login and log in with your credentials. You should be redirected to the dashboard!

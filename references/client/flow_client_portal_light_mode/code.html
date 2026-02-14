@@ -1,0 +1,547 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Flow Client Portal - Light Mode</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Material Symbols -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Tailwind Configuration -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#2b2bee",
+              "primary-dark": "#1a1a9e",
+              "accent-red": "#ff3333",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101022",
+              "surface-light": "#ffffff",
+              "border-light": "#e5e7eb",
+              "text-main": "#111827",
+              "text-muted": "#6b7280",
+            },
+            fontFamily: {
+              display: ["Space Grotesk", "sans-serif"],
+              body: ["Noto Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0px",
+              lg: "0px",
+              xl: "0px",
+              full: "0px", // Overriding strictly for the sharp request
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Custom Scrollbar for "technical" feel */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+      .sharp-shadow {
+        box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light text-text-main font-display flex min-h-screen flex-col antialiased"
+  >
+    <!-- Top Navigation -->
+    <nav
+      class="bg-surface-light border-border-light sticky top-0 z-50 flex h-16 w-full items-center justify-between border-b px-6 lg:px-12"
+    >
+      <div class="flex items-center gap-8">
+        <div
+          class="text-primary flex cursor-pointer items-center gap-2 transition-opacity hover:opacity-80"
+        >
+          <span class="material-symbols-outlined text-3xl">token</span>
+          <span class="text-xl font-bold tracking-tight">FLOW // SYSTEM</span>
+        </div>
+        <div class="ml-4 hidden items-center gap-1 md:flex">
+          <a
+            class="text-primary bg-primary/10 border-primary border-b-2 px-4 py-2 text-sm font-semibold"
+            href="#"
+            >Dashboard</a
+          >
+          <a
+            class="text-text-muted hover:text-primary px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-50"
+            href="#"
+            >Gallery</a
+          >
+          <a
+            class="text-text-muted hover:text-primary px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-50"
+            href="#"
+            >Invoices</a
+          >
+          <a
+            class="text-text-muted hover:text-primary px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-50"
+            href="#"
+            >Specs</a
+          >
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <button
+          class="text-text-muted hover:text-primary relative p-2 transition-colors hover:bg-gray-50"
+        >
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="bg-accent-red absolute top-2 right-2 h-2 w-2"></span>
+        </button>
+        <div class="border-border-light flex items-center gap-3 border-l pl-4">
+          <div class="hidden text-right sm:block">
+            <p class="text-xs font-bold tracking-wide uppercase">Amuro Ray</p>
+            <p class="text-text-muted text-xs">Pilot ID: 0079</p>
+          </div>
+          <div class="h-10 w-10 overflow-hidden border border-gray-300 bg-gray-200">
+            <img
+              alt="Profile Avatar"
+              class="h-full w-full object-cover grayscale transition-all hover:grayscale-0"
+              data-alt="User profile avatar showing pilot generic icon"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCULEv6-jR47qfphYjOh3mmBJSXTxXdOmy_WKH3sAXdZmDJeFUID7LHZVi_Vh61W2iadvBQ5nFd0_bHnOmDzbLa0-4tzQDuFGwErwk0oOojuL4MBYyiR9HYzTGp0Bkm5918Ywt2NPE98q7WABEk2rf7UkWxdFXoIKEuHNKN_wyHHwQ7xDXISUS44XWk4kwewaf3KHwKjHNFWi86Mlt1mukgaK6bKRx6wbOExqeLG-tJTyCGne16GxrMmRnOp3zvhoyOPMUK4GjLbBzy"
+            />
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Main Content -->
+    <main class="mx-auto w-full max-w-7xl flex-grow space-y-8 px-6 py-8 lg:px-12">
+      <!-- Hero: Active Project Header -->
+      <header
+        class="border-border-light flex flex-col items-start justify-between gap-4 border-b pb-4 md:flex-row md:items-end"
+      >
+        <div class="space-y-1">
+          <div
+            class="text-primary flex items-center gap-2 text-sm font-medium tracking-widest uppercase"
+          >
+            <span class="bg-primary h-2 w-2 animate-pulse"></span>
+            Active Build
+          </div>
+          <h1 class="text-text-main text-4xl font-bold tracking-tight uppercase lg:text-5xl">
+            MG-RX-78-2 Ver.Ka
+          </h1>
+          <p class="text-text-muted font-body">
+            Order #4429A | Custom Paint &amp; Metal Detail Upgrades
+          </p>
+        </div>
+        <div class="flex gap-3">
+          <button
+            class="bg-surface-light border-border-light text-text-main sharp-shadow flex items-center gap-2 border px-6 py-3 text-sm font-bold uppercase transition-colors hover:border-gray-400 hover:bg-gray-50"
+          >
+            <span class="material-symbols-outlined text-lg">description</span>
+            Build Sheet
+          </button>
+          <button
+            class="bg-primary hover:bg-primary-dark sharp-shadow flex items-center gap-2 px-6 py-3 text-sm font-bold text-white uppercase transition-colors"
+          >
+            <span class="material-symbols-outlined text-lg">mail</span>
+            Contact Studio
+          </button>
+        </div>
+      </header>
+      <!-- Status & Progress Section -->
+      <section class="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        <!-- Left: Hero Image & Gallery Preview -->
+        <div class="space-y-4 lg:col-span-7">
+          <div
+            class="border-border-light group relative aspect-video w-full overflow-hidden border bg-gray-100"
+          >
+            <img
+              alt="Current build state showing mecha armor pieces"
+              class="h-full w-full object-cover"
+              data-alt="Close up of white and blue robot plastic model kit parts on a workbench"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu7FC6NsLYW2hiN0BbisBaXGFS2nDbXD96c-8wapi16AxgZGFSEJRbfDI46e7Lrp7X-DZx3PXVcEzLxPISZT7RAwEoVUrVDlbAJjKVRBsatiM_4Umxm38q0wqB4GtCcqlOm5ZNf6gKG5ocpdPlPLlYkdZFFAIHI0XurLEBIKQnE_rTFMXF03ynmNRxyC0T_R8udXw9gNn4dSrQlMx1l4lk5SB7NGhWkOClZOcRMuYQ3eFzz3eppdS6K708izg3zGbv3bbmgxjzsUN2"
+            />
+            <div
+              class="bg-background-dark/80 absolute bottom-0 left-0 flex w-full items-center justify-between p-4 text-white backdrop-blur-sm"
+            >
+              <span class="font-mono text-sm uppercase">Img_Ref: 2023_10_24_Update</span>
+              <button
+                class="hover:text-primary flex items-center gap-1 text-xs font-bold tracking-widest uppercase transition-colors"
+              >
+                Expand View <span class="material-symbols-outlined text-sm">open_in_full</span>
+              </button>
+            </div>
+          </div>
+          <!-- Thumbnails -->
+          <div class="grid grid-cols-4 gap-2">
+            <div class="border-primary relative aspect-square cursor-pointer border bg-gray-200">
+              <img
+                class="h-full w-full object-cover opacity-100"
+                data-alt="Detail shot of robotic arm joint"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe3yUMhafFj_OibEQjjHlfcSzkw4r_ZUn9-U7vlrK886Bsp_47vcOBdOU9NwLdxVweQIpdV7me_WaeJp8S8-hhUZwj-GMzvSEgLYPkl8cWGVlVNxAmzmJYYYXEJDoIVTc5kHrs37y1bSN_YfsChAQ5JGdKQSV3dARAT0aTewxpPJPluZ-v7-Gb6lGutzOozMkXsBqqw5lyW7sBk7h1AbqH0U7a-xenFjmgFJ0Kjrqw6MdaxnogW5fgIRQRxXUlP2yw1QciXNSpXc1P"
+              />
+              <div class="border-primary pointer-events-none absolute inset-0 border-2"></div>
+            </div>
+            <div
+              class="aspect-square cursor-pointer border border-transparent bg-gray-200 transition-colors hover:border-gray-400"
+            >
+              <img
+                class="h-full w-full object-cover opacity-70 transition-opacity hover:opacity-100"
+                data-alt="Paint bottles and airbrush equipment"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXFmnEaeA7CTwGQoNQ5qzJIUWj2og_3FJhUytvcClWq5p2BjZsPRgq2c9kG_bfGanUKUCKV3YQtjCQDuAgN62KJWCAXKSjnMEfbrUVRRl8q2A9k8BP7d90Zlws3IASuW1-wo0pFSTGalh_YynptG4kwLxflz2qCrKrQLRHG57CvurLW876R8S3tr27PLb1Ug0QPeiyaXcQcCeE69yKRtATiyvnVW2MLkTgXzG0hN2ndDlnewNxtsNsjI3-xkvkeUFfKGFFjfdZtxYs"
+              />
+            </div>
+            <div
+              class="aspect-square cursor-pointer border border-transparent bg-gray-200 transition-colors hover:border-gray-400"
+            >
+              <img
+                class="h-full w-full object-cover opacity-70 transition-opacity hover:opacity-100"
+                data-alt="Decal sheet for model kit"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw5vdCNiQi18I2HBkIfMSGUzQ6W1XAYavWxXhX_Mbi-aDAPJ1npyEAlai6MPMdTWwyud7tsmuQ_IPPUIVEVaicwNLllCRX33U97RWoROvOwr5lQQK9bOhxVB91tcmqkA6iT9QUbI8OvibmVm6GoU9wk82UmPrglducHPnF19C7nH-NfWqxqJvmh9DG8LTZKQ1UgGJSI-w6lvYc-J9PjngUK_lXVqnYAA2UCFESB69wJjMeR3nm5kx8c_MdrGGaOtZuUKObRkiuQFFa"
+              />
+            </div>
+            <div
+              class="text-text-muted hover:text-primary flex aspect-square cursor-pointer items-center justify-center border border-transparent bg-gray-100 transition-colors hover:border-gray-400 hover:bg-gray-200"
+            >
+              <span class="text-center text-xs font-bold uppercase">View All<br />+12</span>
+            </div>
+          </div>
+        </div>
+        <!-- Right: Progress & Current Phase Details -->
+        <div class="flex flex-col gap-6 lg:col-span-5">
+          <!-- Main Status Card -->
+          <div
+            class="bg-surface-light border-border-light sharp-shadow relative flex h-full flex-col justify-between overflow-hidden border p-6"
+          >
+            <!-- Decor element -->
+            <div class="pointer-events-none absolute top-0 right-0 p-2 opacity-10">
+              <span class="material-symbols-outlined text-9xl">construction</span>
+            </div>
+            <div>
+              <h2 class="text-text-muted mb-2 text-sm font-bold tracking-widest uppercase">
+                Current Status
+              </h2>
+              <div class="text-text-main mb-6 flex items-center gap-3 text-3xl font-bold">
+                <span class="material-symbols-outlined text-primary text-4xl">format_paint</span>
+                Phase 3: Painting &amp; Decals
+              </div>
+              <!-- Progress Bar Component -->
+              <div class="mb-8 space-y-2">
+                <div class="flex justify-between text-sm font-bold">
+                  <span>Completion</span>
+                  <span class="text-primary">78%</span>
+                </div>
+                <div class="relative h-4 w-full bg-gray-200">
+                  <div class="bg-primary absolute top-0 left-0 h-full" style="width: 78%"></div>
+                  <!-- Ticks for aesthetic -->
+                  <div class="absolute top-0 left-1/4 h-full w-px bg-white/30"></div>
+                  <div class="absolute top-0 left-1/2 h-full w-px bg-white/30"></div>
+                  <div class="absolute top-0 left-3/4 h-full w-px bg-white/30"></div>
+                </div>
+                <div class="text-text-muted mt-1 flex justify-between font-mono text-xs">
+                  <span>Started: Oct 01</span>
+                  <span>Est. Delivery: Oct 24</span>
+                </div>
+              </div>
+            </div>
+            <!-- Updates List -->
+            <div class="border-border-light space-y-4 border-t pt-6">
+              <h3 class="text-text-muted text-xs font-bold uppercase">Recent Logs</h3>
+              <div class="flex items-start gap-3">
+                <div class="text-text-muted min-w-16 pt-1 font-mono text-xs">Oct 20</div>
+                <div>
+                  <p class="text-sm font-medium">Applied water slide decals to leg armor.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="text-text-muted min-w-16 pt-1 font-mono text-xs">Oct 18</div>
+                <div>
+                  <p class="text-sm font-medium">Base coat curing complete. Inspecting for dust.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Timeline Section -->
+      <section class="bg-surface-light border-border-light sharp-shadow border p-6 lg:p-8">
+        <h2 class="mb-8 flex items-center gap-2 text-lg font-bold tracking-tight uppercase">
+          <span class="material-symbols-outlined text-primary">timeline</span> Project Timeline
+        </h2>
+        <div class="relative">
+          <!-- Line -->
+          <div
+            class="absolute top-1/2 left-0 hidden h-1 w-full -translate-y-1/2 bg-gray-200 md:block"
+          ></div>
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-5">
+            <!-- Step 1: Complete -->
+            <div
+              class="bg-surface-light relative z-10 flex flex-col gap-3 p-2 md:items-center md:bg-transparent md:p-0"
+            >
+              <div
+                class="bg-primary sharp-shadow flex h-8 w-8 items-center justify-center text-sm font-bold text-white"
+              >
+                <span class="material-symbols-outlined text-sm">check</span>
+              </div>
+              <div class="text-left md:text-center">
+                <p class="text-primary text-xs font-bold uppercase">Completed</p>
+                <p class="text-sm font-bold">Concept &amp; Parts</p>
+                <p class="text-text-muted mt-1 text-xs">Sept 28</p>
+              </div>
+            </div>
+            <!-- Step 2: Complete -->
+            <div
+              class="bg-surface-light relative z-10 flex flex-col gap-3 p-2 md:items-center md:bg-transparent md:p-0"
+            >
+              <div
+                class="bg-primary sharp-shadow flex h-8 w-8 items-center justify-center text-sm font-bold text-white"
+              >
+                <span class="material-symbols-outlined text-sm">check</span>
+              </div>
+              <div class="text-left md:text-center">
+                <p class="text-primary text-xs font-bold uppercase">Completed</p>
+                <p class="text-sm font-bold">Snap Assembly</p>
+                <p class="text-text-muted mt-1 text-xs">Oct 05</p>
+              </div>
+            </div>
+            <!-- Step 3: Active -->
+            <div
+              class="bg-surface-light relative z-10 flex flex-col gap-3 p-2 md:items-center md:bg-transparent md:p-0"
+            >
+              <div
+                class="border-primary text-primary sharp-shadow shadow-primary/20 flex h-8 w-8 items-center justify-center border-2 bg-white text-sm font-bold"
+              >
+                <span class="animate-pulse">3</span>
+              </div>
+              <div class="text-left md:text-center">
+                <p class="text-primary animate-pulse text-xs font-bold uppercase">In Progress</p>
+                <p class="text-sm font-bold">Paint &amp; Decals</p>
+                <p class="text-text-muted mt-1 text-xs">Est. Oct 20</p>
+              </div>
+            </div>
+            <!-- Step 4: Pending -->
+            <div
+              class="bg-surface-light relative z-10 flex flex-col gap-3 p-2 md:items-center md:bg-transparent md:p-0"
+            >
+              <div
+                class="text-text-muted flex h-8 w-8 items-center justify-center bg-gray-200 text-sm font-bold"
+              >
+                4
+              </div>
+              <div class="text-left opacity-60 md:text-center">
+                <p class="text-text-muted text-xs font-bold uppercase">Pending</p>
+                <p class="text-sm font-bold">Weathering</p>
+                <p class="text-text-muted mt-1 text-xs">--</p>
+              </div>
+            </div>
+            <!-- Step 5: Pending -->
+            <div
+              class="bg-surface-light relative z-10 flex flex-col gap-3 p-2 md:items-center md:bg-transparent md:p-0"
+            >
+              <div
+                class="text-text-muted flex h-8 w-8 items-center justify-center bg-gray-200 text-sm font-bold"
+              >
+                5
+              </div>
+              <div class="text-left opacity-60 md:text-center">
+                <p class="text-text-muted text-xs font-bold uppercase">Pending</p>
+                <p class="text-sm font-bold">Final Assembly</p>
+                <p class="text-text-muted mt-1 text-xs">--</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Bottom Grid: Messages & Payments -->
+      <section class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <!-- Message Studio -->
+        <div
+          class="bg-surface-light border-border-light sharp-shadow flex h-full flex-col border p-6"
+        >
+          <div class="mb-6 flex items-center justify-between">
+            <h2 class="flex items-center gap-2 text-lg font-bold tracking-tight uppercase">
+              <span class="material-symbols-outlined text-primary">forum</span> Message Studio
+            </h2>
+            <span
+              class="bg-accent-red/10 text-accent-red border-accent-red/20 border px-2 py-1 text-xs font-bold uppercase"
+              >1 Action Required</span
+            >
+          </div>
+          <div class="mb-6 flex-grow space-y-4">
+            <!-- Message Item: Studio -->
+            <div class="border-border-light flex gap-4 border bg-gray-50 p-4">
+              <div
+                class="bg-primary/20 text-primary flex h-8 w-8 shrink-0 items-center justify-center text-xs font-bold"
+              >
+                ST
+              </div>
+              <div class="w-full space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-primary text-xs font-bold uppercase">Studio Technician</span>
+                  <span class="text-text-muted font-mono text-xs">Today, 10:42 AM</span>
+                </div>
+                <p class="text-text-main text-sm leading-relaxed">
+                  We've found that the gold metallic paint for the V-Fin isn't adhering well to the
+                  primer. We suggest switching to a "Champagne Gold" leaf finish instead. It's more
+                  durable but costs an extra $15.
+                </p>
+                <!-- Action Block -->
+                <div class="border-border-light mt-3 flex items-center gap-3 border bg-white p-3">
+                  <span class="material-symbols-outlined text-accent-red">warning</span>
+                  <div class="flex-grow">
+                    <p class="text-xs font-bold uppercase">Change Request #09</p>
+                    <p class="text-text-muted text-xs">Material Change: +$15.00</p>
+                  </div>
+                  <div class="flex gap-2">
+                    <button
+                      class="bg-gray-200 px-3 py-1 text-xs font-bold uppercase transition-colors hover:bg-gray-300"
+                    >
+                      Deny
+                    </button>
+                    <button
+                      class="bg-primary hover:bg-primary-dark px-3 py-1 text-xs font-bold text-white uppercase transition-colors"
+                    >
+                      Approve
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            class="text-text-muted hover:border-primary hover:text-primary flex w-full items-center justify-center gap-2 border-2 border-dashed border-gray-300 py-3 text-sm font-bold uppercase transition-colors"
+          >
+            <span class="material-symbols-outlined">add</span> New Message
+          </button>
+        </div>
+        <!-- Payment History -->
+        <div
+          class="bg-surface-light border-border-light sharp-shadow flex h-full flex-col border p-6"
+        >
+          <div class="mb-6 flex items-center justify-between">
+            <h2 class="flex items-center gap-2 text-lg font-bold tracking-tight uppercase">
+              <span class="material-symbols-outlined text-primary">receipt_long</span> Invoices
+            </h2>
+            <button class="text-primary text-xs font-bold uppercase hover:underline">
+              Download All
+            </button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse text-left">
+              <thead>
+                <tr class="border-primary/20 border-b-2">
+                  <th class="text-text-muted px-3 py-2 text-xs font-bold uppercase">ID</th>
+                  <th class="text-text-muted px-3 py-2 text-xs font-bold uppercase">Date</th>
+                  <th class="text-text-muted px-3 py-2 text-xs font-bold uppercase">Item</th>
+                  <th class="text-text-muted px-3 py-2 text-right text-xs font-bold uppercase">
+                    Amount
+                  </th>
+                  <th class="text-text-muted px-3 py-2 text-right text-xs font-bold uppercase">
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="font-mono text-sm">
+                <tr class="border-b border-gray-100 transition-colors hover:bg-gray-50">
+                  <td class="px-3 py-3">#INV-001</td>
+                  <td class="text-text-muted px-3 py-3">Sep 28</td>
+                  <td class="px-3 py-3 font-medium">Initial Kit Deposit</td>
+                  <td class="px-3 py-3 text-right">$85.00</td>
+                  <td class="px-3 py-3 text-right">
+                    <span
+                      class="inline-flex items-center bg-green-100 px-2 py-0.5 text-xs font-bold text-green-800 uppercase"
+                      >Paid</span
+                    >
+                  </td>
+                </tr>
+                <tr class="border-b border-gray-100 transition-colors hover:bg-gray-50">
+                  <td class="px-3 py-3">#INV-002</td>
+                  <td class="text-text-muted px-3 py-3">Oct 05</td>
+                  <td class="px-3 py-3 font-medium">Materials &amp; Paint</td>
+                  <td class="px-3 py-3 text-right">$45.00</td>
+                  <td class="px-3 py-3 text-right">
+                    <span
+                      class="inline-flex items-center bg-green-100 px-2 py-0.5 text-xs font-bold text-green-800 uppercase"
+                      >Paid</span
+                    >
+                  </td>
+                </tr>
+                <tr class="transition-colors hover:bg-gray-50">
+                  <td class="px-3 py-3">#INV-003</td>
+                  <td class="text-text-muted px-3 py-3">Oct 21</td>
+                  <td class="px-3 py-3 font-medium">Change Req #09</td>
+                  <td class="px-3 py-3 text-right">$15.00</td>
+                  <td class="px-3 py-3 text-right">
+                    <span
+                      class="bg-accent-red/10 text-accent-red border-accent-red/20 inline-flex items-center border px-2 py-0.5 text-xs font-bold uppercase"
+                      >Pending</span
+                    >
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot class="border-t-2 border-gray-200">
+                <tr>
+                  <td class="px-3 py-3 text-right text-xs font-bold uppercase" colspan="3">
+                    Total Outstanding
+                  </td>
+                  <td class="text-accent-red px-3 py-3 text-right text-lg font-bold" colspan="2">
+                    $15.00
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <div class="mt-auto pt-6">
+            <button
+              class="bg-primary hover:bg-primary-dark sharp-shadow flex w-full items-center justify-center gap-2 py-3 text-sm font-bold text-white uppercase transition-colors"
+            >
+              Pay Outstanding Balance
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="border-border-light bg-surface-light mt-12 border-t py-8">
+      <div
+        class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 md:flex-row lg:px-12"
+      >
+        <div class="text-text-muted font-mono text-xs tracking-widest uppercase">
+          Flow System v2.4.0 // Build Management
+        </div>
+        <div class="flex gap-6">
+          <a class="text-text-muted hover:text-primary text-xs font-bold uppercase" href="#"
+            >Support</a
+          >
+          <a class="text-text-muted hover:text-primary text-xs font-bold uppercase" href="#"
+            >Terms</a
+          >
+          <a class="text-text-muted hover:text-primary text-xs font-bold uppercase" href="#"
+            >Privacy</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
