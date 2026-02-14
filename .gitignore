@@ -41,3 +41,14 @@ next-env.d.ts
 
 # Supabase
 .supabase
+
+# Workspace
+/.claude
+/.opencode
+/.vscode
+/openspec
+/references
+
+# AI Agents
+AGENTS.md
+CLAUDE.md
