@@ -3,10 +3,33 @@ import { NextResponse, type NextRequest } from "next/server";
 import type { Database } from "@/types";
 import type { ProfileRow } from "@/types";
 import { env } from "@/lib/env/server";
+import { corsHeaders, isApiRoute, isPreflight, handlePreflight } from "@/lib/api/middleware-cors";
+
+/**
+ * CORS headers for API routes
+ */
+function addCorsHeaders(response: NextResponse): NextResponse {
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+  response.headers.set('Access-Control-Max-Age', '86400');
+  return response;
+}
 
 export async function middleware(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const pathname = requestUrl.pathname;
+
+  // Handle CORS for API routes
+  if (isApiRoute(pathname)) {
+    if (isPreflight(request)) {
+      return handlePreflight();
+    }
+
+    // Add CORS headers to all API route responses
+    const response = NextResponse.next();
+    return addCorsHeaders(response);
+  }
 
   // Check if the path is an admin route
   const isAdminRoute = pathname.startsWith("/admin");
