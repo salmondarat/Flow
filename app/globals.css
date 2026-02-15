@@ -93,7 +93,7 @@
   color-scheme: light;
 
   /* Semantic colors - minimal clean palette */
-  --color-base-100: #ffffff; /* Pure white background */
+  --color-base-100: #f5f5f5; /* Pure white background */
   --color-base-200: #fafafa; /* Card background - subtle off-white */
   --color-base-300: #f4f4f5; /* Panel backgrounds - light gray */
   --color-base-content: #18181b; /* Near black text for high contrast */
