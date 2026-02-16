@@ -6,7 +6,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth/server";
 import { getComplexityLevel, updateComplexityLevel, deleteComplexityLevel } from "@/lib/api/complexities";
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/server";
 import type { ComplexityLevelUpdate } from "@/types";
 
 interface RouteContext {
@@ -68,7 +68,7 @@ export async function PUT(request: NextRequest, context: RouteContext) {
 
     // If slug is being changed, check for conflicts
     if (slug && slug !== existing.slug) {
-      const supabase = createClient();
+      const supabase = await createClient();
       const { data: slugConflict } = await supabase
         .from("complexity_levels")
         .select("id")
