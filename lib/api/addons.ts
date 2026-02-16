@@ -3,7 +3,9 @@
  * Handles CRUD operations for service add-ons
  */
 
-import { createClient } from "@/lib/supabase/client";
+import { createAdminClient } from "@/lib/supabase/admin";
+
+const createClient = createAdminClient;
 import type { ServiceAddonRow, ServiceAddonInsert, ServiceAddonUpdate } from "@/types";
 
 /**

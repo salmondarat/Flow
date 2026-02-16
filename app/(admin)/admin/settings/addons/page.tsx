@@ -5,6 +5,8 @@
 
 "use client";
 
+
+import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -31,7 +33,11 @@ import { getAllAddons } from "@/lib/api/addons";
 import { getServiceTypes } from "@/lib/api/services";
 import type { ServiceAddonRow, ServiceTypeRow } from "@/types";
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function AddonsPage() {
+  unstable_noStore();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [addons, setAddons] = useState<Array<ServiceAddonRow & { service_name: string }>>([]);
@@ -197,7 +203,7 @@ export default function AddonsPage() {
 
                     <div className="flex gap-2">
                       <Link href={`/admin/settings/addons/${addon.id}`}>
-                        <Button variant="outline" size="sm" className="flex-1">
+                        <Button variant="outline" size="sm" className="flex-1" asChild>
                           <Pencil className="mr-2 h-3 w-3" />
                           Edit
                         </Button>

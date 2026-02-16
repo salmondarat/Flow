@@ -2,6 +2,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getOrders } from "@/lib/features/orders/queries";
 import { Badge } from "@/components/ui/badge";
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Clients | Flow Admin",
 };

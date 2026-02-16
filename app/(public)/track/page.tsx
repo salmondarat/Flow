@@ -5,6 +5,8 @@
 
 "use client";
 
+
+import { unstable_noStore } from "next/cache";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -12,7 +14,11 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Search } from "lucide-react";
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function TrackPage() {
+  unstable_noStore();
   const router = useRouter();
   const [orderId, setOrderId] = useState("");
   const [error, setError] = useState("");

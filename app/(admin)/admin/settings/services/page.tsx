@@ -5,6 +5,8 @@
 
 "use client";
 
+
+import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -29,7 +31,11 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   brush: <Brush className="h-5 w-5" />,
 };
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function ServicesPage() {
+  unstable_noStore();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [services, setServices] = useState<ServiceTypeRow[]>([]);
@@ -169,7 +175,7 @@ export default function ServicesPage() {
 
                     <div className="flex gap-2">
                       <Link href={`/admin/settings/services/${service.id}`}>
-                        <Button variant="outline" size="sm" className="flex-1">
+                        <Button variant="outline" size="sm" className="flex-1" asChild>
                           <Pencil className="mr-2 h-3 w-3" />
                           Edit
                         </Button>

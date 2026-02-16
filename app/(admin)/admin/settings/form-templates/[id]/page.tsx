@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -24,6 +25,9 @@ const templateSchema = z.object({
 });
 
 type TemplateForm = z.infer<typeof templateSchema>;
+
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
 
 export default function EditFormTemplatePage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
@@ -224,7 +228,7 @@ export default function EditFormTemplatePage({ params }: { params: Promise<{ id:
                     </Button>
                     <div className="flex gap-2">
                       <Link href="/admin/settings/form-templates">
-                        <Button type="button" variant="outline" disabled={isSubmitting}>
+                        <Button type="button" variant="outline" disabled={isSubmitting} asChild>
                           Cancel
                         </Button>
                       </Link>

@@ -5,6 +5,8 @@
 
 "use client";
 
+
+import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -26,7 +28,11 @@ import { toast } from "sonner";
 import { getServiceTypes } from "@/lib/api/services";
 import type { ServiceAddonInsert, ServiceTypeRow } from "@/types";
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function NewAddonPage() {
+  unstable_noStore();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [services, setServices] = useState<ServiceTypeRow[]>([]);
@@ -257,7 +263,7 @@ export default function NewAddonPage() {
 
                 <div className="flex justify-end gap-4 pt-4">
                   <Link href="/admin/settings/addons">
-                    <Button type="button" variant="outline" disabled={isSubmitting}>
+                    <Button type="button" variant="outline" disabled={isSubmitting} asChild>
                       Cancel
                     </Button>
                   </Link>

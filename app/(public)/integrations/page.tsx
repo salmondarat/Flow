@@ -1,5 +1,13 @@
-import { Header } from "@/components/layout/header";
+"use client";
+
 import { Footer } from "@/components/layout/footer";
+import nextDynamic from "next/dynamic";
+
+// Dynamic import for Header to prevent SSR issues
+const Header = nextDynamic(() => import("@/components/layout/header").then((mod) => mod.Header));
+
+// Force dynamic rendering to prevent static generation issues with client components
+export const dynamic = "force-dynamic";
 
 export default function IntegrationsPage() {
   const integrations = [
@@ -62,12 +70,12 @@ export default function IntegrationsPage() {
                     {category.tools.map((tool) => (
                       <div
                         key={tool.name}
-                        className="bg-muted dark:bg-card border-border rounded-lg border p-6 hover:border-gundam-cyan/30 transition-colors"
+                        className="bg-muted dark:bg-card border-border hover:border-gundam-cyan/30 rounded-lg border p-6 transition-colors"
                       >
                         <div className="mb-4">
                           <h3 className="text-foreground text-lg font-bold">{tool.name}</h3>
                           <span
-                            className={`ml-2 text-xs px-2 py-1 rounded-full ${
+                            className={`ml-2 rounded-full px-2 py-1 text-xs ${
                               tool.status === "Available"
                                 ? "bg-green-500/20 text-green-500"
                                 : tool.status === "Built-in"
@@ -99,7 +107,7 @@ export default function IntegrationsPage() {
             </p>
             <a
               href="mailto:integrations@flow.sys"
-              className="text-gundam-cyan hover:text-gundam-cyan/80 transition-colors font-bold text-lg underline"
+              className="text-gundam-cyan hover:text-gundam-cyan/80 text-lg font-bold underline transition-colors"
             >
               Contact Our Team
             </a>

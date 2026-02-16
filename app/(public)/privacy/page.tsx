@@ -1,5 +1,13 @@
-import { Header } from "@/components/layout/header";
+"use client";
+
 import { Footer } from "@/components/layout/footer";
+import nextDynamic from "next/dynamic";
+
+// Dynamic import for Header to prevent SSR issues
+const Header = nextDynamic(() => import("@/components/layout/header").then((mod) => mod.Header));
+
+// Force dynamic rendering to prevent static generation issues with client components
+export const dynamic = "force-dynamic";
 
 export default function PrivacyPage() {
   return (
@@ -11,17 +19,15 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           <div className="bg-muted dark:bg-card border-border rounded-xl border p-8">
-            <p className="text-muted-foreground text-sm mb-6">
+            <p className="text-muted-foreground mb-6 text-sm">
               Last Updated: {new Date().toLocaleDateString()}
             </p>
 
             <section className="mb-8">
               <h2 className="text-foreground mb-4 text-xl font-bold">1. Information We Collect</h2>
               <div className="text-muted-foreground space-y-3 text-sm leading-relaxed">
-                <p>
-                  Flow collects information you provide directly to us, including:
-                </p>
-                <ul className="list-disc pl-6 space-y-2">
+                <p>Flow collects information you provide directly to us, including:</p>
+                <ul className="list-disc space-y-2 pl-6">
                   <li>Account information (name, email address, password)</li>
                   <li>Profile information (phone, address, studio name for admin accounts)</li>
                   <li>Order and payment information</li>
@@ -31,10 +37,12 @@ export default function PrivacyPage() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-foreground mb-4 text-xl font-bold">2. How We Use Your Information</h2>
+              <h2 className="text-foreground mb-4 text-xl font-bold">
+                2. How We Use Your Information
+              </h2>
               <div className="text-muted-foreground space-y-3 text-sm leading-relaxed">
                 <p>We use the collected information to:</p>
-                <ul className="list-disc pl-6 space-y-2">
+                <ul className="list-disc space-y-2 pl-6">
                   <li>Provide, maintain, and improve our services</li>
                   <li>Process orders and manage client relationships</li>
                   <li>Send you technical notices and support messages</li>
@@ -47,7 +55,9 @@ export default function PrivacyPage() {
             <section className="mb-8">
               <h2 className="text-foreground mb-4 text-xl font-bold">3. Data Security</h2>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet is 100% secure.
+                We implement appropriate technical and organizational measures to protect your
+                personal data against unauthorized access, alteration, disclosure, or destruction.
+                However, no method of transmission over the Internet is 100% secure.
               </p>
             </section>
 
@@ -56,7 +66,7 @@ export default function PrivacyPage() {
               <p className="text-muted-foreground text-sm leading-relaxed">
                 We do not sell your personal data. We may share your information with:
               </p>
-              <ul className="list-disc pl-6 space-y-2 text-muted-foreground text-sm">
+              <ul className="text-muted-foreground list-disc space-y-2 pl-6 text-sm">
                 <li>Service providers who assist in operating our platform</li>
                 <li>Business partners, with your consent</li>
                 <li>Legal authorities when required by law</li>
@@ -66,7 +76,8 @@ export default function PrivacyPage() {
             <section className="mb-8">
               <h2 className="text-foreground mb-4 text-xl font-bold">5. Your Rights</h2>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                You have the right to access, correct, or delete your personal data. You may also opt out of marketing communications at any time.
+                You have the right to access, correct, or delete your personal data. You may also
+                opt out of marketing communications at any time.
               </p>
             </section>
 

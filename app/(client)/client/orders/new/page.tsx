@@ -1,5 +1,7 @@
 "use client";
 
+
+import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -18,7 +20,11 @@ interface KitFormData extends Record<string, unknown> {
   notes?: string;
 }
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function ClientNewOrderPage() {
+  unstable_noStore();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [template, setTemplate] = useState<FormTemplateConfig | null>(null);

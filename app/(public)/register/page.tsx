@@ -1,5 +1,6 @@
 "use client";
 
+import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -38,7 +39,11 @@ type AuthFunctions = {
   signInWithOAuth: typeof import("@/lib/auth/client").signInWithOAuth;
 };
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function RegisterPage() {
+  unstable_noStore();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<"client" | "admin">("client");
   const [isLoading, setIsLoading] = useState(false);

@@ -5,6 +5,8 @@
 
 "use client";
 
+
+import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
@@ -28,7 +30,11 @@ import { getAddon, updateAddon } from "@/lib/api/addons";
 import { getServiceTypes } from "@/lib/api/services";
 import type { ServiceAddonRow, ServiceTypeRow } from "@/types";
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function EditAddonPage() {
+  unstable_noStore();
   const router = useRouter();
   const params = useParams();
   const addonId = params.id as string;

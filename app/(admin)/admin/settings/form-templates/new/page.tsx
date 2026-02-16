@@ -1,5 +1,7 @@
 "use client";
 
+
+import { unstable_noStore } from "next/cache";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -127,7 +129,11 @@ const defaultConfig: FormTemplateConfig = {
   },
 };
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function NewFormTemplatePage() {
+  unstable_noStore();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showBuilder, setShowBuilder] = useState(false);
@@ -275,7 +281,7 @@ export default function NewFormTemplatePage() {
                     </Button>
                     <div className="flex gap-2">
                       <Link href="/admin/settings/form-templates">
-                        <Button type="button" variant="outline" disabled={isSubmitting}>
+                        <Button type="button" variant="outline" disabled={isSubmitting} asChild>
                           Cancel
                         </Button>
                       </Link>

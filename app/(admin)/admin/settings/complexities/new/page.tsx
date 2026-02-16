@@ -5,6 +5,8 @@
 
 "use client";
 
+
+import { unstable_noStore } from "next/cache";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -22,7 +24,11 @@ const PRESET_MULTIPLIERS = [
   { label: "High (2.0×)", value: 2.0, description: "Advanced complexity" },
 ];
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function NewComplexityPage() {
+  unstable_noStore();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -240,7 +246,7 @@ export default function NewComplexityPage() {
 
                 <div className="flex justify-end gap-4 pt-4">
                   <Link href="/admin/settings/complexities">
-                    <Button type="button" variant="outline" disabled={isSubmitting}>
+                    <Button type="button" variant="outline" disabled={isSubmitting} asChild>
                       Cancel
                     </Button>
                   </Link>

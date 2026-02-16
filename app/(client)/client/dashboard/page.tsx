@@ -1,5 +1,6 @@
 "use client";
 
+import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -25,6 +26,9 @@ import {
 import type { ProgressItem, ActivityItem } from "@/components/dashboard/bento/types";
 import type { OrderRow } from "@/types";
 
+// Force dynamic rendering to prevent static generation issues with client-side handlers
+export const dynamic = "force-dynamic";
+
 interface DashboardStats {
   total: number;
   active: number;
@@ -43,6 +47,7 @@ interface RecentOrder {
 }
 
 export default function ClientDashboardPage() {
+  unstable_noStore();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [stats, setStats] = useState<DashboardStats>({
@@ -169,8 +174,8 @@ export default function ClientDashboardPage() {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="size-8 animate-spin rounded-full border-2 border-brand-500 border-t-transparent" />
-          <p className="text-gray-500 text-sm">Loading dashboard...</p>
+          <div className="border-brand-500 size-8 animate-spin rounded-full border-2 border-t-transparent" />
+          <p className="text-sm text-gray-500">Loading dashboard...</p>
         </div>
       </div>
     );
@@ -184,12 +189,7 @@ export default function ClientDashboardPage() {
       {/* Stats Grid - 12-column Bento Grid */}
       <div className="grid grid-cols-12 gap-4 md:gap-6">
         <div className="col-span-12 md:col-span-6 xl:col-span-3">
-          <StatsCard
-            title="Total Orders"
-            value={stats.total}
-            icon={<CubeIcon />}
-            accent="blue"
-          />
+          <StatsCard title="Total Orders" value={stats.total} icon={<CubeIcon />} accent="blue" />
         </div>
         <div className="col-span-12 md:col-span-6 xl:col-span-3">
           <StatsCard
@@ -223,41 +223,27 @@ export default function ClientDashboardPage() {
       {/* Bento Grid Layout - Reordered for perfect fit */}
       <BentoGrid>
         {/* Recent Orders - Large (9 cols) */}
-        <ActivityList
-          title="Recent Orders"
-          items={activityItems}
-          size="lg"
-          maxItems={6}
-        />
+        <ActivityList title="Recent Orders" items={activityItems} size="lg" maxItems={6} />
 
         {/* Quick Actions - Small (3 cols) - pairs with lg to fill 12 */}
-        <QuickActions
-          title="Quick Actions"
-          actions={quickActions}
-          size="sm"
-        />
+        <QuickActions title="Quick Actions" actions={quickActions} size="sm" />
 
         {/* Active Projects - Medium (6 cols) */}
         {progressItems.length > 0 && (
-          <ProgressCard
-            title="Active Projects"
-            items={progressItems}
-            size="md"
-            accent="brand"
-          />
+          <ProgressCard title="Active Projects" items={progressItems} size="md" accent="brand" />
         )}
 
         {/* Support Card - Medium (6 cols) - pairs with md to fill 12 */}
-        <div className="col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-6 rounded-2xl bg-white dark:bg-gray-900/80 border border-gray-100 dark:border-gray-800 p-5 md:p-6">
-          <h3 className="text-gray-900 mb-4 text-sm font-semibold uppercase tracking-wide dark:text-white">
+        <div className="col-span-12 rounded-2xl border border-gray-100 bg-white p-5 md:col-span-6 md:p-6 lg:col-span-6 xl:col-span-6 dark:border-gray-800 dark:bg-gray-900/80">
+          <h3 className="mb-4 text-sm font-semibold tracking-wide text-gray-900 uppercase dark:text-white">
             Need Help?
           </h3>
-          <p className="text-gray-500 mb-4 text-sm dark:text-gray-400">
+          <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
             Contact our support team for assistance with your orders.
           </p>
           <Link
             href="/client/messages"
-            className="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition-all hover:border-brand-200 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-brand-900 dark:hover:bg-gray-700"
+            className="hover:border-brand-200 dark:hover:border-brand-900 inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
           >
             <SupportIcon />
             Contact Support

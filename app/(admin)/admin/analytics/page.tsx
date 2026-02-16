@@ -4,6 +4,9 @@ import { StatsCards } from "@/components/admin/dashboard/stats-cards";
 import { RevenueChart } from "@/components/admin/dashboard/revenue-chart";
 import { ProfitChart } from "@/components/admin/dashboard/profit-chart";
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Analytics | Flow Admin",
 };

@@ -1,12 +1,20 @@
 "use client";
 
+import { unstable_noStore } from "next/cache";
 import Link from "next/link";
-import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
+import nextDynamic from "next/dynamic";
+
+// Dynamic import for Header to prevent SSR issues
+const Header = nextDynamic(() => import("@/components/layout/header").then((mod) => mod.Header));
+
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
 
 export default function PricingPage() {
+  unstable_noStore();
   const plans = [
     {
       name: "Starter",
@@ -75,7 +83,7 @@ export default function PricingPage() {
         {/* Pricing Cards */}
         <section className="py-24">
           <div className="container mx-auto px-4">
-            <div className="mx-auto max-w-6xl grid gap-8 md:grid-cols-3">
+            <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-3">
               {plans.map((plan, i) => (
                 <motion.div
                   key={plan.name}
@@ -83,20 +91,20 @@ export default function PricingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className={`border rounded-2xl p-8 flex flex-col ${
+                  className={`flex flex-col rounded-2xl border p-8 ${
                     plan.highlighted
                       ? "border-gundam-yellow bg-gundam-yellow/5 dark:bg-gundam-yellow/10 shadow-xl"
                       : "border-border bg-muted dark:bg-card"
                   }`}
                 >
                   {plan.highlighted && (
-                    <div className="bg-gundam-yellow text-accent-content -mt-12 mb-6 mx-auto w-fit rounded-full px-4 py-1 text-xs font-bold tracking-widest uppercase">
+                    <div className="bg-gundam-yellow text-accent-content mx-auto -mt-12 mb-6 w-fit rounded-full px-4 py-1 text-xs font-bold tracking-widest uppercase">
                       Most Popular
                     </div>
                   )}
                   <div className="mb-6">
                     <h3 className="text-foreground text-2xl font-bold">{plan.name}</h3>
-                    <p className="text-muted-foreground text-sm font-mono uppercase">{plan.type}</p>
+                    <p className="text-muted-foreground font-mono text-sm uppercase">{plan.type}</p>
                   </div>
                   <div className="mb-6 flex items-baseline">
                     <span className="text-foreground text-5xl font-bold">${plan.price}</span>

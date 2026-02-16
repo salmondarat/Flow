@@ -1,6 +1,14 @@
+"use client";
+
 import Link from "next/link";
-import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import nextDynamic from "next/dynamic";
+
+// Dynamic import for Header to prevent SSR issues
+const Header = nextDynamic(() => import("@/components/layout/header").then((mod) => mod.Header));
+
+// Force dynamic rendering to prevent static generation issues with client components
+export const dynamic = "force-dynamic";
 
 export default function SitemapPage() {
   const sitemapSections = [
@@ -76,7 +84,7 @@ export default function SitemapPage() {
                       <li key={link.href}>
                         <Link
                           href={link.href}
-                          className="text-muted-foreground hover:text-gundam-cyan hover:underline transition-colors"
+                          className="text-muted-foreground hover:text-gundam-cyan transition-colors hover:underline"
                         >
                           {link.name}
                         </Link>

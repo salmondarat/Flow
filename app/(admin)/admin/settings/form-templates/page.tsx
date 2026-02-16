@@ -1,5 +1,7 @@
 "use client";
 
+
+import { unstable_noStore } from "next/cache";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -30,7 +32,11 @@ interface FormTemplatesResponse {
   templates: FormTemplate[];
 }
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function FormTemplatesPage() {
+  unstable_noStore();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [templates, setTemplates] = useState<FormTemplate[]>([]);
@@ -158,7 +164,7 @@ export default function FormTemplatesPage() {
 
                     <div className="flex gap-2">
                       <Link href={`/admin/settings/form-templates/${template.id}`}>
-                        <Button variant="outline" size="sm" className="flex-1">
+                        <Button variant="outline" size="sm" className="flex-1" asChild>
                           <Pencil className="mr-2 h-3 w-3" />
                           Edit
                         </Button>

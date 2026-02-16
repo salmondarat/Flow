@@ -5,6 +5,8 @@
 
 "use client";
 
+
+import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
@@ -36,7 +38,11 @@ interface ServiceComplexity {
   overrideMultiplier: number | null;
 }
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function EditServicePage() {
+  unstable_noStore();
   const router = useRouter();
   const params = useParams();
   const serviceId = params.id as string;

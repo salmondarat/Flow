@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -9,6 +10,9 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { ArrowLeft, CheckCircle2, XCircle, AlertCircle } from "lucide-react";
 import type { OrderWithItems } from "@/types";
+
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
 
 export default function ClientOrderDetailsPage({
   params,

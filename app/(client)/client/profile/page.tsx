@@ -1,5 +1,7 @@
 "use client";
 
+
+import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -23,7 +25,11 @@ const profileSchema = z.object({
 
 type ProfileForm = z.infer<typeof profileSchema>;
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function ClientProfilePage() {
+  unstable_noStore();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -211,7 +217,7 @@ export default function ClientProfilePage() {
 
             <div className="flex justify-end gap-4">
               <Link href="/client/dashboard">
-                <Button type="button" variant="outline" disabled={isSaving}>
+                <Button type="button" variant="outline" disabled={isSaving} asChild>
                   Cancel
                 </Button>
               </Link>

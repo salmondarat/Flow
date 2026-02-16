@@ -1,7 +1,7 @@
 "use client";
 
+import { unstable_noStore } from "next/cache";
 import { useState } from "react";
-import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,8 +10,13 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Mail, MapPin, Send } from "lucide-react";
+import { Header } from "@/components/layout/header";
+
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
 
 export default function ContactPage() {
+  unstable_noStore();
   const [isLoading, setIsLoading] = useState(false);
   const [isSent, setIsSent] = useState(false);
 

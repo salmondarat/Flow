@@ -5,6 +5,8 @@
 
 "use client";
 
+
+import { unstable_noStore } from "next/cache";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -23,7 +25,11 @@ const AVAILABLE_ICONS = [
   { value: "brush", label: "Brush", icon: "🖌️" },
 ];
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function NewServicePage() {
+  unstable_noStore();
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -285,7 +291,7 @@ export default function NewServicePage() {
 
                 <div className="flex justify-end gap-4 pt-4">
                   <Link href="/admin/settings/services">
-                    <Button type="button" variant="outline" disabled={isSubmitting}>
+                    <Button type="button" variant="outline" disabled={isSubmitting} asChild>
                       Cancel
                     </Button>
                   </Link>

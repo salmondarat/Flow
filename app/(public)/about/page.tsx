@@ -1,12 +1,20 @@
 "use client";
 
+import { unstable_noStore } from "next/cache";
 import Link from "next/link";
-import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { motion } from "framer-motion";
 import { ArrowRight, Shield, Zap, Users, Target } from "lucide-react";
+import nextDynamic from "next/dynamic";
+
+// Dynamic import for Header to prevent SSR issues
+const Header = nextDynamic(() => import("@/components/layout/header").then((mod) => mod.Header));
+
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
 
 export default function AboutPage() {
+  unstable_noStore();
   return (
     <div className="text-foreground bg-background flex min-h-screen flex-col font-sans">
       <Header />
@@ -35,11 +43,13 @@ export default function AboutPage() {
             <div className="grid gap-16 md:grid-cols-2">
               <div>
                 <h2 className="text-foreground mb-6 text-3xl font-bold uppercase">Our Mission</h2>
-                <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                  Flow was built to solve a real problem: managing custom model kit commissions is chaotic.
+                <p className="text-muted-foreground mb-6 text-lg leading-relaxed">
+                  Flow was built to solve a real problem: managing custom model kit commissions is
+                  chaotic.
                 </p>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  We've created a platform that streamlines order intake, provides AI-powered estimates, tracks progress automatically, and keeps clients informed in real-time.
+                  We've created a platform that streamlines order intake, provides AI-powered
+                  estimates, tracks progress automatically, and keeps clients informed in real-time.
                 </p>
                 <p className="text-muted-foreground text-lg leading-relaxed">
                   Whether you're a solo builder or managing a team, Flow scales with you.

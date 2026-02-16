@@ -1,5 +1,13 @@
-import { Header } from "@/components/layout/header";
+"use client";
+
 import { Footer } from "@/components/layout/footer";
+import nextDynamic from "next/dynamic";
+
+// Dynamic import for Header to prevent SSR issues
+const Header = nextDynamic(() => import("@/components/layout/header").then((mod) => mod.Header));
+
+// Force dynamic rendering to prevent static generation issues with client components
+export const dynamic = "force-dynamic";
 
 export default function AccessibilityPage() {
   return (
@@ -11,14 +19,15 @@ export default function AccessibilityPage() {
             Accessibility Statement
           </h1>
           <div className="bg-muted dark:bg-card border-border rounded-xl border p-8">
-            <p className="text-muted-foreground text-sm mb-6">
+            <p className="text-muted-foreground mb-6 text-sm">
               Last Updated: {new Date().toLocaleDateString()}
             </p>
 
             <section className="mb-8">
               <h2 className="text-foreground mb-4 text-xl font-bold">Our Commitment</h2>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Flow is committed to ensuring digital accessibility for all users. We strive to follow the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards.
+                Flow is committed to ensuring digital accessibility for all users. We strive to
+                follow the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards.
               </p>
             </section>
 
@@ -26,18 +35,21 @@ export default function AccessibilityPage() {
               <h2 className="text-foreground mb-4 text-xl font-bold">Accessibility Features</h2>
               <div className="text-muted-foreground space-y-3 text-sm leading-relaxed">
                 <p>We have implemented the following accessibility features:</p>
-                <ul className="list-disc pl-6 space-y-2">
+                <ul className="list-disc space-y-2 pl-6">
                   <li>
-                    <strong>Keyboard Navigation:</strong> All functionality is accessible via keyboard
+                    <strong>Keyboard Navigation:</strong> All functionality is accessible via
+                    keyboard
                   </li>
                   <li>
                     <strong>Screen Reader Support:</strong> Proper semantic HTML and ARIA labels
                   </li>
                   <li>
-                    <strong>Color Contrast:</strong> Text meets minimum contrast ratios for readability
+                    <strong>Color Contrast:</strong> Text meets minimum contrast ratios for
+                    readability
                   </li>
                   <li>
-                    <strong>Responsive Design:</strong> Works across desktop, tablet, and mobile devices
+                    <strong>Responsive Design:</strong> Works across desktop, tablet, and mobile
+                    devices
                   </li>
                   <li>
                     <strong>Focus Indicators:</strong> Clear visual indicators for keyboard focus
@@ -51,7 +63,7 @@ export default function AccessibilityPage() {
               <p className="text-muted-foreground text-sm leading-relaxed">
                 We continuously test and improve our platform's accessibility through:
               </p>
-              <ul className="list-disc pl-6 space-y-2 text-muted-foreground text-sm">
+              <ul className="text-muted-foreground list-disc space-y-2 pl-6 text-sm">
                 <li>Regular accessibility audits with both automated tools and manual testing</li>
                 <li>User testing with individuals who use assistive technologies</li>
                 <li>Training our development team on accessibility best practices</li>
@@ -62,11 +74,14 @@ export default function AccessibilityPage() {
             <section>
               <h2 className="text-foreground mb-4 text-xl font-bold">Feedback</h2>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                We welcome feedback on the accessibility of our site. If you encounter any accessibility barriers, please contact us at{" "}
-                <a href="mailto:accessibility@flow.sys" className="text-gundam-cyan hover:underline">
+                We welcome feedback on the accessibility of our site. If you encounter any
+                accessibility barriers, please contact us at{" "}
+                <a
+                  href="mailto:accessibility@flow.sys"
+                  className="text-gundam-cyan hover:underline"
+                >
                   accessibility@flow.sys
-                </a>
-                {" "}
+                </a>{" "}
                 and we will address your concern.
               </p>
             </section>

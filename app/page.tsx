@@ -12,8 +12,14 @@ import Faq from "@/components/landing/faq";
 import Blog from "@/components/landing/blog";
 import Cta from "@/components/landing/cta";
 import Footer from "@/components/landing/footer";
-import { Header } from "@/components/layout/header";
+import nextDynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+
+// Dynamic import for Header to prevent SSR issues
+const Header = nextDynamic(() => import("@/components/layout/header").then((mod) => mod.Header));
+
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
 
 export default function HomePage() {
   const [isClient, setIsClient] = useState(false);

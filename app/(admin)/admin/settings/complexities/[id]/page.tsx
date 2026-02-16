@@ -5,6 +5,8 @@
 
 "use client";
 
+
+import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
@@ -25,7 +27,11 @@ const PRESET_MULTIPLIERS = [
   { label: "High (2.0×)", value: 2.0, description: "Advanced complexity" },
 ];
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function EditComplexityPage() {
+  unstable_noStore();
   const router = useRouter();
   const params = useParams();
   const complexityId = params.id as string;

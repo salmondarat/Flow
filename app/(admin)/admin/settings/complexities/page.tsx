@@ -5,6 +5,8 @@
 
 "use client";
 
+
+import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -23,7 +25,11 @@ import { Plus, Pencil, Trash2, ArrowLeft } from "lucide-react";
 import { getComplexityLevels } from "@/lib/api/complexities";
 import type { ComplexityLevelRow } from "@/types";
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export default function ComplexitiesPage() {
+  unstable_noStore();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [complexities, setComplexities] = useState<ComplexityLevelRow[]>([]);
@@ -153,7 +159,7 @@ export default function ComplexitiesPage() {
 
                     <div className="flex gap-2">
                       <Link href={`/admin/settings/complexities/${complexity.id}`}>
-                        <Button variant="outline" size="sm" className="flex-1">
+                        <Button variant="outline" size="sm" className="flex-1" asChild>
                           <Pencil className="mr-2 h-3 w-3" />
                           Edit
                         </Button>

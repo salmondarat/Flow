@@ -13,6 +13,9 @@ import { Plus } from "lucide-react";
 import { getOrders } from "@/lib/features/orders/queries";
 import type { OrderStatus } from "@/types";
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 const statusLabels: Record<OrderStatus, string> = {
   draft: "Draft",
   estimated: "Estimated",

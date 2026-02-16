@@ -1,5 +1,6 @@
+"use client";
+
 import Link from "next/link";
-import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import {
   ClipboardList,
@@ -11,55 +12,70 @@ import {
   Shield,
   Zap,
 } from "lucide-react";
+import nextDynamic from "next/dynamic";
+
+// Dynamic import for Header to prevent SSR issues
+const Header = nextDynamic(() => import("@/components/layout/header").then((mod) => mod.Header));
+
+// Force dynamic rendering to prevent static generation issues with client components
+export const dynamic = "force-dynamic";
 
 export default function FeaturesPage() {
   const features = [
     {
       icon: ClipboardList,
       title: "Smart Order Intake",
-      description: "Customizable intake forms that capture every detail—scale, grade, paint preferences—filtering out noise and saving you time.",
+      description:
+        "Customizable intake forms that capture every detail—scale, grade, paint preferences—filtering out noise and saving you time.",
       color: "gundam-cyan",
     },
     {
       icon: Calculator,
       title: "AI Estimation",
-      description: "Stop guessing prices. Our AI suggests quotes based on kit complexity and historical battle data.",
+      description:
+        "Stop guessing prices. Our AI suggests quotes based on kit complexity and historical battle data.",
       color: "gundam-yellow",
     },
     {
       icon: TrendingUp,
       title: "Progress Tracking",
-      description: "Keep clients updated with a dedicated uplink portal. Upload WIP photos and mark milestones effortlessly.",
+      description:
+        "Keep clients updated with a dedicated uplink portal. Upload WIP photos and mark milestones effortlessly.",
       color: "gundam-red",
     },
     {
       icon: BarChart2,
       title: "Analytics Dashboard",
-      description: "Track revenue, turnaround times, and team productivity with beautiful visualizations.",
+      description:
+        "Track revenue, turnaround times, and team productivity with beautiful visualizations.",
       color: "gundam-cyan",
     },
     {
       icon: MessageSquare,
       title: "Client Communication",
-      description: "Built-in messaging keeps everyone aligned. Share updates, answer questions, and build trust.",
+      description:
+        "Built-in messaging keeps everyone aligned. Share updates, answer questions, and build trust.",
       color: "gundam-yellow",
     },
     {
       icon: Users,
       title: "Team Management",
-      description: "Scale from solo builder to multi-operator studio. Assign roles and track performance.",
+      description:
+        "Scale from solo builder to multi-operator studio. Assign roles and track performance.",
       color: "gundam-red",
     },
     {
       icon: Shield,
       title: "Secure Payments",
-      description: "Professional invoicing and secure payment processing. Get paid on time, every time.",
+      description:
+        "Professional invoicing and secure payment processing. Get paid on time, every time.",
       color: "gundam-cyan",
     },
     {
       icon: Zap,
       title: "Inventory Tracking",
-      description: "Never run out of supplies. Track paints, tools, and kit inventory in one unified system.",
+      description:
+        "Never run out of supplies. Track paints, tools, and kit inventory in one unified system.",
       color: "gundam-yellow",
     },
   ];

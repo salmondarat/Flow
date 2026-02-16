@@ -1,5 +1,6 @@
 "use client";
 
+import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -11,6 +12,9 @@ import { toast } from "sonner";
 import { Plus, Search, Package } from "lucide-react";
 import type { OrderRow } from "@/types";
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 interface OrderWithItems extends OrderRow {
   order_items: Array<{
     id: string;
@@ -21,6 +25,7 @@ interface OrderWithItems extends OrderRow {
 }
 
 export default function ClientOrdersPage() {
+  unstable_noStore();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [orders, setOrders] = useState<OrderWithItems[]>([]);

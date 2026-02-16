@@ -7,6 +7,9 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Wrench, Settings, Brush, FileText, Layers } from "lucide-react";
 
+// Force dynamic rendering to prevent static generation issues
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Settings | Flow Admin",
 };
@@ -116,65 +119,66 @@ export default function SettingsPage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-muted-foreground text-sm">
-              Manage service types, complexity levels, add-ons, and form templates for your order system.
+              Manage service types, complexity levels, add-ons, and form templates for your order
+              system.
             </p>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <Link href="/admin/settings/services" className="group">
-                <div className="rounded-lg border p-4 transition-colors hover:bg-muted/50">
+                <div className="hover:bg-muted/50 rounded-lg border p-4 transition-colors">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
                       <Wrench className="h-5 w-5" />
                     </div>
                     <div className="flex-1">
                       <p className="font-medium">Service Types</p>
                       <p className="text-muted-foreground text-sm">Configure services</p>
                     </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="text-muted-foreground h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
               </Link>
 
               <Link href="/admin/settings/complexities" className="group">
-                <div className="rounded-lg border p-4 transition-colors hover:bg-muted/50">
+                <div className="hover:bg-muted/50 rounded-lg border p-4 transition-colors">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
                       <Layers className="h-5 w-5" />
                     </div>
                     <div className="flex-1">
                       <p className="font-medium">Complexities</p>
                       <p className="text-muted-foreground text-sm">Level multipliers</p>
                     </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="text-muted-foreground h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
               </Link>
 
               <Link href="/admin/settings/addons" className="group">
-                <div className="rounded-lg border p-4 transition-colors hover:bg-muted/50">
+                <div className="hover:bg-muted/50 rounded-lg border p-4 transition-colors">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
                       <Settings className="h-5 w-5" />
                     </div>
                     <div className="flex-1">
                       <p className="font-medium">Add-ons</p>
                       <p className="text-muted-foreground text-sm">Optional extras</p>
                     </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="text-muted-foreground h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
               </Link>
 
               <Link href="/admin/settings/form-templates" className="group">
-                <div className="rounded-lg border p-4 transition-colors hover:bg-muted/50">
+                <div className="hover:bg-muted/50 rounded-lg border p-4 transition-colors">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
                       <FileText className="h-5 w-5" />
                     </div>
                     <div className="flex-1">
                       <p className="font-medium">Form Templates</p>
                       <p className="text-muted-foreground text-sm">Order forms</p>
                     </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="text-muted-foreground h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </div>
               </Link>
