@@ -12,14 +12,14 @@ function StatCard({ data }: StatCardProps) {
 
   if (isPrimary) {
     return (
-      <div className="relative overflow-hidden rounded-2xl bg-emerald-600 p-6 text-white group hover:shadow-lg hover:shadow-emerald-600/20 transition-all">
+      <div className="group relative overflow-hidden rounded-2xl bg-emerald-600 p-6 text-white transition-all hover:shadow-lg hover:shadow-emerald-600/20">
         {/* Decorative circle */}
-        <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-white/5 -mr-10 -mt-10 transition-transform group-hover:scale-110" />
+        <div className="absolute top-0 right-0 -mt-10 -mr-10 h-32 w-32 rounded-full bg-white/5 transition-transform group-hover:scale-110" />
 
-        <div className="relative flex justify-between items-start mb-4">
-          <h3 className="font-medium text-emerald-100 text-sm">{title}</h3>
-          <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
-            <ArrowUpRight className="h-4 w-4 text-white -rotate-45" />
+        <div className="relative mb-4 flex items-start justify-between">
+          <h3 className="text-sm font-medium text-emerald-100">{title}</h3>
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+            <ArrowUpRight className="h-4 w-4 -rotate-45 text-white" />
           </div>
         </div>
 
@@ -27,10 +27,10 @@ function StatCard({ data }: StatCardProps) {
           <p className="text-4xl font-bold">{value}</p>
         </div>
 
-        <div className="relative flex items-center text-xs text-emerald-100 mt-4">
+        <div className="relative mt-4 flex items-center text-xs text-emerald-100">
           {trend && (
             <>
-              <span className="bg-emerald-500 text-white px-1.5 py-0.5 rounded text-emerald-100 mr-2 text-[10px]">
+              <span className="mr-2 rounded bg-emerald-500 px-1.5 py-0.5 text-[10px] text-white">
                 {trend.direction === "up" ? `${trend.value} ▲` : `${trend.value} ▼`}
               </span>
             </>
@@ -42,11 +42,11 @@ function StatCard({ data }: StatCardProps) {
   }
 
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900 group hover:border-emerald-600/50 transition-all">
-      <div className="flex justify-between items-start mb-4">
-        <h3 className="font-medium text-gray-600 dark:text-gray-400 text-sm">{title}</h3>
-        <div className="w-8 h-8 rounded-full border border-gray-200 dark:border-gray-600 flex items-center justify-center group-hover:bg-gray-50 dark:group-hover:bg-gray-700">
-          <ArrowUpRight className="h-4 w-4 text-gray-600 dark:text-gray-400 -rotate-45" />
+    <div className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:border-emerald-600/50 dark:border-gray-800 dark:bg-gray-900">
+      <div className="mb-4 flex items-start justify-between">
+        <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">{title}</h3>
+        <div className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 group-hover:bg-gray-50 dark:border-gray-600 dark:group-hover:bg-gray-700">
+          <ArrowUpRight className="h-4 w-4 -rotate-45 text-gray-600 dark:text-gray-400" />
         </div>
       </div>
 
@@ -56,8 +56,8 @@ function StatCard({ data }: StatCardProps) {
 
       <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
         {trend ? (
-          <div className="flex items-center bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-1.5 py-0.5 rounded mr-2">
-            <TrendingUp className="h-3 w-3 mr-0.5" />
+          <div className="mr-2 flex items-center rounded bg-emerald-100 px-1.5 py-0.5 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+            <TrendingUp className="mr-0.5 h-3 w-3" />
             <span className="text-[10px]">{trend.value} ▲</span>
           </div>
         ) : (
