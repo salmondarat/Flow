@@ -7,7 +7,7 @@ import { RemindersWidget } from "@/components/admin/dashboard/reminders-widget";
 import { ProjectListWidget } from "@/components/admin/dashboard/project-list-widget";
 import { TeamCollaborationWidget } from "@/components/admin/dashboard/team-collaboration";
 import { ProjectProgressChart } from "@/components/admin/dashboard/project-progress";
-import { TimerWidget } from "@/components/admin/widgets/timer-widget";
+import { TimerWidget } from "@/components/admin/dashboard/timer-widget";
 
 export function DashboardContent() {
   return (
