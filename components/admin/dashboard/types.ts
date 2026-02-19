@@ -4,7 +4,7 @@
  * Strict TypeScript types with no 'any' types for dashboard components
  */
 
-import { MaterialSymbol } from "react-material-symbols";
+import { LucideIcon } from "lucide-react";
 
 /** Project status enum */
 export enum ProjectStatus {
@@ -89,4 +89,13 @@ export interface WidgetError {
   message: string;
   code?: string;
   retryable: boolean;
+}
+
+/** Icon mapping for project types */
+export type ProjectIconType = "code" | "person_add" | "dashboard" | "speed";
+
+/** Icon configuration for project items */
+export interface ProjectIconConfig {
+  icon: LucideIcon;
+  className: string;
 }
