@@ -65,19 +65,19 @@ export async function fetchDashboardStats(userId: string): Promise<StatsCardData
       value: total,
       subtitle: "Total projects",
       isPrimary: true,
-      trend: { value: total > 0 ? 5 : 0, direction: "up" },
+      trend: { value: total > 0 ? 5 : 0, direction: "up" as const },
     },
     {
       title: "Ended Projects",
       value: ended,
       subtitle: "Completed projects",
-      trend: ended > 0 ? { value: Math.floor(ended * 0.6), direction: "up" } : undefined,
+      trend: ended > 0 ? { value: Math.floor(ended * 0.6), direction: "up" as const } : undefined,
     },
     {
       title: "Running Projects",
       value: running,
       subtitle: "Active projects",
-      trend: running > 0 ? { value: Math.floor(running * 0.2), direction: "up" } : undefined,
+      trend: running > 0 ? { value: Math.floor(running * 0.2), direction: "up" as const } : undefined,
     },
     {
       title: "Pending Projects",
@@ -95,7 +95,8 @@ export async function fetchTeamMembers(userId: string): Promise<TeamMember[]> {
 
   const { data, error } = await supabase
     .from("team_members")
-    .select(`
+    .select(
+      `
       id,
       user_id,
       users!inner(
@@ -108,7 +109,8 @@ export async function fetchTeamMembers(userId: string): Promise<TeamMember[]> {
         name,
         status
       )
-    `)
+    `
+    )
     .eq("team_members.team_id", userId) // Assuming team filtering
     .limit(4);
 
