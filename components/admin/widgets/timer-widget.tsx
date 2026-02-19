@@ -10,8 +10,6 @@ export function TimerWidget() {
     elapsedSeconds: 5048, // 01:24:08
   });
 
-  const [displayTime, setDisplayTime] = useState<string>("01:24:08");
-
   useEffect(() => {
     let interval: ReturnType<typeof setInterval> | null = null;
 
@@ -28,15 +26,6 @@ export function TimerWidget() {
       if (interval) clearInterval(interval);
     };
   }, [timerState.isRunning]);
-
-  useEffect(() => {
-    const hours = Math.floor(timerState.elapsedSeconds / 3600);
-    const minutes = Math.floor((timerState.elapsedSeconds % 3600) / 60);
-    const seconds = timerState.elapsedSeconds % 60;
-
-    const formatted = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-    setDisplayTime(formatted);
-  }, [timerState.elapsedSeconds]);
 
   const handlePause = () => {
     setTimerState((prev) => ({ ...prev, isRunning: !prev.isRunning }));
@@ -63,7 +52,12 @@ export function TimerWidget() {
         <h3 className="font-medium text-gray-300 mb-8">Time Tracker</h3>
         <div className="text-center my-6">
           <p className="text-4xl font-mono font-bold tracking-widest">
-            {displayTime}
+            {(() => {
+              const hours = Math.floor(timerState.elapsedSeconds / 3600);
+              const minutes = Math.floor((timerState.elapsedSeconds % 3600) / 60);
+              const seconds = timerState.elapsedSeconds % 60;
+              return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+            })()}
           </p>
         </div>
       </div>
