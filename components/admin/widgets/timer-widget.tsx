@@ -1,6 +1,6 @@
 "use client";
 
-import { Pause, Stop } from "lucide-react";
+import { Pause, Square } from "lucide-react";
 import type { TimeTrackerState } from "../dashboard/types";
 import { useState, useEffect } from "react";
 
@@ -76,7 +76,7 @@ export function TimerWidget() {
           className="w-10 h-10 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 transition-colors shadow-lg shadow-red-500/30"
           aria-label="Stop"
         >
-          <Stop className="h-5 w-5" />
+          <Square className="h-5 w-5" />
         </button>
       </div>
     </div>
