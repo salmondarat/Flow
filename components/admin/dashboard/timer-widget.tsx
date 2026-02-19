@@ -1,8 +1,10 @@
 "use client";
 
-import { Pause, Stop } from "lucide-react";
+import * as LucideIcons from "lucide-react";
 import type { TimeTrackerState } from "./types";
 import { useState, useEffect } from "react";
+
+const { Pause, Stop } = LucideIcons;
 
 export function TimerWidget() {
   const [timerState, setTimerState] = useState<TimeTrackerState>({
@@ -50,36 +52,36 @@ export function TimerWidget() {
   };
 
   return (
-    <div className="lg:col-span-1 bg-[#0e2a1e] dark:bg-black rounded-2xl p-6 relative overflow-hidden text-white flex flex-col justify-between min-h-[250px]">
+    <div className="relative flex min-h-62.5 flex-col justify-between overflow-hidden rounded-2xl bg-[#0e2a1e] p-6 text-white lg:col-span-1 dark:bg-black">
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute -right-10 top-10 w-40 h-40 rounded-full border-[20px] border-green-800" />
-        <div className="absolute -right-4 top-20 w-40 h-40 rounded-full border-[20px] border-green-700" />
-        <div className="absolute right-6 top-32 w-40 h-40 rounded-full border-[20px] border-green-600" />
+        <div className="absolute top-10 -right-10 h-40 w-40 rounded-full border-20 border-green-800" />
+        <div className="absolute top-20 -right-4 h-40 w-40 rounded-full border-20 border-green-700" />
+        <div className="absolute top-32 right-6 h-40 w-40 rounded-full border-20 border-green-600" />
       </div>
 
       {/* Content */}
       <div className="relative z-10">
-        <h3 className="font-medium text-gray-300 mb-8">Time Tracker</h3>
-        <div className="text-center my-6">
-          <p className="text-4xl font-mono font-bold tracking-widest">
-            {displayTime}
-          </p>
+        <h3 className="mb-8 font-medium text-gray-300">Time Tracker</h3>
+        <div className="my-6 text-center">
+          <p className="font-mono text-4xl font-bold tracking-widest">{displayTime}</p>
         </div>
       </div>
 
       {/* Controls */}
-      <div className="relative z-10 flex justify-center gap-4 mt-auto">
+      <div className="relative z-10 mt-auto flex justify-center gap-4">
         <button
+          type="button"
           onClick={handlePause}
-          className="w-10 h-10 rounded-full bg-white text-green-900 flex items-center justify-center hover:bg-gray-200 transition-colors"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-green-900 transition-colors hover:bg-gray-200"
           aria-label={timerState.isRunning ? "Pause" : "Resume"}
         >
           <Pause className="h-5 w-5" />
         </button>
         <button
+          type="button"
           onClick={handleStop}
-          className="w-10 h-10 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 transition-colors shadow-lg shadow-red-500/30"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white shadow-lg shadow-red-500/30 transition-colors hover:bg-red-600"
           aria-label="Stop"
         >
           <Stop className="h-5 w-5" />
