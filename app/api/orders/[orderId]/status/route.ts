@@ -1,18 +1,18 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth/server";
 import { updateOrderStatus } from "@/lib/features/orders/queries";
 import type { OrderStatus } from "@/types";
 
-export async function POST(
-  request: NextRequest,
+export async function PATCH(
+  request: Request,
   { params }: { params: Promise<{ orderId: string }> }
 ) {
   try {
     await requireAdmin();
 
     const { orderId } = await params;
-    const formData = await request.formData();
-    const status = formData.get("status");
+    const body = await request.json() as { status: OrderStatus };
+    const { status } = body;
 
     if (!status) {
       return NextResponse.json({ error: "Status is required" }, { status: 400 });
@@ -27,17 +27,17 @@ export async function POST(
       "completed",
       "cancelled",
     ];
-    if (!validStatuses.includes(status as OrderStatus)) {
+    if (!validStatuses.includes(status)) {
       return NextResponse.json({ error: "Invalid status" }, { status: 400 });
     }
 
-    const result = await updateOrderStatus(orderId, status as OrderStatus);
+    const result = await updateOrderStatus(orderId, status);
 
     if (!result.success) {
       return NextResponse.json({ error: result.error }, { status: 500 });
     }
 
-    return NextResponse.redirect(new URL(`/admin/orders/${orderId}`, request.url));
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error updating order status:", error);
     return NextResponse.json(
