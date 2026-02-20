@@ -123,7 +123,7 @@ function TaskTagPill({ tag }: { tag: TaskTag }) {
     "low-priority": "bg-badge-yellow",
     pink: "bg-badge-pink",
     purple: "bg-badge-purple",
-    green: "bg-green-100 text-green-700 dark:bg-green-950/30 dark:text-green-400",
+    blue: "bg-badge-blue",
     gray: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300",
   };
 

@@ -30,7 +30,7 @@ export function TaskListView({
   const getStatusColor = (status: string) => {
     switch (status) {
       case "completed":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
       case "in_progress":
       case "approved":
         return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
