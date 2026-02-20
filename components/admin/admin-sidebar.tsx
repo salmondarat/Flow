@@ -19,8 +19,8 @@ import {
 // Menu navigation items (top section)
 const menuItems = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutGrid },
-  { name: "Tasks", href: "/admin/orders", icon: CheckCircle2, badge: "12+" },
-  { name: "Calendar", href: "/admin/orders", icon: CalendarDays },
+  { name: "Tasks", href: "/admin/tasks", icon: CheckCircle2, badge: "12+" },
+  { name: "Calendar", href: "/admin/calendar", icon: CalendarDays },
   { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
   { name: "Team", href: "/admin/clients", icon: Users },
 ];
