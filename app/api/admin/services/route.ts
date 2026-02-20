@@ -5,7 +5,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth/server";
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/server";
 import { getServiceTypes, createServiceType, deleteServiceType } from "@/lib/api/services";
 import type { ServiceTypeInsert } from "@/types";
 
@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = createClient();
+    const supabase = await createClient();
 
     // Check if slug already exists
     const { data: existing } = await supabase
