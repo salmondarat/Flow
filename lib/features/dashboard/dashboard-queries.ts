@@ -11,9 +11,8 @@ import type {
   ProjectListItem,
   ProjectProgress,
   Reminder,
-  ProjectStatus,
-  TaskStatus,
 } from "@/components/admin/dashboard/types";
+import { ProjectStatus, TaskStatus } from "@/components/admin/dashboard/types";
 
 /**
  * Fetch dashboard statistics
@@ -77,7 +76,8 @@ export async function fetchDashboardStats(userId: string): Promise<StatsCardData
       title: "Running Projects",
       value: running,
       subtitle: "Active projects",
-      trend: running > 0 ? { value: Math.floor(running * 0.2), direction: "up" as const } : undefined,
+      trend:
+        running > 0 ? { value: Math.floor(running * 0.2), direction: "up" as const } : undefined,
     },
     {
       title: "Pending Projects",
@@ -164,10 +164,7 @@ export async function fetchProjectList(userId: string): Promise<ProjectListItem[
 export async function fetchProjectProgress(projectId: string): Promise<ProjectProgress> {
   const supabase = createClient();
 
-  const { data, error } = await supabase
-    .from("tasks")
-    .select("status")
-    .eq("project_id", projectId);
+  const { data, error } = await supabase.from("tasks").select("status").eq("project_id", projectId);
 
   if (error) {
     console.error("Error fetching project progress:", error);

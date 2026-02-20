@@ -30,6 +30,7 @@ export interface StatsCardData {
     value: number;
     direction: "up" | "down";
   };
+  icon?: LucideIcon;
 }
 
 /** Team member with current task */

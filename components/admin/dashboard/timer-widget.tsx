@@ -4,7 +4,7 @@ import * as LucideIcons from "lucide-react";
 import type { TimeTrackerState } from "./types";
 import { useState, useEffect } from "react";
 
-const { Pause, Stop } = LucideIcons;
+const { Pause, SquareStop } = LucideIcons;
 
 export function TimerWidget() {
   const [timerState, setTimerState] = useState<TimeTrackerState>({
@@ -84,7 +84,7 @@ export function TimerWidget() {
           className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white shadow-lg shadow-red-500/30 transition-colors hover:bg-red-600"
           aria-label="Stop"
         >
-          <Stop className="h-5 w-5" />
+          <SquareStop className="h-5 w-5" />
         </button>
       </div>
     </div>

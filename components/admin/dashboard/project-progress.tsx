@@ -30,25 +30,25 @@ export function ProjectProgressChart() {
 
   if (widgetState === "loading") {
     return (
-      <div className="lg:col-span-1 rounded-2xl border border-gray-200 bg-white p-6 dark:border-gray-800 dark:bg-gray-900">
-        <h3 className="w-full font-bold text-gray-900 dark:text-white mb-4 text-left">
-          Project Progress
+      <div className="rounded-2xl border border-gray-200 bg-white p-6 lg:col-span-1 dark:border-gray-800 dark:bg-gray-900">
+        <h3 className="mb-4 w-full text-left font-bold text-gray-900 dark:text-white">
+          Build Progress
         </h3>
-        <div className="flex flex-col items-center justify-center h-48">
-          <div className="w-32 h-32 rounded-full border-8 border-gray-200 dark:border-gray-700 animate-pulse" />
+        <div className="flex h-48 flex-col items-center justify-center">
+          <div className="h-32 w-32 animate-pulse rounded-full border-8 border-gray-200 dark:border-gray-700" />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="lg:col-span-1 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900 flex flex-col items-center">
-      <h3 className="w-full font-bold text-gray-900 dark:text-white mb-4 text-left">
-        Project Progress
+    <div className="flex flex-col items-center rounded-2xl border border-gray-200 bg-white p-6 shadow-sm lg:col-span-1 dark:border-gray-800 dark:bg-gray-900">
+      <h3 className="mb-4 w-full text-left font-bold text-gray-900 dark:text-white">
+        Build Progress
       </h3>
 
-      <div className="relative w-48 h-24 mt-4 mb-2 overflow-hidden">
-        <ResponsiveContainer width="100%" height="100%">
+      <div className="relative mt-4 mb-2 h-24 w-48 overflow-hidden">
+        <ResponsiveContainer width="100%" height="100%" minWidth={100} minHeight={50}>
           <PieChart>
             <Pie
               data={data}
@@ -69,7 +69,7 @@ export function ProjectProgressChart() {
         </ResponsiveContainer>
 
         {/* Center Text */}
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-2 text-center">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-2 transform text-center">
           <span className="text-4xl font-bold text-gray-900 dark:text-white">
             {progress?.completed}%
           </span>
@@ -78,17 +78,17 @@ export function ProjectProgressChart() {
       </div>
 
       {/* Legend */}
-      <div className="w-full mt-6 flex justify-between text-[10px] text-gray-500 dark:text-gray-400">
+      <div className="mt-6 flex w-full justify-between text-[10px] text-gray-500 dark:text-gray-400">
         <div className="flex items-center">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 mr-1" />
+          <span className="mr-1 h-2 w-2 rounded-full bg-emerald-500" />
           Completed
         </div>
         <div className="flex items-center">
-          <span className="w-2 h-2 rounded-full bg-emerald-700 mr-1" />
+          <span className="mr-1 h-2 w-2 rounded-full bg-emerald-700" />
           In Progress
         </div>
         <div className="flex items-center">
-          <span className="w-2 h-2 rounded-full bg-gray-300 mr-1" />
+          <span className="mr-1 h-2 w-2 rounded-full bg-gray-300" />
           Pending
         </div>
       </div>

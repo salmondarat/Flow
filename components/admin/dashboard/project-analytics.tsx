@@ -15,19 +15,23 @@ const analyticsData: AnalyticsDataPoint[] = [
 
 export function ProjectAnalyticsChart() {
   return (
-    <div className="lg:col-span-2 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-      <div className="flex justify-between items-center mb-8">
+    <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm lg:col-span-2 dark:border-gray-800 dark:bg-gray-900">
+      <div className="mb-8 flex items-center justify-between">
         <h3 className="text-lg font-bold text-gray-900 dark:text-white">Project Analytics</h3>
-        <button className="text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <button className="text-gray-500 transition-colors hover:text-emerald-600 dark:text-gray-400 dark:hover:text-emerald-400">
+          <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
           </svg>
         </button>
       </div>
 
       <div className="h-48">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={analyticsData} barSize={40} margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
+        <ResponsiveContainer width="100%" height="100%" minWidth={100} minHeight={100}>
+          <BarChart
+            data={analyticsData}
+            barSize={40}
+            margin={{ top: 10, right: 10, left: 10, bottom: 10 }}
+          >
             <XAxis
               dataKey="day"
               axisLine={false}

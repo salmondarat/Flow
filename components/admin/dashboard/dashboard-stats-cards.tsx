@@ -1,6 +1,6 @@
 "use client";
 
-import { TrendingUp, ArrowUpRight } from "lucide-react";
+import { TrendingUp, ArrowUpRight, Package, CheckCircle, Clock, AlertCircle } from "lucide-react";
 import type { StatsCardData } from "./types";
 
 interface StatCardProps {
@@ -8,7 +8,7 @@ interface StatCardProps {
 }
 
 function StatCard({ data }: StatCardProps) {
-  const { title, value, subtitle, isPrimary = false, trend } = data;
+  const { title, value, subtitle, isPrimary = false, trend, icon: Icon } = data;
 
   if (isPrimary) {
     return (
@@ -17,7 +17,10 @@ function StatCard({ data }: StatCardProps) {
         <div className="absolute top-0 right-0 -mt-10 -mr-10 h-32 w-32 rounded-full bg-white/5 transition-transform group-hover:scale-110" />
 
         <div className="relative mb-4 flex items-start justify-between">
-          <h3 className="text-sm font-medium text-emerald-100">{title}</h3>
+          <div className="flex items-center gap-2">
+            {Icon && <Icon className="h-5 w-5 text-emerald-100" />}
+            <h3 className="text-sm font-medium text-emerald-100">{title}</h3>
+          </div>
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
             <ArrowUpRight className="h-4 w-4 -rotate-45 text-white" />
           </div>
@@ -44,7 +47,10 @@ function StatCard({ data }: StatCardProps) {
   return (
     <div className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:border-emerald-600/50 dark:border-gray-800 dark:bg-gray-900">
       <div className="mb-4 flex items-start justify-between">
-        <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">{title}</h3>
+        <div className="flex items-center gap-2">
+          {Icon && <Icon className="h-5 w-5 text-gray-500 dark:text-gray-400" />}
+          <h3 className="text-sm font-medium text-gray-600 dark:text-gray-400">{title}</h3>
+        </div>
         <div className="flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 group-hover:bg-gray-50 dark:border-gray-600 dark:group-hover:bg-gray-700">
           <ArrowUpRight className="h-4 w-4 -rotate-45 text-gray-600 dark:text-gray-400" />
         </div>
@@ -70,30 +76,35 @@ function StatCard({ data }: StatCardProps) {
 }
 
 export function DashboardStatsCards() {
+  // Sample data reflecting Gunpla Custom Build Service
   const statsData: StatsCardData[] = [
     {
-      title: "Total Projects",
+      title: "Total Orders",
       value: 24,
-      subtitle: "Increased from last month",
+      subtitle: "All client orders",
       isPrimary: true,
       trend: { value: 5, direction: "up" },
+      icon: Package,
     },
     {
-      title: "Ended Projects",
+      title: "Completed Builds",
       value: 10,
-      subtitle: "Increased from last month",
+      subtitle: "Ready for delivery",
       trend: { value: 6, direction: "up" },
+      icon: CheckCircle,
     },
     {
-      title: "Running Projects",
+      title: "In Progress",
       value: 12,
-      subtitle: "Increased from last month",
+      subtitle: "Active builds",
       trend: { value: 2, direction: "up" },
+      icon: Clock,
     },
     {
-      title: "Pending Projects",
+      title: "Pending Review",
       value: 2,
-      subtitle: "On Discuss",
+      subtitle: "Awaiting approval",
+      icon: AlertCircle,
     },
   ];
 

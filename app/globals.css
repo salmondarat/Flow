@@ -399,7 +399,17 @@ body {
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
 
 :root {
-  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    "Plus Jakarta Sans",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
 }
 
 /* Geist - Primary font (from Vercel) */
@@ -647,5 +657,82 @@ body {
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* ============================================================================
+     SIDEBAR DESIGN TOKENS (Flow Design System)
+     ============================================================================ */
+
+  /* Primary blue color from HTML reference */
+  :root {
+    --sidebar-primary: #137fec;
+    --sidebar-primary-dark: #0e4b32;
+    --sidebar-text: #1f2937;
+    --sidebar-muted: #6b7280;
+    --sidebar-surface-light: #ffffff;
+    --sidebar-surface-dark: #1f2937;
+    --sidebar-bg-light: #f6f7f8;
+    --sidebar-bg-dark: #101922;
+  }
+
+  /* Sidebar primary color */
+  .bg-sidebar-primary {
+    background-color: var(--sidebar-primary);
+  }
+
+  .text-sidebar-primary {
+    color: var(--sidebar-primary);
+  }
+
+  .bg-sidebar-primary-dark {
+    background-color: #0d6fd4;
+  }
+
+  /* Sidebar surface colors */
+  .bg-sidebar-surface-light {
+    background-color: var(--sidebar-surface-light);
+  }
+
+  .dark .bg-sidebar-surface-light {
+    background-color: var(--sidebar-surface-dark);
+  }
+
+  .bg-sidebar-surface-dark {
+    background-color: var(--sidebar-surface-dark);
+  }
+
+  .dark .bg-sidebar-surface-dark {
+    background-color: #111827;
+  }
+
+  /* Sidebar background */
+  .bg-sidebar-bg {
+    background-color: var(--sidebar-bg-light);
+  }
+
+  .dark .bg-sidebar-bg {
+    background-color: var(--sidebar-bg-dark);
+  }
+
+  /* Sidebar text colors */
+  .text-sidebar-text {
+    color: var(--sidebar-text);
+  }
+
+  .dark .text-sidebar-text {
+    color: #f9fafb;
+  }
+
+  .text-sidebar-muted {
+    color: var(--sidebar-muted);
+  }
+
+  .dark .text-sidebar-muted {
+    color: #9ca3af;
+  }
+
+  /* Soft shadow for cards/buttons */
+  .shadow-soft {
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
   }
 }
