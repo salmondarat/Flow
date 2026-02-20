@@ -35,7 +35,7 @@ const StatItem = ({ value, label }: { value: string; label: string }) => (
 
 export default function Hero() {
   return (
-    <div className="relative w-full overflow-hidden bg-zinc-950 font-sans text-white">
+    <div className="relative w-full bg-zinc-950 font-sans text-white">
       {/* Background Image with Gradient Mask */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center opacity-40"
