@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { KanbanBoard } from "@/components/admin/kanban/kanban-board";
 import { TaskListView } from "./task-list-view";
@@ -19,6 +19,7 @@ import type { OrderStatus } from "@/types";
 
 export function TasksPage({ initialColumns }: { initialColumns: KanbanColumn[] }) {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [view, setView] = useState<"kanban" | "list">(
     (searchParams.get("view") as "kanban" | "list") || "kanban"
   );
@@ -111,14 +112,24 @@ export function TasksPage({ initialColumns }: { initialColumns: KanbanColumn[] }
             <Button
               variant={view === "kanban" ? "default" : "ghost"}
               size="sm"
-              onClick={() => setView("kanban")}
+              onClick={() => {
+                setView("kanban");
+                const params = new URLSearchParams(searchParams.toString());
+                params.set("view", "kanban");
+                router.replace(`/admin/tasks?${params.toString()}`);
+              }}
             >
               <LayoutGrid className="h-4 w-4" />
             </Button>
             <Button
               variant={view === "list" ? "default" : "ghost"}
               size="sm"
-              onClick={() => setView("list")}
+              onClick={() => {
+                setView("list");
+                const params = new URLSearchParams(searchParams.toString());
+                params.set("view", "list");
+                router.replace(`/admin/tasks?${params.toString()}`);
+              }}
             >
               <List className="h-4 w-4" />
             </Button>
