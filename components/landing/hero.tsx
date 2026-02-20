@@ -1,154 +1,235 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
-import Image from "next/image";
-import { Package2, ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
 
-const heroImages = [
-  {
-    src: "https://images.unsplash.com/photo-1614726365723-49faaa5f6c44?w=800&q=80",
-    alt: "Gunpla Custom Build 1",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1563089145-599997674d42?w=800&q=80",
-    alt: "Gunpla Custom Build 2",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?w=800&q=80",
-    alt: "Model Kit Build 3",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=800&q=80",
-    alt: "Diorama Build 4",
-  },
+import React from "react";
+import {
+  ArrowRight,
+  Play,
+  Target,
+  Crown,
+  Star,
+  Hexagon,
+  Triangle,
+  Command,
+  Ghost,
+  Gem,
+  Cpu,
+} from "lucide-react";
+
+const CLIENTS = [
+  { name: "Acme Corp", icon: Hexagon },
+  { name: "Quantum", icon: Triangle },
+  { name: "Command+Z", icon: Command },
+  { name: "Phantom", icon: Ghost },
+  { name: "Ruby", icon: Gem },
+  { name: "Chipset", icon: Cpu },
 ];
 
+const StatItem = ({ value, label }: { value: string; label: string }) => (
+  <div className="flex cursor-default flex-col items-center justify-center transition-transform hover:-translate-y-1">
+    <span className="text-xl font-bold text-white sm:text-2xl">{value}</span>
+    <span className="text-[10px] font-medium tracking-wider text-zinc-500 uppercase sm:text-xs">
+      {label}
+    </span>
+  </div>
+);
+
 export default function Hero() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, []);
   return (
-    <div className="relative items-center justify-center">
-      <section className="mx-auto flex max-w-(--breakpoint-xl) flex-col items-center gap-12 px-4 py-28 md:px-8 lg:flex-row lg:items-stretch lg:justify-between">
-        {/* Left Side - Image Slider */}
-        <motion.div
-          initial={{ x: -50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.6, type: "spring", bounce: 0 }}
-          className="relative w-full lg:w-1/2"
-        >
-          <div className="relative aspect-square lg:aspect-auto lg:h-full">
-            <AnimatePresence mode="wait">
-              {heroImages.map((image, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute inset-0"
-                  style={{ display: currentImageIndex === index ? "block" : "none" }}
-                >
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="rounded-3xl object-cover shadow-2xl"
-                    priority={index === 0}
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
-                </motion.div>
-              ))}
-            </AnimatePresence>
+    <div className="relative w-full overflow-hidden bg-zinc-950 font-sans text-white">
+      {/* Background Image with Gradient Mask */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center opacity-40"
+        style={{
+          backgroundImage: "url(/gund_bg.webp)",
+          maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
+        }}
+      />
 
-            {/* Image navigation dots */}
-            <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
-              {heroImages.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`h-2 w-2 rounded-full transition-all duration-200 ${
-                    index === currentImageIndex ? "bg-primary w-6" : "bg-white/50 hover:bg-white/80"
-                  }`}
-                />
-              ))}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-24 pb-20 sm:px-6 md:pt-32 md:pb-28 lg:px-8">
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:items-center lg:gap-8">
+          {/* Left Column */}
+          <div className="flex flex-col justify-center space-y-8 pt-8 lg:col-span-7">
+            {/* Badge */}
+            <div className="animate-fade-in delay-100">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 backdrop-blur-md transition-colors hover:bg-white/10">
+                <span className="flex items-center gap-2 text-[10px] font-semibold tracking-wider text-zinc-300 uppercase sm:text-xs">
+                  Award-Winning Design
+                  <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
+                </span>
+              </div>
+            </div>
+
+            {/* Heading */}
+            <h1
+              className="animate-fade-in text-5xl leading-[0.9] font-medium tracking-tighter delay-200 sm:text-6xl lg:text-7xl xl:text-8xl"
+              style={{
+                maskImage: "linear-gradient(180deg, black 0%, black 80%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(180deg, black 0%, black 80%, transparent 100%)",
+              }}
+            >
+              Streamline Your
+              <br />
+              <span className="bg-linear-to-br from-white via-white to-[#ffcd75] bg-clip-text text-transparent">
+                Custom Build
+              </span>
+              <br />
+              Workflow
+            </h1>
+
+            {/* Description */}
+            <p className="animate-fade-in max-w-xl text-lg leading-relaxed text-zinc-400 delay-300">
+              Manage orders, track progress, and keep clients informed with tools built specifically
+              for custom model kit builders and studios.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="animate-fade-in flex flex-col gap-4 delay-400 sm:flex-row">
+              <button className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-zinc-950 transition-all hover:scale-[1.02] hover:bg-zinc-200 active:scale-[0.98]">
+                Start Free Trial
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </button>
+
+              <button className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:border-white/20 hover:bg-white/10">
+                <Play className="h-4 w-4 fill-current" />
+                Watch Demo
+              </button>
             </div>
           </div>
-        </motion.div>
 
-        {/* Right Side - Content */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6, type: "spring", bounce: 0 }}
-          className="flex w-full flex-col items-center justify-center space-y-5 text-center lg:w-1/2 lg:items-start lg:text-left"
-        >
-          <span className="bg-card border-border h-full w-fit rounded-full border px-2 py-1 text-sm">
-            For Model Kit Studios
-          </span>
-          <h1 className="to-foreground dark:to-foreground mx-auto bg-linear-to-b from-sky-800 bg-clip-text text-4xl font-medium tracking-tighter text-pretty text-transparent md:text-6xl lg:mx-0 dark:from-sky-100">
-            Streamline Your Custom Build Workflows
-          </h1>
-          <p className="text-muted-foreground mx-auto max-w-2xl text-lg text-balance lg:mx-0">
-            Manage orders, track progress, and keep clients informed with tools built for custom
-            model kit builders.
-          </p>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="items-center justify-center space-y-3 gap-x-3 sm:flex sm:space-y-0 lg:justify-start"
-          >
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button className="shadow-lg">
-                  Start Free Trial
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Welcome to Flow</DialogTitle>
-                  <DialogDescription>
-                    Start your free trial and discover how Flow can transform your model kit studio
-                    operations. Perfect for solo builders and growing studios.
-                  </DialogDescription>
-                </DialogHeader>
-                <DialogFooter>
-                  <Button asChild size="sm">
-                    <Link href="/register">Create Free Account</Link>
-                  </Button>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </motion.div>
-        </motion.div>
-      </section>
+          {/* Right Column */}
+          <div className="space-y-6 lg:col-span-5">
+            {/* Stats Card */}
+            <div className="animate-fade-in relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl delay-500">
+              <div className="pointer-events-none absolute top-0 right-0 -mt-16 -mr-16 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
 
-      {/* Background gradient blur */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 2, delay: 0.5, type: "spring", bounce: 0 }}
-        className="pointer-events-none absolute -top-32 right-0 left-0 flex h-full w-full items-center justify-end"
-      >
-        <div className="bg-light h-150 w-12 rounded-3xl blur-[70px] will-change-transform max-sm:rotate-15 sm:rotate-35"></div>
-      </motion.div>
+              <div className="relative z-10">
+                <div className="mb-8 flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20">
+                    <Target className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold tracking-tight text-white">150+</div>
+                    <div className="text-sm text-zinc-400">Projects Delivered</div>
+                  </div>
+                </div>
+
+                {/* Progress Bar Section */}
+                <div className="mb-8 space-y-3">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-zinc-400">Client Satisfaction</span>
+                    <span className="font-medium text-white">98%</span>
+                  </div>
+                  <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-800/50">
+                    <div className="h-full w-[98%] rounded-full bg-linear-to-r from-white to-zinc-400" />
+                  </div>
+                </div>
+
+                <div className="mb-6 h-px w-full bg-white/10" />
+
+                {/* Mini Stats Grid */}
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  <StatItem value="5+" label="Years" />
+                  <div className="mx-auto h-full w-px bg-white/10" />
+                  <StatItem value="24/7" label="Support" />
+                  <div className="mx-auto h-full w-px bg-white/10" />
+                  <StatItem value="100%" label="Quality" />
+                </div>
+
+                {/* Tag Pills */}
+                <div className="mt-8 flex flex-wrap gap-2">
+                  <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium tracking-wide text-zinc-300">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+                    </span>
+                    ACTIVE
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium tracking-wide text-zinc-300">
+                    <Crown className="h-3 w-3 text-yellow-500" />
+                    PREMIUM
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Marquee Card */}
+            <div className="animate-fade-in relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 py-8 backdrop-blur-xl delay-500">
+              <h3 className="mb-6 px-8 text-sm font-medium text-zinc-400">
+                Trusted by Industry Leaders
+              </h3>
+
+              <div
+                className="relative flex overflow-hidden"
+                style={{
+                  maskImage:
+                    "linear-gradient(to right, transparent, black 20%, black 80%, transparent)",
+                  WebkitMaskImage:
+                    "linear-gradient(to right, transparent, black 20%, black 80%, transparent)",
+                }}
+              >
+                <div className="animate-marquee flex gap-12 px-4 whitespace-nowrap">
+                  {[...CLIENTS, ...CLIENTS, ...CLIENTS].map((client, i) => (
+                    <div
+                      key={i}
+                      className="flex cursor-default items-center gap-2 grayscale transition-all hover:scale-105 hover:grayscale-0"
+                    >
+                      <client.icon className="h-6 w-6 fill-current text-white" />
+                      <span className="text-lg font-bold tracking-tight text-white">
+                        {client.name}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Scoped Animations */}
+      <style jsx>{`
+        @keyframes fadeSlideIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes marquee {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-fade-in {
+          animation: fadeSlideIn 0.8s ease-out forwards;
+          opacity: 0;
+        }
+        .animate-marquee {
+          animation: marquee 40s linear infinite;
+        }
+        .delay-100 {
+          animation-delay: 0.1s;
+        }
+        .delay-200 {
+          animation-delay: 0.2s;
+        }
+        .delay-300 {
+          animation-delay: 0.3s;
+        }
+        .delay-400 {
+          animation-delay: 0.4s;
+        }
+        .delay-500 {
+          animation-delay: 0.5s;
+        }
+      `}</style>
     </div>
   );
 }

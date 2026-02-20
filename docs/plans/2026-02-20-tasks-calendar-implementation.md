@@ -15,11 +15,13 @@
 ### Task 1.1: Update sidebar to point to new routes
 
 **Files:**
+
 - Modify: `components/admin/admin-sidebar.tsx:20-26`
 
 **Step 1: Edit the menuItems array**
 
 Replace:
+
 ```tsx
 const menuItems = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutGrid },
@@ -31,6 +33,7 @@ const menuItems = [
 ```
 
 With:
+
 ```tsx
 const menuItems = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutGrid },
@@ -60,6 +63,7 @@ git commit -m "refactor: update sidebar Tasks and Calendar routes to point to ne
 ### Task 2.1: Create StatusChangeModal component
 
 **Files:**
+
 - Create: `components/admin/tasks/status-change-modal.tsx`
 
 **Step 1: Create the component file**
@@ -117,16 +121,21 @@ export function StatusChangeModal({
         </DialogHeader>
         <div className="flex items-center gap-4 rounded-lg border p-4">
           <div className="flex-1">
-            <p className="text-sm text-muted-foreground">From</p>
+            <p className="text-muted-foreground text-sm">From</p>
             <p className="font-semibold">{statusLabels[fromStatus]}</p>
           </div>
           <div className="text-muted-foreground">
             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
             </svg>
           </div>
           <div className="flex-1 text-right">
-            <p className="text-sm text-muted-foreground">To</p>
+            <p className="text-muted-foreground text-sm">To</p>
             <p className="font-semibold">{statusLabels[toStatus]}</p>
           </div>
         </div>
@@ -134,9 +143,7 @@ export function StatusChangeModal({
           <Button variant="outline" onClick={onClose}>
             Cancel
           </Button>
-          <Button onClick={onConfirm}>
-            Confirm Change
-          </Button>
+          <Button onClick={onConfirm}>Confirm Change</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -156,6 +163,7 @@ git commit -m "feat: add StatusChangeModal component for task status changes"
 ### Task 2.2: Create TaskListView component
 
 **Files:**
+
 - Create: `components/admin/tasks/task-list-view.tsx`
 
 **Step 1: Create the component file**
@@ -184,12 +192,7 @@ export interface TaskListViewProps {
   sortDirection?: "asc" | "desc";
 }
 
-export function TaskListView({
-  tasks,
-  onSort,
-  sortField,
-  sortDirection,
-}: TaskListViewProps) {
+export function TaskListView({ tasks, onSort, sortField, sortDirection }: TaskListViewProps) {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "completed":
@@ -230,9 +233,7 @@ export function TaskListView({
                 className="h-auto p-0 font-medium"
               >
                 Task
-                {sortField === "title" && (
-                  <ArrowUpDown className="ml-1 h-3 w-3" />
-                )}
+                {sortField === "title" && <ArrowUpDown className="ml-1 h-3 w-3" />}
               </Button>
             </TableHead>
             <TableHead>
@@ -243,9 +244,7 @@ export function TaskListView({
                 className="h-auto p-0 font-medium"
               >
                 Status
-                {sortField === "status" && (
-                  <ArrowUpDown className="ml-1 h-3 w-3" />
-                )}
+                {sortField === "status" && <ArrowUpDown className="ml-1 h-3 w-3" />}
               </Button>
             </TableHead>
             <TableHead>
@@ -256,9 +255,7 @@ export function TaskListView({
                 className="h-auto p-0 font-medium"
               >
                 Priority
-                {sortField === "priority" && (
-                  <ArrowUpDown className="ml-1 h-3 w-3" />
-                )}
+                {sortField === "priority" && <ArrowUpDown className="ml-1 h-3 w-3" />}
               </Button>
             </TableHead>
             <TableHead>Due Date</TableHead>
@@ -269,7 +266,7 @@ export function TaskListView({
         <TableBody>
           {tasks.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={6} className="text-center text-muted-foreground">
+              <TableCell colSpan={6} className="text-muted-foreground text-center">
                 No tasks found
               </TableCell>
             </TableRow>
@@ -280,7 +277,7 @@ export function TaskListView({
                   <div>
                     <div className="font-medium">{task.title}</div>
                     {task.description && (
-                      <div className="line-clamp-1 text-sm text-muted-foreground">
+                      <div className="text-muted-foreground line-clamp-1 text-sm">
                         {task.description}
                       </div>
                     )}
@@ -298,9 +295,7 @@ export function TaskListView({
                 </TableCell>
                 <TableCell>
                   {task.dueDate ? (
-                    <span className="text-sm">
-                      {task.dueDate.toLocaleDateString()}
-                    </span>
+                    <span className="text-sm">{task.dueDate.toLocaleDateString()}</span>
                   ) : (
                     <span className="text-muted-foreground">—</span>
                   )}
@@ -313,9 +308,7 @@ export function TaskListView({
                         style={{ width: `${task.progress}%` }}
                       />
                     </div>
-                    <span className="text-sm text-muted-foreground">
-                      {task.progress}%
-                    </span>
+                    <span className="text-muted-foreground text-sm">{task.progress}%</span>
                   </div>
                 </TableCell>
                 <TableCell>
@@ -347,6 +340,7 @@ git commit -m "feat: add TaskListView component for list-based task display"
 ### Task 2.3: Create TasksPage component
 
 **Files:**
+
 - Create: `components/admin/tasks/tasks-page.tsx`
 - Create: `app/(admin)/admin/tasks/page.tsx`
 
@@ -414,10 +408,10 @@ export function TasksPage({ initialColumns }: { initialColumns: KanbanColumn[] }
 
     // Map column ID back to status
     const columnToStatus: Record<string, OrderStatus> = {
-      "todo": "draft",
+      todo: "draft",
       "in-progress": "in_progress",
       "under-review": "cancelled",
-      "completed": "completed",
+      completed: "completed",
     };
 
     setStatusModal({
@@ -485,8 +479,8 @@ export function TasksPage({ initialColumns }: { initialColumns: KanbanColumn[] }
       {/* Filters */}
       <div className="flex items-center gap-3">
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-[180px]">
-            <Filter className="mr-2 h-4 w-4 text-muted-foreground" />
+          <SelectTrigger className="w-45">
+            <Filter className="text-muted-foreground mr-2 h-4 w-4" />
             <SelectValue placeholder="Filter by status" />
           </SelectTrigger>
           <SelectContent>
@@ -501,7 +495,7 @@ export function TasksPage({ initialColumns }: { initialColumns: KanbanColumn[] }
         </Select>
 
         <Select value={priorityFilter} onValueChange={setPriorityFilter}>
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-45">
             <SelectValue placeholder="Filter by priority" />
           </SelectTrigger>
           <SelectContent>
@@ -565,6 +559,7 @@ git commit -m "feat: add Tasks page with kanban/list toggle and filters"
 ### Task 3.1: Create Calendar types and utilities
 
 **Files:**
+
 - Create: `components/admin/calendar/types.ts`
 
 **Step 1: Create the types file**
@@ -606,6 +601,7 @@ git commit -m "feat: add calendar types and interfaces"
 ### Task 3.2: Create CalendarEvent component
 
 **Files:**
+
 - Create: `components/admin/calendar/calendar-event.tsx`
 
 **Step 1: Create the component file**
@@ -622,11 +618,16 @@ export interface CalendarEventProps {
 }
 
 const colorClasses: Record<CalendarEvent["color"], string> = {
-  "overdue": "bg-red-100 text-red-700 border-red-300 dark:bg-red-900/30 dark:text-red-300 dark:border-red-700",
-  "due-today": "bg-orange-100 text-orange-700 border-orange-300 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-700",
-  "upcoming": "bg-blue-100 text-blue-700 border-blue-300 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700",
-  "completed": "bg-green-100 text-green-700 border-green-300 dark:bg-green-900/30 dark:text-green-300 dark:border-green-700",
-  "created": "bg-gray-100 text-gray-700 border-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600",
+  overdue:
+    "bg-red-100 text-red-700 border-red-300 dark:bg-red-900/30 dark:text-red-300 dark:border-red-700",
+  "due-today":
+    "bg-orange-100 text-orange-700 border-orange-300 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-700",
+  upcoming:
+    "bg-blue-100 text-blue-700 border-blue-300 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-700",
+  completed:
+    "bg-green-100 text-green-700 border-green-300 dark:bg-green-900/30 dark:text-green-300 dark:border-green-700",
+  created:
+    "bg-gray-100 text-gray-700 border-gray-300 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600",
 };
 
 const statusLabels: Record<string, string> = {
@@ -666,6 +667,7 @@ git commit -m "feat: add CalendarEvent component with color coding"
 ### Task 3.3: Create EventDetailModal component
 
 **Files:**
+
 - Create: `components/admin/calendar/event-detail-modal.tsx`
 
 **Step 1: Create the component file**
@@ -694,11 +696,11 @@ export interface EventDetailModalProps {
 }
 
 const colorLabels: Record<EventColor, string> = {
-  "overdue": "Overdue",
+  overdue: "Overdue",
   "due-today": "Due Today",
-  "upcoming": "Upcoming",
-  "completed": "Completed",
-  "created": "New Order",
+  upcoming: "Upcoming",
+  completed: "Completed",
+  created: "New Order",
 };
 
 export function EventDetailModal({ isOpen, onClose, event }: EventDetailModalProps) {
@@ -716,10 +718,10 @@ export function EventDetailModal({ isOpen, onClose, event }: EventDetailModalPro
 
         <div className="space-y-4">
           <div className="flex items-center gap-3 rounded-lg border p-3">
-            <Calendar className="h-5 w-5 text-muted-foreground" />
+            <Calendar className="text-muted-foreground h-5 w-5" />
             <div>
               <p className="text-sm font-medium">Date</p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 {event.date.toLocaleDateString(undefined, {
                   weekday: "long",
                   year: "numeric",
@@ -740,9 +742,7 @@ export function EventDetailModal({ isOpen, onClose, event }: EventDetailModalPro
             Close
           </Button>
           <Button asChild>
-            <Link href={`/admin/orders/${event.orderId}`}>
-              View Order
-            </Link>
+            <Link href={`/admin/orders/${event.orderId}`}>View Order</Link>
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -763,6 +763,7 @@ git commit -m "feat: add EventDetailModal component"
 ### Task 3.4: Create CalendarGrid component (Month view)
 
 **Files:**
+
 - Create: `components/admin/calendar/calendar-grid.tsx`
 
 **Step 1: Create the component file**
@@ -799,35 +800,33 @@ export function CalendarGrid({ days, view, onEventClick, onDateClick }: Calendar
   return (
     <div className="space-y-4">
       {/* Week day headers */}
-      <div className="grid grid-cols-7 gap-px border-b bg-muted">
+      <div className="bg-muted grid grid-cols-7 gap-px border-b">
         {weekDays.map((day) => (
-          <div
-            key={day}
-            className="py-2 text-center text-sm font-semibold text-muted-foreground"
-          >
+          <div key={day} className="text-muted-foreground py-2 text-center text-sm font-semibold">
             {day}
           </div>
         ))}
       </div>
 
       {/* Calendar grid */}
-      <div className="grid grid-cols-7 gap-px border bg-muted">
+      <div className="bg-muted grid grid-cols-7 gap-px border">
         {weeks.map((week, weekIndex) =>
           week.map((day, dayIndex) => (
             <button
               key={`${weekIndex}-${dayIndex}`}
               onClick={() => onDateClick?.(day.date)}
               className={cn(
-                "min-h-[120px] bg-background p-2 text-left transition-colors hover:bg-muted/50",
+                "min-h-30 bg-background hover:bg-muted/50 p-2 text-left transition-colors",
                 !day.isCurrentMonth && "bg-muted/50",
-                day.isToday && "bg-muted/100"
+                day.isToday && "bg-muted"
               )}
             >
               <div
                 className={cn(
                   "mb-2 text-sm font-medium",
                   !day.isCurrentMonth && "text-muted-foreground",
-                  day.isToday && "flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground"
+                  day.isToday &&
+                    "bg-primary text-primary-foreground flex h-7 w-7 items-center justify-center rounded-full"
                 )}
               >
                 {day.date.getDate()}
@@ -845,9 +844,7 @@ export function CalendarGrid({ days, view, onEventClick, onDateClick }: Calendar
                   />
                 ))}
                 {day.events.length > 3 && (
-                  <div className="text-xs text-muted-foreground">
-                    +{day.events.length - 3} more
-                  </div>
+                  <div className="text-muted-foreground text-xs">+{day.events.length - 3} more</div>
                 )}
               </div>
             </button>
@@ -871,6 +868,7 @@ git commit -m "feat: add CalendarGrid component for month view"
 ### Task 3.5: Create CalendarPage component
 
 **Files:**
+
 - Create: `components/admin/calendar/calendar-page.tsx`
 - Create: `app/(admin)/admin/calendar/page.tsx`
 
@@ -887,26 +885,20 @@ import type { CalendarView, CalendarDay, CalendarEvent as CalendarEventType } fr
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
 
-export function CalendarPage({
-  days,
-  currentDate,
-}: {
-  days: CalendarDay[];
-  currentDate: Date;
-}) {
+export function CalendarPage({ days, currentDate }: { days: CalendarDay[]; currentDate: Date }) {
   const [view, setView] = useState<CalendarView>("month");
   const [selectedEvent, setSelectedEvent] = useState<CalendarEventType | null>(null);
 
   const handlePreviousMonth = () => {
     const newDate = new Date(currentDate);
     newDate.setMonth(newDate.getMonth() - 1);
-    window.location.href = `/admin/calendar?date=${newDate.toISOString().split('T')[0]}`;
+    window.location.href = `/admin/calendar?date=${newDate.toISOString().split("T")[0]}`;
   };
 
   const handleNextMonth = () => {
     const newDate = new Date(currentDate);
     newDate.setMonth(newDate.getMonth() + 1);
-    window.location.href = `/admin/calendar?date=${newDate.toISOString().split('T')[0]}`;
+    window.location.href = `/admin/calendar?date=${newDate.toISOString().split("T")[0]}`;
   };
 
   const handleToday = () => {
@@ -966,11 +958,7 @@ export function CalendarPage({
       </div>
 
       {/* Calendar Grid */}
-      <CalendarGrid
-        days={days}
-        view={view}
-        onEventClick={(event) => setSelectedEvent(event)}
-      />
+      <CalendarGrid days={days} view={view} onEventClick={(event) => setSelectedEvent(event)} />
 
       {/* Event Detail Modal */}
       <EventDetailModal
@@ -1001,7 +989,10 @@ type OrderWithDates = OrderRow & {
 /**
  * Get calendar data for a specific month
  */
-export async function getCalendarData(year: number, month: number): Promise<{
+export async function getCalendarData(
+  year: number,
+  month: number
+): Promise<{
   days: CalendarDay[];
   currentDate: Date;
 }> {
@@ -1033,9 +1024,7 @@ export async function getCalendarData(year: number, month: number): Promise<{
   (orders as OrderWithDates[]).forEach((order) => {
     const kitName = order.order_items?.[0]?.kit_name || "Untitled";
     const createdAt = new Date(order.created_at);
-    const dueDate = order.estimated_days
-      ? new Date(order.created_at)
-      : null;
+    const dueDate = order.estimated_days ? new Date(order.created_at) : null;
     if (dueDate) dueDate.setDate(dueDate.getDate() + order.estimated_days);
 
     // Add due date event
@@ -1079,9 +1068,7 @@ export async function getCalendarData(year: number, month: number): Promise<{
         dayDate.getDate() === today.getDate() &&
         dayDate.getMonth() === today.getMonth() &&
         dayDate.getFullYear() === today.getFullYear(),
-      events: isCurrentMonth
-        ? events.filter((e) => isSameDay(e.date, dayDate))
-        : [],
+      events: isCurrentMonth ? events.filter((e) => isSameDay(e.date, dayDate)) : [],
     });
   }
 
@@ -1160,6 +1147,7 @@ git commit -m "feat: add Calendar page with month view and event detail modal"
 ### Task 4.1: Create order status update API endpoint
 
 **Files:**
+
 - Create: `app/api/orders/[orderId]/status/route.ts`
 
 **Step 1: Create the API route**
@@ -1180,30 +1168,18 @@ export async function PATCH(
     const { status } = (await request.json()) as { status: OrderStatus };
 
     if (!status) {
-      return NextResponse.json(
-        { error: "Status is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Status is required" }, { status: 400 });
     }
 
-    const { error } = await supabase
-      .from("orders")
-      .update({ status })
-      .eq("id", orderId);
+    const { error } = await supabase.from("orders").update({ status }).eq("id", orderId);
 
     if (error) {
-      return NextResponse.json(
-        { error: error.message },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
 ```
@@ -1222,6 +1198,7 @@ git commit -m "feat: add API endpoint for updating order status"
 ### Task 5.1: Verify Tasks page functionality
 
 **Files:**
+
 - Test: Manual verification
 
 **Step 1: Test navigation**
@@ -1261,6 +1238,7 @@ git commit --allow-empty -m "test: verify Tasks page functionality"
 ### Task 5.2: Verify Calendar page functionality
 
 **Files:**
+
 - Test: Manual verification
 
 **Step 1: Test navigation**
@@ -1302,6 +1280,7 @@ git commit --allow-empty -m "test: verify Calendar page functionality"
 ### Task 5.3: Test drag-and-drop with confirmation
 
 **Files:**
+
 - Test: Manual verification
 
 **Step 1: Test drag functionality**

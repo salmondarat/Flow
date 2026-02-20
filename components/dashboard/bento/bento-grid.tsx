@@ -38,6 +38,9 @@ export function getSizeClasses(size: BentoSize): string {
     lg: "col-span-12 md:col-span-6 lg:col-span-12 xl:col-span-9",
     wd: "col-span-12",
     xl: "col-span-12 row-span-2",
+    // Dashboard widget sizes
+    widget: "col-span-12 lg:col-span-4",
+    "widget-lg": "col-span-12 lg:col-span-8",
   };
 
   return sizeMap[size];
@@ -54,6 +57,7 @@ export interface BentoCardProps {
   interactive?: boolean;
   onClick?: () => void;
   loading?: boolean;
+  dashboard?: boolean; // Use dashboard styling (rounded-3xl, subtle borders)
 }
 
 const accentBorders = {
@@ -74,6 +78,7 @@ export function BentoCard({
   interactive = false,
   onClick,
   loading = false,
+  dashboard = false,
 }: BentoCardProps) {
   const sizeClasses = getSizeClasses(size);
 
@@ -98,11 +103,12 @@ export function BentoCard({
       className={cn(
         "group/bento",
         sizeClasses,
-        "rounded-xl",
-        "bg-white dark:bg-neutral-900",
-        "border border-neutral-200 dark:border-neutral-800",
+        dashboard ? "rounded-dashboard-3xl" : "rounded-xl",
+        dashboard ? "dashboard-card" : "bg-white dark:bg-neutral-900",
+        dashboard ? "border-dashboard-subtle" : "border border-neutral-200 dark:border-neutral-800",
         "p-5 md:p-6",
         "transition-all duration-200",
+        dashboard && "dashboard-hover",
         interactive && [
           "cursor-pointer",
           accentBorders[accent],

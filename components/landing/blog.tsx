@@ -14,7 +14,7 @@ export default function Blog() {
       readTime: "5 Min Read",
       category: "Gundam",
       date: "Jan 25, 2026",
-      image: "https://images.unsplash.com/photo-1614726365723-49faaa5f6c44?w=600&q=80",
+      image: "/images/11. .jpg",
     },
     {
       id: 2,
@@ -25,7 +25,7 @@ export default function Blog() {
       readTime: "8 Min Read",
       category: "Diorama",
       date: "Jan 15, 2026",
-      image: "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600&q=80",
+      image: "/images/12. .png",
     },
     {
       id: 3,
@@ -36,12 +36,12 @@ export default function Blog() {
       readTime: "4 Min Read",
       category: "Tips",
       date: "Jan 10, 2026",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80",
+      image: "/images/13. .jpg",
     },
   ];
 
   return (
-    <section className="mx-auto w-full max-w-(--breakpoint-xl) px-4 py-24 md:px-8">
+    <section className="mx-auto w-full max-w-(--breakpoint-xl) px-4 py-16 sm:py-20 md:px-8 md:py-24">
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
@@ -52,12 +52,13 @@ export default function Blog() {
         <h2 className="from-foreground to-muted-foreground bg-linear-to-b bg-clip-text text-xl font-semibold text-transparent sm:text-2xl">
           From the Blog
         </h2>
-        <p className="text-muted-foreground mt-2 max-w-xl mx-auto text-center">
-          Latest news and updates. Stay ahead with strategies that blend design, tech, and marketing to drive measurable business results.
+        <p className="text-muted-foreground mx-auto mt-2 max-w-xl text-center">
+          Latest news and updates. Stay ahead with strategies that blend design, tech, and marketing
+          to drive measurable business results.
         </p>
       </motion.div>
 
-      <div className="mx-auto grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
         {posts.map((post, index) => (
           <motion.article
             key={post.id}
@@ -65,10 +66,10 @@ export default function Blog() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ y: -8 }}
+            whileHover={{ y: -4 }}
             className="group cursor-pointer"
           >
-            <div className="h-full overflow-hidden rounded-2xl border border-border bg-card/50 transition-all duration-300 hover:shadow-xl">
+            <div className="border-border bg-card/50 h-full overflow-hidden rounded-xl border transition-all duration-300 hover:shadow-xl sm:rounded-2xl">
               {/* Image */}
               <div className="relative aspect-video overflow-hidden">
                 <Image
@@ -83,7 +84,7 @@ export default function Blog() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
-                  className="absolute inset-0 bg-primary/90 transition-opacity"
+                  className="bg-primary/90 absolute inset-0 transition-opacity"
                 >
                   <div className="flex h-full w-full items-center justify-center">
                     <span className="text-primary-foreground text-lg font-semibold">
@@ -94,14 +95,14 @@ export default function Blog() {
               </div>
 
               {/* Content */}
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <div className="mb-3 flex items-center gap-2">
                   <span className="bg-primary/20 text-primary rounded-full px-3 py-1 text-xs font-medium">
                     {post.category}
                   </span>
                 </div>
 
-                <h3 className="mb-2 text-lg font-semibold leading-tight">
+                <h3 className="mb-2 text-base leading-tight font-semibold sm:text-lg">
                   {post.title}
                 </h3>
 
@@ -109,11 +110,14 @@ export default function Blog() {
                   {post.excerpt}
                 </p>
 
-                <div className="flex items-center justify-between border-t border-border/50 pt-4">
+                <div className="border-border/50 flex items-center justify-between border-t pt-4">
                   <div className="flex items-center gap-2">
-                    <div className="bg-muted h-8 w-8 rounded-full flex items-center justify-center">
+                    <div className="bg-muted flex h-8 w-8 items-center justify-center rounded-full">
                       <span className="text-muted-foreground text-xs font-bold">
-                        {post.author.split(" ").map((n) => n[0]).join("")}
+                        {post.author
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
                       </span>
                     </div>
                     <div>

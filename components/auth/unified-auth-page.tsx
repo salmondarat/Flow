@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Header } from "@/components/layout/header";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -139,21 +140,28 @@ export function UnifiedAuthPage() {
   // Only show the component once mounted to avoid hydration issues
   if (!mounted) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <Loader2 className="text-primary h-8 w-8 animate-spin" />
-      </div>
+      <>
+        <Header />
+        <div className="flex h-[calc(100vh-4rem)] items-center justify-center">
+          <Loader2 className="text-primary h-8 w-8 animate-spin" />
+        </div>
+      </>
     );
   }
 
   return (
-    <div className="bg-base-100 min-h-screen w-full">
-      <div className="flex min-h-screen items-center justify-center p-4 md:p-0">
+    <div className="bg-background h-screen w-full">
+      {/* Header */}
+      <Header />
+
+      {/* Main Content */}
+      <div className="flex h-[calc(100vh-4rem)] items-center justify-center p-4 md:p-8">
         <div
           className={`bg-card w-full max-w-6xl overflow-hidden rounded-2xl shadow-xl transition-all duration-500 ${
             formVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
           }`}
         >
-          <div className="flex flex-col md:flex-row">
+          <div className="flex h-full flex-col md:flex-row">
             {/* Left side - Statistics and Images Collage */}
             <div className="bg-neutral hidden w-full md:block md:w-3/5">
               <div className="grid h-full grid-cols-2 grid-rows-3 gap-4 overflow-hidden p-6">
@@ -169,7 +177,7 @@ export function UnifiedAuthPage() {
                 >
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   <img
-                    src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop&q=80"
+                    src="/images/20. .jpg"
                     alt="Person working"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -212,7 +220,7 @@ export function UnifiedAuthPage() {
                 >
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   <img
-                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop&q=80"
+                    src="/images/21. .jpg"
                     alt="Person at computer"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -234,7 +242,7 @@ export function UnifiedAuthPage() {
                 >
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   <img
-                    src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=600&h=400&fit=crop&q=80"
+                    src="/images/22. .jpg"
                     alt="Office space"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -277,7 +285,7 @@ export function UnifiedAuthPage() {
                 >
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   <img
-                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop&q=80"
+                    src="/images/23. .jpg"
                     alt="Desk setup"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -290,37 +298,46 @@ export function UnifiedAuthPage() {
             </div>
 
             {/* Right side - Sign in form */}
-            <div
-              className="bg-card text-foreground w-full p-6 md:w-2/5 md:p-10"
-              style={{
-                transform: formVisible ? "translateX(0)" : "translateX(20px)",
-                opacity: formVisible ? 1 : 0,
-                transition: "transform 0.6s ease-out, opacity 0.6s ease-out",
-              }}
-            >
-              {/* Logo */}
-              <div className="mb-8 flex justify-center">
-                <Link href="/" className="inline-flex items-center gap-3">
-                  <div className="bg-primary flex h-10 w-10 items-center justify-center text-lg font-bold text-white">
-                    F
-                  </div>
-                  <span className="text-foreground text-2xl font-bold tracking-tight uppercase">
-                    Flow<span className="text-primary">.sys</span>
-                  </span>
-                </Link>
-              </div>
-
-              <div className="mb-6 text-center">
-                <h1 className="text-foreground mb-1 text-2xl font-bold">Welcome Back</h1>
-                <p className="text-muted-foreground text-sm">Sign in to your account to continue</p>
-              </div>
-
-              {/* Role Selection Tabs with Different Colors */}
-              <Tabs
-                value={activeTab}
-                onValueChange={(value) => setActiveTab(value as "client" | "admin")}
-                className="mb-6"
+            <div className="bg-card text-foreground flex w-full flex-col md:w-2/5">
+              <div
+                className="flex flex-1 flex-col overflow-y-auto p-6 md:p-8 lg:p-10"
+                style={{
+                  transform: formVisible ? "translateX(0)" : "translateX(20px)",
+                  opacity: formVisible ? 1 : 0,
+                  transition: "transform 0.6s ease-out, opacity 0.6s ease-out",
+                  maxHeight: "calc(100vh - 8rem)",
+                }}
               >
+                {/* Custom scrollbar styling */}
+                <style jsx>{`
+                  div::-webkit-scrollbar {
+                    width: 6px;
+                  }
+                  div::-webkit-scrollbar-track {
+                    background: transparent;
+                  }
+                  div::-webkit-scrollbar-thumb {
+                    background: hsl(var(--muted-foreground) / 0.3);
+                    border-radius: 3px;
+                  }
+                  div::-webkit-scrollbar-thumb:hover {
+                    background: hsl(var(--muted-foreground) / 0.5);
+                  }
+                `}</style>
+
+                {/* Sticky Header - Title and Tabs */}
+                <div className="sticky top-0 z-10 bg-card pb-4">
+                  <div className="mb-6 text-center">
+                    <h1 className="text-foreground mb-1 text-2xl font-bold">Welcome Back</h1>
+                    <p className="text-muted-foreground text-sm">Sign in to your account to continue</p>
+                  </div>
+
+                  {/* Role Selection Tabs with Different Colors */}
+                  <Tabs
+                    value={activeTab}
+                    onValueChange={(value) => setActiveTab(value as "client" | "admin")}
+                    className="mb-6"
+                  >
                 <TabsList className="bg-muted/50 grid w-full grid-cols-2 p-1">
                   <TabsTrigger
                     value="client"
@@ -356,7 +373,9 @@ export function UnifiedAuthPage() {
                   </div>
                 </TabsContent>
               </Tabs>
+                </div>
 
+                {/* Login Form */}
               {!authFunctions ? (
                 <div className="py-8 text-center">
                   <Loader2 className="text-primary mx-auto h-8 w-8 animate-spin" />
@@ -478,6 +497,7 @@ export function UnifiedAuthPage() {
                   ← Back to home
                 </Link>
               </p>
+              </div>
             </div>
           </div>
         </div>

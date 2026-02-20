@@ -1,176 +1,333 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { CheckIcon } from "@radix-ui/react-icons";
-import { Plus, Minus } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Shield, Users, Rocket, Sparkles, Zap, CheckIcon, MinusIcon } from "lucide-react";
+import {
+  type FeatureItem,
+  PricingTable,
+  PricingTableBody,
+  PricingTableHeader,
+  PricingTableHead,
+  PricingTableRow,
+  PricingTableCell,
+  PricingTablePlan,
+} from "@/components/ui/pricing-table";
+
+const features: FeatureItem[] = [
+  {
+    label: "Active Orders",
+    values: ["Up to 50", "Unlimited", "Unlimited"],
+  },
+  {
+    label: "Build, Repair & Repaint",
+    values: [true, true, true],
+  },
+  {
+    label: "Complexity-based Pricing",
+    values: [true, true, true],
+  },
+  {
+    label: "Client Portal Access",
+    values: [true, true, true],
+  },
+  {
+    label: "Reference Image Uploads",
+    values: ["50 MB", "500 MB", "Unlimited"],
+  },
+  {
+    label: "Progress Tracking",
+    values: [true, true, true],
+  },
+  {
+    label: "Email Support",
+    values: ["Standard", "Priority", "24/7 Priority"],
+  },
+  {
+    label: "Custom Form Templates",
+    values: [false, true, true],
+  },
+  {
+    label: "Analytics Dashboard",
+    values: [false, true, true],
+  },
+  {
+    label: "Multi-builder Support",
+    values: [false, "Up to 3", "Unlimited"],
+  },
+  {
+    label: "Workload Management",
+    values: [false, true, true],
+  },
+  {
+    label: "Change Request System",
+    values: [false, true, true],
+  },
+  {
+    label: "API Access",
+    values: [false, false, true],
+  },
+  {
+    label: "White-label Portal",
+    values: [false, false, true],
+  },
+  {
+    label: "Custom Branding",
+    values: [false, false, true],
+  },
+  {
+    label: "SSO & Team Management",
+    values: [false, false, true],
+  },
+  {
+    label: "Dedicated Account Manager",
+    values: [false, false, true],
+  },
+  {
+    label: "SLA Guarantee",
+    values: [false, false, true],
+  },
+];
 
 export default function Pricing() {
-  const plans = [
-    {
-      name: "Landing Page",
-      label: "Ideal for designing or redesigning a website to increase conversion rates",
-      priceStart: 29,
-      priceEnd: 49,
-      isMostPop: false,
-      features: [
-        { text: "Up to 50 active orders", included: true },
-        { text: "Full build, repair & repaint services", included: true },
-        { text: "Complexity-based pricing", included: true },
-        { text: "Client portal access", included: true },
-        { text: "Reference image uploads", included: true },
-        { text: "Progress tracking", included: true },
-        { text: "Email support", included: true },
-        { text: "No-code Development", included: false, price: "+$2k", desc: "We will build your website for an additional fee" },
-      ],
-    },
-    {
-      name: "Partnership",
-      label: "Tailored for businesses with ongoing design & marketing needs to scale your business",
-      priceStart: 79,
-      priceEnd: 99,
-      isMostPop: true,
-      features: [
-        { text: "Unlimited active orders", included: true },
-        { text: "Everything in Landing Page", included: true },
-        { text: "Custom form templates", included: true },
-        { text: "Analytics dashboard", included: true },
-        { text: "Multi-builder support", included: true },
-        { text: "Workload management", included: true },
-        { text: "Priority email support", included: true },
-        { text: "Change request system", included: true },
-        { text: "Accelerate: x2 availability", included: false, price: "+$2k", desc: "Double the team availability for faster turnaround" },
-      ],
-    },
-    {
-      name: "Custom",
-      label: "Limited availability - Tailored digital experiences built for unique business needs",
-      priceStart: 199,
-      priceEnd: 299,
-      isMostPop: false,
-      features: [
-        { text: "Everything in Partnership", included: true },
-        { text: "API access for integrations", included: true },
-        { text: "White-label client portal", included: true },
-        { text: "Custom branding", included: true },
-        { text: "SSO & team management", included: true },
-        { text: "Dedicated account manager", included: true },
-        { text: "24/7 priority support", included: true },
-        { text: "SLA guarantee", included: true },
-        { text: "Advanced SEO & Marketing", included: false, price: "Custom", desc: "Quote based on requirements" },
-      ],
-    },
-  ];
-
   return (
-    <section id="pricing" className="mx-auto w-full max-w-(--breakpoint-xl) px-4 py-24 md:px-8">
+    <section
+      id="pricing"
+      className="relative mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 md:py-24 lg:px-8"
+    >
+      {/* Background decoration */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div
+          className={cn(
+            "absolute inset-0 z-[-10] size-full opacity-30",
+            "[mask-image:radial-gradient(ellipse_at_center,var(--background),transparent)]"
+          )}
+          style={{
+            backgroundImage: "radial-gradient(var(--foreground) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+      </div>
+
+      {/* Header */}
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="mb-16 text-center"
+        className="relative mb-16 text-center"
       >
-        <h2 className="from-foreground to-muted-foreground bg-linear-to-b bg-clip-text text-xl font-semibold text-transparent sm:text-2xl">
-          Pricing Plans
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/50 px-4 py-1.5 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/50">
+          <Sparkles className="h-4 w-4 text-amber-500" />
+          <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
+            Simple Pricing
+          </span>
+        </div>
+        <h2 className="bg-gradient-to-b from-zinc-900 to-zinc-600 bg-clip-text text-3xl font-bold tracking-tight text-transparent sm:text-4xl md:text-5xl dark:from-white dark:to-zinc-400">
+          Flexible Plans for Every Studio
         </h2>
-        <p className="text-muted-foreground mx-auto mt-2 max-w-xl text-center">
-          Flexible Pricing built to Scale Businesses. Choose from tailored packages that fits your business goals and timeline.
+        <p className="mx-auto mt-4 max-w-2xl text-base text-zinc-600 sm:text-lg dark:text-zinc-400">
+          Choose from tailored packages that fit your business goals and timeline. No hidden fees,
+          cancel anytime.
         </p>
       </motion.div>
 
-      <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
-        {plans.map((plan, index) => (
-          <motion.div
-            key={plan.name}
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ y: -8 }}
-            className="relative"
-          >
-            <Card
-              className={`relative flex h-full flex-col transition-all duration-300 ${
-                plan.isMostPop
-                  ? "border-primary border-2 hover:shadow-2xl dark:hover:ring-4 dark:hover:ring-primary/30"
-                  : "hover:shadow-lg dark:hover:ring-2 dark:hover:ring-primary/20"
-              }`}
-            >
-              {plan.isMostPop && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 transform">
-                  <span className="bg-card border-primary rounded-full border-2 px-4 py-1 text-sm font-medium">
-                    Popular
-                  </span>
+      {/* Mobile Pricing Cards */}
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="lg:hidden"
+      >
+        <div className="space-y-6">
+          {/* Starter Plan */}
+          <div className="relative overflow-hidden rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
+            <div className="mb-4 flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border">
+                <Shield className="h-5 w-5" />
+              </div>
+              <div>
+                <h3 className="font-semibold">Starter</h3>
+                <p className="text-xs text-zinc-500">For Solo Builders</p>
+              </div>
+            </div>
+            <div className="mb-6">
+              <span className="text-3xl font-bold">$29</span>
+              <span className="text-zinc-500">/month</span>
+            </div>
+            <Button variant="outline" className="w-full rounded-lg">
+              Get Started
+            </Button>
+            <div className="mt-6 space-y-3">
+              {features.slice(0, 8).map((feature, idx) => (
+                <div key={idx} className="flex items-center gap-3 text-sm">
+                  {feature.values[0] === true ? (
+                    <CheckIcon className="h-4 w-4 text-green-500" />
+                  ) : feature.values[0] === false ? (
+                    <MinusIcon className="h-4 w-4 text-zinc-400" />
+                  ) : (
+                    <span className="text-xs font-medium text-indigo-600 dark:text-indigo-400">
+                      {feature.values[0]}
+                    </span>
+                  )}
+                  <span className="text-zinc-600 dark:text-zinc-400">{feature.label}</span>
                 </div>
-              )}
+              ))}
+            </div>
+          </div>
 
-              <CardContent className="flex flex-1 flex-col p-6 pt-8">
-                <div className="mb-4">
-                  <span className="text-muted-foreground text-xs font-semibold uppercase tracking-wider">
-                    {plan.label}
-                  </span>
+          {/* Professional Plan */}
+          <div className="relative overflow-hidden rounded-2xl border-2 border-indigo-500 bg-gradient-to-b from-indigo-50/50 to-white p-6 dark:from-indigo-950/20 dark:to-zinc-950">
+            <div className="absolute -top-8 -right-8 h-32 w-32 rounded-full bg-indigo-500/10 blur-2xl" />
+            <div className="relative">
+              <div className="mb-2 inline-flex rounded-full bg-indigo-100 px-3 py-1 text-xs font-medium text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+                Most Popular
+              </div>
+              <div className="mb-4 flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full border border-indigo-200 bg-indigo-100 dark:border-indigo-800 dark:bg-indigo-950">
+                  <Users className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
                 </div>
-
-                <div className="mb-4 text-center">
-                  <h3 className="mb-2 text-xl font-semibold">{plan.name}</h3>
-                  <div className="flex items-baseline justify-center gap-2">
-                    <span className="text-4xl font-bold">${plan.priceStart}</span>
-                    <span className="text-4xl font-bold">+</span>
-                    <span className="text-4xl font-bold">${plan.priceEnd}</span>
+                <div>
+                  <h3 className="font-semibold">Professional</h3>
+                  <p className="text-xs text-zinc-500">For Growing Studios</p>
+                </div>
+              </div>
+              <div className="mb-6 flex items-baseline gap-2">
+                <span className="text-3xl font-bold">$89</span>
+                <span className="text-sm text-zinc-400 line-through">$129</span>
+                <span className="text-zinc-500">/month</span>
+              </div>
+              <Button className="w-full rounded-lg bg-indigo-600 text-white hover:bg-indigo-700">
+                Get Started
+              </Button>
+              <div className="mt-6 space-y-3">
+                {features.slice(0, 12).map((feature, idx) => (
+                  <div key={idx} className="flex items-center gap-3 text-sm">
+                    {feature.values[1] === true ? (
+                      <CheckIcon className="h-4 w-4 text-green-500" />
+                    ) : feature.values[1] === false ? (
+                      <MinusIcon className="h-4 w-4 text-zinc-400" />
+                    ) : (
+                      <span className="text-xs font-medium text-indigo-600 dark:text-indigo-400">
+                        {feature.values[1]}
+                      </span>
+                    )}
+                    <span className="text-zinc-600 dark:text-zinc-400">{feature.label}</span>
                   </div>
-                  <p className="text-muted-foreground text-sm">
-                    /month
-                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Enterprise Plan */}
+          <div className="relative overflow-hidden rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
+            <div className="mb-4 flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border">
+                <Rocket className="h-5 w-5" />
+              </div>
+              <div>
+                <h3 className="font-semibold">Enterprise</h3>
+                <p className="text-xs text-zinc-500">For Large Studios</p>
+              </div>
+            </div>
+            <div className="mb-6">
+              <span className="text-3xl font-bold">$249</span>
+              <span className="text-zinc-500">/month</span>
+            </div>
+            <Button variant="outline" className="w-full rounded-lg">
+              Contact Sales
+            </Button>
+            <div className="mt-6 space-y-3">
+              {features.map((feature, idx) => (
+                <div key={idx} className="flex items-center gap-3 text-sm">
+                  {feature.values[2] === true ? (
+                    <CheckIcon className="h-4 w-4 text-green-500" />
+                  ) : feature.values[2] === false ? (
+                    <MinusIcon className="h-4 w-4 text-zinc-400" />
+                  ) : (
+                    <span className="text-xs font-medium text-indigo-600 dark:text-indigo-400">
+                      {feature.values[2]}
+                    </span>
+                  )}
+                  <span className="text-zinc-600 dark:text-zinc-400">{feature.label}</span>
                 </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </motion.div>
 
-                <ul className="flex flex-1 flex-col space-y-3">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li
-                      key={featureIndex}
-                      className={`flex items-start gap-3 text-sm ${
-                        !feature.included ? "opacity-60" : ""
-                      }`}
-                    >
-                      {feature.included ? (
-                        <CheckIcon className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
-                      ) : (
-                        <Minus className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
-                      )}
-                      <div className="flex-1">
-                        <p>{feature.text}</p>
-                        {feature.price && (
-                          <div className="mt-1 flex items-center justify-between gap-2 rounded-md bg-muted/50 p-2">
-                            <span className="text-xs">{feature.desc}</span>
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              className="h-7 px-3 text-xs"
-                            >
-                              {feature.price}
-                            </Button>
-                          </div>
-                        )}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-
-              <CardFooter className="p-6 pt-0">
-                <Button
-                  className="w-full"
-                  variant={plan.isMostPop ? "default" : "outline"}
-                  size="lg"
+      {/* Desktop Pricing Table */}
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="relative hidden lg:block"
+      >
+        <PricingTable className="mx-auto my-5 max-w-5xl">
+          <PricingTableHeader>
+            <PricingTableRow>
+              <th />
+              <th className="p-1">
+                <PricingTablePlan
+                  name="Starter"
+                  badge="For Solo Builders"
+                  price="$29"
+                  icon={Shield}
                 >
-                  Get Started Now
-                </Button>
-              </CardFooter>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
+                  <Button variant="outline" className="w-full rounded-lg" size="lg">
+                    Get Started
+                  </Button>
+                </PricingTablePlan>
+              </th>
+              <th className="p-1">
+                <PricingTablePlan
+                  name="Professional"
+                  badge="Most Popular"
+                  price="$89"
+                  compareAt="$129"
+                  icon={Users}
+                  className="after:pointer-events-none after:absolute after:-inset-0.5 after:rounded-[inherit] after:bg-gradient-to-b after:from-indigo-500/15 after:to-transparent after:blur-[2px]"
+                >
+                  <Button
+                    className="w-full rounded-lg border-indigo-700/60 bg-indigo-600/80 text-white hover:bg-indigo-600"
+                    size="lg"
+                  >
+                    Get Started
+                  </Button>
+                </PricingTablePlan>
+              </th>
+              <th className="p-1">
+                <PricingTablePlan
+                  name="Enterprise"
+                  badge="For Large Studios"
+                  price="$249"
+                  icon={Rocket}
+                >
+                  <Button variant="outline" className="w-full rounded-lg" size="lg">
+                    Contact Sales
+                  </Button>
+                </PricingTablePlan>
+              </th>
+            </PricingTableRow>
+          </PricingTableHeader>
+          <PricingTableBody>
+            {features.map((feature, index) => (
+              <PricingTableRow key={index}>
+                <PricingTableHead className="text-zinc-600 dark:text-zinc-400">
+                  {feature.label}
+                </PricingTableHead>
+                {feature.values.map((value, valueIndex) => (
+                  <PricingTableCell key={valueIndex}>{value}</PricingTableCell>
+                ))}
+              </PricingTableRow>
+            ))}
+          </PricingTableBody>
+        </PricingTable>
+      </motion.div>
 
       {/* Featured Testimonial */}
       <motion.div
@@ -178,19 +335,23 @@ export default function Pricing() {
         whileInView={{ y: 0, opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.4 }}
-        className="mx-auto mt-16 max-w-4xl"
+        className="mx-auto mt-12 max-w-4xl px-2 sm:mt-16 sm:px-0"
       >
-        <div className="relative overflow-hidden rounded-2xl border border-border bg-card/50 p-8 md:p-12">
-          <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-primary/10 blur-3xl" />
+        <div className="relative overflow-hidden rounded-2xl border border-zinc-200 bg-gradient-to-br from-white to-zinc-50 p-6 sm:p-8 md:p-12 dark:border-zinc-800 dark:from-zinc-950 dark:to-zinc-900">
+          <div className="absolute -top-20 -right-20 h-48 w-48 rounded-full bg-indigo-500/10 blur-3xl" />
+          <div className="absolute -bottom-20 -left-20 h-48 w-48 rounded-full bg-purple-500/10 blur-3xl" />
           <div className="relative text-center">
-            <p className="text-muted-foreground text-xs font-semibold uppercase tracking-wider">
-              Increased efficiency by 70%
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 dark:border-indigo-800 dark:bg-indigo-950/30">
+              <Zap className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+              <span className="text-xs font-medium text-indigo-700 dark:text-indigo-300">
+                Increased efficiency by 70%
+              </span>
+            </div>
+            <p className="text-lg font-semibold text-zinc-900 sm:text-xl dark:text-white">
+              "Flow transformed how our studio operates. The pricing automation and client portal
+              have been game-changers."
             </p>
-            <p className="mt-2 text-lg font-semibold">
-              "Flow transformed how our studio operates. The pricing automation and client portal have
-              been game-changers."
-            </p>
-            <p className="text-muted-foreground mt-2">
+            <p className="mt-4 text-sm text-zinc-600 dark:text-zinc-400">
               — James Wilson, Studio Co-Owner
             </p>
           </div>
@@ -205,9 +366,9 @@ export default function Pricing() {
         transition={{ duration: 0.6, delay: 0.5 }}
         className="mt-12 text-center"
       >
-        <p className="mb-4 text-muted-foreground">Can't decide? Let's talk</p>
-        <Button size="lg" className="shadow-lg">
-          Book a call
+        <p className="mb-4 text-zinc-600 dark:text-zinc-400">Can't decide? Let's talk</p>
+        <Button size="lg" className="shadow-lg shadow-indigo-500/20">
+          Book a Call
         </Button>
       </motion.div>
     </section>

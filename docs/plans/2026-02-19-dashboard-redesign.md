@@ -13,6 +13,7 @@
 ## Task 1: Create Dashboard TypeScript Types
 
 **Files:**
+
 - Create: `components/admin/dashboard/types.ts`
 
 **Step 1: Write the type definitions**
@@ -129,6 +130,7 @@ git commit -m "feat: add dashboard TypeScript types
 ## Task 2: Update Dashboard Stats Cards Component
 
 **Files:**
+
 - Modify: `components/admin/dashboard/dashboard-stats-cards.tsx`
 
 **Step 1: Write the updated component**
@@ -166,7 +168,7 @@ function StatCard({ data }: StatCardProps) {
         <div className="relative flex items-center text-xs text-emerald-100 mt-4">
           {trend && (
             <>
-              <span className="bg-emerald-500 text-white px-1.5 py-0.5 rounded text-emerald-100 mr-2 text-[10px]">
+              <span className="bg-emerald-500 text-white px-1.5 py-0.5 rounded mr-2 text-[10px]">
                 {trend.direction === "up" ? `${trend.value} ▲` : `${trend.value} ▼`}
               </span>
             </>
@@ -260,6 +262,7 @@ git commit -m "refactor: update dashboard stats cards styling
 ## Task 3: Update Project Analytics Component
 
 **Files:**
+
 - Modify: `components/admin/dashboard/project-analytics.tsx`
 
 **Step 1: Write the updated component**
@@ -354,6 +357,7 @@ git commit -m "refactor: expand project analytics to 2-column layout
 ## Task 4: Update Reminders Widget
 
 **Files:**
+
 - Modify: `components/admin/dashboard/reminders-widget.tsx`
 
 **Step 1: Write the updated component**
@@ -444,6 +448,7 @@ git commit -m "refactor: update reminders widget styling
 ## Task 5: Update Team Collaboration Widget
 
 **Files:**
+
 - Modify: `components/admin/dashboard/team-collaboration.tsx`
 
 **Step 1: Write the updated component**
@@ -603,6 +608,7 @@ git commit -m "refactor: update team collaboration widget
 ## Task 6: Update Project Progress Widget
 
 **Files:**
+
 - Modify: `components/admin/dashboard/project-progress.tsx`
 
 **Step 1: Write the updated component**
@@ -724,6 +730,7 @@ git commit -m "refactor: update project progress widget
 ## Task 7: Update Project List Widget
 
 **Files:**
+
 - Modify: `components/admin/dashboard/project-list-widget.tsx`
 
 **Step 1: Write the updated component**
@@ -877,6 +884,7 @@ git commit -m "refactor: update project list widget
 ## Task 8: Update Timer Widget with Dark Gradient
 
 **Files:**
+
 - Modify: `components/admin/dashboard/timer-widget.tsx`
 
 **Step 1: Write the updated component**
@@ -934,12 +942,12 @@ export function TimerWidget() {
   };
 
   return (
-    <div className="lg:col-span-1 bg-[#0e2a1e] dark:bg-black rounded-2xl p-6 relative overflow-hidden text-white flex flex-col justify-between min-h-[250px]">
+    <div className="lg:col-span-1 bg-[#0e2a1e] dark:bg-black rounded-2xl p-6 relative overflow-hidden text-white flex flex-col justify-between min-h-62.5">
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute -right-10 top-10 w-40 h-40 rounded-full border-[20px] border-green-800" />
-        <div className="absolute -right-4 top-20 w-40 h-40 rounded-full border-[20px] border-green-700" />
-        <div className="absolute right-6 top-32 w-40 h-40 rounded-full border-[20px] border-green-600" />
+        <div className="absolute -right-10 top-10 w-40 h-40 rounded-full border-20 border-green-800" />
+        <div className="absolute -right-4 top-20 w-40 h-40 rounded-full border-20 border-green-700" />
+        <div className="absolute right-6 top-32 w-40 h-40 rounded-full border-20 border-green-600" />
       </div>
 
       {/* Content */}
@@ -991,6 +999,7 @@ git commit -m "refactor: update timer widget with dark gradient
 ## Task 9: Update Dashboard Content Layout
 
 **Files:**
+
 - Modify: `app/(admin)/admin/dashboard/dashboard-content.tsx`
 
 **Step 1: Write the updated layout**
@@ -1071,6 +1080,7 @@ git commit -m "refactor: update dashboard content layout
 ## Task 10: Update Admin Header Component
 
 **Files:**
+
 - Modify: `components/admin/admin-header.tsx`
 
 **Step 1: Write the updated header**
@@ -1244,6 +1254,7 @@ git commit -m "refactor: update header to match HTML reference
 ## Task 11: Update Admin Layout Header Height
 
 **Files:**
+
 - Modify: `app/(admin)/layout.tsx`
 
 **Step 1: Update layout header to include proper height**
@@ -1263,7 +1274,7 @@ export default function AdminLayout({
     <div className="bg-[#f6f7f8] dark:bg-[#101922] text-gray-900 dark:text-gray-50 flex h-screen overflow-hidden font-sans antialiased">
       <AdminSidebar />
       <div className="relative flex h-full min-w-0 flex-1 flex-col">
-        <div className="flex-shrink-0 h-20 flex items-center">
+        <div className="shrink-0 h-20 flex items-center">
           <AdminHeader />
         </div>
         <main className="flex-1 overflow-y-auto">
@@ -1291,6 +1302,7 @@ git commit -m "fix: update admin layout header height and background
 ## Task 12: Update Layout CSS for Scrollbar Styling
 
 **Files:**
+
 - Modify: `app/globals.css`
 
 **Step 1: Add scrollbar styles matching HTML reference**
@@ -1415,7 +1427,17 @@ git commit -m "fix: update admin layout header height and background
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
 
 :root {
-  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    "Plus Jakarta Sans",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
 }
 
 /* ============================================================================
@@ -1515,6 +1537,7 @@ git commit -m "style: update globals.css for HTML reference matching
 ## Task 13: Create Supabase Data Fetching Utilities
 
 **Files:**
+
 - Create: `lib/features/dashboard/dashboard-queries.ts`
 
 **Step 1: Write the Supabase query utilities**
@@ -1617,7 +1640,8 @@ export async function fetchTeamMembers(userId: string): Promise<TeamMember[]> {
 
   const { data, error } = await supabase
     .from("team_members")
-    .select(`
+    .select(
+      `
       id,
       user_id,
       users!inner(
@@ -1630,7 +1654,8 @@ export async function fetchTeamMembers(userId: string): Promise<TeamMember[]> {
         name,
         status
       )
-    `)
+    `
+    )
     .eq("team_members.team_id", userId) // Assuming team filtering
     .limit(4);
 
@@ -1684,10 +1709,7 @@ export async function fetchProjectList(userId: string): Promise<ProjectListItem[
 export async function fetchProjectProgress(projectId: string): Promise<ProjectProgress> {
   const supabase = createClient();
 
-  const { data, error } = await supabase
-    .from("tasks")
-    .select("status")
-    .eq("project_id", projectId);
+  const { data, error } = await supabase.from("tasks").select("status").eq("project_id", projectId);
 
   if (error) {
     console.error("Error fetching project progress:", error);
@@ -1769,6 +1791,7 @@ git commit -m "feat: add Supabase data fetching utilities
 ## Task 14: Update Package.json Dependencies
 
 **Files:**
+
 - Check: `package.json`
 
 **Step 1: Run audit to check for vulnerabilities**
@@ -1786,6 +1809,7 @@ npm outdated
 **Step 3: Update any deprecated or vulnerable packages**
 
 Based on the audit results, run:
+
 ```bash
 npm update <package-name>
 ```
@@ -1806,6 +1830,7 @@ git commit -m "chore: update dependencies to latest versions
 ## Task 15: Run Build and Fix Warnings
 
 **Files:**
+
 - Run: Build command
 
 **Step 1: Run build to check for warnings**
@@ -1817,6 +1842,7 @@ npm run build
 **Step 2: Fix any TypeScript errors**
 
 Review and fix all TypeScript errors in the output. Common fixes:
+
 - Add missing type annotations
 - Fix implicit 'any' types
 - Add null checks
@@ -1829,6 +1855,7 @@ npm run lint
 ```
 
 Fix any ESLint warnings that appear:
+
 - Remove unused variables
 - Fix console.log statements
 - Add missing return types
@@ -1850,6 +1877,7 @@ git commit -m "fix: resolve build warnings and TypeScript errors
 ## Task 16: Final Testing
 
 **Files:**
+
 - Test: All dashboard components
 
 **Step 1: Start dev server**

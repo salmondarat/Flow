@@ -22,7 +22,7 @@ export default function Impact() {
   ];
 
   return (
-    <section className="mx-auto w-full max-w-(--breakpoint-xl) px-4 py-24 md:px-8">
+    <section className="mx-auto w-full max-w-(--breakpoint-xl) px-4 py-16 sm:py-20 md:px-8 md:py-24">
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
@@ -38,7 +38,7 @@ export default function Impact() {
         </p>
       </motion.div>
 
-      <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-3">
+      <div className="mx-auto grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 md:grid-cols-3">
         {stats.map((stat, index) => (
           <motion.div
             key={index}
@@ -46,11 +46,11 @@ export default function Impact() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ scale: 1.02, y: -5 }}
-            className="group relative overflow-hidden rounded-2xl border border-border bg-card/50 p-8 transition-all duration-300 hover:shadow-lg hover:bg-card"
+            whileHover={{ scale: 1.01, y: -3 }}
+            className="group border-border bg-card/50 hover:bg-card relative overflow-hidden rounded-xl border p-6 transition-all duration-300 hover:shadow-lg sm:rounded-2xl sm:p-8"
           >
             {/* Background gradient */}
-            <div className="absolute -right-20 -top-20 h-40 w-40 rounded-full bg-primary/10 blur-3xl transition-opacity group-hover:opacity-100 opacity-50" />
+            <div className="bg-primary/10 absolute -top-20 -right-20 h-32 w-32 rounded-full opacity-50 blur-3xl transition-opacity group-hover:opacity-100 sm:h-40 sm:w-40" />
 
             <div className="relative">
               <motion.div
@@ -58,10 +58,10 @@ export default function Impact() {
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 + 0.2, type: "spring" }}
-                className="mb-4"
+                className="mb-3 sm:mb-4"
               >
-                <h3 className="text-5xl font-bold md:text-6xl lg:text-7xl">
-                  <span className="from-primary to-purple-600 bg-linear-to-br bg-clip-text text-transparent">
+                <h3 className="text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
+                  <span className="from-primary bg-linear-to-br to-purple-600 bg-clip-text text-transparent">
                     {stat.value}
                   </span>
                 </h3>
@@ -72,7 +72,7 @@ export default function Impact() {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
-                className="mb-2 text-sm font-semibold uppercase tracking-wider text-muted-foreground"
+                className="text-muted-foreground mb-2 text-xs font-semibold tracking-wider uppercase sm:text-sm"
               >
                 {stat.label}
               </motion.h4>
@@ -82,7 +82,7 @@ export default function Impact() {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 + 0.4 }}
-                className="text-muted-foreground text-sm"
+                className="text-muted-foreground text-xs sm:text-sm"
               >
                 {stat.description}
               </motion.p>

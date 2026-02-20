@@ -51,7 +51,7 @@ export default function Faq() {
       }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="mx-auto w-full max-w-(--breakpoint-xl) px-4 py-24 md:px-8"
+      className="mx-auto w-full max-w-(--breakpoint-xl) px-4 py-16 sm:py-20 md:px-8 md:py-24"
     >
       <motion.div
         initial={{ y: 20, opacity: 0 }}
@@ -63,26 +63,24 @@ export default function Faq() {
         <h4 className="from-foreground to-muted-foreground bg-linear-to-b bg-clip-text text-2xl font-bold text-transparent sm:text-3xl">
           FAQs
         </h4>
-        <p className="text-muted-foreground mt-2 max-w-xl mx-auto text-center">
+        <p className="text-muted-foreground mx-auto mt-2 max-w-xl text-center">
           Have questions? We got answers.
         </p>
       </motion.div>
 
       <div className="mx-auto max-w-4xl">
-        <Accordion type="multiple" className="w-full space-y-4">
+        <Accordion type="multiple" className="w-full space-y-3 sm:space-y-4">
           {accordionItems.map((item, index) => (
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="rounded-2xl border border-border bg-card/50 overflow-hidden transition-all duration-300 hover:shadow-lg data-[state=open]:shadow-xl data-[state=open]:border-primary/50"
+              className="border-border bg-card/50 data-[state=open]:border-primary/50 overflow-hidden rounded-xl border transition-all duration-300 hover:shadow-lg data-[state=open]:shadow-xl sm:rounded-2xl"
             >
-              <AccordionTrigger className="group flex w-full items-center justify-between px-6 py-5 text-left hover:no-underline">
-                <span className="text-base font-semibold">{item.title}</span>
+              <AccordionTrigger className="group flex w-full items-center justify-between px-4 py-4 text-left hover:no-underline sm:px-6 sm:py-5">
+                <span className="pr-4 text-sm font-semibold sm:text-base">{item.title}</span>
               </AccordionTrigger>
-              <AccordionContent className="px-6 pb-5">
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {item.content}
-                </p>
+              <AccordionContent className="px-4 pb-4 sm:px-6 sm:pb-5">
+                <p className="text-muted-foreground text-sm leading-relaxed">{item.content}</p>
               </AccordionContent>
             </AccordionItem>
           ))}
@@ -97,16 +95,14 @@ export default function Faq() {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="mt-12 text-center"
       >
-        <p className="text-muted-foreground mb-4">
-          Can't find your answer?
-        </p>
+        <p className="text-muted-foreground mb-4">Can't find your answer?</p>
         <p className="text-muted-foreground mb-4 text-sm">
           Get in touch with our support team, they are friendly!
         </p>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="mx-auto flex items-center justify-center gap-2 rounded-full border border-border bg-card px-6 py-3 transition-all duration-300 hover:shadow-lg hover:bg-accent"
+          className="border-border bg-card hover:bg-accent mx-auto flex items-center justify-center gap-2 rounded-full border px-6 py-3 transition-all duration-300 hover:shadow-lg"
         >
           <Mail className="h-4 w-4" />
           <span className="font-medium">Contact us</span>

@@ -3,7 +3,9 @@
 import { useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { ChevronDown, Box, Users, FileText, Shield } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { ChevronDown, Box, Users, FileText, Shield, Menu, X } from "lucide-react";
 
 interface MenuItem {
   title: string;
@@ -139,6 +141,7 @@ const megaMenus: MegaMenu[] = [
 
 export function Header() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const activeMegaMenu = megaMenus.find((menu) => menu.id === activeMenu);
 
@@ -189,7 +192,7 @@ export function Header() {
             <div className="bg-brand-500 flex h-8 w-8 items-center justify-center rounded-lg text-sm font-semibold text-white">
               F
             </div>
-            <span className="text-text-high text-lg font-semibold tracking-tight">flow</span>
+            <span className="text-text-high text-lg font-semibold tracking-tight">Flow</span>
           </Link>
 
           {/* Menu Items */}
@@ -218,20 +221,105 @@ export function Header() {
           {/* Right Side Actions */}
           <div className="flex items-center gap-4">
             <ThemeToggle />
-            <Link
-              href="/auth"
-              className="text-text-muted hover:text-text-high text-sm font-medium transition-colors dark:text-neutral-400 dark:hover:text-neutral-200"
-              suppressHydrationWarning
-            >
-              Sign In
-            </Link>
-            <Link
-              href="/register"
-              className="bg-brand-500 hover:bg-brand-600 text-high rounded-lg px-4 py-2 text-sm font-medium transition-colors dark:text-neutral-400 dark:hover:text-neutral-200"
-              suppressHydrationWarning
-            >
-              Get Started
-            </Link>
+
+            {/* Desktop Actions */}
+            <div className="hidden items-center gap-4 md:flex">
+              <Link
+                href="/auth"
+                className="text-text-muted hover:text-text-high text-sm font-medium transition-colors dark:text-neutral-400 dark:hover:text-neutral-200"
+                suppressHydrationWarning
+              >
+                Sign In
+              </Link>
+              <Link
+                href="/register"
+                className="bg-brand-500 hover:bg-brand-600 text-muted dark:text-base-200 transition-color rounded-lg px-4 py-2 text-sm font-medium dark:text-neutral-200 dark:hover:text-neutral-200"
+                suppressHydrationWarning
+              >
+                Get Started
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-10 w-10 md:hidden"
+                  aria-label="Open menu"
+                >
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-75 sm:w-100">
+                <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                <div className="flex h-full flex-col">
+                  {/* Mobile Menu Header */}
+                  <div className="border-border flex items-center justify-between border-b pb-4">
+                    <Link
+                      href="/"
+                      className="flex items-center gap-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <div className="bg-brand-500 flex h-8 w-8 items-center justify-center rounded-lg text-sm font-semibold text-white">
+                        F
+                      </div>
+                      <span className="text-text-high text-lg font-semibold tracking-tight">
+                        Flow
+                      </span>
+                    </Link>
+                  </div>
+
+                  {/* Mobile Menu Links */}
+                  <nav className="flex-1 py-6">
+                    <div className="space-y-6">
+                      {megaMenus.map((menu) => (
+                        <div key={menu.id} className="space-y-3">
+                          <h3 className="text-text-high text-sm font-semibold tracking-wider uppercase">
+                            {menu.label}
+                          </h3>
+                          <ul className="space-y-2">
+                            {menu.items.map((item) => (
+                              <li key={item.href}>
+                                <Link
+                                  href={item.href}
+                                  className="text-text-muted hover:text-text-high flex items-center gap-3 rounded-lg p-2 text-sm transition-colors"
+                                  onClick={() => setMobileMenuOpen(false)}
+                                >
+                                  <span className="text-neutral-400">{item.icon}</span>
+                                  <span>{item.title}</span>
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  </nav>
+
+                  {/* Mobile Menu Footer */}
+                  <div className="border-border border-t pt-4">
+                    <div className="flex flex-col gap-3">
+                      <Link
+                        href="/auth"
+                        className="text-text-muted hover:text-text-high text-center text-sm font-medium transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Sign In
+                      </Link>
+                      <Link
+                        href="/register"
+                        className="bg-brand-500 hover:bg-brand-600 text-high rounded-lg px-4 py-3 text-center text-sm font-medium transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Get Started
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </nav>

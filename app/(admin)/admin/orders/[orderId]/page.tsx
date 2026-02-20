@@ -91,7 +91,7 @@ export default async function OrderDetailsPage({
         <CardContent>
           <form action={`/api/orders/${order.id}/status`} method="POST">
             <Select name="status" defaultValue={order.status}>
-              <SelectTrigger className="w-[200px]">
+              <SelectTrigger className="w-50">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>

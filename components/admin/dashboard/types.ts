@@ -75,13 +75,6 @@ export interface Reminder {
   date?: Date;
 }
 
-/** Time tracker state */
-export interface TimeTrackerState {
-  isRunning: boolean;
-  elapsedSeconds: number;
-  currentTask?: string;
-}
-
 /** Widget loading state */
 export type WidgetState = "idle" | "loading" | "error" | "success";
 

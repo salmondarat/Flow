@@ -14,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { Eye, EyeOff, Loader2, Chrome, User, Building2 } from "lucide-react";
+import { Header } from "@/components/layout/header";
 
 const baseRegisterSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -172,24 +173,30 @@ export default function RegisterPage() {
   // Only show the component once mounted to avoid hydration issues
   if (!mounted) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <Loader2 className="text-primary h-8 w-8 animate-spin" />
-      </div>
+      <>
+        <Header />
+        <div className="flex h-[calc(100vh-4rem)] items-center justify-center">
+          <Loader2 className="text-primary h-8 w-8 animate-spin" />
+        </div>
+      </>
     );
   }
 
   return (
-    <div className="bg-base-100 min-h-screen w-full">
-      <div className="flex min-h-screen items-center justify-center p-4 md:p-0">
+    <div className="bg-background h-screen w-full">
+      {/* Header */}
+      <Header />
+
+      <div className="flex h-[calc(100vh-4rem)] items-center justify-center p-4 md:p-6 lg:p-8">
         <div
           className={`bg-card w-full max-w-6xl overflow-hidden rounded-2xl shadow-xl transition-all duration-500 ${
             formVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
           }`}
         >
-          <div className="flex flex-col md:flex-row-reverse">
+          <div className="flex h-full flex-col md:flex-row-reverse">
             {/* Right side - Statistics and Images Collage */}
             <div className="bg-neutral hidden w-full md:block md:w-3/5">
-              <div className="grid h-full grid-cols-2 grid-rows-3 gap-4 overflow-hidden p-6">
+              <div className="grid h-full grid-cols-2 grid-rows-3 gap-3 p-4 lg:p-6">
                 {/* Top left - Stat Card */}
                 <div
                   className="flex flex-col items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 p-6 text-white shadow-lg"
@@ -223,7 +230,7 @@ export default function RegisterPage() {
                 >
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   <img
-                    src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=400&fit=crop&q=80"
+                    src="/images/24. .jpg"
                     alt="Team collaboration"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -245,7 +252,7 @@ export default function RegisterPage() {
                 >
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   <img
-                    src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=400&fit=crop&q=80"
+                    src="/images/25. .jpg"
                     alt="Workshop"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -288,7 +295,7 @@ export default function RegisterPage() {
                 >
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   <img
-                    src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=600&h=400&fit=crop&q=80"
+                    src="/images/26. .jpg"
                     alt="Creative workspace"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -310,7 +317,7 @@ export default function RegisterPage() {
                 >
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                   <img
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop&q=80"
+                    src="/images/27. .jpg"
                     alt="Team meeting"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -323,86 +330,96 @@ export default function RegisterPage() {
             </div>
 
             {/* Left side - Registration form */}
-            <div
-              className="bg-card text-foreground w-full p-6 md:w-2/5 md:p-8"
-              style={{
-                transform: formVisible ? "translateX(0)" : "translateX(-20px)",
-                opacity: formVisible ? 1 : 0,
-                transition: "transform 0.6s ease-out, opacity 0.6s ease-out",
-              }}
-            >
-              {/* Logo */}
-              <div className="mb-6 flex justify-center">
-                <Link href="/" className="inline-flex items-center gap-3">
-                  <div className="bg-primary flex h-10 w-10 items-center justify-center text-lg font-bold text-white">
-                    F
-                  </div>
-                  <span className="text-foreground text-2xl font-bold tracking-tight uppercase">
-                    Flow<span className="text-primary">.sys</span>
-                  </span>
-                </Link>
-              </div>
-
-              <div className="mb-6 text-center">
-                <h1 className="text-foreground mb-1 text-2xl font-bold">Create Account</h1>
-                <p className="text-muted-foreground text-sm">
-                  Join us and start managing your builds today
-                </p>
-              </div>
-
-              {/* Role Selection Tabs with Different Colors */}
-              <Tabs
-                value={activeTab}
-                onValueChange={(value) => {
-                  setActiveTab(value as "client" | "admin");
-                  // Clear errors when switching tabs
-                  adminForm.clearErrors();
-                  clientForm.clearErrors();
+            <div className="bg-card text-foreground flex w-full flex-col md:w-2/5">
+              <div
+                className="flex flex-1 flex-col overflow-y-auto p-4 md:p-6 lg:p-8"
+                style={{
+                  transform: formVisible ? "translateX(0)" : "translateX(-20px)",
+                  opacity: formVisible ? 1 : 0,
+                  transition: "transform 0.6s ease-out, opacity 0.6s ease-out",
+                  maxHeight: "calc(100vh - 8rem)",
                 }}
-                className="mb-6"
               >
-                <TabsList className="bg-muted/50 grid w-full grid-cols-2 p-1">
-                  <TabsTrigger
-                    value="client"
-                    className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-cyan-500 data-[state=active]:text-white data-[state=active]:shadow-md"
-                  >
-                    <User className="h-4 w-4" />
-                    <span>Client</span>
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="admin"
-                    className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-amber-500 data-[state=active]:text-white data-[state=active]:shadow-md"
-                  >
-                    <Building2 className="h-4 w-4" />
-                    <span>Admin</span>
-                  </TabsTrigger>
-                </TabsList>
+                {/* Custom scrollbar styling */}
+                <style jsx>{`
+                  div::-webkit-scrollbar {
+                    width: 6px;
+                  }
+                  div::-webkit-scrollbar-track {
+                    background: transparent;
+                  }
+                  div::-webkit-scrollbar-thumb {
+                    background: hsl(var(--muted-foreground) / 0.3);
+                    border-radius: 3px;
+                  }
+                  div::-webkit-scrollbar-thumb:hover {
+                    background: hsl(var(--muted-foreground) / 0.5);
+                  }
+                `}</style>
 
-                <TabsContent value="client" className="mt-4">
-                  <div className="flex items-center justify-center gap-2 text-cyan-600 dark:text-cyan-400">
-                    <div className="h-2 w-2 animate-pulse rounded-full bg-cyan-500"></div>
-                    <p className="text-sm font-medium">
-                      Create a client account to track orders and communicate with builders.
+                {/* Sticky Header - Title, Description, and Tabs */}
+                <div className="sticky top-0 z-10 bg-card pb-4">
+                  <div className="mb-4 text-center">
+                    <h1 className="text-foreground mb-1 text-2xl font-bold">Create Account</h1>
+                    <p className="text-muted-foreground text-sm">
+                      Join us and start managing your builds today
                     </p>
                   </div>
-                </TabsContent>
 
-                <TabsContent value="admin" className="mt-4">
-                  <div className="flex items-center justify-center gap-2 text-amber-600 dark:text-amber-400">
-                    <div className="h-2 w-2 animate-pulse rounded-full bg-amber-500"></div>
-                    <p className="text-sm font-medium">
-                      Create an admin account to manage your studio and clients.
-                    </p>
-                  </div>
-                </TabsContent>
-              </Tabs>
+                  {/* Role Selection Tabs with Different Colors */}
+                  <Tabs
+                    value={activeTab}
+                    onValueChange={(value) => {
+                      setActiveTab(value as "client" | "admin");
+                      // Clear errors when switching tabs
+                      adminForm.clearErrors();
+                      clientForm.clearErrors();
+                    }}
+                    className="mb-4"
+                  >
+                    <TabsList className="bg-muted/50 grid w-full grid-cols-2 p-1">
+                      <TabsTrigger
+                        value="client"
+                        className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-cyan-500 data-[state=active]:text-white data-[state=active]:shadow-md"
+                      >
+                        <User className="h-4 w-4" />
+                        <span>Client</span>
+                      </TabsTrigger>
+                      <TabsTrigger
+                        value="admin"
+                        className="flex items-center gap-2 transition-all duration-300 data-[state=active]:bg-amber-500 data-[state=active]:text-white data-[state=active]:shadow-md"
+                      >
+                        <Building2 className="h-4 w-4" />
+                        <span>Admin</span>
+                      </TabsTrigger>
+                    </TabsList>
 
-              {/* Client Registration Form */}
-              <form
-                key="client-form"
-                onSubmit={clientForm.handleSubmit(onSubmit)}
-                className={`space-y-4 ${activeTab !== "client" ? "hidden" : ""}`}
-              >
+                    <TabsContent value="client" className="mt-4">
+                      <div className="flex items-center justify-center gap-2 text-cyan-600 dark:text-cyan-400">
+                        <div className="h-2 w-2 animate-pulse rounded-full bg-cyan-500"></div>
+                        <p className="text-sm font-medium">
+                          Create a client account to track orders and communicate with builders.
+                        </p>
+                      </div>
+                    </TabsContent>
+
+                    <TabsContent value="admin" className="mt-4">
+                      <div className="flex items-center justify-center gap-2 text-amber-600 dark:text-amber-400">
+                        <div className="h-2 w-2 animate-pulse rounded-full bg-amber-500"></div>
+                        <p className="text-sm font-medium">
+                          Create an admin account to manage your studio and clients.
+                        </p>
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+                </div>
+
+                {/* Client Registration Form */}
+                <form
+                  key="client-form"
+                  onSubmit={clientForm.handleSubmit(onSubmit)}
+                  className={`space-y-4 ${activeTab !== "client" ? "hidden" : ""}`}
+                >
                 <div className="space-y-2">
                   <Label htmlFor="client_full_name">Full Name *</Label>
                   <Input
@@ -734,6 +751,7 @@ export default function RegisterPage() {
                   ← Back to home
                 </Link>
               </p>
+              </div>
             </div>
           </div>
         </div>

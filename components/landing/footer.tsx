@@ -37,9 +37,9 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="w-full border-t border-border bg-card">
-      <div className="mx-auto max-w-(--breakpoint-xl) px-4 py-16 md:px-8">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="border-border bg-card w-full border-t">
+      <div className="mx-auto max-w-(--breakpoint-xl) px-4 py-12 sm:py-16 md:px-8">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 sm:gap-12 lg:grid-cols-4">
           {/* Logo & Tagline */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -48,7 +48,10 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
             className="space-y-4"
           >
-            <Link href="/" className="flex items-center gap-2 text-xl font-medium transition-opacity hover:opacity-80">
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-xl font-medium transition-opacity hover:opacity-80"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -61,9 +64,7 @@ const Footer = () => {
               </svg>
               Flow
             </Link>
-            <p className="text-muted-foreground text-sm">
-              Built for Model Kit Builders
-            </p>
+            <p className="text-muted-foreground text-sm">Built for Model Kit Builders</p>
           </motion.div>
 
           {/* Product */}
@@ -80,7 +81,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-muted-foreground text-sm transition-colors hover:text-foreground"
+                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -103,7 +104,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-muted-foreground text-sm transition-colors hover:text-foreground"
+                    className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -118,35 +119,31 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-4"
+            className="col-span-2 space-y-3 sm:col-span-1 sm:space-y-4"
           >
             <h4 className="font-semibold">Newsletter</h4>
-            <p className="text-muted-foreground mb-3 text-sm">
+            <p className="text-muted-foreground mb-2 text-xs sm:mb-3 sm:text-sm">
               Stay ahead with design & marketing tips and strategies that drive results.
             </p>
             <div className="flex gap-2">
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                className="h-10"
-              />
-              <Button size="sm" className="h-10">
-                <Mail className="h-5 w-5" />
+              <Input type="email" placeholder="Enter your email" className="h-9 text-sm sm:h-10" />
+              <Button size="sm" className="h-9 px-3 sm:h-10 sm:px-4">
+                <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
               </Button>
             </div>
           </motion.div>
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-16 border-t border-border pt-8">
-          <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 sm:flex-row sm:justify-between">
+        <div className="border-border mt-12 border-t pt-8 sm:mt-16">
+          <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 sm:flex-row sm:justify-between sm:gap-6">
             {/* Social Links */}
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex gap-3"
+              className="order-2 flex gap-2 sm:order-1 sm:gap-3"
             >
               {socialLinks.map((social) => (
                 <Button
@@ -154,7 +151,7 @@ const Footer = () => {
                   asChild
                   variant="ghost"
                   size="icon"
-                  className="h-9 w-9 rounded-full hover:bg-muted/50"
+                  className="hover:bg-muted/50 h-8 w-8 rounded-full sm:h-9 sm:w-9"
                 >
                   <Link
                     href={social.href}
@@ -174,13 +171,13 @@ const Footer = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex items-center gap-6 text-sm"
+              className="order-1 flex flex-wrap items-center justify-center gap-4 text-sm sm:order-2 sm:gap-6"
             >
               {legalLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {link.name}
                 </Link>
@@ -193,7 +190,7 @@ const Footer = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-muted-foreground"
+              className="text-muted-foreground order-3 text-sm"
             >
               © {year} Flow
             </motion.p>

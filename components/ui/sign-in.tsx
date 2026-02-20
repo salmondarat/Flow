@@ -164,7 +164,7 @@ const AnimatedSignIn: React.FC<AnimatedSignInProps> = ({ defaultRole = "client" 
                 {/* Top left - Person working */}
                 <div className="overflow-hidden rounded-xl">
                   <img
-                    src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop"
+                    src="/images/28. .jpg"
                     alt="Person working"
                     className="h-full w-full object-cover"
                     style={{ opacity: 0.9 }}
@@ -190,7 +190,7 @@ const AnimatedSignIn: React.FC<AnimatedSignInProps> = ({ defaultRole = "client" 
                 {/* Middle left - Person at computer */}
                 <div className="overflow-hidden rounded-xl">
                   <img
-                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop"
+                    src="/images/29. .jpg"
                     alt="Person at computer"
                     className="h-full w-full object-cover"
                     style={{ opacity: 0.9 }}
@@ -200,7 +200,7 @@ const AnimatedSignIn: React.FC<AnimatedSignInProps> = ({ defaultRole = "client" 
                 {/* Middle right - Office space */}
                 <div className="overflow-hidden rounded-xl">
                   <img
-                    src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=600&h=400&fit=crop"
+                    src="/images/30. .jpg"
                     alt="Office space"
                     className="h-full w-full object-cover"
                     style={{ opacity: 0.9 }}
@@ -226,7 +226,7 @@ const AnimatedSignIn: React.FC<AnimatedSignInProps> = ({ defaultRole = "client" 
                 {/* Bottom right - Library */}
                 <div className="overflow-hidden rounded-xl">
                   <img
-                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop"
+                    src="/images/31. .jpg"
                     alt="Desk setup"
                     className="h-full w-full object-cover"
                     style={{ opacity: 0.9 }}

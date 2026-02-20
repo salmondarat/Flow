@@ -15,15 +15,15 @@ export default function Partners() {
   const marqueePartners = [...partners, ...partners, ...partners];
 
   return (
-    <section className="relative w-full overflow-hidden border-y border-border/50 bg-muted/30 py-12">
+    <section className="border-border/50 bg-muted/30 relative w-full overflow-hidden border-y py-8 sm:py-12">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="mx-auto max-w-(--breakpoint-md) mb-8 px-4 text-center md:px-8"
+        className="mx-auto mb-6 max-w-(--breakpoint-md) px-4 text-center sm:mb-8 md:px-8"
       >
-        <h2 className="from-foreground to-muted-foreground bg-linear-to-b bg-clip-text text-xl font-semibold text-transparent sm:text-2xl">
+        <h2 className="from-foreground to-muted-foreground bg-linear-to-b bg-clip-text text-lg font-semibold text-transparent sm:text-2xl sm:text-xl">
           Trusted by Model Kit Builders Worldwide
         </h2>
       </motion.div>
@@ -38,7 +38,7 @@ export default function Partners() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="shrink-0 text-muted-foreground/60 text-lg font-semibold tracking-wide transition-all hover:text-foreground"
+              className="text-muted-foreground/60 hover:text-foreground shrink-0 text-lg font-semibold tracking-wide transition-all"
             >
               {partner.logo}
             </motion.div>
@@ -47,8 +47,8 @@ export default function Partners() {
       </div>
 
       {/* Fade edges */}
-      <div className="absolute left-0 top-0 h-full w-20 bg-linear-to-r from-background to-transparent" />
-      <div className="absolute right-0 top-0 h-full w-20 bg-linear-to-l from-background to-transparent" />
+      <div className="from-background absolute top-0 left-0 h-full w-20 bg-linear-to-r to-transparent" />
+      <div className="from-background absolute top-0 right-0 h-full w-20 bg-linear-to-l to-transparent" />
 
       <style jsx>{`
         .marquee-container {

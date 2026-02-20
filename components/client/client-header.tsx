@@ -77,7 +77,7 @@ export function ClientHeader() {
           className="text-primary flex items-center gap-2 transition-opacity hover:opacity-80"
         >
           <span className="material-symbols-outlined text-3xl">token</span>
-          <span className="font-display text-xl font-bold tracking-tight">FLOW // SYSTEM</span>
+          <span className="font-display text-xl font-bold tracking-tight">Flow</span>
         </Link>
         <div className="ml-4 hidden items-center gap-1 md:flex">
           <Link

@@ -5,7 +5,7 @@
  */
 
 /** Size variants for Bento cards */
-export type BentoSize = "sm" | "md" | "lg" | "wd" | "xl";
+export type BentoSize = "sm" | "md" | "lg" | "wd" | "xl" | "widget" | "widget-lg";
 
 /** Color accent variants */
 export type BentoAccent =

@@ -12,8 +12,9 @@ import {
   Settings,
   HelpCircle,
   LogOut,
-  Smartphone,
-  Download,
+  Sparkles,
+  Crown,
+  ArrowRight,
 } from "lucide-react";
 
 // Menu navigation items (top section)
@@ -148,9 +149,9 @@ export function SidebarContent() {
         </div>
       </nav>
 
-      {/* Mobile App Download Card */}
+      {/* Subscriptions Offer Card */}
       <div className="mt-auto p-4">
-        <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-gray-900 to-black p-5 text-center">
+        <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-amber-500 to-orange-600 p-5 text-center">
           {/* Pattern overlay */}
           <div
             className="absolute inset-0 opacity-20"
@@ -160,18 +161,19 @@ export function SidebarContent() {
           />
 
           <div className="relative z-10 flex flex-col items-center">
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white">
-              <Smartphone className="h-5 w-5" />
+            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white">
+              <Crown className="h-5 w-5" />
             </div>
             <h4 className="mb-1 text-sm font-semibold text-white">
-              Download our
+              Upgrade to
               <br />
-              Mobile App
+              Premium
             </h4>
-            <p className="mb-4 text-xs text-gray-400">Get easy in another way</p>
-            <button className="bg-sidebar-primary hover:bg-sidebar-primary-dark flex w-full items-center justify-center gap-2 rounded-lg py-2 text-xs font-semibold text-white transition-colors">
-              <Download className="h-3 w-3" />
-              Download
+            <p className="mb-4 text-xs text-white/80">Unlock all features</p>
+            <button className="bg-white text-orange-600 hover:bg-white/90 flex w-full items-center justify-center gap-2 rounded-lg py-2 text-xs font-semibold transition-colors">
+              <Sparkles className="h-3 w-3" />
+              View Plans
+              <ArrowRight className="h-3 w-3" />
             </button>
           </div>
         </div>

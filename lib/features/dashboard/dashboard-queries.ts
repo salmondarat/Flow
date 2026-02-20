@@ -23,7 +23,8 @@ export async function fetchDashboardStats(userId: string): Promise<StatsCardData
   const { data: projects, error } = await supabase
     .from("projects")
     .select("id, status")
-    .eq("user_id", userId);
+    .eq("user_id", userId)
+    .returns<{ id: string; status: ProjectStatus }[]>();
 
   if (error) {
     console.error("Error fetching dashboard stats:", error);
@@ -112,7 +113,14 @@ export async function fetchTeamMembers(userId: string): Promise<TeamMember[]> {
     `
     )
     .eq("team_members.team_id", userId) // Assuming team filtering
-    .limit(4);
+    .limit(4)
+    .returns<
+      {
+        id: string;
+        users: { full_name: string; avatar_url: string | null };
+        team_tasks: { name: string; status: string };
+      }[]
+    >();
 
   if (error) {
     console.error("Error fetching team members:", error);
@@ -141,7 +149,8 @@ export async function fetchProjectList(userId: string): Promise<ProjectListItem[
     .select("id, name, due_date, type")
     .eq("user_id", userId)
     .order("due_date", { ascending: true })
-    .limit(5);
+    .limit(5)
+    .returns<{ id: string; name: string; due_date: string; type: string | null }[]>();
 
   if (error) {
     console.error("Error fetching project list:", error);
@@ -164,7 +173,11 @@ export async function fetchProjectList(userId: string): Promise<ProjectListItem[
 export async function fetchProjectProgress(projectId: string): Promise<ProjectProgress> {
   const supabase = createClient();
 
-  const { data, error } = await supabase.from("tasks").select("status").eq("project_id", projectId);
+  const { data, error } = await supabase
+    .from("tasks")
+    .select("status")
+    .eq("project_id", projectId)
+    .returns<{ status: TaskStatus }[]>();
 
   if (error) {
     console.error("Error fetching project progress:", error);
@@ -201,7 +214,8 @@ export async function fetchReminders(userId: string): Promise<Reminder[]> {
     .eq("user_id", userId)
     .gte("date", new Date().toISOString())
     .order("date", { ascending: true })
-    .limit(1);
+    .limit(1)
+    .returns<{ id: string; title: string; start_time: string; end_time: string; date: string }[]>();
 
   if (error) {
     console.error("Error fetching reminders:", error);
