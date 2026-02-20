@@ -50,7 +50,7 @@ export function StatusChangeModal({
         </DialogHeader>
         <div className="flex items-center gap-4 rounded-lg border p-4">
           <div className="flex-1">
-            <p className="text-sm text-muted-foreground">From</p>
+            <p className="text-muted-foreground text-sm">From</p>
             <p className="font-semibold">{statusLabels[fromStatus]}</p>
           </div>
           <div className="text-muted-foreground">
@@ -59,7 +59,7 @@ export function StatusChangeModal({
             </svg>
           </div>
           <div className="flex-1 text-right">
-            <p className="text-sm text-muted-foreground">To</p>
+            <p className="text-muted-foreground text-sm">To</p>
             <p className="font-semibold">{statusLabels[toStatus]}</p>
           </div>
         </div>
