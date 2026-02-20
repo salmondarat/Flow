@@ -15,9 +15,6 @@ import nextDynamic from "next/dynamic";
 // Dynamic import for Header to prevent SSR issues
 const Header = nextDynamic(() => import("@/components/layout/header").then((mod) => mod.Header));
 
-// Force dynamic rendering to prevent static generation issues
-export const dynamic = "force-dynamic";
-
 export default function HomePage() {
   return (
     <main className="flex min-h-screen flex-col">
