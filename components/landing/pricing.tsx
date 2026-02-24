@@ -78,6 +78,27 @@ export default function Pricing() {
           backgroundSize: "32px 32px",
         }}
       />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mb-16 text-center"
+        >
+          <div className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 backdrop-blur-sm ${isLight ? "border-zinc-900/10 bg-zinc-900/5" : "border-white/10 bg-white/5"}`}>
+            <Sparkles className="h-4 w-4 text-amber-500" />
+            <span className={`text-xs font-medium ${isLight ? "text-zinc-700" : "text-zinc-400"}`}>Flexible Pricing</span>
+          </div>
+          <h2 className={`mt-6 text-4xl font-medium tracking-tighter sm:text-5xl md:text-6xl ${isLight ? "bg-linear-to-br from-zinc-900 via-zinc-800 to-[#ffcd75]" : "bg-linear-to-br from-white via-white to-[#ffcd75]"} bg-clip-text text-transparent`}>
+            Flexible Plans for Every Studio
+          </h2>
+          <p className={`mx-auto mt-4 max-w-2xl text-base sm:text-lg ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
+            Choose from tailored packages that fit your business goals. No hidden fees, cancel anytime.
+          </p>
+        </motion.div>
+      </div>
     </section>
   );
 }
