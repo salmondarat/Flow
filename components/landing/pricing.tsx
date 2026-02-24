@@ -24,7 +24,6 @@ interface PricingCardProps {
   price: string;
   compareAtPrice?: string;
   icon: React.ComponentType<{ className?: string }>;
-  gradientClass: string;
   iconBgGradient: string;
   isPopular: boolean;
   isLight: boolean;
@@ -33,7 +32,7 @@ interface PricingCardProps {
   ctaText: string;
 }
 
-const PricingCard = ({ name, badge, price, compareAtPrice, icon: Icon, gradientClass, iconBgGradient, isPopular, isLight, features, featureLimit, ctaText }: PricingCardProps) => {
+const PricingCard = ({ name, badge, price, compareAtPrice, icon: Icon, iconBgGradient, isPopular, isLight, features, featureLimit, ctaText }: PricingCardProps) => {
   return (
     <motion.div
       initial={{ y: 20, opacity: 0 }}
@@ -42,7 +41,7 @@ const PricingCard = ({ name, badge, price, compareAtPrice, icon: Icon, gradientC
       transition={{ duration: 0.6, delay: isPopular ? 0.3 : 0.2 }}
       className={`relative overflow-hidden rounded-3xl border backdrop-blur-xl transition-all duration-300 hover:scale-[1.01] ${isLight ? "border-zinc-900/10 bg-zinc-900/5 hover:border-zinc-900/20 hover:bg-zinc-900/10" : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"} ${isPopular ? "after:inset-0 after:rounded-[inherit]" : ""}`}
     >
-      {badge && <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-indigo-500 px-4 py-1 text-xs font-semibold text-white shadow-lg shadow-indigo-500/30">{badge}</div>}
+      {badge && <div aria-label={badge} className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-indigo-500 px-4 py-1 text-xs font-semibold text-white shadow-lg shadow-indigo-500/30">{badge}</div>}
       <div className="relative p-8">
         <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${iconBgGradient}`}>
           <Icon className="h-6 w-6 text-white" />
@@ -51,9 +50,9 @@ const PricingCard = ({ name, badge, price, compareAtPrice, icon: Icon, gradientC
         <div className="mb-6 flex items-baseline gap-2">
           {compareAtPrice && <span className="text-sm text-zinc-500 line-through">{compareAtPrice}</span>}
           <span className={`text-4xl font-bold ${isLight ? "bg-gradient-to-br from-zinc-900 to-zinc-600" : "bg-gradient-to-br from-white to-zinc-400"} bg-clip-text text-transparent`}>{price}</span>
-          <span className={`text-sm ${isLight ? "text-zinc-500" : "text-zinc-500"}`}>/month</span>
+          <span className="text-sm text-zinc-500">/month</span>
         </div>
-        <button className={`mb-6 w-full rounded-full px-6 py-3 text-sm font-semibold transition-all ${isPopular ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/30 hover:scale-[1.02] hover:shadow-indigo-500/50" : isLight ? "border border-zinc-900/20 bg-zinc-900/10 text-zinc-900 hover:bg-zinc-900/20" : "border border-white/20 bg-white/10 text-white hover:bg-white/20"}`}>
+        <button aria-label={ctaText} className={`mb-6 w-full rounded-full px-6 py-3 text-sm font-semibold transition-all ${isPopular ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/30 hover:scale-[1.02] hover:shadow-indigo-500/50" : isLight ? "border border-zinc-900/20 bg-zinc-900/10 text-zinc-900 hover:bg-zinc-900/20" : "border border-white/20 bg-white/10 text-white hover:bg-white/20"}`}>
           {ctaText}
         </button>
         <div className="space-y-3">
