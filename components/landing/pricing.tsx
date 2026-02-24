@@ -28,8 +28,26 @@ export default function Pricing() {
 
   const isLight = mounted ? theme === "light" : false;
 
-  // Features data will be added in next task
-  const features: FeatureItem[] = [];
+  const features: FeatureItem[] = [
+  { label: "Active Orders", values: ["Up to 50", "Unlimited", "Unlimited"] },
+  { label: "Build, Repair & Repaint", values: [true, true, true] },
+  { label: "Complexity-based Pricing", values: [true, true, true] },
+  { label: "Client Portal Access", values: [true, true, true] },
+  { label: "Reference Image Uploads", values: ["50 MB", "500 MB", "Unlimited"] },
+  { label: "Progress Tracking", values: [true, true, true] },
+  { label: "Email Support", values: ["Standard", "Priority", "24/7 Priority"] },
+  { label: "Custom Form Templates", values: [false, true, true] },
+  { label: "Analytics Dashboard", values: [false, true, true] },
+  { label: "Multi-builder Support", values: [false, "Up to 3", "Unlimited"] },
+  { label: "Workload Management", values: [false, true, true] },
+  { label: "Change Request System", values: [false, true, true] },
+  { label: "API Access", values: [false, false, true] },
+  { label: "White-label Portal", values: [false, false, true] },
+  { label: "Custom Branding", values: [false, false, true] },
+  { label: "SSO & Team Management", values: [false, false, true] },
+  { label: "Dedicated Account Manager", values: [false, false, true] },
+  { label: "SLA Guarantee", values: [false, false, true] },
+];
 
   return (
     <section
