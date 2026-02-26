@@ -3,8 +3,6 @@
  * Public page for clients to submit new orders
  */
 
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
-
 import { redirect } from "next/navigation";
 import { OrderPageWrapper } from "@/components/public/order-page";
 import type { KitCardData } from "@/components/public/kit-card";

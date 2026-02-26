@@ -5,7 +5,6 @@
 
 "use client";
 
-
 import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
@@ -106,7 +105,11 @@ export default function EditAddonPage() {
       newErrors.serviceTypeId = "Please select a service";
     }
 
-    if (formData.priceCents === "" || isNaN(Number(formData.priceCents)) || Number(formData.priceCents) < 0) {
+    if (
+      formData.priceCents === "" ||
+      isNaN(Number(formData.priceCents)) ||
+      Number(formData.priceCents) < 0
+    ) {
       newErrors.priceCents = "Price must be a non-negative number";
     }
 
@@ -155,7 +158,7 @@ export default function EditAddonPage() {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+        <Loader2 className="text-muted-foreground h-8 w-8 animate-spin" />
       </div>
     );
   }
@@ -179,9 +182,7 @@ export default function EditAddonPage() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold">Edit Add-on</h1>
-              <p className="text-muted-foreground mt-2">
-                Update add-on details
-              </p>
+              <p className="text-muted-foreground mt-2">Update add-on details</p>
             </div>
             {addon?.is_active && (
               <Badge variant="default" className="gap-1">
@@ -223,7 +224,8 @@ export default function EditAddonPage() {
                       value={formData.serviceTypeId}
                       onValueChange={(value) => {
                         setFormData((prev) => ({ ...prev, serviceTypeId: value }));
-                        if (errors.serviceTypeId) setErrors((prev) => ({ ...prev, serviceTypeId: undefined }));
+                        if (errors.serviceTypeId)
+                          setErrors((prev) => ({ ...prev, serviceTypeId: undefined }));
                       }}
                     >
                       <SelectTrigger>
@@ -237,7 +239,9 @@ export default function EditAddonPage() {
                         ))}
                       </SelectContent>
                     </Select>
-                    {errors.serviceTypeId && <p className="text-destructive text-sm">{errors.serviceTypeId}</p>}
+                    {errors.serviceTypeId && (
+                      <p className="text-destructive text-sm">{errors.serviceTypeId}</p>
+                    )}
                   </div>
                 </div>
 
@@ -248,7 +252,9 @@ export default function EditAddonPage() {
                     placeholder="Brief description of this add-on..."
                     rows={3}
                     value={formData.description}
-                    onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({ ...prev, description: e.target.value }))
+                    }
                   />
                 </div>
 
@@ -265,10 +271,13 @@ export default function EditAddonPage() {
                       value={formData.priceCents}
                       onChange={(e) => {
                         setFormData((prev) => ({ ...prev, priceCents: e.target.value }));
-                        if (errors.priceCents) setErrors((prev) => ({ ...prev, priceCents: undefined }));
+                        if (errors.priceCents)
+                          setErrors((prev) => ({ ...prev, priceCents: undefined }));
                       }}
                     />
-                    {errors.priceCents && <p className="text-destructive text-sm">{errors.priceCents}</p>}
+                    {errors.priceCents && (
+                      <p className="text-destructive text-sm">{errors.priceCents}</p>
+                    )}
                     <p className="text-muted-foreground text-xs">
                       Current: {formatPrice(addon?.price_cents || 0)}
                     </p>
@@ -283,7 +292,8 @@ export default function EditAddonPage() {
                       value={formData.sortOrder}
                       onChange={(e) => {
                         setFormData((prev) => ({ ...prev, sortOrder: e.target.value }));
-                        if (errors.sortOrder) setErrors((prev) => ({ ...prev, sortOrder: undefined }));
+                        if (errors.sortOrder)
+                          setErrors((prev) => ({ ...prev, sortOrder: undefined }));
                       }}
                     />
                   </div>
@@ -298,7 +308,9 @@ export default function EditAddonPage() {
                   </div>
                   <Switch
                     checked={formData.isRequired}
-                    onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, isRequired: checked }))}
+                    onCheckedChange={(checked) =>
+                      setFormData((prev) => ({ ...prev, isRequired: checked }))
+                    }
                   />
                 </div>
 
@@ -306,12 +318,14 @@ export default function EditAddonPage() {
                   <div>
                     <p className="font-medium">Active Status</p>
                     <p className="text-muted-foreground text-sm">
-                      Inactive add-ons won't be shown to clients
+                      Inactive add-ons won&apos;t be shown to clients
                     </p>
                   </div>
                   <Switch
                     checked={formData.isActive}
-                    onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, isActive: checked }))}
+                    onCheckedChange={(checked) =>
+                      setFormData((prev) => ({ ...prev, isActive: checked }))
+                    }
                   />
                 </div>
 

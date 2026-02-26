@@ -348,8 +348,8 @@ export default function Pricing() {
               </span>
             </div>
             <p className="text-lg font-semibold text-zinc-900 sm:text-xl dark:text-white">
-              "Flow transformed how our studio operates. The pricing automation and client portal
-              have been game-changers."
+              &quot;Flow transformed how our studio operates. The pricing automation and client
+              portal have been game-changers.&quot;
             </p>
             <p className="mt-4 text-sm text-zinc-600 dark:text-zinc-400">
               — James Wilson, Studio Co-Owner
@@ -366,7 +366,7 @@ export default function Pricing() {
         transition={{ duration: 0.6, delay: 0.5 }}
         className="mt-12 text-center"
       >
-        <p className="mb-4 text-zinc-600 dark:text-zinc-400">Can't decide? Let's talk</p>
+        <p className="mb-4 text-zinc-600 dark:text-zinc-400">Can&apos;t decide? Let&apos;s talk</p>
         <Button size="lg" className="shadow-lg shadow-indigo-500/20">
           Book a Call
         </Button>

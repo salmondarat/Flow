@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -89,6 +89,8 @@ export function FormBuilder({
   const [showServiceDialog, setShowServiceDialog] = useState(false);
   const [showPricingDialog, setShowPricingDialog] = useState(false);
 
+  const fieldIdCounter = useRef(0);
+
   // Step management
   const addStep = () => {
     const newStep: FormStep = {
@@ -125,9 +127,10 @@ export function FormBuilder({
 
   // Field management
   const addField = (stepIndex: number, type: FieldType) => {
+    const fieldId = fieldIdCounter.current++;
     const newField: FormField = {
-      id: `field-${Date.now()}`,
-      key: `field_${Date.now()}`,
+      id: `field-${fieldId}`,
+      key: `field_${fieldId}`,
       type,
       label: `${type.charAt(0).toUpperCase() + type.slice(1)} Field`,
       required: false,

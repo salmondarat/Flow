@@ -5,25 +5,18 @@ import type { ProjectProgress, WidgetState } from "./types";
 import { useState, useEffect } from "react";
 
 export function ProjectProgressChart() {
-  const [progress, setProgress] = useState<ProjectProgress | null>(null);
-  const [widgetState, setWidgetState] = useState<WidgetState>("loading");
-
-  useEffect(() => {
-    // TODO: Connect to Supabase to fetch project progress
-    // For now, use sample data
-    setProgress({
-      completed: 41,
-      inProgress: 35,
-      pending: 24,
-      total: 100,
-    });
-    setWidgetState("success");
-  }, []);
+  const [progress, setProgress] = useState<ProjectProgress>({
+    completed: 41,
+    inProgress: 35,
+    pending: 24,
+    total: 100,
+  });
+  const [widgetState, setWidgetState] = useState<WidgetState>("success");
 
   const data = progress
     ? [
-        { name: "Completed", value: progress.completed, color: "#10B981" },
-        { name: "In Progress", value: progress.inProgress, color: "#059669" },
+        { name: "Completed", value: progress.completed, color: "#3B82F6" },
+        { name: "In Progress", value: progress.inProgress, color: "#2563EB" },
         { name: "Pending", value: progress.pending, color: "#D1D5DB" },
       ]
     : [];
@@ -80,11 +73,11 @@ export function ProjectProgressChart() {
       {/* Legend */}
       <div className="mt-6 flex w-full justify-between text-[10px] text-gray-500 dark:text-gray-400">
         <div className="flex items-center">
-          <span className="mr-1 h-2 w-2 rounded-full bg-emerald-500" />
+          <span className="mr-1 h-2 w-2 rounded-full bg-blue-500" />
           Completed
         </div>
         <div className="flex items-center">
-          <span className="mr-1 h-2 w-2 rounded-full bg-emerald-700" />
+          <span className="mr-1 h-2 w-2 rounded-full bg-blue-700" />
           In Progress
         </div>
         <div className="flex items-center">

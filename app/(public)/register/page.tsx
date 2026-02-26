@@ -4,6 +4,7 @@ import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -229,9 +230,10 @@ export default function RegisterPage() {
                   }}
                 >
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                  <img
+                  <Image
                     src="/images/24. .jpg"
                     alt="Team collaboration"
+                    fill
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute bottom-3 left-3 z-20 text-white">
@@ -251,9 +253,10 @@ export default function RegisterPage() {
                   }}
                 >
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                  <img
+                  <Image
                     src="/images/25. .jpg"
                     alt="Workshop"
+                    fill
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute bottom-3 left-3 z-20 text-white">
@@ -294,9 +297,10 @@ export default function RegisterPage() {
                   }}
                 >
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                  <img
+                  <Image
                     src="/images/26. .jpg"
                     alt="Creative workspace"
+                    fill
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute bottom-3 left-3 z-20 text-white">
@@ -316,9 +320,10 @@ export default function RegisterPage() {
                   }}
                 >
                   <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                  <img
+                  <Image
                     src="/images/27. .jpg"
                     alt="Team meeting"
+                    fill
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute bottom-3 left-3 z-20 text-white">
@@ -358,7 +363,7 @@ export default function RegisterPage() {
                 `}</style>
 
                 {/* Sticky Header - Title, Description, and Tabs */}
-                <div className="sticky top-0 z-10 bg-card pb-4">
+                <div className="bg-card sticky top-0 z-10 pb-4">
                   <div className="mb-4 text-center">
                     <h1 className="text-foreground mb-1 text-2xl font-bold">Create Account</h1>
                     <p className="text-muted-foreground text-sm">
@@ -420,337 +425,337 @@ export default function RegisterPage() {
                   onSubmit={clientForm.handleSubmit(onSubmit)}
                   className={`space-y-4 ${activeTab !== "client" ? "hidden" : ""}`}
                 >
-                <div className="space-y-2">
-                  <Label htmlFor="client_full_name">Full Name *</Label>
-                  <Input
-                    id="client_full_name"
-                    type="text"
-                    autoComplete="name"
-                    placeholder="John Doe"
-                    disabled={isLoading}
-                    {...clientForm.register("full_name")}
-                    className="h-10"
-                  />
-                  {clientForm.formState.errors.full_name && (
-                    <p className="text-destructive text-sm">
-                      {clientForm.formState.errors.full_name.message}
-                    </p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="client_email">Email Address *</Label>
-                  <Input
-                    id="client_email"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="you@example.com"
-                    disabled={isLoading}
-                    {...clientForm.register("email")}
-                    className="h-10"
-                  />
-                  {clientForm.formState.errors.email && (
-                    <p className="text-destructive text-sm">
-                      {clientForm.formState.errors.email.message}
-                    </p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="client_phone">Phone Number</Label>
-                  <Input
-                    id="client_phone"
-                    type="tel"
-                    autoComplete="tel"
-                    placeholder="+1 (555) 123-4567"
-                    disabled={isLoading}
-                    {...clientForm.register("phone")}
-                    className="h-10"
-                  />
-                  {clientForm.formState.errors.phone && (
-                    <p className="text-destructive text-sm">
-                      {clientForm.formState.errors.phone.message}
-                    </p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="client_address">Address</Label>
-                  <Textarea
-                    id="client_address"
-                    placeholder="123 Main St, City, State, ZIP"
-                    disabled={isLoading}
-                    {...clientForm.register("address")}
-                    className="min-h-[60px] resize-none"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="client_password">Password *</Label>
-                  <div className="relative">
+                  <div className="space-y-2">
+                    <Label htmlFor="client_full_name">Full Name *</Label>
                     <Input
-                      id="client_password"
-                      type={showPassword ? "text" : "password"}
-                      autoComplete="new-password"
-                      placeholder="••••••••"
+                      id="client_full_name"
+                      type="text"
+                      autoComplete="name"
+                      placeholder="John Doe"
                       disabled={isLoading}
-                      {...clientForm.register("password")}
-                      className="h-10 pr-10"
+                      {...clientForm.register("full_name")}
+                      className="h-10"
                     />
-                    <button
-                      type="button"
-                      className="text-muted-foreground hover:text-foreground absolute inset-y-0 right-0 flex items-center pr-3"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                    </button>
+                    {clientForm.formState.errors.full_name && (
+                      <p className="text-destructive text-sm">
+                        {clientForm.formState.errors.full_name.message}
+                      </p>
+                    )}
                   </div>
-                  {clientForm.formState.errors.password && (
-                    <p className="text-destructive text-sm">
-                      {clientForm.formState.errors.password.message}
-                    </p>
-                  )}
-                </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="client_confirmPassword">Confirm Password *</Label>
-                  <div className="relative">
+                  <div className="space-y-2">
+                    <Label htmlFor="client_email">Email Address *</Label>
                     <Input
-                      id="client_confirmPassword"
-                      type={showConfirmPassword ? "text" : "password"}
-                      autoComplete="new-password"
-                      placeholder="••••••••"
+                      id="client_email"
+                      type="email"
+                      autoComplete="email"
+                      placeholder="you@example.com"
                       disabled={isLoading}
-                      {...clientForm.register("confirmPassword")}
-                      className="h-10 pr-10"
+                      {...clientForm.register("email")}
+                      className="h-10"
                     />
-                    <button
-                      type="button"
-                      className="text-muted-foreground hover:text-foreground absolute inset-y-0 right-0 flex items-center pr-3"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    >
-                      {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                    </button>
+                    {clientForm.formState.errors.email && (
+                      <p className="text-destructive text-sm">
+                        {clientForm.formState.errors.email.message}
+                      </p>
+                    )}
                   </div>
-                  {clientForm.formState.errors.confirmPassword && (
-                    <p className="text-destructive text-sm">
-                      {clientForm.formState.errors.confirmPassword.message}
-                    </p>
-                  )}
-                </div>
 
-                <Button
-                  type="submit"
-                  className="h-10 w-full bg-cyan-500 text-white transition-all duration-300 hover:bg-cyan-600"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      Creating account...
-                    </span>
-                  ) : (
-                    <span>Create Client Account</span>
-                  )}
-                </Button>
-
-                {/* Divider */}
-                <div className="relative flex items-center py-1">
-                  <div className="border-border flex-grow border-t"></div>
-                  <span className="text-muted-foreground mx-4 flex-shrink text-sm">OR</span>
-                  <div className="border-border flex-grow border-t"></div>
-                </div>
-
-                {/* Google Sign Up */}
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="h-10 w-full"
-                  onClick={handleGoogleSignIn}
-                  disabled={isGoogleLoading}
-                >
-                  {isGoogleLoading ? (
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  ) : (
-                    <Chrome className="mr-2 h-5 w-5" />
-                  )}
-                  Continue with Google
-                </Button>
-              </form>
-
-              {/* Admin Registration Form */}
-              <form
-                key="admin-form"
-                onSubmit={adminForm.handleSubmit(onSubmit)}
-                className={`space-y-4 ${activeTab !== "admin" ? "hidden" : ""}`}
-              >
-                <div className="space-y-2">
-                  <Label htmlFor="admin_full_name">Full Name *</Label>
-                  <Input
-                    id="admin_full_name"
-                    type="text"
-                    autoComplete="name"
-                    placeholder="John Doe"
-                    disabled={isLoading}
-                    {...adminForm.register("full_name")}
-                    className="h-10"
-                  />
-                  {adminForm.formState.errors.full_name && (
-                    <p className="text-destructive text-sm">
-                      {adminForm.formState.errors.full_name.message}
-                    </p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="admin_email">Email Address *</Label>
-                  <Input
-                    id="admin_email"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="you@example.com"
-                    disabled={isLoading}
-                    {...adminForm.register("email")}
-                    className="h-10"
-                  />
-                  {adminForm.formState.errors.email && (
-                    <p className="text-destructive text-sm">
-                      {adminForm.formState.errors.email.message}
-                    </p>
-                  )}
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="admin_studio_name">Studio Name</Label>
-                  <Input
-                    id="admin_studio_name"
-                    type="text"
-                    placeholder="My Gunpla Studio"
-                    disabled={isLoading}
-                    {...adminForm.register("studio_name")}
-                    className="h-10"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="admin_business_type">Business Type</Label>
-                  <Input
-                    id="admin_business_type"
-                    type="text"
-                    placeholder="Sole Proprietor, LLC, etc."
-                    disabled={isLoading}
-                    {...adminForm.register("business_type")}
-                    className="h-10"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="admin_password">Password *</Label>
-                  <div className="relative">
+                  <div className="space-y-2">
+                    <Label htmlFor="client_phone">Phone Number</Label>
                     <Input
-                      id="admin_password"
-                      type={showPassword ? "text" : "password"}
-                      autoComplete="new-password"
-                      placeholder="••••••••"
+                      id="client_phone"
+                      type="tel"
+                      autoComplete="tel"
+                      placeholder="+1 (555) 123-4567"
                       disabled={isLoading}
-                      {...adminForm.register("password")}
-                      className="h-10 pr-10"
+                      {...clientForm.register("phone")}
+                      className="h-10"
                     />
-                    <button
-                      type="button"
-                      className="text-muted-foreground hover:text-foreground absolute inset-y-0 right-0 flex items-center pr-3"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                    </button>
+                    {clientForm.formState.errors.phone && (
+                      <p className="text-destructive text-sm">
+                        {clientForm.formState.errors.phone.message}
+                      </p>
+                    )}
                   </div>
-                  {adminForm.formState.errors.password && (
-                    <p className="text-destructive text-sm">
-                      {adminForm.formState.errors.password.message}
-                    </p>
-                  )}
-                </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="admin_confirmPassword">Confirm Password *</Label>
-                  <div className="relative">
+                  <div className="space-y-2">
+                    <Label htmlFor="client_address">Address</Label>
+                    <Textarea
+                      id="client_address"
+                      placeholder="123 Main St, City, State, ZIP"
+                      disabled={isLoading}
+                      {...clientForm.register("address")}
+                      className="min-h-[60px] resize-none"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="client_password">Password *</Label>
+                    <div className="relative">
+                      <Input
+                        id="client_password"
+                        type={showPassword ? "text" : "password"}
+                        autoComplete="new-password"
+                        placeholder="••••••••"
+                        disabled={isLoading}
+                        {...clientForm.register("password")}
+                        className="h-10 pr-10"
+                      />
+                      <button
+                        type="button"
+                        className="text-muted-foreground hover:text-foreground absolute inset-y-0 right-0 flex items-center pr-3"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                      </button>
+                    </div>
+                    {clientForm.formState.errors.password && (
+                      <p className="text-destructive text-sm">
+                        {clientForm.formState.errors.password.message}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="client_confirmPassword">Confirm Password *</Label>
+                    <div className="relative">
+                      <Input
+                        id="client_confirmPassword"
+                        type={showConfirmPassword ? "text" : "password"}
+                        autoComplete="new-password"
+                        placeholder="••••••••"
+                        disabled={isLoading}
+                        {...clientForm.register("confirmPassword")}
+                        className="h-10 pr-10"
+                      />
+                      <button
+                        type="button"
+                        className="text-muted-foreground hover:text-foreground absolute inset-y-0 right-0 flex items-center pr-3"
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      >
+                        {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                      </button>
+                    </div>
+                    {clientForm.formState.errors.confirmPassword && (
+                      <p className="text-destructive text-sm">
+                        {clientForm.formState.errors.confirmPassword.message}
+                      </p>
+                    )}
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="h-10 w-full bg-cyan-500 text-white transition-all duration-300 hover:bg-cyan-600"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Creating account...
+                      </span>
+                    ) : (
+                      <span>Create Client Account</span>
+                    )}
+                  </Button>
+
+                  {/* Divider */}
+                  <div className="relative flex items-center py-1">
+                    <div className="border-border flex-grow border-t"></div>
+                    <span className="text-muted-foreground mx-4 flex-shrink text-sm">OR</span>
+                    <div className="border-border flex-grow border-t"></div>
+                  </div>
+
+                  {/* Google Sign Up */}
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="h-10 w-full"
+                    onClick={handleGoogleSignIn}
+                    disabled={isGoogleLoading}
+                  >
+                    {isGoogleLoading ? (
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    ) : (
+                      <Chrome className="mr-2 h-5 w-5" />
+                    )}
+                    Continue with Google
+                  </Button>
+                </form>
+
+                {/* Admin Registration Form */}
+                <form
+                  key="admin-form"
+                  onSubmit={adminForm.handleSubmit(onSubmit)}
+                  className={`space-y-4 ${activeTab !== "admin" ? "hidden" : ""}`}
+                >
+                  <div className="space-y-2">
+                    <Label htmlFor="admin_full_name">Full Name *</Label>
                     <Input
-                      id="admin_confirmPassword"
-                      type={showConfirmPassword ? "text" : "password"}
-                      autoComplete="new-password"
-                      placeholder="••••••••"
+                      id="admin_full_name"
+                      type="text"
+                      autoComplete="name"
+                      placeholder="John Doe"
                       disabled={isLoading}
-                      {...adminForm.register("confirmPassword")}
-                      className="h-10 pr-10"
+                      {...adminForm.register("full_name")}
+                      className="h-10"
                     />
-                    <button
-                      type="button"
-                      className="text-muted-foreground hover:text-foreground absolute inset-y-0 right-0 flex items-center pr-3"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    >
-                      {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                    </button>
+                    {adminForm.formState.errors.full_name && (
+                      <p className="text-destructive text-sm">
+                        {adminForm.formState.errors.full_name.message}
+                      </p>
+                    )}
                   </div>
-                  {adminForm.formState.errors.confirmPassword && (
-                    <p className="text-destructive text-sm">
-                      {adminForm.formState.errors.confirmPassword.message}
-                    </p>
-                  )}
+
+                  <div className="space-y-2">
+                    <Label htmlFor="admin_email">Email Address *</Label>
+                    <Input
+                      id="admin_email"
+                      type="email"
+                      autoComplete="email"
+                      placeholder="you@example.com"
+                      disabled={isLoading}
+                      {...adminForm.register("email")}
+                      className="h-10"
+                    />
+                    {adminForm.formState.errors.email && (
+                      <p className="text-destructive text-sm">
+                        {adminForm.formState.errors.email.message}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="admin_studio_name">Studio Name</Label>
+                    <Input
+                      id="admin_studio_name"
+                      type="text"
+                      placeholder="My Gunpla Studio"
+                      disabled={isLoading}
+                      {...adminForm.register("studio_name")}
+                      className="h-10"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="admin_business_type">Business Type</Label>
+                    <Input
+                      id="admin_business_type"
+                      type="text"
+                      placeholder="Sole Proprietor, LLC, etc."
+                      disabled={isLoading}
+                      {...adminForm.register("business_type")}
+                      className="h-10"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="admin_password">Password *</Label>
+                    <div className="relative">
+                      <Input
+                        id="admin_password"
+                        type={showPassword ? "text" : "password"}
+                        autoComplete="new-password"
+                        placeholder="••••••••"
+                        disabled={isLoading}
+                        {...adminForm.register("password")}
+                        className="h-10 pr-10"
+                      />
+                      <button
+                        type="button"
+                        className="text-muted-foreground hover:text-foreground absolute inset-y-0 right-0 flex items-center pr-3"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                      </button>
+                    </div>
+                    {adminForm.formState.errors.password && (
+                      <p className="text-destructive text-sm">
+                        {adminForm.formState.errors.password.message}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="admin_confirmPassword">Confirm Password *</Label>
+                    <div className="relative">
+                      <Input
+                        id="admin_confirmPassword"
+                        type={showConfirmPassword ? "text" : "password"}
+                        autoComplete="new-password"
+                        placeholder="••••••••"
+                        disabled={isLoading}
+                        {...adminForm.register("confirmPassword")}
+                        className="h-10 pr-10"
+                      />
+                      <button
+                        type="button"
+                        className="text-muted-foreground hover:text-foreground absolute inset-y-0 right-0 flex items-center pr-3"
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      >
+                        {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                      </button>
+                    </div>
+                    {adminForm.formState.errors.confirmPassword && (
+                      <p className="text-destructive text-sm">
+                        {adminForm.formState.errors.confirmPassword.message}
+                      </p>
+                    )}
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="h-10 w-full bg-amber-500 text-white transition-all duration-300 hover:bg-amber-600"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Creating account...
+                      </span>
+                    ) : (
+                      <span>Create Studio Account</span>
+                    )}
+                  </Button>
+
+                  {/* Divider */}
+                  <div className="relative flex items-center py-1">
+                    <div className="border-border flex-grow border-t"></div>
+                    <span className="text-muted-foreground mx-4 flex-shrink text-sm">OR</span>
+                    <div className="border-border flex-grow border-t"></div>
+                  </div>
+
+                  {/* Google Sign Up */}
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="h-10 w-full"
+                    onClick={handleGoogleSignIn}
+                    disabled={isGoogleLoading}
+                  >
+                    {isGoogleLoading ? (
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    ) : (
+                      <Chrome className="mr-2 h-5 w-5" />
+                    )}
+                    Continue with Google
+                  </Button>
+                </form>
+
+                <div className="mt-4 text-center">
+                  <p className="text-muted-foreground text-sm">
+                    Already have an account?{" "}
+                    <Link href="/auth" className="text-primary hover:text-primary/80 font-medium">
+                      Sign in
+                    </Link>
+                  </p>
                 </div>
 
-                <Button
-                  type="submit"
-                  className="h-10 w-full bg-amber-500 text-white transition-all duration-300 hover:bg-amber-600"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      Creating account...
-                    </span>
-                  ) : (
-                    <span>Create Studio Account</span>
-                  )}
-                </Button>
-
-                {/* Divider */}
-                <div className="relative flex items-center py-1">
-                  <div className="border-border flex-grow border-t"></div>
-                  <span className="text-muted-foreground mx-4 flex-shrink text-sm">OR</span>
-                  <div className="border-border flex-grow border-t"></div>
-                </div>
-
-                {/* Google Sign Up */}
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="h-10 w-full"
-                  onClick={handleGoogleSignIn}
-                  disabled={isGoogleLoading}
-                >
-                  {isGoogleLoading ? (
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  ) : (
-                    <Chrome className="mr-2 h-5 w-5" />
-                  )}
-                  Continue with Google
-                </Button>
-              </form>
-
-              <div className="mt-4 text-center">
-                <p className="text-muted-foreground text-sm">
-                  Already have an account?{" "}
-                  <Link href="/auth" className="text-primary hover:text-primary/80 font-medium">
-                    Sign in
+                <p className="text-muted-foreground mt-4 text-center text-sm">
+                  <Link href="/" className="hover:text-foreground transition-colors">
+                    ← Back to home
                   </Link>
                 </p>
-              </div>
-
-              <p className="text-muted-foreground mt-4 text-center text-sm">
-                <Link href="/" className="hover:text-foreground transition-colors">
-                  ← Back to home
-                </Link>
-              </p>
               </div>
             </div>
           </div>

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { KanbanBoard } from "@/components/admin/kanban/kanban-board";
 import { TaskListView } from "./task-list-view";
 import { StatusChangeModal } from "./status-change-modal";
+import { AddTaskModal } from "./add-task-modal";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -14,7 +15,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { LayoutGrid, List, Filter } from "lucide-react";
-import type { KanbanColumn } from "@/components/admin/kanban/types";
+import type { KanbanColumn, KanbanColumnId } from "@/components/admin/kanban/types";
+import { columnToOrderStatus } from "@/components/admin/kanban/types";
 import type { OrderStatus } from "@/types";
 
 export function TasksPage({ initialColumns }: { initialColumns: KanbanColumn[] }) {
@@ -32,18 +34,19 @@ export function TasksPage({ initialColumns }: { initialColumns: KanbanColumn[] }
     toStatus: OrderStatus;
     taskTitle: string;
   } | null>(null);
+  const [addTaskModal, setAddTaskModal] = useState<{
+    isOpen: boolean;
+    columnId: KanbanColumnId;
+  } | null>(null);
 
-  // Flatten all tasks for list view and filtering
   const allTasks = initialColumns.flatMap((column) => column.tasks);
 
-  // Filter tasks
   const filteredTasks = allTasks.filter((task) => {
     if (statusFilter !== "all" && task.status !== statusFilter) return false;
     if (priorityFilter !== "all" && task.priority !== priorityFilter) return false;
     return true;
   });
 
-  // Filter columns for kanban view
   const filteredColumns = initialColumns.map((column) => ({
     ...column,
     tasks: column.tasks.filter((task) => {
@@ -57,20 +60,25 @@ export function TasksPage({ initialColumns }: { initialColumns: KanbanColumn[] }
     const task = allTasks.find((t) => t.id === taskId);
     if (!task) return;
 
-    // Map column ID back to status
-    const columnToStatus: Record<string, OrderStatus> = {
-      "todo": "draft",
-      "in-progress": "in_progress",
-      "under-review": "cancelled",
-      "completed": "completed",
-    };
+    const toStatus = columnToOrderStatus(toColumnId as KanbanColumnId);
 
     setStatusModal({
       isOpen: true,
       orderId: task.orderId,
       fromStatus: task.status,
-      toStatus: columnToStatus[toColumnId] || task.status,
+      toStatus: toStatus,
       taskTitle: task.title,
+    });
+  };
+
+  const handleTaskClick = (taskId: string, orderId: string) => {
+    router.push(`/admin/orders/${orderId}`);
+  };
+
+  const handleAddTask = (columnId: KanbanColumnId) => {
+    setAddTaskModal({
+      isOpen: true,
+      columnId,
     });
   };
 
@@ -85,8 +93,7 @@ export function TasksPage({ initialColumns }: { initialColumns: KanbanColumn[] }
       });
 
       if (response.ok) {
-        // Reload the page to refresh data
-        window.location.reload();
+        router.refresh();
       }
     } catch (error) {
       console.error("Failed to update status:", error);
@@ -97,7 +104,6 @@ export function TasksPage({ initialColumns }: { initialColumns: KanbanColumn[] }
 
   return (
     <div className="space-y-6">
-      {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="mb-1 text-3xl font-bold text-gray-900 dark:text-white">Tasks</h1>
@@ -107,7 +113,6 @@ export function TasksPage({ initialColumns }: { initialColumns: KanbanColumn[] }
         </div>
 
         <div className="flex items-center gap-3">
-          {/* View Toggle */}
           <div className="flex items-center gap-1 rounded-lg border p-1">
             <Button
               variant={view === "kanban" ? "default" : "ghost"}
@@ -137,7 +142,6 @@ export function TasksPage({ initialColumns }: { initialColumns: KanbanColumn[] }
         </div>
       </div>
 
-      {/* Filters */}
       <div className="flex items-center gap-3">
         <Select value={statusFilter} onValueChange={setStatusFilter}>
           <SelectTrigger className="w-45">
@@ -168,14 +172,17 @@ export function TasksPage({ initialColumns }: { initialColumns: KanbanColumn[] }
         </Select>
       </div>
 
-      {/* View */}
       {view === "kanban" ? (
-        <KanbanBoard columns={filteredColumns} onTaskMove={handleTaskMove} />
+        <KanbanBoard 
+          columns={filteredColumns} 
+          onTaskMove={handleTaskMove}
+          onTaskClick={handleTaskClick}
+          onAddTask={handleAddTask}
+        />
       ) : (
         <TaskListView tasks={filteredTasks} />
       )}
 
-      {/* Status Change Modal */}
       {statusModal && (
         <StatusChangeModal
           isOpen={statusModal.isOpen}
@@ -185,6 +192,14 @@ export function TasksPage({ initialColumns }: { initialColumns: KanbanColumn[] }
           fromStatus={statusModal.fromStatus}
           toStatus={statusModal.toStatus}
           taskTitle={statusModal.taskTitle}
+        />
+      )}
+
+      {addTaskModal && (
+        <AddTaskModal
+          isOpen={addTaskModal.isOpen}
+          columnId={addTaskModal.columnId}
+          onClose={() => setAddTaskModal(null)}
         />
       )}
     </div>

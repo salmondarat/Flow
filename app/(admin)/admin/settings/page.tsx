@@ -1,212 +1,225 @@
-import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+"use client";
+
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Wrench, Settings, Brush, FileText, Layers } from "lucide-react";
+import { SettingsNavigation } from "@/components/admin/settings/settings-navigation";
+import { User, Building, Bell, Download as DownloadIcon } from "lucide-react";
 
-// Force dynamic rendering to prevent static generation issues
 export const dynamic = "force-dynamic";
 
-export const metadata = {
-  title: "Settings | Flow Admin",
-};
-
 export default function SettingsPage() {
+  const searchParams = useSearchParams();
+  const activeTab = searchParams.get("tab") || "profile";
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
-        <p className="text-muted-foreground">Manage your account and application settings</p>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Settings</h1>
+        <p className="mt-2 text-gray-500 dark:text-gray-400">
+          Manage your account and application settings
+        </p>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Profile Settings */}
-        <Card className="md:col-span-2">
-          <CardHeader>
-            <CardTitle>Profile Settings</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="space-y-2">
-                <Label htmlFor="name">Display Name</Label>
-                <Input id="name" defaultValue="Admin User" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" defaultValue="admin@flow.local" />
-              </div>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="bio">Bio</Label>
-              <Input
-                id="bio"
-                placeholder="Tell us about yourself"
-                defaultValue="Gunpla custom build specialist"
-              />
-            </div>
-            <Button>Save Changes</Button>
-          </CardContent>
-        </Card>
+      <SettingsNavigation activeTab={activeTab} />
 
-        {/* Business Settings */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Business Info</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+      <div className="max-w-3xl">
+        {activeTab === "profile" && <ProfileSettings />}
+        {activeTab === "business" && <BusinessSettings />}
+        {activeTab === "notifications" && <NotificationsSettings />}
+        {activeTab === "danger" && <DangerZoneSettings />}
+      </div>
+    </div>
+  );
+}
+
+function ProfileSettings() {
+  return (
+    <div className="space-y-6">
+      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+        <div className="mb-6 flex items-center gap-3">
+          <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
+            <User className="h-5 w-5" />
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Profile Settings</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Manage your personal information and preferences
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="business-name">Business Name</Label>
-              <Input id="business-name" defaultValue="Flow Gunpla Service" />
+              <Label htmlFor="name">Display Name</Label>
+              <Input id="name" defaultValue="Admin User" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="currency">Currency</Label>
-              <Input id="currency" defaultValue="Indonesian Rupiah (IDR)" disabled />
-              <p className="text-muted-foreground text-xs">
-                Currency is set based on your pricing configuration
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" type="email" defaultValue="admin@flow.local" />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="bio">Bio</Label>
+            <Input
+              id="bio"
+              placeholder="Tell us about yourself"
+              defaultValue="Gunpla custom build specialist"
+            />
+          </div>
+          <Button>Save Changes</Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BusinessSettings() {
+  return (
+    <div className="space-y-6">
+      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+        <div className="mb-6 flex items-center gap-3">
+          <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
+            <Building className="h-5 w-5" />
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Business Info</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Configure your business details and preferences
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="business-name">Business Name</Label>
+            <Input id="business-name" defaultValue="Flow Gunpla Service" />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="currency">Currency</Label>
+            <Input id="currency" defaultValue="Indonesian Rupiah (IDR)" disabled />
+            <p className="text-muted-foreground text-xs">
+              Currency is set based on your pricing configuration
+            </p>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="timezone">Timezone</Label>
+            <Input id="timezone" defaultValue="Asia/Jakarta (WIB)" />
+          </div>
+          <Button>Update</Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function NotificationsSettings() {
+  return (
+    <div className="space-y-6">
+      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+        <div className="mb-6 flex items-center gap-3">
+          <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
+            <Bell className="h-5 w-5" />
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Notifications</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Configure notification preferences
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800">
+            <div>
+              <p className="font-medium text-gray-900 dark:text-white">New Orders</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Get notified when new orders come in
               </p>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="timezone">Timezone</Label>
-              <Input id="timezone" defaultValue="Asia/Jakarta (WIB)" />
+            <Badge
+              variant="outline"
+              className="border-green-200 bg-green-50 text-green-700 dark:border-green-900 dark:bg-green-950/30 dark:text-green-400"
+            >
+              On
+            </Badge>
+          </div>
+          <Separator />
+          <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800">
+            <div>
+              <p className="font-medium text-gray-900 dark:text-white">Status Updates</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Client notifications for status changes
+              </p>
             </div>
-            <Button>Update</Button>
-          </CardContent>
-        </Card>
+            <Badge
+              variant="outline"
+              className="border-green-200 bg-green-50 text-green-700 dark:border-green-900 dark:bg-green-950/30 dark:text-green-400"
+            >
+              On
+            </Badge>
+          </div>
+          <Separator />
+          <div className="flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800">
+            <div>
+              <p className="font-medium text-gray-900 dark:text-white">Messages</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Client inquiries and contact forms
+              </p>
+            </div>
+            <Badge
+              variant="outline"
+              className="border-green-200 bg-green-50 text-green-700 dark:border-green-900 dark:bg-green-950/30 dark:text-green-400"
+            >
+              On
+            </Badge>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
-        {/* Notification Settings */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Notifications</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">New Orders</p>
-                <p className="text-muted-foreground text-sm">
-                  Get notified when new orders come in
-                </p>
-              </div>
-              <Badge variant="outline">On</Badge>
-            </div>
-            <Separator />
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Status Updates</p>
-                <p className="text-muted-foreground text-sm">
-                  Client notifications for status changes
-                </p>
-              </div>
-              <Badge variant="outline">On</Badge>
-            </div>
-            <Separator />
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Messages</p>
-                <p className="text-muted-foreground text-sm">Client inquiries and contact forms</p>
-              </div>
-              <Badge variant="outline">On</Badge>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Configuration */}
-        <Card className="md:col-span-2">
-          <CardHeader>
-            <CardTitle>Configuration</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-muted-foreground text-sm">
-              Manage service types, complexity levels, add-ons, and form templates for your order
-              system.
+function DangerZoneSettings() {
+  return (
+    <div className="space-y-6">
+      <div className="rounded-2xl border border-red-200 bg-white p-6 shadow-sm dark:border-red-900 dark:bg-gray-900">
+        <div className="mb-6 flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400">
+            <DownloadIcon className="h-5 w-5" />
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-red-600 dark:text-red-400">Danger Zone</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Irreversible and destructive actions
             </p>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              <Link href="/admin/settings/services" className="group">
-                <div className="hover:bg-muted/50 rounded-lg border p-4 transition-colors">
-                  <div className="flex items-center gap-3">
-                    <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
-                      <Wrench className="h-5 w-5" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-medium">Service Types</p>
-                      <p className="text-muted-foreground text-sm">Configure services</p>
-                    </div>
-                    <ArrowRight className="text-muted-foreground h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </div>
-              </Link>
+          </div>
+        </div>
 
-              <Link href="/admin/settings/complexities" className="group">
-                <div className="hover:bg-muted/50 rounded-lg border p-4 transition-colors">
-                  <div className="flex items-center gap-3">
-                    <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
-                      <Layers className="h-5 w-5" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-medium">Complexities</p>
-                      <p className="text-muted-foreground text-sm">Level multipliers</p>
-                    </div>
-                    <ArrowRight className="text-muted-foreground h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </div>
-              </Link>
-
-              <Link href="/admin/settings/addons" className="group">
-                <div className="hover:bg-muted/50 rounded-lg border p-4 transition-colors">
-                  <div className="flex items-center gap-3">
-                    <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
-                      <Settings className="h-5 w-5" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-medium">Add-ons</p>
-                      <p className="text-muted-foreground text-sm">Optional extras</p>
-                    </div>
-                    <ArrowRight className="text-muted-foreground h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </div>
-              </Link>
-
-              <Link href="/admin/settings/form-templates" className="group">
-                <div className="hover:bg-muted/50 rounded-lg border p-4 transition-colors">
-                  <div className="flex items-center gap-3">
-                    <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
-                      <FileText className="h-5 w-5" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-medium">Form Templates</p>
-                      <p className="text-muted-foreground text-sm">Order forms</p>
-                    </div>
-                    <ArrowRight className="text-muted-foreground h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </div>
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Danger Zone */}
-        <Card className="border-destructive/50 md:col-span-2">
-          <CardHeader>
-            <CardTitle className="text-destructive">Danger Zone</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-muted-foreground text-sm">Irreversible and destructive actions</p>
-            <div className="flex gap-4">
-              <Button variant="destructive" size="sm">
-                Export All Data
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground"
-              >
-                Reset Application
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="space-y-4">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            These actions cannot be undone. Please proceed with caution.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Button
+              variant="outline"
+              className="border-red-200 text-red-600 hover:border-red-300 hover:bg-red-50 dark:border-red-900 dark:text-red-400 dark:hover:bg-red-950/30"
+            >
+              <DownloadIcon className="mr-2 h-4 w-4" />
+              Export All Data
+            </Button>
+            <Button
+              variant="outline"
+              className="border-red-200 text-red-600 hover:border-red-300 hover:bg-red-50 dark:border-red-900 dark:text-red-400 dark:hover:bg-red-950/30"
+            >
+              Reset Application
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

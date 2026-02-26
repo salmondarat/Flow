@@ -51,7 +51,7 @@ export default function Faq() {
       }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className="mx-auto w-full max-w-(--breakpoint-xl) px-4 py-16 sm:py-20 md:px-8 md:py-24"
+      className="mx-auto w-full max-w-(--breakpoint-xl) px-4 py-8 sm:py-10 md:px-8 md:py-12"
     >
       <motion.div
         initial={{ y: 20, opacity: 0 }}
@@ -95,7 +95,7 @@ export default function Faq() {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="mt-12 text-center"
       >
-        <p className="text-muted-foreground mb-4">Can't find your answer?</p>
+        <p className="text-muted-foreground mb-4">Can&apos;t find your answer?</p>
         <p className="text-muted-foreground mb-4 text-sm">
           Get in touch with our support team, they are friendly!
         </p>

@@ -21,7 +21,7 @@ export function DashboardContent() {
         </div>
 
         <div className="flex items-center space-x-3">
-          <button className="flex items-center rounded-xl bg-emerald-600 px-5 py-2.5 font-medium text-white shadow-lg shadow-emerald-600/30 transition-all hover:bg-emerald-700">
+          <button className="flex items-center rounded-xl bg-blue-600 px-5 py-2.5 font-medium text-white shadow-lg shadow-blue-600/30 transition-all hover:bg-blue-700">
             <Plus className="mr-2 h-5 w-5" />
             Add Project
           </button>

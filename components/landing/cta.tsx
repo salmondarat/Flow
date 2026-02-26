@@ -13,7 +13,7 @@ export default function Cta() {
 
   return (
     <section className="border-border/50 bg-muted/30 relative overflow-hidden border-y">
-      <div className="mx-auto w-full max-w-(--breakpoint-xl) px-4 py-16 sm:py-20 md:px-8 md:py-32">
+      <div className="mx-auto w-full max-w-(--breakpoint-xl) px-4 py-8 sm:py-10 md:px-8 md:py-12">
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}

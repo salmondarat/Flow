@@ -5,7 +5,6 @@
 
 "use client";
 
-
 import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
@@ -20,7 +19,11 @@ import { Switch } from "@/components/ui/switch";
 import { ArrowLeft, Loader2, Save, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 import { getServiceType, updateServiceType } from "@/lib/api/services";
-import { getComplexityLevels, getComplexityForService, setServiceComplexityMultiplier } from "@/lib/api/complexities";
+import {
+  getComplexityLevels,
+  getComplexityForService,
+  setServiceComplexityMultiplier,
+} from "@/lib/api/complexities";
 import type { ServiceTypeRow, ComplexityLevelRow } from "@/types";
 
 const AVAILABLE_ICONS = [
@@ -160,7 +163,11 @@ export default function EditServicePage() {
       newErrors.slug = "Slug can only contain lowercase letters, numbers, and hyphens";
     }
 
-    if (!formData.basePriceCents || isNaN(Number(formData.basePriceCents)) || Number(formData.basePriceCents) <= 0) {
+    if (
+      !formData.basePriceCents ||
+      isNaN(Number(formData.basePriceCents)) ||
+      Number(formData.basePriceCents) <= 0
+    ) {
       newErrors.basePriceCents = "Base price must be a positive number";
     }
 
@@ -214,7 +221,7 @@ export default function EditServicePage() {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+        <Loader2 className="text-muted-foreground h-8 w-8 animate-spin" />
       </div>
     );
   }
@@ -252,7 +259,7 @@ export default function EditServicePage() {
 
           <div className="grid gap-6 lg:grid-cols-3">
             {/* Service Details */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="space-y-6 lg:col-span-2">
               <Card>
                 <CardHeader>
                   <CardTitle>Service Details</CardTitle>
@@ -301,7 +308,9 @@ export default function EditServicePage() {
                         placeholder="Brief description of this service type..."
                         rows={3}
                         value={formData.description}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
+                        onChange={(e) =>
+                          setFormData((prev) => ({ ...prev, description: e.target.value }))
+                        }
                       />
                     </div>
 
@@ -317,7 +326,9 @@ export default function EditServicePage() {
                                 ? "border-primary bg-primary/10"
                                 : "border-border hover:border-muted-foreground"
                             }`}
-                            onClick={() => setFormData((prev) => ({ ...prev, iconName: icon.value }))}
+                            onClick={() =>
+                              setFormData((prev) => ({ ...prev, iconName: icon.value }))
+                            }
                           >
                             {icon.icon}
                           </button>
@@ -338,10 +349,13 @@ export default function EditServicePage() {
                           value={formData.basePriceCents}
                           onChange={(e) => {
                             setFormData((prev) => ({ ...prev, basePriceCents: e.target.value }));
-                            if (errors.basePriceCents) setErrors((prev) => ({ ...prev, basePriceCents: undefined }));
+                            if (errors.basePriceCents)
+                              setErrors((prev) => ({ ...prev, basePriceCents: undefined }));
                           }}
                         />
-                        {errors.basePriceCents && <p className="text-destructive text-sm">{errors.basePriceCents}</p>}
+                        {errors.basePriceCents && (
+                          <p className="text-destructive text-sm">{errors.basePriceCents}</p>
+                        )}
                       </div>
 
                       <div className="space-y-2">
@@ -355,10 +369,13 @@ export default function EditServicePage() {
                           value={formData.baseDays}
                           onChange={(e) => {
                             setFormData((prev) => ({ ...prev, baseDays: e.target.value }));
-                            if (errors.baseDays) setErrors((prev) => ({ ...prev, baseDays: undefined }));
+                            if (errors.baseDays)
+                              setErrors((prev) => ({ ...prev, baseDays: undefined }));
                           }}
                         />
-                        {errors.baseDays && <p className="text-destructive text-sm">{errors.baseDays}</p>}
+                        {errors.baseDays && (
+                          <p className="text-destructive text-sm">{errors.baseDays}</p>
+                        )}
                       </div>
 
                       <div className="space-y-2">
@@ -370,7 +387,8 @@ export default function EditServicePage() {
                           value={formData.sortOrder}
                           onChange={(e) => {
                             setFormData((prev) => ({ ...prev, sortOrder: e.target.value }));
-                            if (errors.sortOrder) setErrors((prev) => ({ ...prev, sortOrder: undefined }));
+                            if (errors.sortOrder)
+                              setErrors((prev) => ({ ...prev, sortOrder: undefined }));
                           }}
                         />
                       </div>
@@ -380,12 +398,14 @@ export default function EditServicePage() {
                       <div>
                         <p className="font-medium">Active Status</p>
                         <p className="text-muted-foreground text-sm">
-                          Inactive services won't be shown to clients
+                          Inactive services won&apos;t be shown to clients
                         </p>
                       </div>
                       <Switch
                         checked={formData.isActive}
-                        onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, isActive: checked }))}
+                        onCheckedChange={(checked) =>
+                          setFormData((prev) => ({ ...prev, isActive: checked }))
+                        }
                       />
                     </div>
 
@@ -414,9 +434,7 @@ export default function EditServicePage() {
               <Card className="sticky top-4">
                 <CardHeader>
                   <CardTitle className="text-lg">Complexity Multipliers</CardTitle>
-                  <CardDescription>
-                    Override default multipliers for this service
-                  </CardDescription>
+                  <CardDescription>Override default multipliers for this service</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {serviceComplexities.map((sc) => {
@@ -427,10 +445,16 @@ export default function EditServicePage() {
                     return (
                       <div key={sc.complexityId} className="space-y-2 rounded-lg border p-3">
                         <div className="flex items-center justify-between">
-                          <Label htmlFor={`multiplier-${sc.complexityId}`} className="text-sm font-medium">
+                          <Label
+                            htmlFor={`multiplier-${sc.complexityId}`}
+                            className="text-sm font-medium"
+                          >
                             {sc.complexityName}
                           </Label>
-                          <Badge variant={sc.overrideMultiplier ? "default" : "secondary"} className="text-xs">
+                          <Badge
+                            variant={sc.overrideMultiplier ? "default" : "secondary"}
+                            className="text-xs"
+                          >
                             {sc.overrideMultiplier ? "Custom" : "Default"}
                           </Badge>
                         </div>
@@ -442,22 +466,26 @@ export default function EditServicePage() {
                             step="0.1"
                             placeholder={sc.multiplier.toString()}
                             value={sc.overrideMultiplier ?? ""}
-                            onChange={(e) => handleMultiplierChange(sc.complexityId, e.target.value)}
+                            onChange={(e) =>
+                              handleMultiplierChange(sc.complexityId, e.target.value)
+                            }
                             className="h-8"
                           />
                           <span className="text-muted-foreground text-sm">×</span>
                         </div>
                         <div className="text-muted-foreground text-xs">
                           <p>Default: {sc.multiplier}×</p>
-                          <p>Effective: {effectiveMultiplier}× = {formatPrice(totalPrice)}</p>
+                          <p>
+                            Effective: {effectiveMultiplier}× = {formatPrice(totalPrice)}
+                          </p>
                         </div>
                       </div>
                     );
                   })}
 
                   <p className="text-muted-foreground text-xs">
-                    Leave empty to use the default multiplier. Custom values override the default for this
-                    service only.
+                    Leave empty to use the default multiplier. Custom values override the default
+                    for this service only.
                   </p>
                 </CardContent>
               </Card>

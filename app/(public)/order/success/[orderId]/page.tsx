@@ -49,8 +49,8 @@ export default async function OrderSuccessPage({ params }: OrderSuccessPageProps
           <div className="bg-muted rounded-lg p-4">
             <p className="text-muted-foreground mb-2 text-sm">What happens next?</p>
             <ul className="space-y-1 text-left text-sm">
-              <li>✓ We'll review your order details</li>
-              <li>✓ You'll receive a confirmation via WhatsApp/Email</li>
+              <li>✓ We&apos;ll review your order details</li>
+              <li>✓ You&apos;ll receive a confirmation via WhatsApp/Email</li>
               <li>✓ Track progress anytime using your order ID</li>
             </ul>
           </div>

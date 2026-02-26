@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Eye, EyeOff, Loader2, Chrome, User, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -163,10 +164,11 @@ const AnimatedSignIn: React.FC<AnimatedSignInProps> = ({ defaultRole = "client" 
               <div className="grid h-full grid-cols-2 grid-rows-3 gap-4 overflow-hidden p-6">
                 {/* Top left - Person working */}
                 <div className="overflow-hidden rounded-xl">
-                  <img
+                  <Image
                     src="/images/28. .jpg"
                     alt="Person working"
-                    className="h-full w-full object-cover"
+                    fill
+                    className="object-cover"
                     style={{ opacity: 0.9 }}
                   />
                 </div>
@@ -189,20 +191,22 @@ const AnimatedSignIn: React.FC<AnimatedSignInProps> = ({ defaultRole = "client" 
 
                 {/* Middle left - Person at computer */}
                 <div className="overflow-hidden rounded-xl">
-                  <img
+                  <Image
                     src="/images/29. .jpg"
                     alt="Person at computer"
-                    className="h-full w-full object-cover"
+                    fill
+                    className="object-cover"
                     style={{ opacity: 0.9 }}
                   />
                 </div>
 
                 {/* Middle right - Office space */}
                 <div className="overflow-hidden rounded-xl">
-                  <img
+                  <Image
                     src="/images/30. .jpg"
                     alt="Office space"
-                    className="h-full w-full object-cover"
+                    fill
+                    className="object-cover"
                     style={{ opacity: 0.9 }}
                   />
                 </div>
@@ -225,10 +229,11 @@ const AnimatedSignIn: React.FC<AnimatedSignInProps> = ({ defaultRole = "client" 
 
                 {/* Bottom right - Library */}
                 <div className="overflow-hidden rounded-xl">
-                  <img
+                  <Image
                     src="/images/31. .jpg"
                     alt="Desk setup"
-                    className="h-full w-full object-cover"
+                    fill
+                    className="object-cover"
                     style={{ opacity: 0.9 }}
                   />
                 </div>
@@ -392,7 +397,7 @@ const AnimatedSignIn: React.FC<AnimatedSignInProps> = ({ defaultRole = "client" 
 
               <div className="mt-6 text-center">
                 <p className="text-muted-foreground text-sm">
-                  Don't have an account?{" "}
+                  Don&apos;t have an account?{" "}
                   <Link href="/register" className="text-primary hover:text-primary/80 font-medium">
                     Sign up
                   </Link>

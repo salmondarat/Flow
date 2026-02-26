@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -14,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { logout } from "@/lib/auth/client";
+import { useAuth } from "@/lib/auth/auth-context";
 
 // Auth pages that should not show user information
 const AUTH_PAGES = ["/auth", "/client/register"];
@@ -22,44 +21,19 @@ const AUTH_PAGES = ["/auth", "/client/register"];
 export function ClientHeader() {
   const router = useRouter();
   const pathname = usePathname();
-  const [user, setUser] = useState<{ email?: string; full_name?: string } | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const { user, isLoading } = useAuth();
 
   // Check if current page is an auth page
   const isAuthPage = AUTH_PAGES.some((path) => pathname?.startsWith(path));
 
-  useEffect(() => {
-    async function fetchUser() {
-      try {
-        const response = await fetch("/api/auth/me");
-        if (response.ok) {
-          const data = await response.json();
-          const displayName = data.user.full_name || data.user.email?.split("@")[0] || "User";
-          setUser({
-            email: data.user.email,
-            full_name: displayName,
-          });
-        }
-      } catch {
-        setUser(null);
-      }
-    }
-
-    fetchUser();
-
-    const handleFocus = () => fetchUser();
-    window.addEventListener("focus", handleFocus);
-    return () => window.removeEventListener("focus", handleFocus);
-  }, []);
-
   const handleLogout = async () => {
-    setIsLoading(true);
     try {
+      const { logout } = await import("@/lib/auth/client");
       await logout();
       router.push("/auth");
       router.refresh();
-    } finally {
-      setIsLoading(false);
+    } catch (error) {
+      console.error("Logout error:", error);
     }
   };
 

@@ -8,7 +8,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24"
+      className="relative mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 md:px-8 md:py-12"
     >
       {/* Background decoration */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">

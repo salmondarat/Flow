@@ -18,8 +18,18 @@ export function CalendarWidget({ className }: CalendarWidgetProps) {
   const month = currentDate.getMonth();
 
   const monthNames = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
 
   const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -43,7 +53,7 @@ export function CalendarWidget({ className }: CalendarWidgetProps) {
     const hasEvent = eventDays.includes(day);
     const is25thOr26thOr27th = [25, 26, 27].includes(day);
 
-    let dayClass = "h-6 w-6 flex items-center justify-center mx-auto text-[10px] font-bold";
+    const dayClass = "h-6 w-6 flex items-center justify-center mx-auto text-[10px] font-bold";
     let bgClass = "";
 
     if (isCurrentDay) {
@@ -51,18 +61,16 @@ export function CalendarWidget({ className }: CalendarWidgetProps) {
     } else if (hasEvent && !is25thOr26thOr27th) {
       bgClass = "bg-purple-100 text-purple-500 dark:bg-purple-950/30 dark:text-purple-400";
     } else if (is25thOr26thOr27th) {
-      bgClass = day === 25
-        ? "bg-orange-400 text-white"
-        : day === 26
-          ? "bg-orange-200 text-orange-700"
-          : "bg-orange-400 text-white";
+      bgClass =
+        day === 25
+          ? "bg-orange-400 text-white"
+          : day === 26
+            ? "bg-orange-200 text-orange-700"
+            : "bg-orange-400 text-white";
     }
 
     days.push(
-      <div
-        key={day}
-        className={cn(dayClass, bgClass, "rounded-full")}
-      >
+      <div key={day} className={cn(dayClass, bgClass, "rounded-full")}>
         {day}
       </div>
     );
@@ -78,7 +86,7 @@ export function CalendarWidget({ className }: CalendarWidgetProps) {
   return (
     <div
       className={cn(
-        "dashboard-card dashboard-hover rounded-dashboard-3xl flex flex-col gap-4 border-dashboard-subtle p-5",
+        "dashboard-card dashboard-hover rounded-dashboard-3xl border-dashboard-subtle flex flex-col gap-4 p-5",
         className
       )}
     >
@@ -86,30 +94,33 @@ export function CalendarWidget({ className }: CalendarWidgetProps) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="text-lg">🗓️</span>
-          <h3 className="font-bold text-dashboard-primary dark:text-white">Calendar</h3>
+          <h3 className="text-dashboard-primary font-bold dark:text-white">Calendar</h3>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1 text-[10px] font-bold text-gray-400">
             {monthNames[month]}{" "}
             <svg className="h-2 w-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path d="M19 9l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} />
+              <path
+                d="M19 9l-7 7-7-7"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+              />
             </svg>
           </div>
-          <button className="text-gray-400 font-bold">••</button>
+          <button className="font-bold text-gray-400">••</button>
         </div>
       </div>
 
       {/* Day Headers */}
-      <div className="grid grid-cols-7 text-center text-[10px] text-gray-400 font-bold mb-2">
+      <div className="mb-2 grid grid-cols-7 text-center text-[10px] font-bold text-gray-400">
         {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day) => (
           <span key={day}>{day}</span>
         ))}
       </div>
 
       {/* Calendar Days */}
-      <div className="grid grid-cols-7 gap-y-3">
-        {days}
-      </div>
+      <div className="grid grid-cols-7 gap-y-3">{days}</div>
     </div>
   );
 }

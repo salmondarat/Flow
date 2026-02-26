@@ -5,7 +5,6 @@
 
 "use client";
 
-
 import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
@@ -100,7 +99,11 @@ export default function EditComplexityPage() {
       newErrors.slug = "Slug can only contain lowercase letters, numbers, and hyphens";
     }
 
-    if (!formData.multiplier || isNaN(Number(formData.multiplier)) || Number(formData.multiplier) <= 0) {
+    if (
+      !formData.multiplier ||
+      isNaN(Number(formData.multiplier)) ||
+      Number(formData.multiplier) <= 0
+    ) {
       newErrors.multiplier = "Multiplier must be a positive number";
     }
 
@@ -145,7 +148,7 @@ export default function EditComplexityPage() {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+        <Loader2 className="text-muted-foreground h-8 w-8 animate-spin" />
       </div>
     );
   }
@@ -236,15 +239,21 @@ export default function EditComplexityPage() {
                       value={formData.multiplier}
                       onChange={(e) => {
                         setFormData((prev) => ({ ...prev, multiplier: e.target.value }));
-                        if (errors.multiplier) setErrors((prev) => ({ ...prev, multiplier: undefined }));
+                        if (errors.multiplier)
+                          setErrors((prev) => ({ ...prev, multiplier: undefined }));
                       }}
                       className="flex-1"
                     />
-                    <Badge variant={getMultiplierBadge(Number(formData.multiplier))} className="h-10 px-4">
+                    <Badge
+                      variant={getMultiplierBadge(Number(formData.multiplier))}
+                      className="h-10 px-4"
+                    >
                       {Number(formData.multiplier).toFixed(1)}×
                     </Badge>
                   </div>
-                  {errors.multiplier && <p className="text-destructive text-sm">{errors.multiplier}</p>}
+                  {errors.multiplier && (
+                    <p className="text-destructive text-sm">{errors.multiplier}</p>
+                  )}
                   <p className="text-muted-foreground text-xs">
                     The price multiplier applied to the base service price
                   </p>
@@ -280,7 +289,8 @@ export default function EditComplexityPage() {
                     value={formData.sortOrder}
                     onChange={(e) => {
                       setFormData((prev) => ({ ...prev, sortOrder: e.target.value }));
-                      if (errors.sortOrder) setErrors((prev) => ({ ...prev, sortOrder: undefined }));
+                      if (errors.sortOrder)
+                        setErrors((prev) => ({ ...prev, sortOrder: undefined }));
                     }}
                   />
                 </div>
@@ -289,12 +299,14 @@ export default function EditComplexityPage() {
                   <div>
                     <p className="font-medium">Active Status</p>
                     <p className="text-muted-foreground text-sm">
-                      Inactive complexities won't be shown to clients
+                      Inactive complexities won&apos;t be shown to clients
                     </p>
                   </div>
                   <Switch
                     checked={formData.isActive}
-                    onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, isActive: checked }))}
+                    onCheckedChange={(checked) =>
+                      setFormData((prev) => ({ ...prev, isActive: checked }))
+                    }
                   />
                 </div>
 

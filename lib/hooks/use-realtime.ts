@@ -146,12 +146,10 @@ export function usePolling<T>(
   } = {}
 ) {
   const { interval = 10000, enabled = true } = options;
-  const [isPolling, setIsPolling] = useState<boolean>(false);
+  const [isPolling, setIsPolling] = useState<boolean>(enabled);
 
   useEffect(() => {
     if (!enabled) return;
-
-    setIsPolling(true);
 
     const poll = async () => {
       try {

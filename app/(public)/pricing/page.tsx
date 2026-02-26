@@ -18,13 +18,7 @@ export const dynamic = "force-dynamic";
 export default function PricingPage() {
   unstable_noStore();
   const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const isLight = mounted ? theme === "light" : false;
+  const isLight = theme === "light";
 
   const plans = [
     {
@@ -89,7 +83,9 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className={`relative w-full font-sans ${isLight ? "bg-white text-zinc-900" : "bg-zinc-950 text-white"}`}>
+    <div
+      className={`relative w-full font-sans ${isLight ? "bg-white text-zinc-900" : "bg-zinc-950 text-white"}`}
+    >
       {/* Background Image */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center opacity-40"
@@ -102,8 +98,8 @@ export default function PricingPage() {
 
       {/* Gradient Blobs */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute left-1/4 top-0 h-96 w-96 rounded-full bg-indigo-500/10 blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl" />
+        <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-indigo-500/10 blur-3xl" />
+        <div className="absolute right-1/4 bottom-0 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl" />
       </div>
 
       {/* Dot Pattern */}
@@ -135,9 +131,7 @@ export default function PricingPage() {
             >
               <Sparkles className="h-4 w-4 text-amber-500" />
               <span
-                className={`text-xs font-medium ${
-                  isLight ? "text-zinc-700" : "text-zinc-400"
-                }`}
+                className={`text-xs font-medium ${isLight ? "text-zinc-700" : "text-zinc-400"}`}
               >
                 Flexible Pricing
               </span>
@@ -160,7 +154,8 @@ export default function PricingPage() {
                 isLight ? "text-zinc-600" : "text-zinc-400"
               }`}
             >
-              Simple, transparent pricing that scales with your business. No hidden fees, cancel anytime.
+              Simple, transparent pricing that scales with your business. No hidden fees, cancel
+              anytime.
             </p>
           </motion.div>
         </section>
@@ -200,16 +195,14 @@ export default function PricingPage() {
 
                   {/* Plan Name */}
                   <h3
-                    className={`mb-1 text-xl font-bold ${
-                      isLight ? "text-zinc-900" : "text-white"
-                    }`}
+                    className={`mb-1 text-xl font-bold ${isLight ? "text-zinc-900" : "text-white"}`}
                   >
                     {plan.name}
                   </h3>
 
                   {/* Plan Type */}
                   <p
-                    className={`mb-4 text-xs font-mono uppercase ${
+                    className={`mb-4 font-mono text-xs uppercase ${
                       isLight ? "text-zinc-500" : "text-zinc-500"
                     }`}
                   >
@@ -238,11 +231,7 @@ export default function PricingPage() {
                   </div>
 
                   {/* Description */}
-                  <p
-                    className={`mb-6 text-sm ${
-                      isLight ? "text-zinc-600" : "text-zinc-400"
-                    }`}
-                  >
+                  <p className={`mb-6 text-sm ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
                     {plan.description}
                   </p>
 
@@ -256,7 +245,7 @@ export default function PricingPage() {
                         }`}
                       >
                         <div
-                          className={`flex-shrink-0 flex h-5 w-5 items-center justify-center rounded-full ${
+                          className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full ${
                             isLight ? "bg-zinc-900/10" : "bg-white/10"
                           }`}
                         >
@@ -270,12 +259,12 @@ export default function PricingPage() {
                   {/* CTA Button */}
                   <Link
                     href="/register"
-                    className={`inline-flex items-center justify-center w-full rounded-full px-6 py-3 text-sm font-semibold transition-all ${
+                    className={`inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition-all ${
                       plan.highlighted
                         ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/30 hover:scale-[1.02] hover:shadow-indigo-500/50"
                         : isLight
-                        ? "border border-zinc-900/20 bg-zinc-900/10 text-zinc-900 hover:bg-zinc-900/20"
-                        : "border border-white/20 bg-white/10 text-white hover:bg-white/20"
+                          ? "border border-zinc-900/20 bg-zinc-900/10 text-zinc-900 hover:bg-zinc-900/20"
+                          : "border border-white/20 bg-white/10 text-white hover:bg-white/20"
                     }`}
                     aria-label={`Select ${plan.name} plan`}
                   >
@@ -290,9 +279,9 @@ export default function PricingPage() {
 
         {/* FAQ Section */}
         <section className="relative mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-3xl border backdrop-blur-xl mx-auto max-w-3xl">
+          <div className="relative mx-auto max-w-3xl overflow-hidden rounded-3xl border backdrop-blur-xl">
             {/* Background Decoration */}
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl" />
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500/5 to-purple-500/5" />
 
             <div className="relative p-8 sm:p-12">
               <motion.div
@@ -313,9 +302,7 @@ export default function PricingPage() {
 
                 {/* Heading */}
                 <h2
-                  className={`mb-4 text-2xl font-bold ${
-                    isLight ? "text-zinc-900" : "text-white"
-                  }`}
+                  className={`mb-4 text-2xl font-bold ${isLight ? "text-zinc-900" : "text-white"}`}
                 >
                   Frequently Asked Questions
                 </h2>
@@ -347,9 +334,7 @@ export default function PricingPage() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: 0.7 + i * 0.1 }}
                       className={`rounded-2xl border p-6 ${
-                        isLight
-                          ? "border-zinc-900/10 bg-zinc-900/5"
-                          : "border-white/10 bg-white/5"
+                        isLight ? "border-zinc-900/10 bg-zinc-900/5" : "border-white/10 bg-white/5"
                       }`}
                     >
                       <h3
@@ -359,11 +344,7 @@ export default function PricingPage() {
                       >
                         {faq.q}
                       </h3>
-                      <p
-                        className={`text-sm ${
-                          isLight ? "text-zinc-600" : "text-zinc-400"
-                        }`}
-                      >
+                      <p className={`text-sm ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
                         {faq.a}
                       </p>
                     </motion.div>
@@ -384,29 +365,19 @@ export default function PricingPage() {
             className="relative mx-auto max-w-3xl"
           >
             <div
-              className={`relative overflow-hidden rounded-3xl border p-8 sm:p-12 backdrop-blur-xl ${
-                isLight
-                  ? "border-zinc-900/10 bg-zinc-900/5"
-                  : "border-white/10 bg-white/5"
+              className={`relative overflow-hidden rounded-3xl border p-8 backdrop-blur-xl sm:p-12 ${
+                isLight ? "border-zinc-900/10 bg-zinc-900/5" : "border-white/10 bg-white/5"
               }`}
             >
               {/* Background Decoration */}
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 rounded-3xl" />
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500/5 to-purple-500/5" />
 
               {/* Content */}
               <div className="relative text-center">
-                <p
-                  className={`text-lg ${
-                    isLight ? "text-zinc-600" : "text-zinc-400"
-                  }`}
-                >
+                <p className={`text-lg ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
                   Still have questions?
                 </p>
-                <p
-                  className={`mt-2 text-sm ${
-                    isLight ? "text-zinc-500" : "text-zinc-500"
-                  }`}
-                >
+                <p className={`mt-2 text-sm ${isLight ? "text-zinc-500" : "text-zinc-500"}`}>
                   Our team is here to help you find the perfect plan for your studio.
                 </p>
 

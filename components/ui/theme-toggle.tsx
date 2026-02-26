@@ -1,16 +1,9 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 
 export function ThemeToggle() {
   const { setTheme, theme, systemTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  // Ensure component is mounted to avoid hydration mismatch
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   // Determine the actual current theme
   const currentTheme = theme === "system" ? systemTheme : theme;
@@ -20,10 +13,6 @@ export function ThemeToggle() {
     const newTheme = isDark ? "light" : "dark";
     setTheme(newTheme);
   };
-
-  if (!mounted) {
-    return <div className="h-10 w-10" />;
-  }
 
   return (
     <button

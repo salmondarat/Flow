@@ -1,8 +1,9 @@
 "use client";
 
 import type React from "react";
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef } from "react";
 import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const testimonials = [
   {
@@ -34,15 +35,6 @@ const testimonials = [
   },
 ];
 
-function usePreloadImages(images: string[]) {
-  useEffect(() => {
-    images.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, [images]);
-}
-
 function SplitText({ text }: { text: string }) {
   const words = text.split(" ");
 
@@ -71,8 +63,6 @@ export function CleanTestimonial() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  usePreloadImages(testimonials.map((t) => t.avatar));
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -175,9 +165,10 @@ export function CleanTestimonial() {
             }`}
             whileHover={{ scale: 1.1, opacity: 1 }}
           >
-            <img
+            <Image
               src={t.avatar || "/placeholder.svg"}
               alt={t.author}
+              fill
               className="h-full w-full object-cover"
             />
           </motion.div>
@@ -210,17 +201,22 @@ export function CleanTestimonial() {
                 transition={{ duration: 0.5 }}
               />
               {testimonials.map((t, i) => (
-                <motion.img
+                <motion.div
                   key={t.avatar}
-                  src={t.avatar}
-                  alt={t.author}
-                  className="absolute inset-0 h-12 w-12 rounded-full object-cover grayscale transition-[filter] duration-500 hover:grayscale-0 sm:h-14 sm:w-14"
                   animate={{
                     opacity: i === activeIndex ? 1 : 0,
                     zIndex: i === activeIndex ? 1 : 0,
                   }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
-                />
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={t.avatar}
+                    alt={t.author}
+                    fill
+                    className="h-12 w-12 rounded-full object-cover grayscale transition-[filter] duration-500 hover:grayscale-0 sm:h-14 sm:w-14"
+                  />
+                </motion.div>
               ))}
             </div>
 

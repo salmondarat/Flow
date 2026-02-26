@@ -15,7 +15,7 @@ const iconStyles: Record<ProjectIconType, string> = {
   code: "text-amber-600 bg-amber-100 dark:bg-amber-900/30",
   person_add: "text-blue-600 bg-blue-100 dark:bg-blue-900/30",
   dashboard: "text-purple-600 bg-purple-100 dark:bg-purple-900/30",
-  speed: "text-emerald-600 bg-emerald-100 dark:bg-emerald-900/30",
+  speed: "text-blue-600 bg-blue-100 dark:bg-blue-900/30",
 };
 
 // Gunpla service type labels
@@ -27,39 +27,33 @@ const serviceLabels: Record<string, string> = {
 };
 
 export function ProjectListWidget() {
-  const [projects, setProjects] = useState<ProjectListItem[]>([]);
-  const [widgetState, setWidgetState] = useState<WidgetState>("loading");
-
-  useEffect(() => {
-    // Sample Gunpla orders data
-    setProjects([
-      {
-        id: "1",
-        name: "RX-78-2 Gundam - Full Custom",
-        dueDate: new Date("2026-02-28"),
-        type: "code",
-      },
-      {
-        id: "2",
-        name: "Wing Zero Custom - Paint + Panel",
-        dueDate: new Date("2026-03-05"),
-        type: "person_add",
-      },
-      {
-        id: "3",
-        name: "Barbatos Lupus Rex - Weathering",
-        dueDate: new Date("2026-03-12"),
-        type: "dashboard",
-      },
-      {
-        id: "4",
-        name: "Unicorn Gundam - LED Install",
-        dueDate: new Date("2026-03-18"),
-        type: "speed",
-      },
-    ]);
-    setWidgetState("success");
-  }, []);
+  const [projects, setProjects] = useState<ProjectListItem[]>([
+    {
+      id: "1",
+      name: "RX-78-2 Gundam - Full Custom",
+      dueDate: new Date("2026-02-28"),
+      type: "code",
+    },
+    {
+      id: "2",
+      name: "Wing Zero Custom - Paint + Panel",
+      dueDate: new Date("2026-03-05"),
+      type: "person_add",
+    },
+    {
+      id: "3",
+      name: "Barbatos Lupus Rex - Weathering",
+      dueDate: new Date("2026-03-12"),
+      type: "dashboard",
+    },
+    {
+      id: "4",
+      name: "Unicorn Gundam - LED Install",
+      dueDate: new Date("2026-03-18"),
+      type: "speed",
+    },
+  ]);
+  const [widgetState, setWidgetState] = useState<WidgetState>("success");
 
   const formatDate = (date: Date): string => {
     return new Intl.DateTimeFormat("en-US", {

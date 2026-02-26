@@ -5,20 +5,14 @@ import type { Reminder, WidgetState } from "./types";
 import { useState, useEffect } from "react";
 
 export function RemindersWidget() {
-  const [reminder, setReminder] = useState<Reminder | null>(null);
-  const [widgetState, setWidgetState] = useState<WidgetState>("loading");
+  const [reminder, setReminder] = useState<Reminder>({
+    id: "1",
+    title: "Client Consultation - RX-93 Nu Gundam Custom",
+    startTime: "02:00 PM",
+    endTime: "03:30 PM",
+  });
+  const [widgetState, setWidgetState] = useState<WidgetState>("success");
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Gunpla business context - client consultation
-    setReminder({
-      id: "1",
-      title: "Client Consultation - RX-93 Nu Gundam Custom",
-      startTime: "02:00 PM",
-      endTime: "03:30 PM",
-    });
-    setWidgetState("success");
-  }, []);
 
   if (widgetState === "loading") {
     return (
@@ -61,7 +55,7 @@ export function RemindersWidget() {
       </div>
 
       <div className="mt-8">
-        <button className="group flex w-full items-center justify-center rounded-xl bg-emerald-600 py-4 font-semibold text-white shadow-lg shadow-emerald-600/20 transition-all hover:bg-emerald-700">
+        <button className="group flex w-full items-center justify-center rounded-xl bg-blue-600 py-4 font-semibold text-white shadow-lg shadow-blue-600/20 transition-all hover:bg-blue-700">
           <Video className="mr-2 h-5 w-5 group-hover:animate-pulse" />
           Join Call
         </button>

@@ -19,7 +19,7 @@ const services = [
     title: "Custom Build Management",
     description:
       "Manage multiple custom build orders with ease. Track each build from submission to delivery with intuitive dashboards.",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    image: "/images/1. .jpg",
     size: "large",
   },
   {
@@ -27,21 +27,21 @@ const services = [
     title: "Progress Tracking",
     description:
       "Real-time visibility into build progress with beautiful analytics and client portals.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80",
+    image: "/images/2. .jpg",
     size: "medium",
   },
   {
     icon: RefreshCw,
     title: "Change Requests",
     description: "Streamlined modification workflows with automated approvals and impact tracking.",
-    image: "https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?w=600&q=80",
+    image: "/images/3. .jpg",
     size: "medium",
   },
   {
     icon: Layers,
     title: "Multi-Kit Support",
     description: "Manage complex projects with multiple kits in one unified dashboard.",
-    image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80",
+    image: "/images/4. .jpg",
     size: "wide",
   },
   {
@@ -49,7 +49,7 @@ const services = [
     title: "Public Tracking",
     description:
       "Share build progress with anyone via public links. Perfect for communities and showcases.",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80",
+    image: "/images/5. .jpg",
     size: "wide",
   },
 ];
@@ -78,7 +78,7 @@ const itemVariants = {
 
 export default function Services() {
   return (
-    <section className="relative mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 md:py-24 lg:px-8">
+    <section className="relative mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-10 md:py-12 lg:px-8">
       {/* Background decoration */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-gradient-to-br from-indigo-500/10 to-purple-500/10 blur-3xl" />

@@ -12,14 +12,14 @@ function StatCard({ data }: StatCardProps) {
 
   if (isPrimary) {
     return (
-      <div className="group relative overflow-hidden rounded-2xl bg-emerald-600 p-6 text-white transition-all hover:shadow-lg hover:shadow-emerald-600/20">
+      <div className="group relative overflow-hidden rounded-2xl bg-blue-600 p-6 text-white transition-all hover:shadow-lg hover:shadow-blue-600/20">
         {/* Decorative circle */}
         <div className="absolute top-0 right-0 -mt-10 -mr-10 h-32 w-32 rounded-full bg-white/5 transition-transform group-hover:scale-110" />
 
         <div className="relative mb-4 flex items-start justify-between">
           <div className="flex items-center gap-2">
-            {Icon && <Icon className="h-5 w-5 text-emerald-100" />}
-            <h3 className="text-sm font-medium text-emerald-100">{title}</h3>
+            {Icon && <Icon className="h-5 w-5 text-blue-100" />}
+            <h3 className="text-sm font-medium text-blue-100">{title}</h3>
           </div>
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
             <ArrowUpRight className="h-4 w-4 -rotate-45 text-white" />
@@ -30,10 +30,10 @@ function StatCard({ data }: StatCardProps) {
           <p className="text-4xl font-bold">{value}</p>
         </div>
 
-        <div className="relative mt-4 flex items-center text-xs text-emerald-100">
+        <div className="relative mt-4 flex items-center text-xs text-blue-100">
           {trend && (
             <>
-              <span className="mr-2 rounded bg-emerald-500 px-1.5 py-0.5 text-[10px] text-white">
+              <span className="mr-2 rounded bg-blue-500 px-1.5 py-0.5 text-[10px] text-white">
                 {trend.direction === "up" ? `${trend.value} ▲` : `${trend.value} ▼`}
               </span>
             </>
@@ -45,7 +45,7 @@ function StatCard({ data }: StatCardProps) {
   }
 
   return (
-    <div className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:border-emerald-600/50 dark:border-gray-800 dark:bg-gray-900">
+    <div className="group rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:border-blue-600/50 dark:border-gray-800 dark:bg-gray-900">
       <div className="mb-4 flex items-start justify-between">
         <div className="flex items-center gap-2">
           {Icon && <Icon className="h-5 w-5 text-gray-500 dark:text-gray-400" />}
@@ -62,7 +62,7 @@ function StatCard({ data }: StatCardProps) {
 
       <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
         {trend ? (
-          <div className="mr-2 flex items-center rounded bg-emerald-100 px-1.5 py-0.5 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
+          <div className="mr-2 flex items-center rounded bg-blue-100 px-1.5 py-0.5 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400">
             <TrendingUp className="mr-0.5 h-3 w-3" />
             <span className="text-[10px]">{trend.value} ▲</span>
           </div>

@@ -34,15 +34,11 @@ export default async function NewOrderPage() {
       });
 
       if (!response.ok) {
-        /* eslint-disable @typescript-eslint/no-unsafe-assignment */
         const error = await response.json().catch(() => ({ message: "Failed to submit order" }));
-        /* eslint-disable @typescript-eslint/no-unsafe-member-access */
         throw new Error(error.error?.message || error.message || "Failed to submit order");
       }
 
-      /* eslint-disable @typescript-eslint/no-unsafe-assignment */
       const result = await response.json();
-      /* eslint-disable @typescript-eslint/no-unsafe-member-access */
       redirect(`/admin/orders/${result.id}`);
     } catch (error) {
       console.error("Order submission error:", error);

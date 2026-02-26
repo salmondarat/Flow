@@ -22,7 +22,7 @@ export default function Impact() {
   ];
 
   return (
-    <section className="mx-auto w-full max-w-(--breakpoint-xl) px-4 py-16 sm:py-20 md:px-8 md:py-24">
+    <section className="mx-auto w-full max-w-(--breakpoint-xl) px-4 py-8 sm:py-10 md:px-8 md:py-12">
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}

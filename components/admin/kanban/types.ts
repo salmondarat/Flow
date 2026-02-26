@@ -54,12 +54,23 @@ export function orderStatusToColumn(status: OrderStatus): KanbanColumnId {
   const statusMap: Record<OrderStatus, KanbanColumnId> = {
     draft: "todo",
     estimated: "todo",
-    approved: "in-progress",
+    approved: "todo",
     in_progress: "in-progress",
     completed: "completed",
     cancelled: "under-review",
   };
   return statusMap[status] || "todo";
+}
+
+/** Kanban column to order status mapping */
+export function columnToOrderStatus(columnId: KanbanColumnId): OrderStatus {
+  const columnMap: Record<KanbanColumnId, OrderStatus> = {
+    "todo": "draft",
+    "in-progress": "in_progress",
+    "under-review": "cancelled",
+    "completed": "completed",
+  };
+  return columnMap[columnId] || "draft";
 }
 
 /** Calculate due date from created date and estimated days */

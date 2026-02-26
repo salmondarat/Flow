@@ -15,7 +15,7 @@ export default function Partners() {
   const marqueePartners = [...partners, ...partners, ...partners];
 
   return (
-    <section className="border-border/50 bg-muted/30 relative w-full overflow-hidden border-y py-8 sm:py-12">
+    <section className="border-border/50 bg-muted/30 relative w-full overflow-hidden border-y py-4 sm:py-6">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}

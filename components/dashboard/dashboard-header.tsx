@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
@@ -32,6 +33,14 @@ export function DashboardHeader({ role, title }: DashboardHeaderProps) {
   return (
     <header className="border-border bg-card/80 backdrop-blur-sm flex h-16 items-center justify-between border-b px-6">
       <div className="flex items-center gap-4">
+        {/* Back to Site */}
+        <Link
+          href="/"
+          className="text-text-medium hover:text-text-high border-border hover:bg-muted/50 flex items-center gap-2 border px-3 py-2 rounded-lg text-sm transition-colors"
+        >
+          <span className="material-symbols-outlined">home</span>
+          Back to Site
+        </Link>
         {/* Mobile menu trigger - for future implementation */}
         <button className="lg:hidden text-text-medium hover:text-text-high p-2">
           <span className="material-symbols-outlined">menu</span>

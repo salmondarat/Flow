@@ -12,7 +12,8 @@ const PROJECTS = [
     client: "Private Collector",
     year: "2023",
     category: "Gundam",
-    description: "Premium custom paint job with weathering effects and LED lighting system. This project showcases advanced airbrushing techniques and precise color modulation.",
+    description:
+      "Premium custom paint job with weathering effects and LED lighting system. This project showcases advanced airbrushing techniques and precise color modulation.",
     image: "/images/5. .jpg",
   },
   {
@@ -21,7 +22,8 @@ const PROJECTS = [
     client: "Disney Interactive",
     year: "2024",
     category: "Star Wars",
-    description: "Movie-accurate detailing with battle damage effects and custom base. Created for promotional display with full weathering work.",
+    description:
+      "Movie-accurate detailing with battle damage effects and custom base. Created for promotional display with full weathering work.",
     image: "/images/6. .jpg",
   },
   {
@@ -30,7 +32,8 @@ const PROJECTS = [
     client: "Bandai Namco",
     year: "2023",
     category: "Diorama",
-    description: "Urban battle scene with dynamic posing and environmental storytelling. Features custom-built terrain and lighting effects.",
+    description:
+      "Urban battle scene with dynamic posing and environmental storytelling. Features custom-built terrain and lighting effects.",
     image: "/images/7. .jpg",
   },
   {
@@ -39,7 +42,8 @@ const PROJECTS = [
     client: "Private Collector",
     year: "2024",
     category: "Gundam",
-    description: "Classic rebuild with modern articulation and metallic finish. Enhanced with additional panel line detailing and custom decals.",
+    description:
+      "Classic rebuild with modern articulation and metallic finish. Enhanced with additional panel line detailing and custom decals.",
     image: "/images/8. .jpg",
   },
   {
@@ -48,7 +52,8 @@ const PROJECTS = [
     client: "343 Industries",
     year: "2023",
     category: "Halo",
-    description: "1:35 scale replica with opening doors and detailed interior. Commissioned for limited edition promotional materials.",
+    description:
+      "1:35 scale replica with opening doors and detailed interior. Commissioned for limited edition promotional materials.",
     image: "/images/9. .jpg",
   },
   {
@@ -57,7 +62,8 @@ const PROJECTS = [
     client: "Anime Studio",
     year: "2024",
     category: "Evangelion",
-    description: "Bio-mechanical transformation with progressive color shading. Features translucent parts and LED eye system.",
+    description:
+      "Bio-mechanical transformation with progressive color shading. Features translucent parts and LED eye system.",
     image: "/images/10. .jpg",
   },
 ];
@@ -72,7 +78,11 @@ export default function Work() {
       const container = thumbnailContainerRef.current;
       const activeThumb = container.children[activeIndex] as HTMLElement;
       if (activeThumb) {
-        const scrollLeft = activeThumb.offsetLeft - container.offsetLeft - container.clientWidth / 2 + activeThumb.clientWidth / 2;
+        const scrollLeft =
+          activeThumb.offsetLeft -
+          container.offsetLeft -
+          container.clientWidth / 2 +
+          activeThumb.clientWidth / 2;
         container.scrollTo({ left: scrollLeft, behavior: "smooth" });
       }
     }
@@ -83,7 +93,7 @@ export default function Work() {
   const goToNext = () => setActiveIndex((prev) => (prev === PROJECTS.length - 1 ? 0 : prev + 1));
 
   return (
-    <section className="relative mx-auto w-full max-w-360 px-4 py-16 sm:px-6 md:px-8 lg:px-10">
+    <section className="inline-flec mx-auto px-3 py-1.5 sm:px-8 sm:py-16 md:px-12 md:py-20 lg:px-16 lg:py-24">
       {/* Section Header */}
       <motion.div
         initial={{ y: 20, opacity: 0 }}
@@ -94,16 +104,16 @@ export default function Work() {
       >
         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Our Work</h2>
         <p className="text-muted-foreground mx-auto mt-4 max-w-xl">
-          Explore the digital journeys we've crafted with precision and passion.
+          Explore the digital journeys we&apos;ve crafted with precision and passion.
         </p>
       </motion.div>
 
       {/* Main Content */}
       <div className="flex flex-col gap-6 lg:gap-12">
         {/* Info Panel + Image Display */}
-        <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
+        <div className="flex flex-col gap-8 lg:flex-row lg:gap-16">
           {/* Left Info Panel */}
-          <div className="lg:w-1/4 flex flex-col justify-end pb-4 order-2 lg:order-1">
+          <div className="order-2 flex flex-col justify-end pb-4 lg:order-1 lg:w-1/3">
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
@@ -112,7 +122,7 @@ export default function Work() {
               className="space-y-6"
             >
               <div>
-                <span className="text-xs font-bold tracking-widest uppercase mb-2 block text-[#13ec5b]">
+                <span className="mb-2 block text-xs font-bold tracking-widest text-[#13ec5b] uppercase">
                   Featured Project
                 </span>
                 <motion.h1
@@ -120,7 +130,7 @@ export default function Work() {
                   initial={{ y: 10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 0.3 }}
-                  className="text-4xl font-bold leading-tight mb-4 sm:text-5xl"
+                  className="mb-4 text-4xl leading-tight font-bold sm:text-5xl"
                 >
                   {activeProject.title}
                 </motion.h1>
@@ -135,23 +145,27 @@ export default function Work() {
                 </motion.p>
               </div>
 
-              <div className="flex gap-4 items-center pt-4 border-t border-[#13ec5b]/10">
+              <div className="flex items-center gap-4 border-t border-[#13ec5b]/10 pt-4">
                 <div>
-                  <p className="text-[10px] uppercase tracking-wider font-semibold text-slate-500">Client</p>
+                  <p className="text-[10px] font-semibold tracking-wider text-slate-500 uppercase">
+                    Client
+                  </p>
                   <p className="text-sm font-medium">{activeProject.client}</p>
                 </div>
                 <div className="h-8 w-px bg-[#13ec5b]/20"></div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-wider font-semibold text-slate-500">Year</p>
+                  <p className="text-[10px] font-semibold tracking-wider text-slate-500 uppercase">
+                    Year
+                  </p>
                   <p className="text-sm font-medium">{activeProject.year}</p>
                 </div>
               </div>
 
-              <div className="flex gap-2 mt-4">
-                <button className="flex items-center justify-center h-10 w-10 rounded-full border border-slate-700 text-slate-400 hover:border-[#13ec5b] hover:text-[#13ec5b] transition-colors">
+              <div className="mt-4 flex gap-2">
+                <button className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 text-slate-400 transition-colors hover:border-[#13ec5b] hover:text-[#13ec5b]">
                   <Share className="h-5 w-5" />
                 </button>
-                <button className="flex items-center justify-center h-10 w-10 rounded-full border border-slate-700 text-slate-400 hover:border-[#13ec5b] hover:text-[#13ec5b] transition-colors">
+                <button className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 text-slate-400 transition-colors hover:border-[#13ec5b] hover:text-[#13ec5b]">
                   <Info className="h-5 w-5" />
                 </button>
               </div>
@@ -159,13 +173,13 @@ export default function Work() {
           </div>
 
           {/* Main Image Display */}
-          <div className="lg:w-3/4 order-1 lg:order-2">
+          <div className="order-1 lg:order-2 lg:w-2/3">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="w-full min-h-100 lg:min-h-150 rounded-xl overflow-hidden relative bg-slate-900 dark:bg-zinc-900"
+              className="relative min-h-100 w-full overflow-hidden rounded-xl bg-slate-900 lg:min-h-150 dark:bg-zinc-900"
             >
               {/* Main Image */}
               <motion.div
@@ -185,28 +199,28 @@ export default function Work() {
               </motion.div>
 
               {/* Navigation Arrows */}
-              <div className="absolute bottom-6 right-6 flex gap-2 z-10">
+              <div className="absolute right-6 bottom-6 z-10 flex gap-2">
                 <button
                   onClick={goToPrev}
-                  className="bg-black/50 backdrop-blur-md hover:bg-[#13ec5b] hover:text-background-dark text-white h-12 w-12 rounded-full flex items-center justify-center transition-all"
+                  className="hover:text-background-dark flex h-12 w-12 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-md transition-all hover:bg-[#13ec5b]"
                 >
                   <ArrowLeft className="h-5 w-5" />
                 </button>
                 <button
                   onClick={goToNext}
-                  className="bg-black/50 backdrop-blur-md hover:bg-[#13ec5b] hover:text-background-dark text-white h-12 w-12 rounded-full flex items-center justify-center transition-all"
+                  className="hover:text-background-dark flex h-12 w-12 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-md transition-all hover:bg-[#13ec5b]"
                 >
                   <ArrowRight className="h-5 w-5" />
                 </button>
               </div>
 
               {/* Image Counter */}
-              <div className="absolute top-6 right-6 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 z-10">
-                <span className="text-xs font-mono text-[#13ec5b]">
+              <div className="absolute top-6 right-6 z-10 rounded-full border border-white/10 bg-black/50 px-3 py-1 backdrop-blur-md">
+                <span className="font-mono text-xs text-[#13ec5b]">
                   {String(activeIndex + 1).padStart(2, "0")}
                 </span>
-                <span className="text-xs font-mono text-slate-400">/</span>
-                <span className="text-xs font-mono text-white">
+                <span className="font-mono text-xs text-slate-400">/</span>
+                <span className="font-mono text-xs text-white">
                   {String(PROJECTS.length).padStart(2, "0")}
                 </span>
               </div>
@@ -215,23 +229,25 @@ export default function Work() {
         </div>
 
         {/* Divider */}
-        <div className="w-full h-px bg-slate-200 dark:bg-slate-800 my-2"></div>
+        <div className="my-2 h-px w-full bg-slate-200 dark:bg-slate-800"></div>
 
         {/* Thumbnail Slider Section */}
         <div className="flex flex-col gap-4">
-          <div className="flex justify-between items-end px-1">
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-slate-500">Gallery Index</h3>
-            <div className="flex gap-2 text-[#13ec5b]/50 text-xs font-mono items-center">
+          <div className="flex items-end justify-between px-1">
+            <h3 className="text-sm font-semibold tracking-widest text-slate-500 uppercase">
+              Gallery Index
+            </h3>
+            <div className="flex items-center gap-2 font-mono text-xs text-[#13ec5b]/50">
               <span>SCROLL</span>
               <ChevronRight className="h-4 w-4 animate-pulse" />
             </div>
           </div>
 
-          <div className="relative group/slider">
+          <div className="group/slider relative">
             {/* Thumbnails Container */}
             <div
               ref={thumbnailContainerRef}
-              className="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth py-2 px-1"
+              className="no-scrollbar flex gap-4 overflow-x-auto scroll-smooth px-1 py-2"
               style={{
                 scrollbarWidth: "none",
                 msOverflowStyle: "none",
@@ -245,13 +261,13 @@ export default function Work() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   onClick={() => setActiveIndex(index)}
-                  className="shrink-0 w-32 md:w-48 aspect-video relative cursor-pointer group/thumb"
+                  className="group/thumb relative aspect-video w-32 shrink-0 cursor-pointer md:w-48"
                 >
                   {index === activeIndex && (
-                    <div className="absolute inset-0 border-2 border-[#13ec5b] rounded-lg z-20 pointer-events-none"></div>
+                    <div className="pointer-events-none absolute inset-0 z-20 rounded-lg border-2 border-[#13ec5b]"></div>
                   )}
                   <div
-                    className={`w-full h-full rounded-lg transition-all ${
+                    className={`h-full w-full rounded-lg transition-all ${
                       index === activeIndex
                         ? "opacity-100"
                         : "opacity-50 grayscale group-hover/thumb:opacity-100 group-hover/thumb:grayscale-0"
@@ -261,12 +277,12 @@ export default function Work() {
                       src={project.image}
                       alt={project.title}
                       fill
-                      className="object-cover rounded-lg"
+                      className="rounded-lg object-cover"
                       sizes="(max-width: 768px) 128px, 192px"
                     />
                   </div>
                   {index === activeIndex && (
-                    <div className="absolute inset-0 bg-[#13ec5b]/10 rounded-lg"></div>
+                    <div className="absolute inset-0 rounded-lg bg-[#13ec5b]/10"></div>
                   )}
                 </motion.div>
               ))}

@@ -1,6 +1,5 @@
 "use client";
 
-
 import { unstable_noStore } from "next/cache";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
@@ -16,7 +15,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { Plus, Pencil, Trash2, Eye, ArrowLeft } from "lucide-react";
+import { Plus, Pencil, Trash2, Eye } from "lucide-react";
+import { SettingsNavigation } from "@/components/admin/settings/settings-navigation";
 
 interface FormTemplate {
   id: string;
@@ -109,96 +109,83 @@ export default function FormTemplatesPage() {
   }
 
   return (
-    <div className="bg-muted/30 min-h-screen">
-      <header className="bg-background border-b">
-        <div className="container flex h-16 items-center px-4">
-          <Link
-            href="/admin/settings"
-            className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Dashboard
-          </Link>
-        </div>
-      </header>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Form Templates</h1>
+        <p className="mt-2 text-gray-500 dark:text-gray-400">
+          Manage order form templates for client orders
+        </p>
+      </div>
 
-      <main className="container px-4 py-8">
-        <div className="mx-auto max-w-6xl space-y-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold">Form Templates</h1>
-              <p className="text-muted-foreground mt-2">
-                Manage order form templates for client orders
-              </p>
-            </div>
-            <Link href="/admin/settings/form-templates/new">
-              <Button>
-                <Plus className="mr-2 h-4 w-4" />
-                New Template
-              </Button>
-            </Link>
-          </div>
+      <SettingsNavigation activeTab="forms" />
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {templates.map((template) => (
-              <Card key={template.id} className="relative">
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <CardTitle className="flex items-center gap-2">
-                        {template.name}
-                        {template.is_default && <Badge variant="default">Default</Badge>}
-                      </CardTitle>
-                      {template.description && (
-                        <CardDescription className="mt-1">{template.description}</CardDescription>
-                      )}
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="text-muted-foreground text-sm">
-                      <p>Version: {template.version}</p>
-                      <p>Updated: {formatDate(template.updated_at)}</p>
-                    </div>
+      <div className="mb-6 flex items-center justify-between">
+        <Link href="/admin/settings/form-templates/new">
+          <Button>
+            <Plus className="mr-2 h-4 w-4" />
+            New Template
+          </Button>
+        </Link>
+      </div>
 
-                    <div className="flex gap-2">
-                      <Link href={`/admin/settings/form-templates/${template.id}`}>
-                        <Button variant="outline" size="sm" className="flex-1" asChild>
-                          <Pencil className="mr-2 h-3 w-3" />
-                          Edit
-                        </Button>
-                      </Link>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setTemplateToDelete(template)}
-                        className="text-destructive hover:text-destructive"
-                      >
-                        <Trash2 className="h-3 w-3" />
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {templates.map((template) => (
+          <Card key={template.id} className="relative">
+            <CardHeader>
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <CardTitle className="flex items-center gap-2">
+                    {template.name}
+                    {template.is_default && <Badge variant="default">Default</Badge>}
+                  </CardTitle>
+                  {template.description && (
+                    <CardDescription className="mt-1">{template.description}</CardDescription>
+                  )}
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="text-muted-foreground text-sm">
+                  <p>Version: {template.version}</p>
+                  <p>Updated: {formatDate(template.updated_at)}</p>
+                </div>
 
-            {templates.length === 0 && (
-              <Card className="col-span-full">
-                <CardContent className="flex flex-col items-center justify-center py-16">
-                  <p className="text-muted-foreground mb-4">No form templates found</p>
-                  <Link href="/admin/settings/form-templates/new">
-                    <Button>
-                      <Plus className="mr-2 h-4 w-4" />
-                      Create Your First Template
+                <div className="flex gap-2">
+                  <Link href={`/admin/settings/form-templates/${template.id}`}>
+                    <Button variant="outline" size="sm" className="flex-1" asChild>
+                      <Pencil className="mr-2 h-3 w-3" />
+                      Edit
                     </Button>
                   </Link>
-                </CardContent>
-              </Card>
-            )}
-          </div>
-        </div>
-      </main>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setTemplateToDelete(template)}
+                    className="text-destructive hover:text-destructive"
+                  >
+                    <Trash2 className="h-3 w-3" />
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+
+        {templates.length === 0 && (
+          <Card className="col-span-full">
+            <CardContent className="flex flex-col items-center justify-center py-16">
+              <p className="text-muted-foreground mb-4">No form templates found</p>
+              <Link href="/admin/settings/form-templates/new">
+                <Button>
+                  <Plus className="mr-2 h-4 w-4" />
+                  Create Your First Template
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        )}
+      </div>
 
       {/* Delete Confirmation Dialog */}
       <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
@@ -206,8 +193,8 @@ export default function FormTemplatesPage() {
           <DialogHeader>
             <DialogTitle>Delete Form Template</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete "{templateToDelete?.name}"? This action cannot be
-              undone.
+              Are you sure you want to delete &quot;{templateToDelete?.name}&quot;? This action
+              cannot be undone.
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-end gap-4">

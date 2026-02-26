@@ -46,9 +46,24 @@ next-env.d.ts
 /.claude
 /.opencode
 /.vscode
+/.gemini
+/.planning
+/.bin
 /openspec
 /references
+/issues
+/notes
+/diagrams
+/roadmap
+/feedback
+/docs
+/ideas
 
 # AI Agents
 AGENTS.md
 CLAUDE.md
+
+# Logs
+*.log
+logs
+*.log.*

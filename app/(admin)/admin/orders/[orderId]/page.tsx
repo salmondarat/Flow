@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -248,9 +249,11 @@ export default async function OrderDetailsPage({
                     {new Date(log.created_at).toLocaleString()}
                   </p>
                   {log.photo_url && (
-                    <img
+                    <Image
                       src={log.photo_url}
                       alt="Progress photo"
+                      width={200}
+                      height={200}
                       className="mt-2 max-w-xs rounded"
                     />
                   )}

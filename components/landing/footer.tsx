@@ -125,7 +125,7 @@ const Footer = () => {
             <p className="text-muted-foreground mb-2 text-xs sm:mb-3 sm:text-sm">
               Stay ahead with design & marketing tips and strategies that drive results.
             </p>
-            <div className="flex gap-2">
+            <div className="flex gap-2" suppressHydrationWarning>
               <Input type="email" placeholder="Enter your email" className="h-9 text-sm sm:h-10" />
               <Button size="sm" className="h-9 px-3 sm:h-10 sm:px-4">
                 <Mail className="h-4 w-4 sm:h-5 sm:w-5" />

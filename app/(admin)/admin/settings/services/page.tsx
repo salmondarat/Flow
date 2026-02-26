@@ -5,7 +5,6 @@
 
 "use client";
 
-
 import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -21,9 +20,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { Plus, Pencil, Trash2, ArrowLeft, Wrench, Settings, Brush } from "lucide-react";
+import { Plus, Pencil, Trash2, Wrench, Settings, Brush } from "lucide-react";
 import { getServiceTypes } from "@/lib/api/services";
 import type { ServiceTypeRow } from "@/types";
+import { SettingsNavigation } from "@/components/admin/settings/settings-navigation";
 
 const ICON_MAP: Record<string, React.ReactNode> = {
   wrench: <Wrench className="h-5 w-5" />,
@@ -108,108 +108,93 @@ export default function ServicesPage() {
   }
 
   return (
-    <div className="bg-muted/30 min-h-screen">
-      <header className="bg-background border-b">
-        <div className="container flex h-16 items-center px-4">
-          <Link
-            href="/admin/settings"
-            className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Settings
-          </Link>
-        </div>
-      </header>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Service Types</h1>
+        <p className="mt-2 text-gray-500 dark:text-gray-400">
+          Manage service types for client orders (Full Build, Repair, Repaint, etc.)
+        </p>
+      </div>
 
-      <main className="container px-4 py-8">
-        <div className="mx-auto max-w-6xl space-y-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-3xl font-bold">Service Types</h1>
-              <p className="text-muted-foreground mt-2">
-                Manage service types for client orders (Full Build, Repair, Repaint, etc.)
-              </p>
-            </div>
-            <Link href="/admin/settings/services/new">
-              <Button>
-                <Plus className="mr-2 h-4 w-4" />
-                New Service
-              </Button>
-            </Link>
-          </div>
+      <SettingsNavigation activeTab="services" />
 
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <Card key={service.id} className={service.is_active ? "" : "opacity-60"}>
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-start gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                        {getIcon(service.icon_name)}
-                      </div>
-                      <div>
-                        <CardTitle className="flex items-center gap-2">
-                          {service.name}
-                          {!service.is_active && <Badge variant="secondary">Inactive</Badge>}
-                        </CardTitle>
-                        <CardDescription className="mt-1">
-                          {service.slug}
-                        </CardDescription>
-                      </div>
-                    </div>
+      <div className="mb-6 flex items-center justify-between">
+        <Link href="/admin/settings/services/new">
+          <Button>
+            <Plus className="mr-2 h-4 w-4" />
+            New Service
+          </Button>
+        </Link>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {services.map((service) => (
+          <Card key={service.id} className={service.is_active ? "" : "opacity-60"}>
+            <CardHeader>
+              <div className="flex items-start justify-between">
+                <div className="flex items-start gap-3">
+                  <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
+                    {getIcon(service.icon_name)}
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="text-muted-foreground text-sm">
-                      <p>Base Price: {formatPrice(service.base_price_cents)}</p>
-                      <p>Base Days: {service.base_days} days</p>
-                      <p>Sort Order: {service.sort_order}</p>
-                    </div>
-
-                    {service.description && (
-                      <p className="text-muted-foreground text-sm line-clamp-2">
-                        {service.description}
-                      </p>
-                    )}
-
-                    <div className="flex gap-2">
-                      <Link href={`/admin/settings/services/${service.id}`}>
-                        <Button variant="outline" size="sm" className="flex-1" asChild>
-                          <Pencil className="mr-2 h-3 w-3" />
-                          Edit
-                        </Button>
-                      </Link>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setServiceToDelete(service)}
-                        className="text-destructive hover:text-destructive"
-                      >
-                        <Trash2 className="h-3 w-3" />
-                      </Button>
-                    </div>
+                  <div>
+                    <CardTitle className="flex items-center gap-2">
+                      {service.name}
+                      {!service.is_active && <Badge variant="secondary">Inactive</Badge>}
+                    </CardTitle>
+                    <CardDescription className="mt-1">{service.slug}</CardDescription>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <div className="text-muted-foreground text-sm">
+                  <p>Base Price: {formatPrice(service.base_price_cents)}</p>
+                  <p>Base Days: {service.base_days} days</p>
+                  <p>Sort Order: {service.sort_order}</p>
+                </div>
 
-            {services.length === 0 && (
-              <Card className="col-span-full">
-                <CardContent className="flex flex-col items-center justify-center py-16">
-                  <p className="text-muted-foreground mb-4">No service types found</p>
-                  <Link href="/admin/settings/services/new">
-                    <Button>
-                      <Plus className="mr-2 h-4 w-4" />
-                      Create Your First Service
+                {service.description && (
+                  <p className="text-muted-foreground line-clamp-2 text-sm">
+                    {service.description}
+                  </p>
+                )}
+
+                <div className="flex gap-2">
+                  <Link href={`/admin/settings/services/${service.id}`}>
+                    <Button variant="outline" size="sm" className="flex-1" asChild>
+                      <Pencil className="mr-2 h-3 w-3" />
+                      Edit
                     </Button>
                   </Link>
-                </CardContent>
-              </Card>
-            )}
-          </div>
-        </div>
-      </main>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setServiceToDelete(service)}
+                    className="text-destructive hover:text-destructive"
+                  >
+                    <Trash2 className="h-3 w-3" />
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+
+        {services.length === 0 && (
+          <Card className="col-span-full">
+            <CardContent className="flex flex-col items-center justify-center py-16">
+              <p className="text-muted-foreground mb-4">No service types found</p>
+              <Link href="/admin/settings/services/new">
+                <Button>
+                  <Plus className="mr-2 h-4 w-4" />
+                  Create Your First Service
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+        )}
+      </div>
 
       {/* Delete Confirmation Dialog */}
       <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
@@ -217,8 +202,9 @@ export default function ServicesPage() {
           <DialogHeader>
             <DialogTitle>Delete Service Type</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete "{serviceToDelete?.name}"? This will soft-delete the
-              service (it won't appear for clients but existing orders will preserve the reference).
+              Are you sure you want to delete &quot;{serviceToDelete?.name}&quot;? This will
+              soft-delete the service (it won&apos;t appear for clients but existing orders will
+              preserve the reference).
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-end gap-4">

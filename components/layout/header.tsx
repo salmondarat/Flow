@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Box, Users, FileText, Shield, Menu, X } from "lucide-react";
+import { ChevronDown, Box, Users, FileText, Shield, Menu, X, User, LogOut, LayoutDashboard } from "lucide-react";
+import { useAuth } from "@/lib/auth/auth-context";
 
 interface MenuItem {
   title: string;
@@ -140,10 +142,33 @@ const megaMenus: MegaMenu[] = [
 ];
 
 export function Header() {
+  const { user, isLoading } = useAuth();
+  const router = useRouter();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const activeMegaMenu = megaMenus.find((menu) => menu.id === activeMenu);
+
+  const handleSignOut = async () => {
+    try {
+      const { createClient } = await import("@/lib/supabase/client");
+      const supabase = createClient();
+      await supabase.auth.signOut();
+      router.push("/");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
+  const getDashboardPath = () => {
+    if (!user) return "/client/dashboard";
+    return user?.role === "admin" ? "/admin/dashboard" : "/client/dashboard";
+  };
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const clearHideTimeout = useCallback(() => {
     if (timeoutRef.current) {
@@ -179,9 +204,9 @@ export function Header() {
   }, [clearHideTimeout]);
 
   return (
-    <header className="relative z-50">
+    <header className="fixed top-0 left-0 right-0 z-50">
       {/* Main Navigation Bar */}
-      <nav className="bg-background/80 sticky top-0 border-b border-neutral-200/50 backdrop-blur-sm">
+      <nav className="bg-background/80 border-b border-neutral-200/50 backdrop-blur-sm">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
           {/* Logo */}
           <Link
@@ -189,10 +214,13 @@ export function Header() {
             className="flex cursor-pointer items-center gap-2"
             suppressHydrationWarning
           >
-            <div className="bg-brand-500 flex h-8 w-8 items-center justify-center rounded-lg text-sm font-semibold text-white">
-              F
+            <div className="bg-sidebar-primary flex h-10 w-10 items-center justify-center rounded-xl text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check h-6 w-6" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
             </div>
-            <span className="text-text-high text-lg font-semibold tracking-tight">Flow</span>
+            <span className="text-sidebar-primary text-2xl font-bold tracking-tight">Flow</span>
           </Link>
 
           {/* Menu Items */}
@@ -224,20 +252,53 @@ export function Header() {
 
             {/* Desktop Actions */}
             <div className="hidden items-center gap-4 md:flex">
-              <Link
-                href="/auth"
-                className="text-text-muted hover:text-text-high text-sm font-medium transition-colors dark:text-neutral-400 dark:hover:text-neutral-200"
-                suppressHydrationWarning
-              >
-                Sign In
-              </Link>
-              <Link
-                href="/register"
-                className="bg-brand-500 hover:bg-brand-600 text-muted dark:text-base-200 transition-color rounded-lg px-4 py-2 text-sm font-medium dark:text-neutral-200 dark:hover:text-neutral-200"
-                suppressHydrationWarning
-              >
-                Get Started
-              </Link>
+              {isLoading ? (
+                <div className="h-9 w-20 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700" />
+              ) : user ? (
+                <div className="flex items-center gap-3">
+                  <Link
+                    href={getDashboardPath()}
+                    className="text-text-muted hover:text-text-high flex items-center gap-2 text-sm font-medium transition-colors"
+                  >
+                    <LayoutDashboard className="h-4 w-4" />
+                    Dashboard
+                  </Link>
+                  <div className="border-border flex items-center gap-3 rounded-full border px-3 py-1.5">
+                    <div className="bg-sidebar-primary flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold text-white">
+                      {user.email?.charAt(0).toUpperCase() || "U"}
+                    </div>
+                    <span className="text-text-high text-sm font-medium">
+                      {user.full_name || user.email?.split("@")[0]}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-7 w-7 text-text-muted hover:text-text-high"
+                      onClick={handleSignOut}
+                      title="Sign out"
+                    >
+                      <LogOut className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <Link
+                    href="/auth"
+                    className="text-text-muted hover:text-text-high text-sm font-medium transition-colors dark:text-neutral-400 dark:hover:text-neutral-200"
+                    suppressHydrationWarning
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="bg-brand-500 hover:bg-brand-600 text-muted dark:text-base-200 transition-color rounded-lg px-4 py-2 text-sm font-medium dark:text-neutral-200 dark:hover:text-neutral-200"
+                    suppressHydrationWarning
+                  >
+                    Get Started
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -262,10 +323,13 @@ export function Header() {
                       className="flex items-center gap-2"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      <div className="bg-brand-500 flex h-8 w-8 items-center justify-center rounded-lg text-sm font-semibold text-white">
-                        F
+                      <div className="bg-sidebar-primary flex h-10 w-10 items-center justify-center rounded-xl text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check h-6 w-6" aria-hidden="true">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <path d="m9 12 2 2 4-4"></path>
+                        </svg>
                       </div>
-                      <span className="text-text-high text-lg font-semibold tracking-tight">
+                      <span className="text-sidebar-primary text-2xl font-bold tracking-tight">
                         Flow
                       </span>
                     </Link>
@@ -300,22 +364,61 @@ export function Header() {
 
                   {/* Mobile Menu Footer */}
                   <div className="border-border border-t pt-4">
-                    <div className="flex flex-col gap-3">
-                      <Link
-                        href="/auth"
-                        className="text-text-muted hover:text-text-high text-center text-sm font-medium transition-colors"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        Sign In
-                      </Link>
-                      <Link
-                        href="/register"
-                        className="bg-brand-500 hover:bg-brand-600 text-high rounded-lg px-4 py-3 text-center text-sm font-medium transition-colors"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        Get Started
-                      </Link>
-                    </div>
+                    {isLoading ? (
+                      <div className="h-12 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700" />
+                    ) : user ? (
+                      <div className="flex flex-col gap-3">
+                        <div className="border-border flex items-center gap-3 rounded-lg border p-3">
+                          <div className="bg-sidebar-primary flex h-10 w-10 items-center justify-center rounded-lg text-sm font-semibold text-white">
+                            {user.email?.charAt(0).toUpperCase() || "U"}
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="text-text-high text-sm font-semibold">
+                              {user.full_name || user.email?.split("@")[0]}
+                            </span>
+                            <span className="text-text-muted text-xs capitalize">
+                              {user.role || "User"}
+                            </span>
+                          </div>
+                        </div>
+                        <Link
+                          href={getDashboardPath()}
+                          className="text-text-muted hover:text-text-high flex items-center justify-center gap-2 rounded-lg border border-neutral-200 px-4 py-3 text-sm font-medium transition-colors dark:border-neutral-700"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          <LayoutDashboard className="h-4 w-4" />
+                          Go to Dashboard
+                        </Link>
+                        <Button
+                          variant="outline"
+                          className="text-text-muted hover:text-text-high"
+                          onClick={() => {
+                            handleSignOut();
+                            setMobileMenuOpen(false);
+                          }}
+                        >
+                          <LogOut className="mr-2 h-4 w-4" />
+                          Sign Out
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col gap-3">
+                        <Link
+                          href="/auth"
+                          className="text-text-muted hover:text-text-high text-center text-sm font-medium transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          Sign In
+                        </Link>
+                        <Link
+                          href="/register"
+                          className="bg-brand-500 hover:bg-brand-600 text-high rounded-lg px-4 py-3 text-center text-sm font-medium transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          Get Started
+                        </Link>
+                      </div>
+                    )}
                   </div>
                 </div>
               </SheetContent>

@@ -15,12 +15,14 @@ import {
   Sparkles,
   Crown,
   ArrowRight,
+  Package,
 } from "lucide-react";
 
 // Menu navigation items (top section)
 const menuItems = [
   { name: "Dashboard", href: "/admin/dashboard", icon: LayoutGrid },
   { name: "Tasks", href: "/admin/tasks", icon: CheckCircle2, badge: "12+" },
+  { name: "Orders", href: "/admin/orders", icon: Package },
   { name: "Calendar", href: "/admin/calendar", icon: CalendarDays },
   { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
   { name: "Team", href: "/admin/clients", icon: Users },
@@ -46,12 +48,12 @@ export function SidebarContent() {
   return (
     <div className="flex h-full flex-col">
       {/* Logo Section */}
-      <div className="flex items-center space-x-3 p-6">
+      <Link href="/" className="flex items-center space-x-3 p-6 hover:bg-sidebar-accent/20 transition-colors">
         <div className="bg-sidebar-primary flex h-10 w-10 items-center justify-center rounded-xl text-white">
           <CheckCircle2 className="h-6 w-6" />
         </div>
         <span className="text-sidebar-primary text-2xl font-bold tracking-tight">Flow</span>
-      </div>
+      </Link>
 
       {/* Navigation */}
       <nav className="flex-1 space-y-8 overflow-y-auto px-4">
@@ -170,7 +172,7 @@ export function SidebarContent() {
               Premium
             </h4>
             <p className="mb-4 text-xs text-white/80">Unlock all features</p>
-            <button className="bg-white text-orange-600 hover:bg-white/90 flex w-full items-center justify-center gap-2 rounded-lg py-2 text-xs font-semibold transition-colors">
+            <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-white py-2 text-xs font-semibold text-orange-600 transition-colors hover:bg-white/90">
               <Sparkles className="h-3 w-3" />
               View Plans
               <ArrowRight className="h-3 w-3" />
