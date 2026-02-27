@@ -5,7 +5,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth/server";
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/server";
 import { getComplexityLevels, createComplexityLevel } from "@/lib/api/complexities";
 import type { ComplexityLevelInsert } from "@/types";
 
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const supabase = createClient();
+    const supabase = await createClient();
 
     // Check if slug already exists
     const { data: existing } = await supabase

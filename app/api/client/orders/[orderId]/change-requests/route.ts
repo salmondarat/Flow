@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth/server";
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/server";
 
 export async function POST(
   request: NextRequest,
@@ -29,7 +29,7 @@ export async function POST(
       return NextResponse.json({ error: "Kit ID and description are required" }, { status: 400 });
     }
 
-    const supabase = createClient();
+    const supabase = await createClient();
 
     // Get the order and verify ownership
     const { data: order, error: fetchError } = await (supabase.from("orders") as any)

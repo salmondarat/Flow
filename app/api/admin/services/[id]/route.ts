@@ -6,7 +6,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth/server";
 import { getServiceType, updateServiceType, deleteServiceType } from "@/lib/api/services";
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/server";
 import type { ServiceTypeUpdate } from "@/types";
 
 interface RouteContext {
@@ -72,7 +72,7 @@ export async function PUT(request: NextRequest, context: RouteContext) {
 
     // If slug is being changed, check for conflicts
     if (slug && slug !== existing.slug) {
-      const supabase = createClient();
+      const supabase = await createClient();
       const { data: slugConflict } = await supabase
         .from("service_types")
         .select("id")
