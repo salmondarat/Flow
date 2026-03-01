@@ -1,2 +1,0 @@
-#!/bin/sh
-exec /media/data/Projects/flow/node_modules/next/dist/bin/next "$@"
