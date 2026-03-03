@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Camera, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -25,11 +25,9 @@ export function ProfilePhotoUpload({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Update preview when currentImage prop changes
-  useState(() => {
-    if (currentImage !== preview) {
-      setPreview(currentImage);
-    }
-  });
+  useEffect(() => {
+    setPreview(currentImage);
+  }, [currentImage]);
 
   const validateFile = useCallback((file: File): string | null => {
     // Check file type
