@@ -42,6 +42,7 @@ export default function SettingsPage() {
 function ProfileSettings() {
   const [isSaving, setIsSaving] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [bio, setBio] = useState("Gunpla custom build specialist");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,11 +89,12 @@ function ProfileSettings() {
             <Textarea
               id="bio"
               placeholder="Tell us about yourself"
-              defaultValue="Gunpla custom build specialist"
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
               maxLength={300}
               rows={3}
             />
-            <p className="text-muted-foreground text-xs text-right">0/300</p>
+            <p className="text-muted-foreground text-xs text-right">{bio.length}/300</p>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
