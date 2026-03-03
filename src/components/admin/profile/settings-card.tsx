@@ -4,7 +4,7 @@ import { ReactNode, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-interface SettingsCardProps {
+export interface SettingsCardProps {
   title: string;
   description?: string;
   icon?: ReactNode;
