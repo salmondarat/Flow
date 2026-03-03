@@ -1,12 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { SettingsNavigation } from "@/components/admin/settings/settings-navigation";
+import { SettingsCard, ProfilePhotoUpload } from "@/components/admin/profile";
 import { User, Building, Bell, Download as DownloadIcon } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -37,43 +40,72 @@ export default function SettingsPage() {
 }
 
 function ProfileSettings() {
+  const [isSaving, setIsSaving] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSaving(true);
+    // TODO: Implement save logic
+    setTimeout(() => {
+      setIsSaving(false);
+    }, 500);
+  };
+
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
-            <User className="h-5 w-5" />
-          </div>
-          <div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Profile Settings</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Manage your personal information and preferences
-            </p>
-          </div>
-        </div>
-
-        <div className="space-y-4">
+      <SettingsCard
+        title="Basic Information"
+        description="Manage your personal information and preferences"
+        icon={<User className="h-5 w-5" />}
+        action={
+          <Button type="submit" form="profile-form" disabled={isSaving}>
+            {isSaving ? "Saving..." : "Save Changes"}
+          </Button>
+        }
+      >
+        <form id="profile-form" onSubmit={handleSubmit} className="space-y-4">
+          <ProfilePhotoUpload
+            currentImage="https://lh3.googleusercontent.com/aida-public/AB6AXuC9Xia8UTvQRkZILRRog998rPqODWDugqzdgMcrdwpmI8tgycZN3wIaqRZJTJ9UGFw8a80pgxNYSPug4VfJQjxCsleHJLT5gGMyO9C_R4BV_2oIKZ9YwVqyVf_ly_3-g6mEzsCyntjBnrCLgA5PEVmAfU681RmnLr9bv4jfwOlUGfXlNNvHBTGAaLOgNKokN-x6fwHb_R5rKr_zR2FSJWiWDZXcVpPRInCJHu0ttGna34JuMx30OvrV09zsxq0HlgGaH6myCPJtj9ng"
+            onImageChange={setSelectedFile}
+          />
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="name">Display Name</Label>
-              <Input id="name" defaultValue="Admin User" />
+              <Label htmlFor="display-name">Display Name</Label>
+              <Input id="display-name" defaultValue="Admin User" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" defaultValue="admin@flow.local" />
+              <Label htmlFor="username">Username</Label>
+              <Input id="username" placeholder="@username" />
             </div>
           </div>
           <div className="space-y-2">
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" type="email" defaultValue="admin@flow.local" disabled />
+          </div>
+          <div className="space-y-2">
             <Label htmlFor="bio">Bio</Label>
-            <Input
+            <Textarea
               id="bio"
               placeholder="Tell us about yourself"
               defaultValue="Gunpla custom build specialist"
+              maxLength={300}
+              rows={3}
             />
+            <p className="text-muted-foreground text-xs text-right">0/300</p>
           </div>
-          <Button>Save Changes</Button>
-        </div>
-      </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <Label htmlFor="location">Location</Label>
+              <Input id="location" placeholder="City, Country" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="website">Website</Label>
+              <Input id="website" type="url" placeholder="https://yourportfolio.com" />
+            </div>
+          </div>
+        </form>
+      </SettingsCard>
     </div>
   );
 }
