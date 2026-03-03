@@ -6,7 +6,18 @@ import { useRouter } from "next/navigation";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Box, Users, FileText, Shield, Menu, X, User, LogOut, LayoutDashboard } from "lucide-react";
+import {
+  ChevronDown,
+  Box,
+  Users,
+  FileText,
+  Shield,
+  Menu,
+  X,
+  User,
+  LogOut,
+  LayoutDashboard,
+} from "lucide-react";
 import { useAuth } from "@/lib/auth/auth-context";
 
 interface MenuItem {
@@ -204,10 +215,10 @@ export function Header() {
   }, [clearHideTimeout]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header className="fixed top-0 right-0 left-0 z-50">
       {/* Main Navigation Bar */}
       <nav className="bg-background/80 border-b border-neutral-200/50 backdrop-blur-sm">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6">
           {/* Logo */}
           <Link
             href="/"
@@ -215,7 +226,19 @@ export function Header() {
             suppressHydrationWarning
           >
             <div className="bg-sidebar-primary flex h-10 w-10 items-center justify-center rounded-xl text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check h-6 w-6" aria-hidden="true">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-circle-check h-6 w-6"
+                aria-hidden="true"
+              >
                 <circle cx="12" cy="12" r="10"></circle>
                 <path d="m9 12 2 2 4-4"></path>
               </svg>
@@ -224,7 +247,7 @@ export function Header() {
           </Link>
 
           {/* Menu Items */}
-          <div className="hidden items-center gap-8 md:flex">
+          <div className="hidden items-center gap-8 lg:flex">
             {megaMenus.map((menu) => (
               <button
                 key={menu.id}
@@ -251,7 +274,7 @@ export function Header() {
             <ThemeToggle />
 
             {/* Desktop Actions */}
-            <div className="hidden items-center gap-4 md:flex">
+            <div className="hidden items-center gap-4 lg:flex">
               {isLoading ? (
                 <div className="h-9 w-20 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700" />
               ) : user ? (
@@ -273,7 +296,7 @@ export function Header() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-7 w-7 text-text-muted hover:text-text-high"
+                      className="text-text-muted hover:text-text-high h-7 w-7"
                       onClick={handleSignOut}
                       title="Sign out"
                     >
@@ -307,34 +330,15 @@ export function Header() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-10 w-10 md:hidden"
+                  className="h-10 w-10 lg:hidden"
                   aria-label="Open menu"
                 >
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-75 sm:w-100">
+              <SheetContent side="right" className="w-75 overflow-y-auto sm:w-100">
                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                 <div className="flex h-full flex-col">
-                  {/* Mobile Menu Header */}
-                  <div className="border-border flex items-center justify-between border-b pb-4">
-                    <Link
-                      href="/"
-                      className="flex items-center gap-2"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <div className="bg-sidebar-primary flex h-10 w-10 items-center justify-center rounded-xl text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check h-6 w-6" aria-hidden="true">
-                          <circle cx="12" cy="12" r="10"></circle>
-                          <path d="m9 12 2 2 4-4"></path>
-                        </svg>
-                      </div>
-                      <span className="text-sidebar-primary text-2xl font-bold tracking-tight">
-                        Flow
-                      </span>
-                    </Link>
-                  </div>
-
                   {/* Mobile Menu Links */}
                   <nav className="flex-1 py-6">
                     <div className="space-y-6">
@@ -363,7 +367,7 @@ export function Header() {
                   </nav>
 
                   {/* Mobile Menu Footer */}
-                  <div className="border-border border-t pt-4">
+                  <div className="border-border border-t pt-4 pb-6">
                     {isLoading ? (
                       <div className="h-12 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700" />
                     ) : user ? (
@@ -436,8 +440,8 @@ export function Header() {
         onMouseLeave={handleDropdownLeave}
       >
         {activeMegaMenu && (
-          <div className="mx-auto max-w-7xl px-6 py-8">
-            <div className="grid grid-cols-2 gap-12">
+          <div className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:gap-12">
               {/* Left Column - Menu Items */}
               <div className="space-y-1">
                 {activeMegaMenu.items.map((item) => (

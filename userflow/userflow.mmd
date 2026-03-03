@@ -1,0 +1,210 @@
+---
+config:
+  theme: redux
+id: eb4a5a7f-3c69-452d-a93d-92e4f3447936
+---
+flowchart TD
+    %% Public Flow
+    LP(["Landing Page"])
+    LP --> Browse
+    Browse --> |View Services| VP["View Services"]
+    Browse --> |View Pricing| Pricing["Pricing Page"]
+    Browse --> |View Features| Features["Features Page"]
+    Browse --> |Contact| Contact["Contact Page"]
+    Browse --> |Track Order| Track["Order Tracking"]
+
+    Track --> |Enter Order ID| TO["Track Order Status"]
+    TO --> |View Details| OD["Order Details"]
+    OD --> |Login for more| AuthFlow
+
+    %% Subscription/Purchase Flow
+    Pricing --> |Select Starter Plan| PlanStarter["Select Starter Plan"]
+    Pricing --> |Select Studio Pro| PlanPro["Select Studio Pro"]
+    Pricing --> |Select Enterprise| PlanEnterprise["Select Enterprise"]
+
+    PlanStarter --> |Go to Register| RegisterWithPlan["Register with Plan"]
+    PlanPro --> |Go to Register| RegisterWithPlan
+    PlanEnterprise --> |Go to Register| RegisterWithPlan
+
+    %% New User - Purchase Flow
+    RegisterWithPlan --> |New User| NewUserRegister["Create Account"]
+    NewUserRegister --> |Submit| VerifyEmail["Verify Email"]
+    VerifyEmail --> |Verified| EmailVerified["Email Verified"]
+    EmailVerified --> |Login| Login
+
+    %% Existing User - Purchase Flow
+    RegisterWithPlan --> |Already Logged In| DirectCheckout["Direct to Checkout"]
+
+    %% Checkout Flow
+    Login --> |After Login| Checkout["Checkout Page"]
+    Checkout --> |Enter Billing| BillingInfo["Billing Information"]
+    BillingInfo --> |Select Payment| PaymentMethod["Payment Method"]
+    PaymentMethod --> |Card| CardPayment["Credit/Debit Card"]
+    PaymentMethod --> |PayPal| PayPalPayment["PayPal"]
+    PaymentMethod --> |Other| OtherPayment["Other Methods"]
+
+    CardPayment --> |Submit| ProcessPayment["Process Payment"]
+    PayPalPayment --> |Complete| ProcessPayment
+    OtherPayment --> |Submit| ProcessPayment
+
+    ProcessPayment --> |Success| PaymentSuccess["Payment Successful"]
+    ProcessPayment --> |Failed| PaymentFailed["Payment Failed"]
+    PaymentFailed --> |Retry| PaymentMethod
+    PaymentFailed --> |Cancel| Pricing
+
+    %% Subscription Activation
+    PaymentSuccess --> |Activate| SubscriptionActive["Subscription Activated"]
+    SubscriptionActive --> |Trial Period| TrialActive["14-Day Trial Active"]
+    TrialActive --> |Trial Ends| SubscriptionBilled["Subscription Billed"]
+    SubscriptionBilled --> |Monthly| MonthlyRenewal["Monthly Renewal"]
+    MonthlyRenewal --> |Auto-Renew| SubscriptionActive
+    MonthlyRenewal --> |Cancel| SubscriptionCancelled["Subscription Cancelled"]
+
+    %% Subscription Management Flow
+    ClientDashboard --> Billing["Billing & Subscription"]
+    Billing --> |View Current Plan| CurrentPlan["Current Plan"]
+    Billing --> |View Invoices| Invoices["Payment History"]
+    Billing --> |Manage| ManageSubscription["Manage Subscription"]
+
+    ManageSubscription --> |Upgrade Plan| UpgradePlan["Upgrade Plan"]
+    ManageSubscription --> |Downgrade Plan| DowngradePlan["Downgrade Plan"]
+    ManageSubscription --> |Cancel| CancelSubscription["Cancel Subscription"]
+
+    UpgradePlan --> |Select Higher Plan| SelectHigherPlan["Select Higher Plan"]
+    SelectHigherPlan --> |Pro-Rated Billing| UpgradeCheckout["Upgrade Checkout"]
+    UpgradeCheckout --> |Payment| ProcessPayment
+
+    DowngradePlan --> |Select Lower Plan| SelectLowerPlan["Select Lower Plan"]
+    SelectLowerPlan --> |Confirm| DowngradeConfirmed["Downgrade Confirmed"]
+    DowngradeConfirmed --> |Next Cycle| DowngradeEffective["Effective Next Cycle"]
+
+    CancelSubscription --> |Confirm Cancel| ConfirmCancel["Confirm Cancellation"]
+    ConfirmCancel --> |Reason| CancelReason["Cancellation Reason"]
+    CancelReason --> |Submit| SubscriptionCancelled
+
+    %% Plan Feature Access
+    SubscriptionActive --> |Check Plan| PlanFeatures["Access Plan Features"]
+    PlanFeatures --> |Starter| StarterFeatures["5 Projects, Basic Invoicing"]
+    PlanFeatures --> |Studio Pro| ProFeatures["Unlimited Projects, AI Estimates, Analytics"]
+    PlanFeatures --> |Enterprise| EnterpriseFeatures["All Features + API, Custom Integrations"]
+
+    StarterFeatures --> ClientDashboard
+    ProFeatures --> ClientDashboard
+    EnterpriseFeatures --> ClientDashboard
+
+    %% Authentication Flow
+    AuthFlow([Auth])
+    AuthFlow --> Signup["Signup"]
+    AuthFlow --> Login
+    AuthFlow --> Forgot["Forgot Password"]
+
+    %% Signup Flow (General)
+    Signup --> |New Client| ClientRegister["Client Registration"]
+    ClientRegister --> |Submit| VerifyEmail
+
+    %% Login Flow
+    Login --> |Admin Credentials| AdminAuth["Admin Auth"]
+    Login --> |Client Credentials| ClientAuth["Client Auth"]
+
+    %% Forgot Password Flow
+    Forgot --> |Submit Email| FPRequest["Request Reset"]
+    FPRequest --> |Email Sent| CheckEmail["Check Email"]
+    CheckEmail --> |Click Link| ResetPassword["Reset Password"]
+    ResetPassword --> |New Password| PWConfirm["Password Updated"]
+    PWConfirm --> Login
+
+    %% Admin Flow
+    AdminAuth --> AdminDashboard["Admin Dashboard"]
+    AdminDashboard --> ManageOrders["Manage Orders"]
+    AdminDashboard --> ManageTasks["Manage Tasks"]
+    AdminDashboard --> ManageClients["Manage Clients"]
+    AdminDashboard --> ViewAnalytics["View Analytics"]
+    AdminDashboard --> ViewCalendar["View Calendar"]
+    AdminDashboard --> ViewMessages["View Messages"]
+    AdminDashboard --> AdminSettings["Settings"]
+
+    %% Admin - Manage Orders
+    ManageOrders --> ViewAllOrders["View All Orders"]
+    ViewAllOrders --> |Select Order| AOrderDetail["Order Detail"]
+    AOrderDetail --> |Create Order| ACreateOrder["Create New Order"]
+    ACreateOrder --> |Select Service| ASelectService["Select Service"]
+    ASelectService --> |Add Complexities| AAddComplexities["Add Complexities"]
+    AAddComplexities --> |Add Addons| AAddAddons["Add Addons"]
+    AAddAddons --> |Submit Form| ASubmitOrder["Submit Order"]
+    ASubmitOrder --> OrderPending["Order Pending"]
+
+    %% Admin - Order Actions
+    AOrderDetail --> |Approve| OrderApproved["Order Approved"]
+    AOrderDetail --> |Reject| OrderRejected["Order Rejected"]
+    AOrderDetail --> |Complete| OrderCompleted["Order Completed"]
+    AOrderDetail --> |Change Request| ChangeRequest["Process Change Request"]
+
+    %% Admin - Settings
+    AdminSettings --> ServicesSettings["Manage Services"]
+    AdminSettings --> ComplexitiesSettings["Manage Complexities"]
+    AdminSettings --> AddonsSettings["Manage Addons"]
+    AdminSettings --> FormTemplatesSettings["Manage Form Templates"]
+
+    %% Client Flow
+    ClientAuth --> ClientDashboard
+    ClientDashboard --> COrders["My Orders"]
+    ClientDashboard --> CProfile["My Profile"]
+    ClientDashboard --> CSettings["Settings"]
+
+    %% Client - Create Order
+    COrders --> |Create New Order| CCreateOrder["Create Order"]
+    CCreateOrder --> |Browse Services| CBrowseServices["Browse Services"]
+    CBrowseServices --> |Select Service| CSelectService["Select Service"]
+    CSelectService --> |Customize| CCustomize["Customize Order"]
+    CCustomize --> |Add Complexity| CAddComplexity["Select Complexity"]
+    CCustomize --> |Add Addons| CAddAddon["Add Addons"]
+    CCustomize --> |Upload Ref| CUploadRef["Upload Reference"]
+    CAddComplexity --> |Fill Form| CFillForm["Fill Form"]
+    CAddAddon --> |Fill Form| CFillForm
+    CUploadRef --> |Fill Form| CFillForm
+    CFillForm --> |Submit| CSubmitOrder["Submit Order"]
+    CSubmitOrder --> |Success| OrderSuccess["Order Success"]
+    OrderSuccess --> COrders
+
+    %% Client - View/Manage Orders
+    COrders --> |View Order| COrderDetail["Order Detail"]
+    COrderDetail --> |Check Status| COrderStatus["Check Order Status"]
+    COrderDetail --> |Request Change| CChangeRequest["Request Change"]
+    COrderDetail --> |Cancel Order| CCancelOrder["Cancel Order"]
+
+    %% Order Status Flow
+    OrderPending --> |Admin Approved| OrderApproved
+    OrderPending --> |Admin Rejected| OrderRejected
+    OrderApproved --> |In Progress| InProgress["In Progress"]
+    InProgress --> |Completed| OrderCompleted
+    InProgress --> |Change Requested| ChangeRequest
+    ChangeRequest --> |Approved| InProgress
+    ChangeRequest --> |Rejected| InProgress
+
+    %% Client Profile/Settings
+    CProfile --> ViewProfile["View Profile"]
+    CProfile --> EditProfile["Edit Profile"]
+    CSettings --> AccountSettings["Account Settings"]
+    CSettings --> NotificationSettings["Notification Settings"]
+
+    %% Logout Flow
+    AdminDashboard --> Logout["Logout"]
+    ClientDashboard --> Logout
+    Logout --> LP
+
+    %% Styling
+    classDef public fill:#e1f5ff,stroke:#0288d1,stroke-width:2px
+    classDef auth fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef admin fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef client fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    classDef order fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef subscription fill:#fff9c4,stroke:#f9a825,stroke-width:2px
+    classDef payment fill:#e0f2f1,stroke:#00796b,stroke-width:2px
+
+    class LP,Browse,VP,Pricing,Features,Contact,Track,TO public
+    class AuthFlow,Signup,Login,Forgot,ClientRegister,VerifyEmail,EmailVerified,ResetPassword,PWConfirm auth
+    class AdminAuth,AdminDashboard,ManageOrders,ManageTasks,ManageClients,ViewAnalytics,ViewCalendar,ViewMessages,AdminSettings admin
+    class ClientAuth,ClientDashboard,COrders,CProfile,CSettings,CCreateOrder,COrderDetail client
+    class ACreateOrder,ASelectService,AAddComplexities,AAddAddons,ASubmitOrder,OrderPending,OrderApproved,OrderRejected,OrderCompleted,InProgress,ChangeRequest,OrderSuccess order
+    class PlanStarter,PlanPro,PlanEnterprise,RegisterWithPlan,NewUserRegister,Checkout,BillingInfo,PaymentMethod,ProcessPayment,PaymentSuccess,SubscriptionActive,TrialActive,SubscriptionBilled,SubscriptionCancelled,Billing,CurrentPlan,Invoices,ManageSubscription,UpgradePlan,DowngradePlan,CancelSubscription subscription
+    class CardPayment,PayPalPayment,OtherPayment,ProcessPayment,PaymentFailed,PaymentSuccess payment

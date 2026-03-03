@@ -80,7 +80,7 @@ export function DashboardStatsCards() {
   const statsData: StatsCardData[] = [
     {
       title: "Total Orders",
-      value: 24,
+      value: 2,
       subtitle: "All client orders",
       isPrimary: true,
       trend: { value: 5, direction: "up" },

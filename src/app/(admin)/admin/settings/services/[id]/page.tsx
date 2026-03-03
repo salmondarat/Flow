@@ -5,7 +5,6 @@
 
 "use client";
 
-import { unstable_noStore } from "next/cache";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
@@ -18,12 +17,6 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { ArrowLeft, Loader2, Save, CheckCircle } from "lucide-react";
 import { toast } from "sonner";
-import { getServiceType, updateServiceType } from "@/lib/api/services";
-import {
-  getComplexityLevels,
-  getComplexityForService,
-  setServiceComplexityMultiplier,
-} from "@/lib/api/complexities";
 import type { ServiceTypeRow, ComplexityLevelRow } from "@/types";
 
 const AVAILABLE_ICONS = [
@@ -45,7 +38,6 @@ interface ServiceComplexity {
 export const dynamic = "force-dynamic";
 
 export default function EditServicePage() {
-  unstable_noStore();
   const router = useRouter();
   const params = useParams();
   const serviceId = params.id as string;
@@ -77,10 +69,26 @@ export default function EditServicePage() {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const [serviceData, complexitiesData] = await Promise.all([
-        getServiceType(serviceId),
-        getComplexityLevels({ activeOnly: true }),
+      const [serviceResponse, complexitiesResponse] = await Promise.all([
+        fetch(`/api/admin/services/${serviceId}`),
+        fetch("/api/admin/complexities?activeOnly=true"),
       ]);
+
+      if (!serviceResponse.ok) {
+        if (serviceResponse.status === 404) {
+          toast.error("Service not found");
+          router.push("/admin/settings/services");
+          return;
+        }
+        throw new Error("Failed to fetch service");
+      }
+
+      if (!complexitiesResponse.ok) {
+        throw new Error("Failed to fetch complexities");
+      }
+
+      const { service: serviceData } = await serviceResponse.json();
+      const { complexities: complexitiesData } = await complexitiesResponse.json();
 
       if (!serviceData) {
         toast.error("Service not found");
@@ -89,7 +97,11 @@ export default function EditServicePage() {
       }
 
       // Fetch service-specific complexities with overrides
-      const serviceComplexitiesData = await getComplexityForService(serviceId);
+      const serviceComplexitiesResponse = await fetch(`/api/admin/services/${serviceId}/complexities`);
+      if (!serviceComplexitiesResponse.ok) {
+        throw new Error("Failed to fetch service complexities");
+      }
+      const { serviceComplexities: serviceComplexitiesData } = await serviceComplexitiesResponse.json();
 
       setService(serviceData);
       setComplexities(complexitiesData);
@@ -140,7 +152,16 @@ export default function EditServicePage() {
 
     // Save to database
     try {
-      await setServiceComplexityMultiplier(serviceId, complexityId, multiplier ?? null);
+      const response = await fetch(`/api/admin/services/${serviceId}/complexities`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ complexityId, multiplier }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update multiplier");
+      }
+
       toast.success("Multiplier updated");
     } catch (error) {
       console.error("Error updating multiplier:", error);
@@ -189,16 +210,25 @@ export default function EditServicePage() {
     setIsSaving(true);
 
     try {
-      await updateServiceType(serviceId, {
-        name: formData.name.trim(),
-        slug: formData.slug.trim(),
-        description: formData.description.trim() || null,
-        icon_name: formData.iconName || null,
-        base_price_cents: Math.round(Number(formData.basePriceCents) * 100),
-        base_days: Math.round(Number(formData.baseDays)),
-        sort_order: Number(formData.sortOrder) || 0,
-        is_active: formData.isActive,
+      const response = await fetch(`/api/admin/services/${serviceId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          slug: formData.slug.trim(),
+          description: formData.description.trim() || null,
+          iconName: formData.iconName || null,
+          basePriceCents: Math.round(Number(formData.basePriceCents) * 100),
+          baseDays: Math.round(Number(formData.baseDays)),
+          sortOrder: Number(formData.sortOrder) || 0,
+          isActive: formData.isActive,
+        }),
       });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || "Failed to update service");
+      }
 
       toast.success("Service updated successfully");
       fetchData();

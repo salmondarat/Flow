@@ -73,8 +73,8 @@ export function AdminHeader({ title: _title = "Dashboard" }: AdminHeaderProps) {
                 </svg>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-64 p-0">
-              <div className="flex h-full flex-col">
+            <SheetContent side="left" className="w-64 overflow-hidden p-0">
+              <div className="flex h-full flex-col min-w-0">
                 <SidebarContent />
               </div>
             </SheetContent>

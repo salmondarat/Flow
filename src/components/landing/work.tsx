@@ -93,7 +93,7 @@ export default function Work() {
   const goToNext = () => setActiveIndex((prev) => (prev === PROJECTS.length - 1 ? 0 : prev + 1));
 
   return (
-    <section className="inline-flec mx-auto px-3 py-1.5 sm:px-8 sm:py-16 md:px-12 md:py-20 lg:px-16 lg:py-24">
+    <section className="mx-auto w-full max-w-7xl overflow-x-hidden px-4 py-8 sm:px-6 sm:py-16 md:px-8 md:py-20 lg:px-12 lg:py-24">
       {/* Section Header */}
       <motion.div
         initial={{ y: 20, opacity: 0 }}
@@ -179,7 +179,7 @@ export default function Work() {
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="relative min-h-100 w-full overflow-hidden rounded-xl bg-slate-900 lg:min-h-150 dark:bg-zinc-900"
+              className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-slate-900 sm:aspect-[16/10] lg:aspect-[16/9] dark:bg-zinc-900"
             >
               {/* Main Image */}
               <motion.div

@@ -23,11 +23,20 @@ export function ProfilePhotoUpload({
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const isMountedRef = useRef(true);
 
   // Update preview when currentImage prop changes
   useEffect(() => {
     setPreview(currentImage);
   }, [currentImage]);
+
+  // Cleanup on unmount to prevent memory leaks
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
+  }, []);
 
   const validateFile = useCallback((file: File): string | null => {
     // Check file type
@@ -62,8 +71,10 @@ export function ProfilePhotoUpload({
       // Create preview using FileReader
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreview(reader.result as string);
-        onImageChange(file);
+        if (isMountedRef.current) {
+          setPreview(reader.result as string);
+          onImageChange(file);
+        }
       };
       reader.readAsDataURL(file);
     },
@@ -91,7 +102,9 @@ export function ProfilePhotoUpload({
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    setIsDragging(true);
+    if (!isUploading) {
+      setIsDragging(true);
+    }
   };
 
   const handleDragLeave = () => {

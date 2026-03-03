@@ -25,7 +25,7 @@ const menuItems = [
   { name: "Orders", href: "/admin/orders", icon: Package },
   { name: "Calendar", href: "/admin/calendar", icon: CalendarDays },
   { name: "Analytics", href: "/admin/analytics", icon: BarChart3 },
-  { name: "Team", href: "/admin/clients", icon: Users },
+  { name: "Clients", href: "/admin/clients", icon: Users },
 ];
 
 // General navigation items (bottom section)
@@ -46,20 +46,23 @@ export function SidebarContent() {
   };
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full min-w-0 flex-col overflow-hidden">
       {/* Logo Section */}
-      <Link href="/" className="flex items-center space-x-3 p-6 hover:bg-sidebar-accent/20 transition-colors">
-        <div className="bg-sidebar-primary flex h-10 w-10 items-center justify-center rounded-xl text-white">
-          <CheckCircle2 className="h-6 w-6" />
+      <Link
+        href="/"
+        className="hover:bg-sidebar-accent/20 flex min-w-0 shrink-0 items-center space-x-2 overflow-hidden p-4 transition-colors"
+      >
+        <div className="bg-sidebar-primary flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white">
+          <CheckCircle2 className="h-5 w-5" />
         </div>
-        <span className="text-sidebar-primary text-2xl font-bold tracking-tight">Flow</span>
+        <span className="text-sidebar-primary truncate text-xl font-bold tracking-tight">Flow</span>
       </Link>
 
       {/* Navigation */}
-      <nav className="flex-1 space-y-8 overflow-y-auto px-4">
+      <nav className="min-w-0 flex-1 space-y-6 overflow-x-hidden overflow-y-auto px-2">
         {/* Menu Section */}
-        <div>
-          <h3 className="text-sidebar-muted mb-4 px-4 text-xs font-semibold tracking-wider uppercase">
+        <div className="min-w-0">
+          <h3 className="text-sidebar-muted mb-3 truncate px-2 text-xs font-semibold tracking-wider uppercase">
             Menu
           </h3>
           <ul className="space-y-1">
@@ -67,36 +70,34 @@ export function SidebarContent() {
               const Icon = item.icon;
               const active = isActive(item.href);
               return (
-                <li key={item.name}>
+                <li key={item.name} className="min-w-0">
                   <Link
                     href={item.href}
                     className={cn(
-                      "group flex items-center justify-between rounded-xl px-4 py-3 transition-colors",
+                      "group flex items-center gap-2 overflow-hidden rounded-lg px-2 py-2.5 transition-colors",
                       active
                         ? "bg-sidebar-primary shadow-soft text-white"
                         : "text-sidebar-muted hover:bg-gray-100 dark:hover:bg-gray-800"
                     )}
                   >
-                    <div className="flex items-center space-x-3">
-                      <Icon
-                        className={cn(
-                          "h-5 w-5 transition-colors",
-                          active ? "text-white" : "group-hover:text-sidebar-primary"
-                        )}
-                      />
-                      <span
-                        className={cn(
-                          "font-medium transition-colors",
-                          active
-                            ? "text-white"
-                            : "group-hover:text-sidebar-text dark:group-hover:text-white"
-                        )}
-                      >
-                        {item.name}
-                      </span>
-                    </div>
+                    <Icon
+                      className={cn(
+                        "h-5 w-5 shrink-0 transition-colors",
+                        active ? "text-white" : "group-hover:text-sidebar-primary"
+                      )}
+                    />
+                    <span
+                      className={cn(
+                        "truncate text-sm font-medium transition-colors",
+                        active
+                          ? "text-white"
+                          : "group-hover:text-sidebar-text dark:group-hover:text-white"
+                      )}
+                    >
+                      {item.name}
+                    </span>
                     {item.badge && (
-                      <span className="bg-sidebar-primary rounded-md px-2 py-0.5 text-xs font-bold text-white">
+                      <span className="bg-sidebar-primary ml-auto shrink-0 rounded-md px-1.5 py-0.5 text-xs font-bold text-white">
                         {item.badge}
                       </span>
                     )}
@@ -108,8 +109,8 @@ export function SidebarContent() {
         </div>
 
         {/* General Section */}
-        <div>
-          <h3 className="text-sidebar-muted mb-4 px-4 text-xs font-semibold tracking-wider uppercase">
+        <div className="min-w-0">
+          <h3 className="text-sidebar-muted mb-3 truncate px-2 text-xs font-semibold tracking-wider uppercase">
             General
           </h3>
           <ul className="space-y-1">
@@ -117,11 +118,11 @@ export function SidebarContent() {
               const Icon = item.icon;
               const active = isActive(item.href);
               return (
-                <li key={item.name}>
+                <li key={item.name} className="min-w-0">
                   <Link
                     href={item.href}
                     className={cn(
-                      "group flex items-center space-x-3 rounded-xl px-4 py-3 transition-colors",
+                      "group flex items-center gap-2 overflow-hidden rounded-lg px-2 py-2.5 transition-colors",
                       active
                         ? "bg-sidebar-primary shadow-soft text-white"
                         : "text-sidebar-muted hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -129,13 +130,13 @@ export function SidebarContent() {
                   >
                     <Icon
                       className={cn(
-                        "h-5 w-5 transition-colors",
+                        "h-5 w-5 shrink-0 transition-colors",
                         active ? "text-white" : "group-hover:text-sidebar-primary"
                       )}
                     />
                     <span
                       className={cn(
-                        "font-medium transition-colors",
+                        "truncate text-sm font-medium transition-colors",
                         active
                           ? "text-white"
                           : "group-hover:text-sidebar-text dark:group-hover:text-white"
@@ -152,8 +153,8 @@ export function SidebarContent() {
       </nav>
 
       {/* Subscriptions Offer Card */}
-      <div className="mt-auto p-4">
-        <div className="relative overflow-hidden rounded-2xl bg-linear-to-br from-amber-500 to-orange-600 p-5 text-center">
+      <div className="mt-auto min-w-0 shrink-0 overflow-hidden p-3">
+        <div className="relative w-full max-w-full min-w-0 overflow-hidden rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-4">
           {/* Pattern overlay */}
           <div
             className="absolute inset-0 opacity-20"
@@ -162,20 +163,18 @@ export function SidebarContent() {
             }}
           />
 
-          <div className="relative z-10 flex flex-col items-center">
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/20 text-white">
-              <Crown className="h-5 w-5" />
+          <div className="relative z-10 flex w-full max-w-full min-w-0 flex-col items-center">
+            <div className="mb-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/20 text-white">
+              <Crown className="h-4.5 w-4.5 shrink-0" />
             </div>
-            <h4 className="mb-1 text-sm font-semibold text-white">
-              Upgrade to
-              <br />
-              Premium
+            <h4 className="mb-1 w-full truncate text-xs font-semibold text-white">
+              Upgrade to Premium
             </h4>
-            <p className="mb-4 text-xs text-white/80">Unlock all features</p>
-            <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-white py-2 text-xs font-semibold text-orange-600 transition-colors hover:bg-white/90">
-              <Sparkles className="h-3 w-3" />
-              View Plans
-              <ArrowRight className="h-3 w-3" />
+            <p className="mb-3 w-full truncate text-[10px] text-white/80">Unlock all features</p>
+            <button className="inline-flex w-full max-w-full min-w-0 items-center justify-center gap-1.5 overflow-hidden rounded-lg bg-white px-3 py-1.5 text-[10px] font-semibold text-orange-600 transition-colors hover:bg-white/90">
+              <Sparkles className="h-3 w-3 shrink-0" />
+              <span className="truncate">View Plans</span>
+              <ArrowRight className="h-3 w-3 shrink-0" />
             </button>
           </div>
         </div>
@@ -186,7 +185,7 @@ export function SidebarContent() {
 
 export function AdminSidebar() {
   return (
-    <aside className="bg-sidebar-surface-light dark:bg-sidebar-surface-dark flex h-full w-64 shrink-0 flex-col overflow-hidden border-r border-gray-200 lg:flex dark:border-gray-700">
+    <aside className="bg-sidebar-surface-light dark:bg-sidebar-surface-dark hidden h-full w-64 shrink-0 flex-col overflow-hidden border-r border-gray-200 lg:flex dark:border-gray-700">
       <SidebarContent />
     </aside>
   );
