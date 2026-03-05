@@ -68,4 +68,4 @@ CLAUDE.md
 # Logs
 *.log
 logs
-*.log.*
+*.log.*firebase-debug.log
