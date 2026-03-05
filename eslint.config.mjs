@@ -18,10 +18,8 @@ export default tseslint.config({ ignores: ["dist", ".next", "node_modules", "bui
     "react-refresh": reactRefresh,
   },
   rules: {
-    "react-refresh/only-export-components": [
-      "warn",
-      { allowConstantExport: true, allowExportNames: ["metadata", "useTheme"] },
-    ],
+    // Disable react-refresh rule for shadcn/ui component patterns
+    "react-refresh/only-export-components": "off",
     // Relax rules for development
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-explicit-any": "off",

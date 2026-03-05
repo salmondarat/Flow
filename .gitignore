@@ -43,21 +43,23 @@ next-env.d.ts
 .supabase
 
 # Workspace
-/.claude
-/.opencode
-/.vscode
-/.gemini
-/.planning
-/.bin
-/openspec
-/references
-/issues
-/notes
-/diagrams
-/roadmap
-/feedback
-/docs
-/ideas
+/.agent/
+/.bin/
+/.claude/
+/.gemini/
+/.opencode/
+/.planning/
+/.qwen/
+/.vscode/
+/openspec/
+/references/
+/issues/
+/notes/
+/diagrams/
+/roadmap/
+/feedback/
+/docs/
+/ideas/
 
 # AI Agents
 AGENTS.md
