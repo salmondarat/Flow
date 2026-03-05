@@ -8,11 +8,7 @@ import { Github, Twitter, Facebook, Instagram, Linkedin, Mail } from "lucide-rea
 import { useEffect, useState } from "react";
 
 const Footer = () => {
-  const [year, setYear] = useState("");
-
-  useEffect(() => {
-    setYear(new Date().getFullYear().toString());
-  }, []);
+  const [year] = useState(() => new Date().getFullYear().toString());
 
   const socialLinks = [
     { name: "Facebook", href: "https://facebook.com/flowapp", icon: Facebook },

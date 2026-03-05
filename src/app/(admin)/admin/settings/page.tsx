@@ -60,14 +60,16 @@ function ProfileSettings() {
   const [isSaving, setIsSaving] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [bio, setBio] = useState("Gunpla custom build specialist");
-  const [displayName, setDisplayName] = useState("");
+  const [displayName, setDisplayName] = useState(user?.full_name ?? "");
 
   // Sync display name with user data when it loads
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    if (user?.full_name) {
+    if (user?.full_name && displayName !== user.full_name) {
       setDisplayName(user.full_name);
     }
-  }, [user?.full_name]);
+  }, [user?.full_name, displayName]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -510,7 +512,7 @@ function PrivacyCard() {
             <div>
               <p className="text-sm font-medium">Messages from Unknown Users</p>
               <p className="text-muted-foreground text-xs">
-                Allow users you don't know to send you messages
+                Allow users you don&apos;t know to send you messages
               </p>
             </div>
             <Switch />

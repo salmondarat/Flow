@@ -108,7 +108,7 @@ export default function EditServicePage() {
 
       // Build service complexities array
       const complexitiesWithOverrides: ServiceComplexity[] = complexitiesData.map((c: ComplexityLevelRow) => {
-        const override = serviceComplexitiesData.find((sc) => sc.id === c.id);
+        const override = serviceComplexitiesData.find((sc: { id: string }) => sc.id === c.id);
         return {
           id: override?.id || "",
           complexityId: c.id,

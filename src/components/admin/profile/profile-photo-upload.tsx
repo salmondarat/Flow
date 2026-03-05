@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const MAX_FILE_SIZE = 1024 * 1024; // 1MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"] as const;
 
-interface ProfilePhotoUploadProps {
+export interface ProfilePhotoUploadProps {
   currentImage?: string;
   onImageChange: (file: File | null) => void;
   isUploading?: boolean;

@@ -8,9 +8,11 @@ export function ThemeToggle() {
   const { setTheme, theme } = useTheme();
 
   // Prevent hydration mismatch by only rendering after mount
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     setMounted(true);
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   if (!mounted) {
     return (
