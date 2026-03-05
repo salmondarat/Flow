@@ -5,9 +5,14 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Github, Twitter, Facebook, Instagram, Linkedin, Mail } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Footer = () => {
-  const year = new Date().getFullYear();
+  const [year, setYear] = useState("");
+
+  useEffect(() => {
+    setYear(new Date().getFullYear().toString());
+  }, []);
 
   const socialLinks = [
     { name: "Facebook", href: "https://facebook.com/flowapp", icon: Facebook },

@@ -4,7 +4,7 @@ import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { SidebarContent } from "@/components/admin/admin-sidebar";
 import { SearchWithShortcuts } from "@/components/admin/search/search-with-shortcuts";
 import { useAuth } from "@/lib/auth/auth-context";
@@ -74,6 +74,7 @@ export function AdminHeader({ title: _title = "Dashboard" }: AdminHeaderProps) {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-64 overflow-hidden p-0">
+              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex h-full flex-col min-w-0">
                 <SidebarContent />
               </div>
