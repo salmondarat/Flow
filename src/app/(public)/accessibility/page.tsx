@@ -141,7 +141,7 @@ export default function AccessibilityPage() {
                   Ongoing Efforts
                 </h2>
                 <p className="light:text-zinc-600 mb-6 text-lg text-zinc-400">
-                  We continuously test and improve our platform's accessibility through:
+                  We continuously test and improve our platform&apos;s accessibility through:
                 </p>
                 <ul className="light:text-zinc-600 space-y-4 text-zinc-400">
                   {[

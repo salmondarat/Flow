@@ -38,7 +38,7 @@ export default function AboutPage() {
                 </span>
               </h1>
               <p className="light:text-zinc-600 mb-12 text-xl leading-relaxed text-zinc-400">
-                We're on a mission to bring modern operations software to the custom model kit
+                We&apos;re on a mission to bring modern operations software to the custom model kit
                 industry, empowering studios to focus on what matters most—the craft.
               </p>
             </div>
@@ -61,13 +61,13 @@ export default function AboutPage() {
                     focusing on their craft.
                   </p>
                   <p className="light:text-zinc-700 text-lg leading-relaxed text-zinc-300">
-                    We've created a platform that streamlines order intake, provides AI-powered
+                    We&apos;ve created a platform that streamlines order intake, provides AI-powered
                     estimates, tracks progress automatically, and keeps clients informed in
                     real-time.
                   </p>
                   <p className="light:text-zinc-700 text-lg leading-relaxed text-zinc-300">
-                    Whether you're a solo builder or managing a team, Flow scales with you—growing
-                    alongside your business and adapting to your unique needs.
+                    Whether you&apos;re a solo builder or managing a team, Flow scales with
+                    you—growing alongside your business and adapting to your unique needs.
                   </p>
                 </div>
               </div>

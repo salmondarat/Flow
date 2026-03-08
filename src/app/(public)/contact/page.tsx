@@ -93,8 +93,8 @@ export default function ContactPage() {
                 </span>
               </h1>
               <p className="light:text-zinc-600 mb-12 text-xl leading-relaxed text-zinc-400">
-                Have questions? We're here to help. Reach out and we'll get back to you within 24
-                hours.
+                Have questions? We&apos;re here to help. Reach out and we&apos;ll get back to you
+                within 24 hours.
               </p>
             </div>
           </div>

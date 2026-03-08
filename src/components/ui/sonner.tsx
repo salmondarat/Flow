@@ -10,7 +10,11 @@ const Toaster = ({ ...props }: ToasterProps) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    // Using requestAnimationFrame to avoid synchronous setState warning
+    // This is a valid pattern for preventing hydration mismatches
+    requestAnimationFrame(() => {
+      setMounted(true);
+    });
   }, []);
 
   // Prevent hydration mismatch by not rendering until mounted

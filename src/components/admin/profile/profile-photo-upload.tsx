@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import Image from "next/image";
 import { Camera, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -137,18 +138,19 @@ export function ProfilePhotoUpload({
             isDragging
               ? "border-primary bg-primary/5"
               : preview
-              ? "border-gray-200 dark:border-gray-700"
-              : "border-dashed border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500",
+                ? "border-gray-200 dark:border-gray-700"
+                : "border-dashed border-gray-300 hover:border-gray-400 dark:border-gray-600 dark:hover:border-gray-500",
             isUploading && "cursor-not-allowed opacity-50"
           )}
         >
           {preview ? (
             <>
               {/* Image Preview */}
-              <img
+              <Image
                 src={preview}
                 alt="Profile preview"
-                className="h-full w-full object-cover"
+                fill
+                className="object-cover"
                 draggable={false}
               />
 
@@ -174,16 +176,14 @@ export function ProfilePhotoUpload({
           ) : (
             <>
               {/* Empty State */}
-              <div className="flex flex-col items-center gap-1 text-center p-2">
+              <div className="flex flex-col items-center gap-1 p-2 text-center">
                 <Upload className="h-6 w-6 text-gray-400 dark:text-gray-500" />
-                <span className="text-xs text-gray-500 dark:text-gray-400">
-                  Upload
-                </span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">Upload</span>
               </div>
 
               {isDragging && (
-                <div className="absolute inset-0 flex items-center justify-center bg-primary/10">
-                  <Upload className="h-8 w-8 text-primary animate-bounce" />
+                <div className="bg-primary/10 absolute inset-0 flex items-center justify-center">
+                  <Upload className="text-primary h-8 w-8 animate-bounce" />
                 </div>
               )}
             </>
@@ -203,7 +203,7 @@ export function ProfilePhotoUpload({
           {/* Loading Spinner */}
           {isUploading && (
             <div className="absolute inset-0 flex items-center justify-center bg-white/50 dark:bg-black/50">
-              <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+              <div className="border-primary h-8 w-8 animate-spin rounded-full border-4 border-t-transparent" />
             </div>
           )}
         </div>
@@ -211,15 +211,13 @@ export function ProfilePhotoUpload({
 
       {/* Error Message */}
       {error && (
-        <p className="text-sm text-destructive" role="alert">
+        <p className="text-destructive text-sm" role="alert">
           {error}
         </p>
       )}
 
       {/* Helper Text */}
-      <p className="text-xs text-muted-foreground">
-        JPG, PNG, or WebP (max 1MB)
-      </p>
+      <p className="text-muted-foreground text-xs">JPG, PNG, or WebP (max 1MB)</p>
     </div>
   );
 }

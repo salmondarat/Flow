@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -32,12 +33,54 @@ import {
 } from "lucide-react";
 
 const TIME_OPTIONS = [
-  "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30",
-  "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30",
-  "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
-  "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
-  "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30",
-  "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30",
+  "00:00",
+  "00:30",
+  "01:00",
+  "01:30",
+  "02:00",
+  "02:30",
+  "03:00",
+  "03:30",
+  "04:00",
+  "04:30",
+  "05:00",
+  "05:30",
+  "06:00",
+  "06:30",
+  "07:00",
+  "07:30",
+  "08:00",
+  "08:30",
+  "09:00",
+  "09:30",
+  "10:00",
+  "10:30",
+  "11:00",
+  "11:30",
+  "12:00",
+  "12:30",
+  "13:00",
+  "13:30",
+  "14:00",
+  "14:30",
+  "15:00",
+  "15:30",
+  "16:00",
+  "16:30",
+  "17:00",
+  "17:30",
+  "18:00",
+  "18:30",
+  "19:00",
+  "19:30",
+  "20:00",
+  "20:30",
+  "21:00",
+  "21:30",
+  "22:00",
+  "22:30",
+  "23:00",
+  "23:30",
 ];
 
 const DAYS = [
@@ -66,12 +109,15 @@ export function BusinessSettings() {
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [activeSection, setActiveSection] = useState<string>("core");
 
-  const handleInputChange = useCallback((field: string, value: string | number | boolean | string[]) => {
-    setLocalSettings((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  }, []);
+  const handleInputChange = useCallback(
+    (field: string, value: string | number | boolean | string[]) => {
+      setLocalSettings((prev) => ({
+        ...prev,
+        [field]: value,
+      }));
+    },
+    []
+  );
 
   const handleLogoChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -166,10 +212,12 @@ export function BusinessSettings() {
               <div className="flex items-center gap-4">
                 <div className="flex h-24 w-24 items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50">
                   {logoPreview || settings.logo_url ? (
-                    <img
+                    <Image
                       src={logoPreview || settings.logo_url || ""}
                       alt="Business Logo"
-                      className="h-full w-full object-contain p-2"
+                      width={96}
+                      height={96}
+                      className="object-contain p-2"
                     />
                   ) : (
                     <Building className="h-8 w-8 text-gray-400" />
@@ -209,7 +257,9 @@ export function BusinessSettings() {
                 onChange={(e) => handleInputChange("tagline", e.target.value)}
                 placeholder="A short description of your business"
               />
-              <p className="text-xs text-gray-500">This will appear on invoices and the client portal</p>
+              <p className="text-xs text-gray-500">
+                This will appear on invoices and the client portal
+              </p>
             </div>
 
             {/* Description */}
@@ -262,7 +312,7 @@ export function BusinessSettings() {
               <div className="space-y-2">
                 <Label htmlFor="business-email">Business Email</Label>
                 <div className="relative">
-                  <Mail className="text-muted-foreground absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" />
+                  <Mail className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
                   <Input
                     id="business-email"
                     type="email"
@@ -278,7 +328,7 @@ export function BusinessSettings() {
               <div className="space-y-2">
                 <Label htmlFor="business-phone">Business Phone</Label>
                 <div className="relative">
-                  <Phone className="text-muted-foreground absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" />
+                  <Phone className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
                   <Input
                     id="business-phone"
                     type="tel"
@@ -294,7 +344,7 @@ export function BusinessSettings() {
               <div className="space-y-2">
                 <Label htmlFor="website-url">Website</Label>
                 <div className="relative">
-                  <Globe className="text-muted-foreground absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" />
+                  <Globe className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
                   <Input
                     id="website-url"
                     type="url"
@@ -483,16 +533,21 @@ export function BusinessSettings() {
               const enabledKey = `${day.key}_enabled` as keyof BusinessSettingsUpdate;
               const openKey = `${day.key}_open` as keyof BusinessSettingsUpdate;
               const closeKey = `${day.key}_close` as keyof BusinessSettingsUpdate;
-              const isEnabled = (localSettings[enabledKey] ?? settings[enabledKey as keyof typeof settings]) as boolean;
-              const openTime = (localSettings[openKey] ?? settings[openKey as keyof typeof settings]) as string;
-              const closeTime = (localSettings[closeKey] ?? settings[closeKey as keyof typeof settings]) as string;
+              const isEnabled = (localSettings[enabledKey] ??
+                settings[enabledKey as keyof typeof settings]) as boolean;
+              const openTime = (localSettings[openKey] ??
+                settings[openKey as keyof typeof settings]) as string;
+              const closeTime = (localSettings[closeKey] ??
+                settings[closeKey as keyof typeof settings]) as string;
 
               return (
                 <div key={day.key} className="flex items-center gap-4">
                   <div className="w-24">
                     <Switch
                       checked={isEnabled}
-                      onCheckedChange={(checked) => handleInputChange(enabledKey as string, checked)}
+                      onCheckedChange={(checked) =>
+                        handleInputChange(enabledKey as string, checked)
+                      }
                     />
                     <span className="ml-2 text-sm font-medium">{day.label}</span>
                   </div>
@@ -578,7 +633,9 @@ export function BusinessSettings() {
                   min="0"
                   max="100"
                   value={localSettings.deposit_percentage ?? settings.deposit_percentage}
-                  onChange={(e) => handleInputChange("deposit_percentage", parseInt(e.target.value))}
+                  onChange={(e) =>
+                    handleInputChange("deposit_percentage", parseInt(e.target.value))
+                  }
                 />
                 <p className="text-xs text-gray-500">
                   Percentage of total order value required as upfront deposit
@@ -590,9 +647,10 @@ export function BusinessSettings() {
                 <Label>Accepted Payment Methods</Label>
                 <div className="grid gap-2 md:grid-cols-2">
                   {PAYMENT_METHODS.map((method) => {
-                    const currentMethods = (localSettings.payment_methods ?? settings.payment_methods) as string[];
+                    const currentMethods = (localSettings.payment_methods ??
+                      settings.payment_methods) as string[];
                     const isSelected = currentMethods.includes(method.value);
-                    
+
                     return (
                       <label
                         key={method.value}
@@ -646,8 +704,12 @@ export function BusinessSettings() {
                     id="invoice-starting"
                     type="number"
                     min="1"
-                    value={localSettings.invoice_starting_number ?? settings.invoice_starting_number}
-                    onChange={(e) => handleInputChange("invoice_starting_number", parseInt(e.target.value))}
+                    value={
+                      localSettings.invoice_starting_number ?? settings.invoice_starting_number
+                    }
+                    onChange={(e) =>
+                      handleInputChange("invoice_starting_number", parseInt(e.target.value))
+                    }
                   />
                 </div>
               </div>
@@ -659,7 +721,9 @@ export function BusinessSettings() {
                   type="number"
                   min="0"
                   value={localSettings.payment_terms_days ?? settings.payment_terms_days}
-                  onChange={(e) => handleInputChange("payment_terms_days", parseInt(e.target.value))}
+                  onChange={(e) =>
+                    handleInputChange("payment_terms_days", parseInt(e.target.value))
+                  }
                 />
                 <p className="text-xs text-gray-500">
                   Number of days clients have to pay the invoice
@@ -674,8 +738,13 @@ export function BusinessSettings() {
                   min="0"
                   max="100"
                   step="0.01"
-                  value={localSettings.late_payment_fee_percentage ?? settings.late_payment_fee_percentage}
-                  onChange={(e) => handleInputChange("late_payment_fee_percentage", parseFloat(e.target.value))}
+                  value={
+                    localSettings.late_payment_fee_percentage ??
+                    settings.late_payment_fee_percentage
+                  }
+                  onChange={(e) =>
+                    handleInputChange("late_payment_fee_percentage", parseFloat(e.target.value))
+                  }
                 />
               </div>
             </div>
@@ -699,7 +768,9 @@ export function BusinessSettings() {
                 onChange={(e) => handleInputChange("currency_code", e.target.value)}
                 disabled
               />
-              <p className="text-xs text-gray-500">Currency is set based on your pricing configuration</p>
+              <p className="text-xs text-gray-500">
+                Currency is set based on your pricing configuration
+              </p>
             </div>
 
             <div className="space-y-2">
@@ -709,7 +780,9 @@ export function BusinessSettings() {
                 type="number"
                 min="1"
                 value={localSettings.default_lead_time_days ?? settings.default_lead_time_days}
-                onChange={(e) => handleInputChange("default_lead_time_days", parseInt(e.target.value))}
+                onChange={(e) =>
+                  handleInputChange("default_lead_time_days", parseInt(e.target.value))
+                }
               />
               <p className="text-xs text-gray-500">Default turnaround time for new orders</p>
             </div>
@@ -722,8 +795,12 @@ export function BusinessSettings() {
                 min="0"
                 max="100"
                 step="0.01"
-                value={localSettings.rush_order_fee_percentage ?? settings.rush_order_fee_percentage}
-                onChange={(e) => handleInputChange("rush_order_fee_percentage", parseFloat(e.target.value))}
+                value={
+                  localSettings.rush_order_fee_percentage ?? settings.rush_order_fee_percentage
+                }
+                onChange={(e) =>
+                  handleInputChange("rush_order_fee_percentage", parseFloat(e.target.value))
+                }
               />
               <p className="text-xs text-gray-500">Additional fee for expedited orders</p>
             </div>

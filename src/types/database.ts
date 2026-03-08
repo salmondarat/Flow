@@ -733,6 +733,12 @@ export interface Database {
         };
         Returns: boolean;
       };
+      exec_sql: {
+        Args: {
+          sql: string;
+        };
+        Returns: undefined;
+      };
     };
     Enums: {
       [_ in never]: never;
