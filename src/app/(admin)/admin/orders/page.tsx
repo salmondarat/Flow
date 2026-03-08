@@ -131,8 +131,8 @@ export default async function OrdersPage({
                     )}
                   </TableCell>
                   <TableCell>
-                    <Badge variant={statusVariants[order.status]}>
-                      {statusLabels[order.status]}
+                    <Badge variant={statusVariants[order.status as OrderStatus]}>
+                      {statusLabels[order.status as OrderStatus]}
                     </Badge>
                   </TableCell>
                   <TableCell>{order.order_items?.length || 0}</TableCell>

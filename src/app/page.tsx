@@ -17,7 +17,7 @@ const Header = nextDynamic(() => import("@/components/layout/header").then((mod)
 
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="flex min-h-screen flex-col" suppressHydrationWarning>
       <Header />
       <Hero />
       <Partners />

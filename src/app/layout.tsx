@@ -33,7 +33,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${plusJakartaSans.variable} ${spaceGrotesk.variable} bg-background text-foreground font-sans`}
-        suppressHydrationWarning
       >
         <QueryProvider>
           <AuthProvider>

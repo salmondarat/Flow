@@ -79,8 +79,8 @@ export default async function OrderDetailsPage({
             Created on {new Date(order.created_at).toLocaleDateString()}
           </p>
         </div>
-        <Badge variant={statusVariants[order.status]} className="text-lg">
-          {statusLabels[order.status]}
+        <Badge variant={statusVariants[order.status as OrderStatus]} className="text-lg">
+          {statusLabels[order.status as OrderStatus]}
         </Badge>
       </div>
 
@@ -120,7 +120,7 @@ export default async function OrderDetailsPage({
           <CardContent className="space-y-2">
             <div className="flex justify-between">
               <span className="text-muted-foreground">Status:</span>
-              <Badge variant={statusVariants[order.status]}>{statusLabels[order.status]}</Badge>
+              <Badge variant={statusVariants[order.status as OrderStatus]}>{statusLabels[order.status as OrderStatus]}</Badge>
             </div>
             <Separator />
             <div className="flex justify-between">
@@ -221,9 +221,35 @@ export default async function OrderDetailsPage({
                     </div>
                     <Badge variant="outline">{item.service_type.replace("_", " ")}</Badge>
                   </div>
-                  <div className="mt-2 flex gap-4 text-sm">
+                  <div className="mt-2 flex flex-wrap gap-4 text-sm">
                     <span>Complexity: {item.complexity}</span>
+                    {/* Display complexity tier info if available */}
+                    {item.complexity_score !== null && item.complexity_score !== undefined && (
+                      <span className="text-primary font-medium">
+                        Score: {item.complexity_score}
+                      </span>
+                    )}
+                    {item.complexity_tier_id && (
+                      <Badge variant="secondary" className="text-xs">
+                        Tier ID: {item.complexity_tier_id.slice(0, 8)}...
+                      </Badge>
+                    )}
                   </div>
+                  {/* Display complexity assessment details */}
+                  {item.complexity_score !== null && item.complexity_score !== undefined && (
+                    <div className="bg-muted/50 mt-3 rounded-md p-3">
+                      <p className="text-muted-foreground mb-1 text-xs">Complexity Assessment:</p>
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground">Score:</span>
+                        <span className="font-medium">{item.complexity_score} points</span>
+                      </div>
+                      {item.complexity_answers && Array.isArray(item.complexity_answers) && (
+                        <p className="text-muted-foreground mt-1 text-xs">
+                          {item.complexity_answers.length} question(s) answered
+                        </p>
+                      )}
+                    </div>
+                  )}
                   {item.notes && <p className="text-muted-foreground mt-2 text-sm">{item.notes}</p>}
                 </div>
               ))}

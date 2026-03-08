@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
+import React, { useState } from "react";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,10 +17,8 @@ const Header = nextDynamic(() => import("@/components/layout/header").then((mod)
 export const dynamic = "force-dynamic";
 
 export default function ContactPage() {
-  const { theme } = useTheme();
   const [isLoading, setIsLoading] = useState(false);
   const [isSent, setIsSent] = useState(false);
-  const isLight = theme === "light";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -72,58 +69,30 @@ export default function ContactPage() {
   ];
 
   return (
-    <div
-      className={`min-h-screen font-sans transition-colors duration-300 ${
-        isLight ? "bg-white text-zinc-900" : "bg-zinc-950 text-white"
-      }`}
-    >
+    <div className="light:bg-white light:text-zinc-900 min-h-screen bg-zinc-950 font-sans text-white transition-colors duration-300">
       <Header />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative overflow-hidden">
-          {/* Background gradient mesh */}
           <div className="absolute inset-0 -z-10">
-            <div
-              className={`absolute top-0 left-1/2 h-200 w-200 -translate-x-1/2 rounded-full blur-3xl ${
-                isLight
-                  ? "bg-linear-to-br from-indigo-100 via-purple-50 to-transparent opacity-50"
-                  : "bg-linear-to-br from-indigo-900/20 via-purple-900/10 to-transparent opacity-50"
-              }`}
-            />
+            <div className="absolute top-0 left-1/2 hidden h-200 w-200 -translate-x-1/2 rounded-full bg-linear-to-br from-indigo-900/20 via-purple-900/10 to-transparent opacity-50 blur-3xl dark:block" />
+            <div className="absolute top-0 left-1/2 block h-200 w-200 -translate-x-1/2 rounded-full bg-linear-to-br from-indigo-100 via-purple-50 to-transparent opacity-50 blur-3xl dark:hidden" />
           </div>
-
           <div className="mx-auto max-w-7xl px-4 py-32 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
-              {/* Badge */}
-              <div
-                className={`mb-8 inline-flex items-center gap-2 rounded-full border px-4 py-2 backdrop-blur-md transition-colors ${
-                  isLight
-                    ? "border-zinc-900/10 bg-zinc-900/5 hover:bg-zinc-900/10"
-                    : "border-white/10 bg-white/5 hover:bg-white/10"
-                }`}
-              >
-                <Sparkles className={`h-4 w-4 ${isLight ? "text-zinc-600" : "text-zinc-400"}`} />
-                <span
-                  className={`text-xs font-semibold tracking-wider uppercase ${isLight ? "text-zinc-700" : "text-zinc-300"}`}
-                >
+              <div className="light:border-zinc-900/10 light:bg-zinc-900/5 light:hover:bg-zinc-900/10 mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-md transition-colors hover:bg-white/10">
+                <Sparkles className="light:text-zinc-600 h-4 w-4 text-zinc-400" />
+                <span className="light:text-zinc-700 text-xs font-semibold tracking-wider text-zinc-300 uppercase">
                   Contact Us
                 </span>
               </div>
-
-              {/* Heading */}
               <h1 className="mb-6 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
                 Get in
-                <span
-                  className={`block bg-linear-to-br bg-clip-text text-transparent ${isLight ? "from-zinc-900 via-zinc-800 to-[#ffcd75]" : "from-white via-white to-[#ffcd75]"}`}
-                >
+                <span className="light:from-zinc-900 light:via-zinc-800 block bg-linear-to-br from-white via-white to-[#ffcd75] bg-clip-text text-transparent">
                   touch
                 </span>
               </h1>
-
-              {/* Description */}
-              <p
-                className={`mb-12 text-xl leading-relaxed ${isLight ? "text-zinc-600" : "text-zinc-400"}`}
-              >
+              <p className="light:text-zinc-600 mb-12 text-xl leading-relaxed text-zinc-400">
                 Have questions? We&apos;re here to help. Reach out and we&apos;ll get back to you
                 within 24 hours.
               </p>
@@ -140,41 +109,29 @@ export default function ContactPage() {
                 {contactInfo.map((info) => (
                   <div
                     key={info.title}
-                    className={`relative overflow-hidden rounded-3xl border backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] ${
-                      isLight
-                        ? "border-zinc-900/10 bg-zinc-900/5 hover:border-zinc-900/20 hover:bg-zinc-900/10"
-                        : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"
-                    }`}
+                    className="light:border-zinc-900/10 light:bg-zinc-900/5 light:hover:border-zinc-900/20 light:hover:bg-zinc-900/10 relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] hover:border-white/20 hover:bg-white/10"
                   >
                     <div className="relative p-8">
-                      {/* Glow effect */}
                       <div
                         className={`absolute -top-4 -right-4 h-24 w-24 rounded-full bg-linear-to-br ${info.gradient} opacity-0 blur-3xl`}
                       />
-
                       <div
                         className={`relative mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br ${info.gradient} text-white shadow-lg`}
                       >
                         {info.icon}
                       </div>
-
-                      <h3
-                        className={`relative mb-3 text-xl font-bold ${isLight ? "text-zinc-900" : "text-white"}`}
-                      >
+                      <h3 className="light:text-zinc-900 relative mb-3 text-xl font-bold text-white">
                         {info.title}
                       </h3>
-
                       {info.link ? (
                         <a
                           href={info.link}
-                          className={`relative text-lg font-medium hover:underline ${isLight ? "text-zinc-600" : "text-zinc-400"}`}
+                          className="light:text-zinc-600 relative text-lg font-medium text-zinc-400 hover:underline"
                         >
                           {info.value}
                         </a>
                       ) : (
-                        <p
-                          className={`relative text-lg ${isLight ? "text-zinc-600" : "text-zinc-400"}`}
-                        >
+                        <p className="light:text-zinc-600 relative text-lg text-zinc-400">
                           {info.value}
                         </p>
                       )}
@@ -185,27 +142,15 @@ export default function ContactPage() {
 
               {/* Contact Form */}
               <div className="lg:col-span-2">
-                <div
-                  className={`relative overflow-hidden rounded-3xl border backdrop-blur-xl ${
-                    isLight
-                      ? "border-zinc-900/10 bg-zinc-900/5 shadow-zinc-900/10"
-                      : "border-white/10 bg-white/5 shadow-white/10"
-                  }`}
-                >
+                <div className="light:border-zinc-900/10 light:bg-zinc-900/5 light:shadow-zinc-900/10 relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-white/10 backdrop-blur-xl">
                   <div className="relative p-8 lg:p-12">
-                    <h2
-                      className={`mb-8 text-3xl font-bold tracking-tight ${isLight ? "text-zinc-900" : "text-white"}`}
-                    >
+                    <h2 className="light:text-zinc-900 mb-8 text-3xl font-bold tracking-tight text-white">
                       Send us a message
                     </h2>
-
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid gap-6 sm:grid-cols-2">
                         <div className="space-y-2">
-                          <Label
-                            htmlFor="name"
-                            className={isLight ? "text-zinc-700" : "text-zinc-300"}
-                          >
+                          <Label htmlFor="name" className="light:text-zinc-700 text-zinc-300">
                             Name *
                           </Label>
                           <Input
@@ -214,18 +159,11 @@ export default function ContactPage() {
                             placeholder="Your name"
                             required
                             disabled={isLoading || isSent}
-                            className={`${
-                              isLight
-                                ? "border-zinc-900/10 bg-zinc-900/5 text-zinc-900 focus:border-zinc-900/20"
-                                : "border-white/10 bg-white/5 text-white focus:border-white/20"
-                            }`}
+                            className="light:border-zinc-900/10 light:bg-zinc-900/5 light:text-zinc-900 light:focus:border-zinc-900/20 border-white/10 bg-white/5 text-white focus:border-white/20"
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label
-                            htmlFor="email"
-                            className={isLight ? "text-zinc-700" : "text-zinc-300"}
-                          >
+                          <Label htmlFor="email" className="light:text-zinc-700 text-zinc-300">
                             Email *
                           </Label>
                           <Input
@@ -235,19 +173,12 @@ export default function ContactPage() {
                             placeholder="your@email.com"
                             required
                             disabled={isLoading || isSent}
-                            className={`${
-                              isLight
-                                ? "border-zinc-900/10 bg-zinc-900/5 text-zinc-900 focus:border-zinc-900/20"
-                                : "border-white/10 bg-white/5 text-white focus:border-white/20"
-                            }`}
+                            className="light:border-zinc-900/10 light:bg-zinc-900/5 light:text-zinc-900 light:focus:border-zinc-900/20 border-white/10 bg-white/5 text-white focus:border-white/20"
                           />
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <Label
-                          htmlFor="subject"
-                          className={isLight ? "text-zinc-700" : "text-zinc-300"}
-                        >
+                        <Label htmlFor="subject" className="light:text-zinc-700 text-zinc-300">
                           Subject *
                         </Label>
                         <Input
@@ -256,18 +187,11 @@ export default function ContactPage() {
                           placeholder="How can we help?"
                           required
                           disabled={isLoading || isSent}
-                          className={`${
-                            isLight
-                              ? "border-zinc-900/10 bg-zinc-900/5 text-zinc-900 focus:border-zinc-900/20"
-                              : "border-white/10 bg-white/5 text-white focus:border-white/20"
-                          }`}
+                          className="light:border-zinc-900/10 light:bg-zinc-900/5 light:text-zinc-900 light:focus:border-zinc-900/20 border-white/10 bg-white/5 text-white focus:border-white/20"
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label
-                          htmlFor="message"
-                          className={isLight ? "text-zinc-700" : "text-zinc-300"}
-                        >
+                        <Label htmlFor="message" className="light:text-zinc-700 text-zinc-300">
                           Message *
                         </Label>
                         <Textarea
@@ -309,14 +233,11 @@ export default function ContactPage() {
         </section>
 
         {/* FAQ Section */}
-        <section className={`py-24 ${isLight ? "bg-zinc-50" : "bg-zinc-900/50"}`}>
+        <section className="light:bg-zinc-50 bg-zinc-900/50 py-24">
           <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-            <h2
-              className={`mb-12 text-4xl font-bold tracking-tight sm:text-5xl ${isLight ? "text-zinc-900" : "text-white"}`}
-            >
+            <h2 className="light:text-zinc-900 mb-12 text-4xl font-bold tracking-tight text-white sm:text-5xl">
               Frequently Asked Questions
             </h2>
-
             <div className="grid gap-6 text-left">
               {[
                 {
@@ -334,24 +255,16 @@ export default function ContactPage() {
                   answer:
                     "Yes! We work with larger studios to build custom integrations and features that fit their specific needs.",
                 },
-              ].map((faq, i) => (
+              ].map((faq) => (
                 <div
                   key={faq.question}
-                  className={`relative overflow-hidden rounded-3xl border backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] ${
-                    isLight
-                      ? "border-zinc-900/10 bg-zinc-900/5 hover:border-zinc-900/20 hover:bg-zinc-900/10"
-                      : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"
-                  }`}
+                  className="light:border-zinc-900/10 light:bg-zinc-900/5 light:hover:border-zinc-900/20 light:hover:bg-zinc-900/10 relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] hover:border-white/20 hover:bg-white/10"
                 >
                   <div className="relative p-8">
-                    <h3
-                      className={`mb-4 text-xl font-bold ${isLight ? "text-zinc-900" : "text-white"}`}
-                    >
+                    <h3 className="light:text-zinc-900 mb-4 text-xl font-bold text-white">
                       {faq.question}
                     </h3>
-                    <p className={`text-base ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
-                      {faq.answer}
-                    </p>
+                    <p className="light:text-zinc-600 text-base text-zinc-400">{faq.answer}</p>
                   </div>
                 </div>
               ))}

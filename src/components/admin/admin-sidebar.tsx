@@ -1,8 +1,12 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
+import { Button } from "@/components/ui/button";
 import {
   LayoutGrid,
   CheckCircle2,
@@ -16,6 +20,10 @@ import {
   Crown,
   ArrowRight,
   Package,
+  Bell,
+  Moon,
+  Sun,
+  Plus,
 } from "lucide-react";
 
 // Menu navigation items (top section)
@@ -35,14 +43,60 @@ const generalItems = [
   { name: "Logout", href: "/logout", icon: LogOut },
 ];
 
+// Mobile-only action buttons
+const mobileActionButtons = [
+  {
+    name: "Notifications",
+    icon: Bell,
+    action: () => console.log("Notifications clicked"),
+  },
+  {
+    name: "Help",
+    icon: HelpCircle,
+    action: () => console.log("Help clicked"),
+  },
+  {
+    name: "New Order",
+    icon: Plus,
+    action: () => console.log("New Order clicked"),
+  },
+];
+
 export function SidebarContent() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { setTheme, theme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
 
   const isActive = (href: string) => {
     if (href === "/admin/dashboard") {
       return pathname === href || pathname === "/admin";
     }
     return pathname === href || pathname.startsWith(href + "/");
+  };
+
+  const handleLogout = async () => {
+    try {
+      const { logout } = await import("@/lib/auth/client");
+      await logout();
+      router.push("/auth");
+      router.refresh();
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Avoid hydration mismatch by using theme || checking mounted
+  const currentTheme = theme;
+  const isDark = currentTheme === "dark";
+
+  const toggleTheme = () => {
+    const newTheme = isDark ? "light" : "dark";
+    setTheme(newTheme);
   };
 
   return (
@@ -127,6 +181,12 @@ export function SidebarContent() {
                         ? "bg-sidebar-primary shadow-soft text-white"
                         : "text-sidebar-muted hover:bg-gray-100 dark:hover:bg-gray-800"
                     )}
+                    onClick={(e) => {
+                      if (item.name === "Logout") {
+                        e.preventDefault();
+                        handleLogout();
+                      }
+                    }}
                   >
                     <Icon
                       className={cn(
@@ -150,10 +210,54 @@ export function SidebarContent() {
             })}
           </ul>
         </div>
+
+        {/* Quick Actions Section - Mobile Only */}
+        <div className="min-w-0 lg:hidden">
+          <h3 className="text-sidebar-muted mb-3 truncate px-2 text-xs font-semibold tracking-wider uppercase">
+            Quick Actions
+          </h3>
+          <div className="grid grid-cols-4 gap-2 px-2">
+            {mobileActionButtons.map((button) => {
+              const Icon = button.icon;
+              return (
+                <button
+                  key={button.name}
+                  onClick={button.action}
+                  className="flex flex-col items-center gap-1.5 rounded-lg p-2 text-sidebar-muted transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+                  aria-label={button.name}
+                >
+                  <Icon className="h-5 w-5 shrink-0" />
+                  <span className="text-[10px] font-medium truncate w-full text-center">
+                    {button.name}
+                  </span>
+                </button>
+              );
+            })}
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="flex flex-col items-center gap-1.5 rounded-lg p-2 text-sidebar-muted transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
+              aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+            >
+              {mounted && (
+                <>
+                  {isDark ? (
+                    <Sun className="h-5 w-5 shrink-0" />
+                  ) : (
+                    <Moon className="h-5 w-5 shrink-0" />
+                  )}
+                  <span className="text-[10px] font-medium truncate w-full text-center">
+                    Theme
+                  </span>
+                </>
+              )}
+            </button>
+          </div>
+        </div>
       </nav>
 
-      {/* Subscriptions Offer Card */}
-      <div className="mt-auto min-w-0 shrink-0 overflow-hidden p-3">
+      {/* Subscriptions Offer Card - Hidden on mobile */}
+      <div className="mt-auto min-w-0 shrink-0 overflow-hidden p-3 max-lg:hidden">
         <div className="relative w-full max-w-full min-w-0 overflow-hidden rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-4">
           {/* Pattern overlay */}
           <div

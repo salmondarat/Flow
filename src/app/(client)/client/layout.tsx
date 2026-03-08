@@ -6,7 +6,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     <div className="bg-background text-foreground flex h-screen overflow-hidden">
       <DashboardSidebar navigation={CLIENT_NAV} role="client" />
       <div className="bg-background relative flex h-full min-w-0 flex-1 flex-col">
-        <DashboardHeader role="client" />
+        <DashboardHeader navigation={CLIENT_NAV} role="client" />
         <main className="flex-1 overflow-y-auto p-8">
           <div className="mx-auto max-w-350 flex-col gap-8">{children}</div>
         </main>

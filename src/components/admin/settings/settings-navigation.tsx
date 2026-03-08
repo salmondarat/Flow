@@ -9,8 +9,10 @@ import {
   Bell,
   Wrench,
   Layers,
+  BarChart3,
   PlusCircle,
   FileText,
+  ClipboardList,
   AlertTriangle,
 } from "lucide-react";
 
@@ -26,10 +28,15 @@ const tabs: SettingsTab[] = [
   { id: "profile", label: "Profile", icon: User, href: "/admin/settings" },
   { id: "business", label: "Business", icon: Building, href: "/admin/settings" },
   { id: "notifications", label: "Notifications", icon: Bell, href: "/admin/settings" },
+  { id: "complexity", label: "Complexity", icon: Layers, href: "/admin/settings" },
   { id: "services", label: "Service Types", icon: Wrench, href: "/admin/settings/services" },
-  { id: "complexities", label: "Complexities", icon: Layers, href: "/admin/settings/complexities" },
   { id: "addons", label: "Add-ons", icon: PlusCircle, href: "/admin/settings/addons" },
-  { id: "forms", label: "Form Templates", icon: FileText, href: "/admin/settings/form-templates" },
+  {
+    id: "forms",
+    label: "Form Templates",
+    icon: ClipboardList,
+    href: "/admin/settings/form-templates",
+  },
   {
     id: "danger",
     label: "Danger Zone",

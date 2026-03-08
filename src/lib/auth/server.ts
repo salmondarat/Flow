@@ -45,6 +45,19 @@ export async function isAdmin(): Promise<boolean> {
 }
 
 /**
+ * Require authentication, throw error if not authenticated
+ */
+export async function requireUser(): Promise<AuthUser> {
+  const user = await getCurrentUser();
+
+  if (!user) {
+    throw new Error("Authentication required");
+  }
+
+  return user;
+}
+
+/**
  * Require admin role, throw error if not admin
  */
 export async function requireAdmin(): Promise<AuthUser> {
