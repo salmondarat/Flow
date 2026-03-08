@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -65,6 +66,7 @@ export function SidebarContent() {
   const pathname = usePathname();
   const router = useRouter();
   const { setTheme, theme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
 
   const isActive = (href: string) => {
     if (href === "/admin/dashboard") {
@@ -84,7 +86,12 @@ export function SidebarContent() {
     }
   };
 
-  const currentTheme = theme || "dark";
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Avoid hydration mismatch by using theme || checking mounted
+  const currentTheme = theme;
   const isDark = currentTheme === "dark";
 
   const toggleTheme = () => {
@@ -232,14 +239,18 @@ export function SidebarContent() {
               className="flex flex-col items-center gap-1.5 rounded-lg p-2 text-sidebar-muted transition-colors hover:bg-gray-100 dark:hover:bg-gray-800"
               aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
             >
-              {isDark ? (
-                <Sun className="h-5 w-5 shrink-0" />
-              ) : (
-                <Moon className="h-5 w-5 shrink-0" />
+              {mounted && (
+                <>
+                  {isDark ? (
+                    <Sun className="h-5 w-5 shrink-0" />
+                  ) : (
+                    <Moon className="h-5 w-5 shrink-0" />
+                  )}
+                  <span className="text-[10px] font-medium truncate w-full text-center">
+                    Theme
+                  </span>
+                </>
               )}
-              <span className="text-[10px] font-medium truncate w-full text-center">
-                Theme
-              </span>
             </button>
           </div>
         </div>
