@@ -1,20 +1,16 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
+import React from "react";
 import { motion } from "framer-motion";
 import {
   Shield,
   Users,
   Rocket,
-  ArrowRight,
   CheckIcon,
   MinusIcon,
   Sparkles,
   Crown,
-  Zap,
 } from "lucide-react";
-import Link from "next/link";
 
 interface FeatureItem {
   label: string;
@@ -29,7 +25,6 @@ interface PricingCardProps {
   icon: React.ComponentType<{ className?: string }>;
   iconBgGradient: string;
   isPopular: boolean;
-  isLight: boolean;
   features: FeatureItem[];
   featureLimit: number;
   ctaText: string;
@@ -43,7 +38,6 @@ const PricingCard = ({
   icon: Icon,
   iconBgGradient,
   isPopular,
-  isLight,
   features,
   featureLimit,
   ctaText,
@@ -54,11 +48,10 @@ const PricingCard = ({
       whileInView={{ y: 0, opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: isPopular ? 0.3 : 0.2 }}
-      className={`relative overflow-hidden rounded-3xl border backdrop-blur-xl transition-all duration-300 hover:scale-[1.01] ${
-        isLight
-          ? "border-zinc-900/10 bg-zinc-900/5 hover:border-zinc-900/20 hover:bg-zinc-900/10"
-          : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"
-      } ${isPopular ? "after:inset-0 after:rounded-[inherit]" : ""}`}
+      className={`relative overflow-hidden rounded-3xl border backdrop-blur-xl transition-all duration-300 hover:scale-[1.01] 
+        border-zinc-900/10 bg-zinc-900/5 hover:border-zinc-900/20 hover:bg-zinc-900/10
+        dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20 dark:hover:bg-white/10
+        ${isPopular ? "after:inset-0 after:rounded-[inherit]" : ""}`}
     >
       <div className="relative p-8 pt-12">
         {badge && (
@@ -72,7 +65,7 @@ const PricingCard = ({
         >
           <Icon className="h-6 w-6 text-white" />
         </div>
-        <h3 className={`mb-1 text-xl font-bold ${isLight ? "text-zinc-900" : "text-white"}`}>
+        <h3 className="mb-1 text-xl font-bold text-zinc-900 dark:text-white">
           {name}
         </h3>
         <div className="mb-6 flex items-baseline gap-2">
@@ -80,7 +73,7 @@ const PricingCard = ({
             <span className="text-sm text-zinc-500 line-through">{compareAtPrice}</span>
           )}
           <span
-            className={`text-4xl font-bold ${isLight ? "bg-linear-to-br from-zinc-900 to-zinc-600" : "bg-linear-to-br from-white to-zinc-400"} bg-clip-text text-transparent`}
+            className="text-4xl font-bold bg-linear-to-br from-zinc-900 to-zinc-600 dark:from-white dark:to-zinc-400 bg-clip-text text-transparent"
           >
             {price}
           </span>
@@ -88,7 +81,11 @@ const PricingCard = ({
         </div>
         <button
           aria-label={ctaText}
-          className={`mb-6 w-full rounded-full px-6 py-3 text-sm font-semibold transition-all ${isPopular ? "bg-linear-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/30 hover:scale-[1.02] hover:shadow-indigo-500/50" : isLight ? "border border-zinc-900/20 bg-zinc-900/10 text-zinc-900 hover:bg-zinc-900/20" : "border border-white/20 bg-white/10 text-white hover:bg-white/20"}`}
+          className={`mb-6 w-full rounded-full px-6 py-3 text-sm font-semibold transition-all 
+            ${isPopular 
+              ? "bg-linear-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/30 hover:scale-[1.02] hover:shadow-indigo-500/50" 
+              : "border border-zinc-900/20 bg-zinc-900/10 text-zinc-900 hover:bg-zinc-900/20 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
+            }`}
         >
           {ctaText}
         </button>
@@ -100,26 +97,26 @@ const PricingCard = ({
               <div key={idx} className="flex items-start gap-3">
                 {value === true ? (
                   <div
-                    className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${isLight ? "bg-zinc-900/10" : "bg-white/10"}`}
+                    className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-zinc-900/10 dark:bg-white/10"
                   >
                     <CheckIcon className="h-4 w-4 text-green-500" />
                   </div>
                 ) : value === false ? (
                   <div
-                    className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${isLight ? "bg-zinc-900/10" : "bg-white/10"}`}
+                    className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-zinc-900/10 dark:bg-white/10"
                   >
                     <MinusIcon className="h-4 w-4 text-zinc-500" />
                   </div>
                 ) : (
                   <span
-                    className={`shrink-0 text-xs font-medium ${isLight ? "text-indigo-600" : "text-indigo-400"}`}
+                    className="shrink-0 text-xs font-medium text-indigo-600 dark:text-indigo-400"
                   >
                     {value as string}
                   </span>
                 )}
                 <div className="flex-1">
                   <span
-                    className={`text-sm leading-relaxed ${isLight ? "text-zinc-700" : "text-zinc-300"}`}
+                    className="text-sm leading-relaxed text-zinc-700 dark:text-zinc-300"
                   >
                     {feature.label}
                   </span>
@@ -128,7 +125,7 @@ const PricingCard = ({
             );
           })}
           {featureLimit < features.length && (
-            <div className={`text-sm ${isLight ? "text-zinc-500" : "text-zinc-500"}`}>
+            <div className="text-sm text-zinc-500">
               and more...
             </div>
           )}
@@ -139,9 +136,6 @@ const PricingCard = ({
 };
 
 export default function Pricing() {
-  const { theme } = useTheme();
-  const isLight = theme === "light";
-
   const features: FeatureItem[] = [
     { label: "Active Orders", values: ["Up to 50", "Unlimited", "Unlimited"] },
     { label: "Build, Repair & Repaint", values: [true, true, true] },
@@ -166,7 +160,7 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className={`relative w-full ${isLight ? "bg-white text-zinc-900" : "bg-zinc-950 text-white"}`}
+      className="relative w-full bg-white text-zinc-900 dark:bg-zinc-950 dark:text-white"
     >
       {/* Main Content Container */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
@@ -180,24 +174,24 @@ export default function Pricing() {
         >
           {/* Badge */}
           <div
-            className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 backdrop-blur-sm ${isLight ? "border-zinc-900/10 bg-zinc-900/5" : "border-white/10 bg-white/5"}`}
+            className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 backdrop-blur-sm border-zinc-900/10 bg-zinc-900/5 dark:border-white/10 dark:bg-white/5"
           >
             <Sparkles className="h-4 w-4 text-amber-500" />
-            <span className={`text-xs font-medium ${isLight ? "text-zinc-700" : "text-zinc-400"}`}>
+            <span className="text-xs font-medium text-zinc-700 dark:text-zinc-400">
               Flexible Pricing
             </span>
           </div>
 
           {/* Heading */}
           <h2
-            className={`mt-6 text-4xl font-medium tracking-tighter sm:text-5xl md:text-6xl ${isLight ? "bg-linear-to-br from-zinc-900 via-zinc-800 to-[#ffcd75]" : "bg-linear-to-br from-white via-white to-[#ffcd75]"} bg-clip-text text-transparent`}
+            className="mt-6 text-4xl font-medium tracking-tighter sm:text-5xl md:text-6xl bg-linear-to-br from-zinc-900 via-zinc-800 to-[#ffcd75] dark:from-white dark:via-white dark:to-[#ffcd75] bg-clip-text text-transparent"
           >
             Flexible Plans for Every Studio
           </h2>
 
           {/* Description */}
           <p
-            className={`mx-auto mt-4 max-w-2xl text-base sm:text-lg ${isLight ? "text-zinc-600" : "text-zinc-400"}`}
+            className="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-zinc-600 dark:text-zinc-400"
           >
             Choose from tailored packages that fit your business goals. No hidden fees, cancel
             anytime.
@@ -212,9 +206,8 @@ export default function Pricing() {
             badge={undefined}
             price="$29"
             icon={Shield}
-            iconBgGradient={isLight ? "from-zinc-300 to-zinc-500" : "from-zinc-700 to-zinc-900"}
+            iconBgGradient="from-zinc-300 to-zinc-500 dark:from-zinc-700 dark:to-zinc-900"
             isPopular={false}
-            isLight={isLight}
             features={features}
             featureLimit={8}
             ctaText="Get Started"
@@ -229,7 +222,6 @@ export default function Pricing() {
             icon={Users}
             iconBgGradient="from-indigo-500 to-purple-600"
             isPopular={true}
-            isLight={isLight}
             features={features}
             featureLimit={12}
             ctaText="Get Started"
@@ -243,7 +235,6 @@ export default function Pricing() {
             icon={Rocket}
             iconBgGradient="from-emerald-500 to-teal-600"
             isPopular={false}
-            isLight={isLight}
             features={features}
             featureLimit={features.length}
             ctaText="Contact Sales"

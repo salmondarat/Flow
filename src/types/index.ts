@@ -1,7 +1,14 @@
 // Re-export database types
 export * from "./database";
 
-import type { Database } from "./database";
+import type {
+  Database,
+  OrderStatus,
+  ChangeRequestStatus,
+  ServiceType,
+  Complexity,
+} from "./database";
+import type { Json } from "./database";
 
 // Utility types for Supabase query results
 export type ProfileRow = Database["public"]["Tables"]["profiles"]["Row"];
@@ -38,25 +45,115 @@ export type ComplexityLevelInsert = Database["public"]["Tables"]["complexity_lev
 export type ComplexityLevelUpdate = Database["public"]["Tables"]["complexity_levels"]["Update"];
 
 export type ServiceComplexityRow = Database["public"]["Tables"]["service_complexities"]["Row"];
-export type ServiceComplexityInsert = Database["public"]["Tables"]["service_complexities"]["Insert"];
-export type ServiceComplexityUpdate = Database["public"]["Tables"]["service_complexities"]["Update"];
+export type ServiceComplexityInsert =
+  Database["public"]["Tables"]["service_complexities"]["Insert"];
+export type ServiceComplexityUpdate =
+  Database["public"]["Tables"]["service_complexities"]["Update"];
 
 export type ServiceAddonRow = Database["public"]["Tables"]["service_addons"]["Row"];
 export type ServiceAddonInsert = Database["public"]["Tables"]["service_addons"]["Insert"];
 export type ServiceAddonUpdate = Database["public"]["Tables"]["service_addons"]["Update"];
 
+// Complexity questions and tiers types
+export type ComplexityQuestionTemplateRow =
+  Database["public"]["Tables"]["complexity_question_templates"]["Row"];
+export type ComplexityQuestionTemplateInsert =
+  Database["public"]["Tables"]["complexity_question_templates"]["Insert"];
+export type ComplexityQuestionTemplateUpdate =
+  Database["public"]["Tables"]["complexity_question_templates"]["Update"];
+
+export type ComplexityQuestionRow = Database["public"]["Tables"]["complexity_questions"]["Row"];
+export type ComplexityQuestionInsert =
+  Database["public"]["Tables"]["complexity_questions"]["Insert"];
+export type ComplexityQuestionUpdate =
+  Database["public"]["Tables"]["complexity_questions"]["Update"];
+
+export type ComplexityAnswerOptionRow =
+  Database["public"]["Tables"]["complexity_answer_options"]["Row"];
+export type ComplexityAnswerOptionInsert =
+  Database["public"]["Tables"]["complexity_answer_options"]["Insert"];
+export type ComplexityAnswerOptionUpdate =
+  Database["public"]["Tables"]["complexity_answer_options"]["Update"];
+
+export type ComplexityTierRow = Database["public"]["Tables"]["complexity_tiers"]["Row"];
+export type ComplexityTierInsert = Database["public"]["Tables"]["complexity_tiers"]["Insert"];
+export type ComplexityTierUpdate = Database["public"]["Tables"]["complexity_tiers"]["Update"];
+
+// Business settings types
+export type BusinessSettingsRow = Database["public"]["Tables"]["business_settings"]["Row"];
+export type BusinessSettingsInsert = Database["public"]["Tables"]["business_settings"]["Insert"];
+export type BusinessSettingsUpdate = Database["public"]["Tables"]["business_settings"]["Update"];
+
 // Domain type aliases for convenience
-export type UserRole = "admin" | "client";
-export type OrderStatus =
-  | "draft"
-  | "estimated"
-  | "approved"
-  | "in_progress"
-  | "completed"
-  | "cancelled";
-export type ServiceType = "full_build" | "repair" | "repaint";
-export type Complexity = "low" | "medium" | "high";
-export type ChangeRequestStatus = "pending" | "approved" | "rejected";
+
+// Complexity question types
+export interface ComplexityQuestionWithAnswers {
+  id: string;
+  template_id: string;
+  question_text: string;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+  answer_options: Array<{
+    id: string;
+    question_id: string;
+    answer_text: string;
+    score: number;
+    sort_order: number;
+    created_at: string;
+    updated_at: string;
+  }>;
+}
+
+export interface ComplexityQuestionTemplateWithQuestions {
+  id: string;
+  name: string;
+  description: string | null;
+  is_default: boolean;
+  created_by: string | null;
+  created_at: string;
+  updated_at: string;
+  questions: ComplexityQuestionWithAnswers[];
+}
+
+export interface ComplexityAnswerSelection {
+  question_id: string;
+  answer_option_id: string;
+}
+
+export interface ComplexityCalculationResult {
+  total_score: number;
+  tier_id: string | null;
+  tier_name: string | null;
+  multiplier: number | null;
+  estimated_min_price_cents: number | null;
+  estimated_max_price_cents: number | null;
+}
+
+export interface ComplexityTierWithPricing {
+  id: string;
+  name: string;
+  description: string | null;
+  min_score: number;
+  max_score: number | null;
+  multiplier: number;
+  base_min_price_cents: number | null;
+  base_max_price_cents: number | null;
+  is_active: boolean;
+  sort_order: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ServiceComplexityWithTiers {
+  service_type_id: string;
+  complexity_level_id: string | null;
+  complexity_tier_id: string | null;
+  override_multiplier: number | null;
+  tier_override_multiplier: number | null;
+}
+
+// Domain type aliases for convenience
 
 // Extended domain types with computed fields
 export interface OrderWithItems {
@@ -114,6 +211,10 @@ export interface OrderItemWithPricing {
   notes: string | null;
   created_at: string;
   estimated_price: number; // Calculated from service + complexity
+  complexity_score: number | null;
+  complexity_tier_id: string | null;
+  complexity_answers: Json | null;
+  complexity_calculation: ComplexityCalculationResult | null;
 }
 
 export interface DashboardStats {

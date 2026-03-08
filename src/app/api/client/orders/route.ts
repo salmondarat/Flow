@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Failed to create order" }, { status: 500 });
     }
 
-    // Create order items
+    // Create order items with complexity data
     const itemsToInsert = order_items.map((item: any) => ({
       order_id: order.id,
       kit_name: item.kit_name,
@@ -89,6 +89,10 @@ export async function POST(request: NextRequest) {
       service_type: item.service_type,
       complexity: item.complexity || "medium",
       notes: item.notes || null,
+      // Store complexity calculation details from questionnaire
+      complexity_score: item.complexity_score || null,
+      complexity_tier_id: item.complexity_tier_id || null,
+      complexity_answers: item.complexity_answers || null,
     }));
 
     const { error: itemsError } = await (supabase.from("order_items") as any).insert(itemsToInsert);

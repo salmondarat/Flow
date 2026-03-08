@@ -26,7 +26,10 @@ import {
   Plus,
   Download,
   Settings,
+  Layers,
 } from "lucide-react";
+import { ComplexitySettings } from "@/components/admin/settings/complexity-settings";
+import { BusinessSettings } from "@/components/admin/settings/business-settings";
 
 export const dynamic = "force-dynamic";
 
@@ -45,10 +48,11 @@ export default function SettingsPage() {
 
       <SettingsNavigation activeTab={activeTab} />
 
-      <div className="max-w-3xl">
+      <div className="max-w-5xl">
         {activeTab === "profile" && <ProfileSettings />}
         {activeTab === "business" && <BusinessSettings />}
         {activeTab === "notifications" && <NotificationsSettings />}
+        {activeTab === "complexity" && <ComplexitySettings />}
         {activeTab === "danger" && <DangerZoneSettings />}
       </div>
     </div>
@@ -611,45 +615,6 @@ function AccountActionsCard() {
         </div>
       </div>
     </SettingsCard>
-  );
-}
-
-function BusinessSettings() {
-  return (
-    <div className="space-y-6">
-      <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-lg">
-            <Building className="h-5 w-5" />
-          </div>
-          <div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white">Business Info</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Configure your business details and preferences
-            </p>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="business-name">Business Name</Label>
-            <Input id="business-name" defaultValue="Flow Gunpla Service" />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="currency">Currency</Label>
-            <Input id="currency" defaultValue="Indonesian Rupiah (IDR)" disabled />
-            <p className="text-muted-foreground text-xs">
-              Currency is set based on your pricing configuration
-            </p>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="timezone">Timezone</Label>
-            <Input id="timezone" defaultValue="Asia/Jakarta (WIB)" />
-          </div>
-          <Button>Update</Button>
-        </div>
-      </div>
-    </div>
   );
 }
 

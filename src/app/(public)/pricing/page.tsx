@@ -5,20 +5,14 @@ import Link from "next/link";
 import { Footer } from "@/components/layout/footer";
 import { motion } from "framer-motion";
 import { Check, ArrowRight, Sparkles, Crown, Zap, Shield, Users, Rocket } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 import nextDynamic from "next/dynamic";
 
-// Dynamic import for Header to prevent SSR issues
 const Header = nextDynamic(() => import("@/components/layout/header").then((mod) => mod.Header));
 
-// Force dynamic rendering to prevent static generation issues
 export const dynamic = "force-dynamic";
 
 export default function PricingPage() {
   unstable_noStore();
-  const { theme } = useTheme();
-  const isLight = theme === "light";
 
   const plans = [
     {
@@ -28,7 +22,8 @@ export default function PricingPage() {
       compareAtPrice: null,
       description: "Perfect for solo builders just getting started",
       icon: Shield,
-      iconBgGradient: isLight ? "from-zinc-300 to-zinc-500" : "from-zinc-700 to-zinc-900",
+      iconBgGradient: "from-zinc-700 to-zinc-900",
+      iconBgGradientLight: "from-zinc-300 to-zinc-500",
       features: [
         "5 active projects",
         "Basic invoicing",
@@ -83,14 +78,21 @@ export default function PricingPage() {
   ];
 
   return (
-    <div
-      className={`relative w-full font-sans ${isLight ? "bg-white text-zinc-900" : "bg-zinc-950 text-white"}`}
-    >
-      {/* Background Image */}
+    <div className="light:bg-white light:text-zinc-900 relative w-full bg-zinc-950 font-sans text-white">
+      {/* Background Image - Dark */}
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center opacity-40"
+        className="dark-bg absolute inset-0 z-0 bg-cover bg-center opacity-40"
         style={{
-          backgroundImage: isLight ? "url(/gund_bg-white.png)" : "url(/gund_bg.webp)",
+          backgroundImage: "url(/gund_bg.webp)",
+          maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
+        }}
+      />
+      {/* Background Image - Light */}
+      <div
+        className="light-bg absolute inset-0 z-0 bg-cover bg-center opacity-40"
+        style={{
+          backgroundImage: "url(/gund_bg-white.png)",
           maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
           WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
         }}
@@ -124,36 +126,20 @@ export default function PricingPage() {
             className="text-center"
           >
             {/* Badge */}
-            <div
-              className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 backdrop-blur-sm ${
-                isLight ? "border-zinc-900/10 bg-zinc-900/5" : "border-white/10 bg-white/5"
-              }`}
-            >
+            <div className="light:border-zinc-900/10 light:bg-zinc-900/5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-sm">
               <Sparkles className="h-4 w-4 text-amber-500" />
-              <span
-                className={`text-xs font-medium ${isLight ? "text-zinc-700" : "text-zinc-400"}`}
-              >
+              <span className="light:text-zinc-700 text-xs font-medium text-zinc-400">
                 Flexible Pricing
               </span>
             </div>
 
             {/* Heading */}
-            <h2
-              className={`mt-6 text-4xl font-medium tracking-tighter sm:text-5xl md:text-6xl ${
-                isLight
-                  ? "bg-gradient-to-br from-zinc-900 via-zinc-800 to-[#ffcd75]"
-                  : "bg-gradient-to-br from-white via-white to-[#ffcd75]"
-              } bg-clip-text text-transparent`}
-            >
+            <h2 className="light:from-zinc-900 light:via-zinc-800 mt-6 bg-gradient-to-br from-white via-white to-[#ffcd75] bg-clip-text text-4xl font-medium tracking-tighter text-transparent sm:text-5xl md:text-6xl">
               Plans That Scale With You
             </h2>
 
             {/* Description */}
-            <p
-              className={`mx-auto mt-4 max-w-2xl text-base sm:text-lg ${
-                isLight ? "text-zinc-600" : "text-zinc-400"
-              }`}
-            >
+            <p className="light:text-zinc-600 mx-auto mt-4 max-w-2xl text-base text-zinc-400 sm:text-lg">
               Simple, transparent pricing that scales with your business. No hidden fees, cancel
               anytime.
             </p>
@@ -170,11 +156,7 @@ export default function PricingPage() {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-                className={`relative overflow-hidden rounded-3xl border backdrop-blur-xl transition-all duration-300 hover:scale-[1.01] ${
-                  isLight
-                    ? "border-zinc-900/10 bg-zinc-900/5 hover:border-zinc-900/20 hover:bg-zinc-900/10"
-                    : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"
-                } ${plan.highlighted ? "after:inset-0 after:rounded-[inherit]" : ""}`}
+                className={`light:border-zinc-900/10 light:bg-zinc-900/5 light:hover:border-zinc-900/20 light:hover:bg-zinc-900/10 relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-300 hover:scale-[1.01] hover:border-white/20 hover:bg-white/10 ${plan.highlighted ? "after:inset-0 after:rounded-[inherit]" : ""}`}
               >
                 {/* Popular Badge */}
                 {plan.highlighted && (
@@ -188,26 +170,25 @@ export default function PricingPage() {
                 <div className="relative p-8">
                   {/* Icon */}
                   <div
-                    className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${plan.iconBgGradient}`}
+                    className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${plan.iconBgGradient} light:hidden`}
                   >
                     <plan.icon className="h-6 w-6 text-white" />
                   </div>
+                  {plan.iconBgGradientLight && (
+                    <div
+                      className={`mb-4 hidden h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${plan.iconBgGradientLight} light:flex`}
+                    >
+                      <plan.icon className="h-6 w-6 text-white" />
+                    </div>
+                  )}
 
                   {/* Plan Name */}
-                  <h3
-                    className={`mb-1 text-xl font-bold ${isLight ? "text-zinc-900" : "text-white"}`}
-                  >
+                  <h3 className="light:text-zinc-900 mb-1 text-xl font-bold text-white">
                     {plan.name}
                   </h3>
 
                   {/* Plan Type */}
-                  <p
-                    className={`mb-4 font-mono text-xs uppercase ${
-                      isLight ? "text-zinc-500" : "text-zinc-500"
-                    }`}
-                  >
-                    {plan.type}
-                  </p>
+                  <p className="mb-4 font-mono text-xs text-zinc-500 uppercase">{plan.type}</p>
 
                   {/* Pricing */}
                   <div className="mb-6 flex items-baseline gap-2">
@@ -216,22 +197,14 @@ export default function PricingPage() {
                         ${plan.compareAtPrice}
                       </span>
                     )}
-                    <span
-                      className={`text-4xl font-bold ${
-                        isLight
-                          ? "bg-gradient-to-br from-zinc-900 to-zinc-600"
-                          : "bg-gradient-to-br from-white to-zinc-400"
-                      } bg-clip-text text-transparent`}
-                    >
+                    <span className="light:from-zinc-900 light:to-zinc-600 bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-4xl font-bold text-transparent">
                       ${plan.price}
                     </span>
-                    <span className={`text-sm ${isLight ? "text-zinc-500" : "text-zinc-500"}`}>
-                      /mo
-                    </span>
+                    <span className="text-sm text-zinc-500">/mo</span>
                   </div>
 
                   {/* Description */}
-                  <p className={`mb-6 text-sm ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
+                  <p className="light:text-zinc-600 mb-6 text-sm text-zinc-400">
                     {plan.description}
                   </p>
 
@@ -240,15 +213,9 @@ export default function PricingPage() {
                     {plan.features.map((feature) => (
                       <li
                         key={feature}
-                        className={`flex items-center gap-3 text-sm ${
-                          isLight ? "text-zinc-700" : "text-zinc-300"
-                        }`}
+                        className="light:text-zinc-700 flex items-center gap-3 text-sm text-zinc-300"
                       >
-                        <div
-                          className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full ${
-                            isLight ? "bg-zinc-900/10" : "bg-white/10"
-                          }`}
-                        >
+                        <div className="light:bg-zinc-900/10 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-white/10">
                           <Check className="h-4 w-4 text-green-500" />
                         </div>
                         <span>{feature}</span>
@@ -262,9 +229,7 @@ export default function PricingPage() {
                     className={`inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition-all ${
                       plan.highlighted
                         ? "bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-lg shadow-indigo-500/30 hover:scale-[1.02] hover:shadow-indigo-500/50"
-                        : isLight
-                          ? "border border-zinc-900/20 bg-zinc-900/10 text-zinc-900 hover:bg-zinc-900/20"
-                          : "border border-white/20 bg-white/10 text-white hover:bg-white/20"
+                        : "light:border-zinc-900/20 light:bg-zinc-900/10 light:text-zinc-900 light:hover:bg-zinc-900/20 border border-white/20 bg-white/10 text-white hover:bg-white/20"
                     }`}
                     aria-label={`Select ${plan.name} plan`}
                   >
@@ -292,18 +257,12 @@ export default function PricingPage() {
                 className="text-center"
               >
                 {/* Icon */}
-                <div
-                  className={`mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 shadow-lg shadow-amber-500/20 ${
-                    isLight ? "text-zinc-900" : "text-white"
-                  }`}
-                >
+                <div className="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-lg shadow-amber-500/20">
                   <Zap className="h-6 w-6" />
                 </div>
 
                 {/* Heading */}
-                <h2
-                  className={`mb-4 text-2xl font-bold ${isLight ? "text-zinc-900" : "text-white"}`}
-                >
+                <h2 className="light:text-zinc-900 mb-4 text-2xl font-bold text-white">
                   Frequently Asked Questions
                 </h2>
 
@@ -333,20 +292,12 @@ export default function PricingPage() {
                       whileInView={{ y: 0, opacity: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: 0.7 + i * 0.1 }}
-                      className={`rounded-2xl border p-6 ${
-                        isLight ? "border-zinc-900/10 bg-zinc-900/5" : "border-white/10 bg-white/5"
-                      }`}
+                      className="light:border-zinc-900/10 light:bg-zinc-900/5 rounded-2xl border border-white/10 bg-white/5 p-6"
                     >
-                      <h3
-                        className={`mb-2 text-base font-semibold ${
-                          isLight ? "text-zinc-900" : "text-white"
-                        }`}
-                      >
+                      <h3 className="light:text-zinc-900 mb-2 text-base font-semibold text-white">
                         {faq.q}
                       </h3>
-                      <p className={`text-sm ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
-                        {faq.a}
-                      </p>
+                      <p className="light:text-zinc-600 text-sm text-zinc-400">{faq.a}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -364,20 +315,14 @@ export default function PricingPage() {
             transition={{ duration: 0.6, delay: 1.2 }}
             className="relative mx-auto max-w-3xl"
           >
-            <div
-              className={`relative overflow-hidden rounded-3xl border p-8 backdrop-blur-xl sm:p-12 ${
-                isLight ? "border-zinc-900/10 bg-zinc-900/5" : "border-white/10 bg-white/5"
-              }`}
-            >
+            <div className="light:border-zinc-900/10 light:bg-zinc-900/5 relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl sm:p-12">
               {/* Background Decoration */}
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-500/5 to-purple-500/5" />
 
               {/* Content */}
               <div className="relative text-center">
-                <p className={`text-lg ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
-                  Still have questions?
-                </p>
-                <p className={`mt-2 text-sm ${isLight ? "text-zinc-500" : "text-zinc-500"}`}>
+                <p className="light:text-zinc-600 text-lg text-zinc-400">Still have questions?</p>
+                <p className="mt-2 text-sm text-zinc-500">
                   Our team is here to help you find the perfect plan for your studio.
                 </p>
 
@@ -395,6 +340,15 @@ export default function PricingPage() {
         </section>
       </main>
       <Footer />
+
+      <style jsx>{`
+        :global(.light) .dark-bg {
+          display: none;
+        }
+        :global(.dark) .light-bg {
+          display: none;
+        }
+      `}</style>
     </div>
   );
 }

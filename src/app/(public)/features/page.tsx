@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import nextDynamic from "next/dynamic";
 import {
@@ -57,7 +56,6 @@ const SkeletonOrderIntake = () => (
     xmlns="http://www.w3.org/2000/svg"
     className="h-auto w-full"
   >
-    {/* Window frame */}
     <rect x="0" y="0" width="400" height="300" rx="12" fill="currentColor" fillOpacity="0.05" />
     <rect
       x="0"
@@ -69,27 +67,17 @@ const SkeletonOrderIntake = () => (
       strokeWidth="1"
       strokeOpacity="0.1"
     />
-
-    {/* Header */}
     <rect x="0" y="0" width="400" height="48" rx="12" fill="currentColor" fillOpacity="0.03" />
     <rect x="0" y="48" width="400" height="1" fill="currentColor" fillOpacity="0.05" />
-
-    {/* Title area */}
     <rect x="24" y="20" width="200" height="12" rx="4" fill="currentColor" fillOpacity="0.15" />
-
-    {/* Form fields */}
     <rect x="24" y="72" width="352" height="44" rx="8" fill="currentColor" fillOpacity="0.08" />
     <rect x="24" y="76" width="80" height="10" rx="3" fill="currentColor" fillOpacity="0.2" />
     <rect x="24" y="140" width="352" height="44" rx="8" fill="currentColor" fillOpacity="0.08" />
     <rect x="24" y="144" width="60" height="10" rx="3" fill="currentColor" fillOpacity="0.2" />
     <rect x="24" y="208" width="170" height="44" rx="8" fill="currentColor" fillOpacity="0.08" />
     <rect x="206" y="208" width="170" height="44" rx="8" fill="currentColor" fillOpacity="0.08" />
-
-    {/* Select dropdown indicators */}
     <circle cx="370" cy="94" r="4" fill="currentColor" fillOpacity="0.2" />
     <circle cx="370" cy="162" r="4" fill="currentColor" fillOpacity="0.2" />
-
-    {/* Progress indicator */}
     <rect x="24" y="272" width="80" height="8" rx="4" fill="currentColor" fillOpacity="0.15" />
     <rect x="114" y="272" width="80" height="8" rx="4" fill="currentColor" fillOpacity="0.08" />
     <rect x="204" y="272" width="80" height="8" rx="4" fill="currentColor" fillOpacity="0.08" />
@@ -114,18 +102,12 @@ const SkeletonAI = () => (
       strokeWidth="1"
       strokeOpacity="0.1"
     />
-
-    {/* AI Panel header */}
     <rect x="0" y="0" width="400" height="48" rx="12" fill="currentColor" fillOpacity="0.03" />
     <rect x="0" y="48" width="400" height="1" fill="currentColor" fillOpacity="0.05" />
-
-    {/* Sparkle icon */}
     <g opacity="0.3">
       <path d="M36 28L38 32L42 34L38 36L36 40L34 36L30 34L34 32L36 28Z" fill="currentColor" />
     </g>
     <rect x="52" y="24" width="120" height="12" rx="4" fill="currentColor" fillOpacity="0.15" />
-
-    {/* Price suggestion card */}
     <rect x="24" y="72" width="352" height="120" rx="12" fill="currentColor" fillOpacity="0.08" />
     <rect
       x="24"
@@ -137,24 +119,16 @@ const SkeletonAI = () => (
       strokeWidth="1"
       strokeOpacity="0.1"
     />
-
-    {/* Large price */}
     <text x="48" y="120" fill="currentColor" fillOpacity="0.3" fontSize="32" fontWeight="bold">
       $450
     </text>
     <rect x="48" y="136" width="140" height="8" rx="4" fill="currentColor" fillOpacity="0.15" />
-
-    {/* Confidence badge */}
     <rect x="300" y="88" width="56" height="20" rx="10" fill="currentColor" fillOpacity="0.15" />
     <rect x="310" y="96" width="36" height="4" rx="2" fill="currentColor" fillOpacity="0.3" />
-
-    {/* Breakdown */}
     <rect x="48" y="164" width="60" height="6" rx="3" fill="currentColor" fillOpacity="0.12" />
     <rect x="312" y="164" width="40" height="6" rx="3" fill="currentColor" fillOpacity="0.12" />
     <rect x="48" y="178" width="60" height="6" rx="3" fill="currentColor" fillOpacity="0.12" />
     <rect x="312" y="178" width="40" height="6" rx="3" fill="currentColor" fillOpacity="0.12" />
-
-    {/* Action buttons */}
     <rect x="24" y="216" width="168" height="44" rx="8" fill="currentColor" fillOpacity="0.15" />
     <rect x="208" y="216" width="168" height="44" rx="8" fill="currentColor" fillOpacity="0.08" />
     <rect
@@ -167,8 +141,6 @@ const SkeletonAI = () => (
       strokeWidth="1"
       strokeOpacity="0.1"
     />
-
-    {/* Adjust slider */}
     <rect x="24" y="280" width="352" height="4" rx="2" fill="currentColor" fillOpacity="0.08" />
     <circle cx="200" cy="282" r="8" fill="currentColor" fillOpacity="0.2" />
   </svg>
@@ -192,8 +164,6 @@ const SkeletonProgress = () => (
       strokeWidth="1"
       strokeOpacity="0.1"
     />
-
-    {/* Timeline vertical line */}
     <line
       x1="48"
       y1="48"
@@ -203,8 +173,6 @@ const SkeletonProgress = () => (
       strokeWidth="2"
       strokeOpacity="0.1"
     />
-
-    {/* Milestone 1 - Complete */}
     <circle cx="48" cy="64" r="12" fill="currentColor" fillOpacity="0.15" />
     <rect x="72" y="52" width="280" height="24" rx="6" fill="currentColor" fillOpacity="0.08" />
     <rect
@@ -218,13 +186,9 @@ const SkeletonProgress = () => (
       strokeOpacity="0.1"
     />
     <circle cx="48" cy="64" r="5" fill="currentColor" fillOpacity="0.4" />
-
-    {/* Milestone 2 - Complete */}
     <circle cx="48" cy="116" r="12" fill="currentColor" fillOpacity="0.15" />
     <rect x="72" y="104" width="280" height="24" rx="6" fill="currentColor" fillOpacity="0.08" />
     <circle cx="48" cy="116" r="5" fill="currentColor" fillOpacity="0.4" />
-
-    {/* Milestone 3 - In Progress */}
     <circle cx="48" cy="168" r="12" fill="currentColor" fillOpacity="0.2" />
     <rect x="72" y="152" width="280" height="32" rx="8" fill="currentColor" fillOpacity="0.12" />
     <rect
@@ -239,8 +203,6 @@ const SkeletonProgress = () => (
     />
     <circle cx="48" cy="168" r="5" fill="currentColor" fillOpacity="0.6" />
     <rect x="88" y="164" width="60" height="8" rx="4" fill="currentColor" fillOpacity="0.2" />
-
-    {/* Milestone 4 - Pending */}
     <circle
       cx="48"
       cy="220"
@@ -251,8 +213,6 @@ const SkeletonProgress = () => (
       fill="none"
     />
     <rect x="72" y="208" width="200" height="24" rx="6" fill="currentColor" fillOpacity="0.05" />
-
-    {/* Upload photo indicator */}
     <rect x="72" y="248" width="80" height="24" rx="6" fill="currentColor" fillOpacity="0.08" />
   </svg>
 );
@@ -275,18 +235,12 @@ const SkeletonAnalytics = () => (
       strokeWidth="1"
       strokeOpacity="0.1"
     />
-
-    {/* Header */}
     <rect x="0" y="0" width="400" height="48" rx="12" fill="currentColor" fillOpacity="0.03" />
     <rect x="24" y="20" width="100" height="12" rx="4" fill="currentColor" fillOpacity="0.15" />
-
-    {/* Stats row */}
     <rect x="24" y="64" width="92" height="60" rx="8" fill="currentColor" fillOpacity="0.08" />
     <rect x="128" y="64" width="92" height="60" rx="8" fill="currentColor" fillOpacity="0.08" />
     <rect x="232" y="64" width="92" height="60" rx="8" fill="currentColor" fillOpacity="0.08" />
     <rect x="336" y="64" width="40" height="60" rx="8" fill="currentColor" fillOpacity="0.05" />
-
-    {/* Chart area */}
     <rect x="24" y="140" width="352" height="120" rx="8" fill="currentColor" fillOpacity="0.05" />
     <rect
       x="24"
@@ -298,8 +252,6 @@ const SkeletonAnalytics = () => (
       strokeWidth="1"
       strokeOpacity="0.08"
     />
-
-    {/* Chart bars */}
     <rect x="36" y="200" width="20" height="44" rx="4" fill="currentColor" fillOpacity="0.15" />
     <rect x="68" y="180" width="20" height="64" rx="4" fill="currentColor" fillOpacity="0.15" />
     <rect x="100" y="220" width="20" height="24" rx="4" fill="currentColor" fillOpacity="0.15" />
@@ -311,8 +263,6 @@ const SkeletonAnalytics = () => (
     <rect x="292" y="175" width="20" height="69" rx="4" fill="currentColor" fillOpacity="0.22" />
     <rect x="324" y="195" width="20" height="49" rx="4" fill="currentColor" fillOpacity="0.18" />
     <rect x="356" y="205" width="20" height="39" rx="4" fill="currentColor" fillOpacity="0.15" />
-
-    {/* Chart line overlay */}
     <polyline
       points="46,200 78,180 110,220 142,190 174,170 206,210 238,160 270,185 302,175 334,195 366,205"
       fill="none"
@@ -320,8 +270,6 @@ const SkeletonAnalytics = () => (
       strokeWidth="2"
       strokeOpacity="0.3"
     />
-
-    {/* X-axis labels */}
     <rect x="36" y="276" width="16" height="4" rx="2" fill="currentColor" fillOpacity="0.1" />
     <rect x="100" y="276" width="16" height="4" rx="2" fill="currentColor" fillOpacity="0.1" />
     <rect x="164" y="276" width="16" height="4" rx="2" fill="currentColor" fillOpacity="0.1" />
@@ -349,17 +297,11 @@ const SkeletonMessages = () => (
       strokeWidth="1"
       strokeOpacity="0.1"
     />
-
-    {/* Header */}
     <rect x="0" y="0" width="400" height="56" rx="12" fill="currentColor" fillOpacity="0.03" />
     <rect x="0" y="56" width="400" height="1" fill="currentColor" fillOpacity="0.05" />
-
-    {/* Avatar */}
     <circle cx="40" cy="28" r="16" fill="currentColor" fillOpacity="0.15" />
     <rect x="68" y="20" width="100" height="8" rx="4" fill="currentColor" fillOpacity="0.15" />
     <rect x="68" y="32" width="60" height="6" rx="3" fill="currentColor" fillOpacity="0.1" />
-
-    {/* Message from client - using path for asymmetric rounded corners */}
     <path
       d="M28 80 H188 A12 12 0 0 1 200 92 V116 A12 12 0 0 1 188 128 H36 A4 4 0 0 1 32 124 V92 A4 4 0 0 1 36 88 Z"
       fill="currentColor"
@@ -367,8 +309,6 @@ const SkeletonMessages = () => (
     />
     <rect x="36" y="92" width="100" height="8" rx="4" fill="currentColor" fillOpacity="0.15" />
     <rect x="36" y="104" width="140" height="8" rx="4" fill="currentColor" fillOpacity="0.12" />
-
-    {/* Message from builder - using path for asymmetric rounded corners */}
     <path
       d="M196 144 H364 A4 4 0 0 1 368 148 V196 A4 4 0 0 1 364 200 H212 A12 12 0 0 1 200 188 V164 A12 12 0 0 1 212 152 H364 Z"
       fill="currentColor"
@@ -377,11 +317,7 @@ const SkeletonMessages = () => (
     <rect x="208" y="156" width="120" height="8" rx="4" fill="currentColor" fillOpacity="0.25" />
     <rect x="208" y="168" width="150" height="8" rx="4" fill="currentColor" fillOpacity="0.2" />
     <rect x="208" y="180" width="80" height="8" rx="4" fill="currentColor" fillOpacity="0.18" />
-
-    {/* Photo attachment indicator */}
     <rect x="208" y="192" width="48" height="8" rx="4" fill="currentColor" fillOpacity="0.15" />
-
-    {/* Message from client 2 - using path for asymmetric rounded corners */}
     <path
       d="M28 224 H228 A12 12 0 0 1 240 236 V248 A12 12 0 0 1 228 260 H36 A4 4 0 0 1 32 256 V236 A4 4 0 0 1 36 232 Z"
       fill="currentColor"
@@ -389,8 +325,6 @@ const SkeletonMessages = () => (
     />
     <rect x="36" y="236" width="140" height="8" rx="4" fill="currentColor" fillOpacity="0.15" />
     <rect x="36" y="248" width="100" height="8" rx="4" fill="currentColor" fillOpacity="0.12" />
-
-    {/* Input area */}
     <rect x="24" y="276" width="300" height="16" rx="8" fill="currentColor" fillOpacity="0.06" />
     <circle cx="348" cy="284" r="12" fill="currentColor" fillOpacity="0.15" />
   </svg>
@@ -414,29 +348,21 @@ const SkeletonTeam = () => (
       strokeWidth="1"
       strokeOpacity="0.1"
     />
-
-    {/* Team member 1 */}
     <rect x="24" y="24" width="352" height="56" rx="10" fill="currentColor" fillOpacity="0.06" />
     <circle cx="56" cy="52" r="16" fill="currentColor" fillOpacity="0.15" />
     <rect x="84" y="40" width="100" height="10" rx="4" fill="currentColor" fillOpacity="0.18" />
     <rect x="84" y="56" width="60" height="6" rx="3" fill="currentColor" fillOpacity="0.12" />
     <rect x="300" y="42" width="64" height="20" rx="6" fill="currentColor" fillOpacity="0.1" />
-
-    {/* Team member 2 */}
     <rect x="24" y="92" width="352" height="56" rx="10" fill="currentColor" fillOpacity="0.06" />
     <circle cx="56" cy="120" r="16" fill="currentColor" fillOpacity="0.15" />
     <rect x="84" y="108" width="90" height="10" rx="4" fill="currentColor" fillOpacity="0.18" />
     <rect x="84" y="124" width="70" height="6" rx="3" fill="currentColor" fillOpacity="0.12" />
     <rect x="300" y="110" width="64" height="20" rx="6" fill="currentColor" fillOpacity="0.1" />
-
-    {/* Team member 3 */}
     <rect x="24" y="160" width="352" height="56" rx="10" fill="currentColor" fillOpacity="0.06" />
     <circle cx="56" cy="188" r="16" fill="currentColor" fillOpacity="0.15" />
     <rect x="84" y="176" width="110" height="10" rx="4" fill="currentColor" fillOpacity="0.18" />
     <rect x="84" y="192" width="55" height="6" rx="3" fill="currentColor" fillOpacity="0.12" />
     <rect x="300" y="178" width="64" height="20" rx="6" fill="currentColor" fillOpacity="0.1" />
-
-    {/* Add member button */}
     <rect
       x="24"
       y="228"
@@ -498,8 +424,6 @@ const SkeletonPayments = () => (
       strokeWidth="1"
       strokeOpacity="0.1"
     />
-
-    {/* Invoice card */}
     <rect x="24" y="24" width="352" height="120" rx="10" fill="currentColor" fillOpacity="0.08" />
     <rect
       x="24"
@@ -511,33 +435,19 @@ const SkeletonPayments = () => (
       strokeWidth="1"
       strokeOpacity="0.1"
     />
-
-    {/* Invoice header */}
     <rect x="48" y="48" width="80" height="10" rx="4" fill="currentColor" fillOpacity="0.15" />
     <rect x="320" y="48" width="32" height="10" rx="4" fill="currentColor" fillOpacity="0.1" />
-
-    {/* Invoice details */}
     <rect x="48" y="72" width="120" height="8" rx="4" fill="currentColor" fillOpacity="0.12" />
     <rect x="48" y="88" width="100" height="8" rx="4" fill="currentColor" fillOpacity="0.12" />
     <rect x="48" y="104" width="80" height="8" rx="4" fill="currentColor" fillOpacity="0.12" />
-
-    {/* Total */}
     <rect x="240" y="104" width="100" height="20" rx="6" fill="currentColor" fillOpacity="0.15" />
-
-    {/* Payment status */}
     <rect x="48" y="128" width="64" height="8" rx="4" fill="currentColor" fillOpacity="0.1" />
-
-    {/* Payment method */}
     <rect x="24" y="168" width="352" height="64" rx="10" fill="currentColor" fillOpacity="0.06" />
     <rect x="48" y="192" width="100" height="8" rx="4" fill="currentColor" fillOpacity="0.15" />
     <rect x="48" y="208" width="140" height="8" rx="4" fill="currentColor" fillOpacity="0.12" />
-
-    {/* Card icon */}
     <rect x="320" y="188" width="32" height="20" rx="4" fill="currentColor" fillOpacity="0.15" />
     <rect x="324" y="192" width="20" height="4" rx="2" fill="currentColor" fillOpacity="0.25" />
     <rect x="324" y="200" width="12" height="4" rx="2" fill="currentColor" fillOpacity="0.2" />
-
-    {/* History */}
     <rect x="24" y="256" width="352" height="32" rx="8" fill="currentColor" fillOpacity="0.04" />
     <rect x="48" y="268" width="60" height="6" rx="3" fill="currentColor" fillOpacity="0.1" />
     <rect x="312" y="268" width="48" height="6" rx="3" fill="currentColor" fillOpacity="0.1" />
@@ -562,20 +472,14 @@ const SkeletonInventory = () => (
       strokeWidth="1"
       strokeOpacity="0.1"
     />
-
-    {/* Header with search */}
     <rect x="0" y="0" width="400" height="56" rx="12" fill="currentColor" fillOpacity="0.03" />
     <rect x="0" y="56" width="400" height="1" fill="currentColor" fillOpacity="0.05" />
     <rect x="24" y="20" width="60" height="12" rx="4" fill="currentColor" fillOpacity="0.15" />
     <rect x="248" y="16" width="128" height="28" rx="8" fill="currentColor" fillOpacity="0.06" />
-
-    {/* Category tabs */}
     <rect x="24" y="72" width="60" height="24" rx="6" fill="currentColor" fillOpacity="0.12" />
     <rect x="92" y="72" width="60" height="24" rx="6" fill="currentColor" fillOpacity="0.06" />
     <rect x="160" y="72" width="60" height="24" rx="6" fill="currentColor" fillOpacity="0.06" />
     <rect x="228" y="72" width="60" height="24" rx="6" fill="currentColor" fillOpacity="0.06" />
-
-    {/* Inventory item 1 - Low stock warning */}
     <rect x="24" y="112" width="352" height="48" rx="8" fill="currentColor" fillOpacity="0.06" />
     <rect x="40" y="124" width="80" height="8" rx="4" fill="currentColor" fillOpacity="0.15" />
     <rect x="40" y="140" width="50" height="6" rx="3" fill="currentColor" fillOpacity="0.1" />
@@ -592,14 +496,10 @@ const SkeletonInventory = () => (
       fill="none"
     />
     <circle cx="348" cy="136" r="4" fill="currentColor" fillOpacity="0.3" />
-
-    {/* Inventory item 2 */}
     <rect x="24" y="172" width="352" height="48" rx="8" fill="currentColor" fillOpacity="0.06" />
     <rect x="40" y="184" width="70" height="8" rx="4" fill="currentColor" fillOpacity="0.15" />
     <rect x="40" y="200" width="45" height="6" rx="3" fill="currentColor" fillOpacity="0.1" />
     <rect x="300" y="184" width="48" height="20" rx="6" fill="currentColor" fillOpacity="0.1" />
-
-    {/* Inventory item 3 */}
     <rect x="24" y="232" width="352" height="48" rx="8" fill="currentColor" fillOpacity="0.06" />
     <rect x="40" y="244" width="90" height="8" rx="4" fill="currentColor" fillOpacity="0.15" />
     <rect x="40" y="260" width="55" height="6" rx="3" fill="currentColor" fillOpacity="0.1" />
@@ -755,15 +655,7 @@ const features = [
 ];
 
 // Individual Feature Card Component
-function FeatureCard({
-  feature,
-  index,
-  isLight,
-}: {
-  feature: (typeof features)[0];
-  index: number;
-  isLight: boolean;
-}) {
+function FeatureCard({ feature, index }: { feature: (typeof features)[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref);
   const isEven = index % 2 === 0;
@@ -771,14 +663,11 @@ function FeatureCard({
   return (
     <div
       ref={ref}
-      className={`relative grid items-center gap-12 py-24 transition-all duration-1000 lg:grid-cols-2 lg:gap-20 ${
-        isInView ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
-      }`}
+      className={`relative grid items-center gap-12 py-24 transition-all duration-1000 lg:grid-cols-2 lg:gap-20 ${isInView ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"}`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       {/* Content Side */}
       <div className={`space-y-8 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
-        {/* Feature badge */}
         <div className="inline-flex items-center gap-2">
           <div
             className={`flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br ${feature.gradient} text-white shadow-lg`}
@@ -789,20 +678,12 @@ function FeatureCard({
             Feature {index + 1}
           </span>
         </div>
-
-        {/* Title */}
-        <h2
-          className={`text-4xl font-bold tracking-tight sm:text-5xl ${isLight ? "text-zinc-900" : "text-white"}`}
-        >
+        <h2 className="light:text-zinc-900 text-4xl font-bold tracking-tight text-white sm:text-5xl">
           {feature.title}
         </h2>
-
-        {/* Description */}
-        <p className={`text-lg leading-relaxed ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
+        <p className="light:text-zinc-600 text-lg leading-relaxed text-zinc-400">
           {feature.description}
         </p>
-
-        {/* Feature details list */}
         <ul className="space-y-4">
           {feature.details.map((detail, i) => (
             <li key={i} className="flex items-start gap-3">
@@ -811,9 +692,7 @@ function FeatureCard({
               >
                 <Check className="h-3 w-3" strokeWidth={3} />
               </div>
-              <span className={`text-base ${isLight ? "text-zinc-700" : "text-zinc-300"}`}>
-                {detail}
-              </span>
+              <span className="light:text-zinc-700 text-base text-zinc-300">{detail}</span>
             </li>
           ))}
         </ul>
@@ -821,14 +700,7 @@ function FeatureCard({
 
       {/* Skeleton UI Preview Side */}
       <div className={`${isEven ? "lg:order-2" : "lg:order-1"}`}>
-        <div
-          className={`relative overflow-hidden rounded-3xl border-2 shadow-2xl backdrop-blur-xl transition-all duration-500 hover:scale-[1.02] ${
-            isLight
-              ? "border-zinc-900/10 bg-white/50 shadow-zinc-900/10"
-              : "border-white/10 bg-zinc-900/50 shadow-white/10"
-          }`}
-        >
-          {/* Gradient glow behind */}
+        <div className="light:border-zinc-900/10 light:bg-white/50 light:shadow-zinc-900/10 relative overflow-hidden rounded-3xl border-2 border-white/10 bg-zinc-900/50 shadow-2xl shadow-white/10 backdrop-blur-xl transition-all duration-500 hover:scale-[1.02]">
           <div
             className={`absolute -inset-4 bg-linear-to-br ${feature.gradient} opacity-0 blur-3xl`}
           />
@@ -836,83 +708,45 @@ function FeatureCard({
         </div>
       </div>
 
-      {/* Decorative line for odd/even rhythm */}
+      {/* Decorative line */}
       <div
-        className={`absolute inset-0 -z-10 flex items-center justify-center opacity-0 lg:opacity-100 ${
-          isEven ? "lg:justify-start" : "lg:justify-end"
-        }`}
+        className={`absolute inset-0 -z-10 flex items-center justify-center opacity-0 lg:opacity-100 ${isEven ? "lg:justify-start" : "lg:justify-end"}`}
       >
-        <div
-          className={`h-px w-32 ${isLight ? "bg-linear-to-r from-transparent via-zinc-200 to-transparent" : "bg-linear-to-r from-transparent via-zinc-800 to-transparent"}`}
-        />
+        <div className="light:bg-linear-to-r light:from-transparent light:via-zinc-200 light:to-transparent h-px w-32 bg-linear-to-r from-transparent via-zinc-800 to-transparent" />
       </div>
     </div>
   );
 }
 
 export default function FeaturesPage() {
-  const { theme } = useTheme();
-  const isLight = theme === "light";
-
   return (
-    <div
-      className={`min-h-screen font-sans transition-colors duration-300 ${
-        isLight ? "bg-white text-zinc-900" : "bg-zinc-950 text-white"
-      }`}
-    >
+    <div className="light:bg-white light:text-zinc-900 min-h-screen bg-zinc-950 font-sans text-white transition-colors duration-300">
       <Header />
-
       <main>
         {/* Hero Section */}
         <section className="relative overflow-hidden">
-          {/* Background gradient mesh */}
           <div className="absolute inset-0 -z-10">
-            <div
-              className={`absolute top-0 left-1/2 h-200 w-200 -translate-x-1/2 rounded-full blur-3xl ${
-                isLight
-                  ? "bg-linear-to-br from-blue-100 via-indigo-50 to-transparent opacity-50"
-                  : "bg-linear-to-br from-blue-900/20 via-indigo-900/10 to-transparent opacity-50"
-              }`}
-            />
+            <div className="absolute top-0 left-1/2 hidden h-200 w-200 -translate-x-1/2 rounded-full bg-linear-to-br from-blue-900/20 via-indigo-900/10 to-transparent opacity-50 blur-3xl dark:block" />
+            <div className="absolute top-0 left-1/2 block h-200 w-200 -translate-x-1/2 rounded-full bg-linear-to-br from-blue-100 via-indigo-50 to-transparent opacity-50 blur-3xl dark:hidden" />
           </div>
-
           <div className="mx-auto max-w-7xl px-4 py-32 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
-              {/* Badge */}
-              <div
-                className={`mb-8 inline-flex items-center gap-2 rounded-full border px-4 py-2 backdrop-blur-md transition-colors ${
-                  isLight
-                    ? "border-zinc-900/10 bg-zinc-900/5 hover:bg-zinc-900/10"
-                    : "border-white/10 bg-white/5 hover:bg-white/10"
-                }`}
-              >
-                <Sparkles className={`h-4 w-4 ${isLight ? "text-zinc-600" : "text-zinc-400"}`} />
-                <span
-                  className={`text-xs font-semibold tracking-wider uppercase ${isLight ? "text-zinc-700" : "text-zinc-300"}`}
-                >
+              <div className="light:border-zinc-900/10 light:bg-zinc-900/5 light:hover:bg-zinc-900/10 mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-md transition-colors hover:bg-white/10">
+                <Sparkles className="light:text-zinc-600 h-4 w-4 text-zinc-400" />
+                <span className="light:text-zinc-700 text-xs font-semibold tracking-wider text-zinc-300 uppercase">
                   Powerful Tools
                 </span>
               </div>
-
-              {/* Heading */}
               <h1 className="mb-8 text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
                 Everything you need to
-                <span
-                  className={`block bg-linear-to-br bg-clip-text text-transparent ${isLight ? "from-zinc-900 via-zinc-800 to-[#ffcd75]" : "from-white via-white to-[#ffcd75]"}`}
-                >
+                <span className="light:from-zinc-900 light:via-zinc-800 block bg-linear-to-br from-white via-white to-[#ffcd75] bg-clip-text text-transparent">
                   manage your studio
                 </span>
               </h1>
-
-              {/* Subheading */}
-              <p
-                className={`mb-12 text-xl leading-relaxed ${isLight ? "text-zinc-600" : "text-zinc-400"}`}
-              >
+              <p className="light:text-zinc-600 mb-12 text-xl leading-relaxed text-zinc-400">
                 From intake to delivery, Flow provides tools you need to streamline operations,
                 communicate clearly, and grow your custom build business.
               </p>
-
-              {/* Quick stats */}
               <div className="grid grid-cols-3 gap-8">
                 {[
                   { value: "8+", label: "Features" },
@@ -920,16 +754,10 @@ export default function FeaturesPage() {
                   { value: "99%", label: "Uptime" },
                 ].map((stat, i) => (
                   <div key={i} className="flex flex-col items-center">
-                    <span
-                      className={`text-3xl font-bold ${isLight ? "text-zinc-900" : "text-white"}`}
-                    >
+                    <span className="light:text-zinc-900 text-3xl font-bold text-white">
                       {stat.value}
                     </span>
-                    <span
-                      className={`text-sm font-medium ${isLight ? "text-zinc-500" : "text-zinc-500"}`}
-                    >
-                      {stat.label}
-                    </span>
+                    <span className="text-sm font-medium text-zinc-500">{stat.label}</span>
                   </div>
                 ))}
               </div>
@@ -941,64 +769,40 @@ export default function FeaturesPage() {
         <section className="relative">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             {features.map((feature, index) => (
-              <FeatureCard key={feature.id} feature={feature} index={index} isLight={isLight} />
+              <FeatureCard key={feature.id} feature={feature} index={index} />
             ))}
           </div>
         </section>
 
         {/* CTA Section */}
         <section className="relative overflow-hidden py-32">
-          {/* Background */}
-          <div className={`absolute inset-0 -z-10 ${isLight ? "bg-zinc-50" : "bg-zinc-900/50"}`} />
-          <div
-            className={`absolute inset-0 -z-10 bg-linear-to-br ${
-              isLight ? "from-blue-50/50 to-purple-50/50" : "from-blue-900/10 to-purple-900/10"
-            }`}
-          />
-
+          <div className="light:bg-zinc-50 absolute inset-0 -z-10 bg-zinc-900/50" />
+          <div className="absolute inset-0 -z-10 hidden bg-linear-to-br from-blue-900/10 to-purple-900/10 dark:block" />
+          <div className="absolute inset-0 -z-10 block bg-linear-to-br from-blue-50/50 to-purple-50/50 dark:hidden" />
           <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-            <h2
-              className={`mb-6 text-4xl font-bold tracking-tight sm:text-5xl ${isLight ? "text-zinc-900" : "text-white"}`}
-            >
+            <h2 className="light:text-zinc-900 mb-6 text-4xl font-bold tracking-tight text-white sm:text-5xl">
               Ready to transform your workflow?
             </h2>
-            <p className={`mb-10 text-xl ${isLight ? "text-zinc-600" : "text-zinc-400"}`}>
+            <p className="light:text-zinc-600 mb-10 text-xl text-zinc-400">
               Join hundreds of builders who have already streamlined their custom build operations
               with Flow.
             </p>
-
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Link
                 href="/register"
-                className={`group inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-semibold transition-all hover:scale-105 active:scale-95 ${
-                  isLight
-                    ? "bg-zinc-900 text-white shadow-lg shadow-zinc-900/25 hover:bg-zinc-800"
-                    : "bg-white text-zinc-950 shadow-lg shadow-white/25 hover:bg-zinc-200"
-                }`}
+                className="group light:bg-zinc-900 light:text-white light:shadow-zinc-900/25 light:hover:bg-zinc-800 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold text-zinc-950 shadow-lg shadow-white/25 transition-all hover:scale-105 hover:bg-zinc-200 active:scale-95"
               >
                 Start Free Trial
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
-
-              <button
-                className={`group inline-flex items-center gap-2 rounded-full border px-8 py-4 text-sm font-semibold transition-all hover:scale-105 ${
-                  isLight
-                    ? "border-zinc-900/10 bg-zinc-900/5 text-zinc-900 hover:border-zinc-900/20 hover:bg-zinc-900/10"
-                    : "border-white/10 bg-white/5 text-white hover:border-white/20 hover:bg-white/10"
-                }`}
-              >
+              <button className="group light:border-zinc-900/10 light:bg-zinc-900/5 light:text-zinc-900 light:hover:border-zinc-900/20 light:hover:bg-zinc-900/10 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-8 py-4 text-sm font-semibold text-white transition-all hover:scale-105 hover:border-white/20 hover:bg-white/10">
                 <Play className="h-4 w-4 fill-current" />
                 Watch Demo
               </button>
             </div>
-
-            {/* Trust indicators */}
             <div className="mt-12 flex flex-wrap items-center justify-center gap-8">
               {["No credit card required", "14-day free trial", "Cancel anytime"].map((text, i) => (
-                <div
-                  key={i}
-                  className={`flex items-center gap-2 text-sm ${isLight ? "text-zinc-500" : "text-zinc-500"}`}
-                >
+                <div key={i} className="flex items-center gap-2 text-sm text-zinc-500">
                   <Check className="h-4 w-4 text-green-500" strokeWidth={3} />
                   {text}
                 </div>
@@ -1007,34 +811,7 @@ export default function FeaturesPage() {
           </div>
         </section>
       </main>
-
       <Footer />
-
-      <style jsx>{`
-        @keyframes fadeSlideIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fade-in {
-          animation: fadeSlideIn 0.8s ease-out forwards;
-          opacity: 0;
-        }
-        .delay-100 {
-          animation-delay: 0.1s;
-        }
-        .delay-200 {
-          animation-delay: 0.2s;
-        }
-        .delay-300 {
-          animation-delay: 0.3s;
-        }
-      `}</style>
     </div>
   );
 }

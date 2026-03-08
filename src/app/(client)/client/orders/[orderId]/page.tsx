@@ -1,6 +1,5 @@
 "use client";
 
-
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -293,7 +292,7 @@ export default function ClientOrderDetailsPage({
                 {order.order_items?.map((item) => (
                   <div key={item.id} className="rounded-lg border p-4">
                     <div className="flex items-start justify-between">
-                      <div className="space-y-1">
+                      <div className="flex-1 space-y-1">
                         <h3 className="font-semibold">{item.kit_name}</h3>
                         {item.kit_model && (
                           <p className="text-muted-foreground text-sm">{item.kit_model}</p>
@@ -303,7 +302,46 @@ export default function ClientOrderDetailsPage({
                           <Badge variant="outline">
                             {getComplexityLabel(item.complexity)} Complexity
                           </Badge>
+                          {/* Display complexity tier info if available */}
+                          {item.complexity_tier_id && (
+                            <Badge variant="secondary" className="bg-primary/10 text-primary">
+                              Tier Score: {item.complexity_score}
+                            </Badge>
+                          )}
                         </div>
+                        {/* Display complexity assessment details */}
+                        {item.complexity_score && (
+                          <div className="bg-muted/50 mt-3 rounded-md p-3">
+                            <div className="flex items-center justify-between text-sm">
+                              <span className="text-muted-foreground">Complexity Score:</span>
+                              <span className="font-medium">{item.complexity_score} points</span>
+                            </div>
+                            {item.complexity_calculation && (
+                              <>
+                                <div className="mt-1 flex items-center justify-between text-sm">
+                                  <span className="text-muted-foreground">Tier:</span>
+                                  <span className="font-medium">
+                                    {item.complexity_calculation.tier_name}
+                                  </span>
+                                </div>
+                                {item.complexity_calculation.estimated_min_price_cents !== null && (
+                                  <div className="mt-1 flex items-center justify-between text-sm">
+                                    <span className="text-muted-foreground">Est. Price Range:</span>
+                                    <span className="text-primary font-medium">
+                                      {formatPrice(
+                                        item.complexity_calculation.estimated_min_price_cents
+                                      )}{" "}
+                                      -{" "}
+                                      {formatPrice(
+                                        item.complexity_calculation.estimated_max_price_cents!
+                                      )}
+                                    </span>
+                                  </div>
+                                )}
+                              </>
+                            )}
+                          </div>
+                        )}
                         {item.notes && (
                           <p className="text-muted-foreground mt-2 text-sm">Notes: {item.notes}</p>
                         )}
