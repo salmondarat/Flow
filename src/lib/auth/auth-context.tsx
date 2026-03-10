@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import type { User, Session } from "@supabase/supabase-js";
 import type { ProfileRow } from "@/types";
 import type { AuthUser, AuthContextValue, AuthProviderProps } from "./auth-types";
+import { verifyRoleToken } from "./jwt-utils";
 
 export const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
@@ -19,23 +20,41 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     try {
-      const supabase = (await import("@/lib/supabase/client")).createClient();
+      // OPTIMIZATION: Check for cached role token first to avoid DB query
+      const cookies = document.cookie;
+      const roleTokenMatch = cookies.match(/role_token=([^;]+)/);
+      const roleToken = roleTokenMatch?.[1];
+      const cachedRole = roleToken ? verifyRoleToken(roleToken) : null;
 
-      // Get user profile with role
-      type ProfileRole = Pick<ProfileRow, "role" | "full_name">;
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("role, full_name")
-        .eq("id", supabaseUser.id)
-        .maybeSingle<ProfileRole>();
+      let role: "admin" | "client" = "client";
+      let full_name: string | undefined = undefined;
+
+      if (cachedRole && cachedRole.userId === supabaseUser.id) {
+        // Use cached role if valid
+        role = cachedRole.role;
+      } else {
+        // Fetch from database if no valid cache
+        const supabase = (await import("@/lib/supabase/client")).createClient();
+
+        // Get user profile with role
+        type ProfileRole = Pick<ProfileRow, "role" | "full_name">;
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("role, full_name")
+          .eq("id", supabaseUser.id)
+          .maybeSingle<ProfileRole>();
+
+        role = profile?.role ?? "client";
+        full_name = profile?.full_name ?? undefined;
+      }
 
       const metadata = supabaseUser.user_metadata as Record<string, unknown> | null;
 
       setUser({
         id: supabaseUser.id,
         email: supabaseUser.email,
-        full_name: profile?.full_name || (metadata?.full_name as string | undefined),
-        role: profile?.role ?? "client",
+        full_name: full_name || (metadata?.full_name as string | undefined),
+        role,
       });
     } catch (error) {
       console.error("Error fetching user profile:", error);

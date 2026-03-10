@@ -4,6 +4,7 @@ import type { Database } from "@/types";
 import type { ProfileRow } from "@/types";
 import { env } from "@/lib/env/server";
 import { corsHeaders, isApiRoute, isPreflight, handlePreflight } from "@/lib/api/middleware-cors";
+import { createRoleToken, verifyRoleToken, getRoleTokenFromRequest } from "@/lib/auth/jwt-utils";
 
 /**
  * CORS headers for API routes
@@ -31,14 +32,14 @@ export async function middleware(request: NextRequest) {
     return addCorsHeaders(response);
   }
 
-  // Check if the path is an admin route
+  // Check if path is an admin route
   const isAdminRoute = pathname.startsWith("/admin");
   // Exclude unified auth page from protection
   const isAuthPage = pathname === "/auth";
   // Exclude unified register page from protection
   const isRegisterPage = pathname === "/register";
 
-  // Check if the path is a client route
+  // Check if path is a client route
   const isClientRoute = pathname.startsWith("/client");
   // Exclude client register page from protection (login is now handled by /auth)
   const isClientRegisterPage = pathname === "/client/register";
@@ -63,17 +64,17 @@ export async function middleware(request: NextRequest) {
         getAll() {
           return request.cookies.getAll();
         },
-        setAll(cookiesToSet: { name: string; value: string; options?: Record<string, unknown> }[]) {
-          cookiesToSet.forEach(({ name, value, options }) => {
+        setAll(cookiesToSet: { name: string; value: string }[]) {
+          cookiesToSet.forEach(({ name, value }) => {
             request.cookies.set(name, value);
-            response.cookies.set(name, value, options);
+            response.cookies.set(name, value);
           });
         },
       },
     }
   );
 
-  // Get the user
+  // Get user
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -85,7 +86,35 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 
-  // Check if user has admin role
+  // OPTIMIZATION: Check for cached role token first to avoid DB query
+  const cachedRole = verifyRoleToken(getRoleTokenFromRequest(request));
+
+  if (cachedRole && cachedRole.userId === user.id) {
+    // Use cached role if valid
+    if (process.env.NODE_ENV === "development") {
+      console.log("[Middleware] Using cached role:", cachedRole.role);
+    }
+
+    // Admin route: require admin role
+    if (isAdminRoute) {
+      if (cachedRole.role !== "admin") {
+        const redirectUrl = new URL("/auth", request.url);
+        redirectUrl.searchParams.set("error", "unauthorized");
+        return NextResponse.redirect(redirectUrl);
+      }
+    }
+
+    // Client route: require client role, prevent admin access
+    if (isClientRoute) {
+      if (cachedRole.role !== "client") {
+        return NextResponse.redirect(new URL("/admin", request.url));
+      }
+    }
+
+    return response;
+  }
+
+  // No valid cached role - fetch from database and create new cache
   type ProfileRole = Pick<ProfileRow, "role">;
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
@@ -104,10 +133,25 @@ export async function middleware(request: NextRequest) {
     console.log("[Middleware] Is admin:", profile?.role === "admin");
   }
 
+  if (!profile) {
+    // No profile found - redirect to auth
+    const redirectUrl = new URL("/auth", request.url);
+    redirectUrl.searchParams.set("error", "unauthorized");
+    return NextResponse.redirect(redirectUrl);
+  }
+
+  // Create and set role token cookie (1 hour expiry)
+  const roleToken = createRoleToken(user.id, profile.role);
+  response.cookies.set("role_token", roleToken, {
+    path: "/",
+    maxAge: 3600,
+    httpOnly: true,
+    sameSite: "lax",
+  });
+
   // Admin route: require admin role
   if (isAdminRoute) {
-    if (!profile || profile.role !== "admin") {
-      // User is authenticated but not admin - redirect to auth page with error
+    if (profile.role !== "admin") {
       const redirectUrl = new URL("/auth", request.url);
       redirectUrl.searchParams.set("error", "unauthorized");
       return NextResponse.redirect(redirectUrl);
@@ -116,8 +160,7 @@ export async function middleware(request: NextRequest) {
 
   // Client route: require client role, prevent admin access
   if (isClientRoute) {
-    if (!profile || profile.role !== "client") {
-      // User is admin trying to access client routes - redirect to admin dashboard
+    if (profile.role !== "client") {
       return NextResponse.redirect(new URL("/admin", request.url));
     }
   }
