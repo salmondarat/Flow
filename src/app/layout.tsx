@@ -20,8 +20,70 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Flow - The OS for Custom Model Studios",
-  description: "Streamline your custom model kit building business with Flow.",
+  title: {
+    default: "Flow - The OS for Custom Model Studios",
+    template: "%s | Flow",
+  },
+  description:
+    "Streamline your custom model kit building business with Flow. Manage your custom Gunpla kit building projects, track builds, and grow your studio.",
+  keywords: [
+    "Flow",
+    "custom model studio",
+    "Gunpla",
+    "Gundam",
+    "model kit building",
+    "custom builds",
+    "plastic model",
+    "gunpla management",
+    "model kit tracking",
+    "studio management",
+  ],
+  authors: [{ name: "Flow" }],
+  creator: "Flow",
+  publisher: "Flow",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://flow.app",
+    title: "Flow - The OS for Custom Model Studios",
+    description:
+      "Streamline your custom model kit building business with Flow. Manage your custom Gunpla kit building projects, track builds, and grow your studio.",
+    siteName: "Flow",
+    images: [
+      {
+        url: "/gundam-hero-bg.png",
+        width: 1200,
+        height: 630,
+        alt: "Flow - The OS for Custom Model Studios",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Flow - The OS for Custom Model Studios",
+    description:
+      "Streamline your custom model kit building business with Flow. Manage your custom Gunpla kit building projects, track builds, and grow your studio.",
+    images: ["/gundam-hero-bg.png"],
+    creator: "@flow",
+  },
+  icons: {
+    icon: "/icons/gunpla.svg",
+    shortcut: "/icons/gunpla.svg",
+    apple: "/icons/gunpla.svg",
+  },
+  manifest: "/manifest.json",
+  metadataBase: new URL("https://flow.app"),
 };
 
 export default function RootLayout({
