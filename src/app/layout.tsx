@@ -62,10 +62,10 @@ export const metadata: Metadata = {
     siteName: "Flow",
     images: [
       {
-        url: "/gundam-hero-bg.png",
-        width: 1200,
-        height: 630,
-        alt: "Flow - The OS for Custom Model Studios",
+        url: "https://flow.app/gund_bg-white.png",
+        width: 1632,
+        height: 640,
+        alt: "Flow - The OS for Custom Model Studios - Gundam Model Kit Management Platform",
       },
     ],
   },
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     title: "Flow - The OS for Custom Model Studios",
     description:
       "Streamline your custom model kit building business with Flow. Manage your custom Gunpla kit building projects, track builds, and grow your studio.",
-    images: ["/gundam-hero-bg.png"],
+    images: ["https://flow.app/gund_bg-white.png"],
     creator: "@flow",
   },
   icons: {
